@@ -1,0 +1,11 @@
+---
+export const prerender = true;
+import Layout from '../layouts/Layout.astro';
+import PageHeading from '../components/PageHeading.astro';
+import FAQ from '../components/FAQ.astro';
+import CTA from '../components/CTA.astro';
+---
+<Layout title="שאלות ותשובות | לפני שמחברים סוכן AI — TamidZamin" description="תשובות על סוכני AI לעסקים: שפות, מספר קיים, מחירים, תיאום תורים והעברה לאדם. מה בודקים מראש ומה לא מבטיחים ללא אישור.">
+  <PageHeading title="לפני שמתחילים, שואלים." description="מה הסוכן עושה, איפה הגבולות ואילו דברים צריך לבדוק יחד." />
+  <section class="page-section"><div class="container reading"><FAQ all /><div class="notice"><strong>יש שאלה שלא ענינו עליה?</strong><p>אפשר לתאר אותה בעמוד <a href="/contact/">יצירת הקשר</a>. מידע על הטיפול בפרטי פנייה נמצא ב<a href="/privacy/">מדיניות הפרטיות</a>.</p></div></div></section><CTA />
+</Layout>

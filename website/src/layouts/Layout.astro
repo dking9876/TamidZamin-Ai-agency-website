@@ -1,0 +1,102 @@
+---
+import '@fontsource-variable/heebo';
+import '../styles/global.css';
+import '../styles/home.css';
+import Picture from '../components/Picture.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../lib/site';
+interface Props { title: string; description: string; noindex?: boolean; }
+const { title, description, noindex = false } = Astro.props;
+const canonical = new URL(Astro.url.pathname, site.origin).href;
+const indexable = site.launched && !noindex;
+const path = Astro.url.pathname;
+const nav = [
+  ['/#channels', 'פתרונות'], ['/#process', 'איך זה עובד'], ['/#trades', 'למי זה מתאים'],
+  ['/#benefits', 'יתרונות'], ['/about/', 'אודות'], ['/faq/', 'שאלות נפוצות'],
+];
+const schema = {
+  '@context': 'https://schema.org', '@type': 'Organization',
+  name: 'TamidZamin', url: site.origin, logo: new URL('/images/logo-600.webp', site.origin).href,
+  description: 'אפיון והטמעת סוכני AI בוואטסאפ ובטלפון לעסקי שירות עצמאיים בישראל.',
+  ...(site.email ? { email: site.email } : {}),
+  ...(site.legalName ? { legalName: site.legalName } : {}),
+};
+---
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#08162c" />
+    {path === '/' && <link rel="preload" href="/images/blue-edge.webp" as="image" fetchpriority="high" />}
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content={indexable ? 'index, follow' : 'noindex, nofollow'} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/png" href="/images/icon.png" />
+    <link rel="apple-touch-icon" href="/images/icon.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="he_IL" />
+    <meta property="og:site_name" content="TamidZamin" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL('/images/social.jpg', site.origin).href} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="המחשה של בעל מקצוע בעבודה — TamidZamin" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL('/images/social.jpg', site.origin).href} />
+    {indexable && <script type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\\u003c')} />}
+  </head>
+  <body class={path === '/' ? 'homepage' : undefined}>
+    <a class="skip-link" href="#main">דלגו לתוכן הראשי</a>
+    <header class="site-header">
+      <div class="header-inner container">
+        <a href="/" class="brand" aria-label="TamidZamin — לעמוד הבית"><Picture name="logo" alt="TamidZamin" width={600} height={146} eager /></a>
+        <nav class="desktop-nav" aria-label="ניווט ראשי">
+          {nav.map(([href, label]) => <a href={href} aria-current={path === href ? 'page' : undefined}>{label}</a>)}
+        </nav>
+        <a href="/contact/" class="button header-cta">בואו נדבר <Icon name="arrow" size={17} /></a>
+        <details class="mobile-menu">
+          <summary aria-label="פתיחת תפריט ניווט"><Icon name="menu" /></summary>
+          <nav aria-label="ניווט לנייד">
+            {nav.map(([href, label]) => <a href={href} aria-current={path === href ? 'page' : undefined}>{label}</a>)}
+            <a href="/contact/">יצירת קשר</a>
+          </nav>
+        </details>
+      </div>
+    </header>
+    <main id="main" tabindex="-1"><slot /></main>
+    <footer class="site-footer">
+      <div class="container footer-main">
+        <div class="footer-brand">
+          <a class="brand" href="/" aria-label="TamidZamin — לעמוד הבית"><Picture name="logo" alt="TamidZamin" width={600} height={146} /></a>
+          <p>סוכני AI לעסקים של אנשים.</p>
+        </div>
+        <nav aria-label="ניווט תחתון"><a href="/services/whatsapp/">סוכן WhatsApp</a><a href="/services/phone/">סוכן טלפוני</a><a href="/about/">אודות</a><a href="/contact/">יצירת קשר</a></nav>
+        <nav aria-label="מידע שימושי"><a href="/faq/">שאלות ותשובות</a><a href="/privacy/">מדיניות פרטיות</a><a href="/accessibility/">הצהרת נגישות</a></nav>
+      </div>
+      <div class="container footer-bottom">
+        <span>© {new Date().getFullYear()} <bdi>TamidZamin</bdi></span>
+        <span>התמונות והשיחות באתר הן להמחשה.</span>
+        {!site.launched && <span class="preview-label">תצוגה מקדימה · לא אתר פעיל</span>}
+      </div>
+    </footer>
+    <script>
+      const menu = document.querySelector<HTMLDetailsElement>('.mobile-menu');
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && menu?.open) {
+          menu.open = false;
+          menu.querySelector('summary')?.focus();
+        }
+      });
+      document.addEventListener('click', (event) => {
+        if (menu?.open && event.target instanceof Node && !menu.contains(event.target)) menu.open = false;
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,103 @@
+---
+export const prerender = false;
+import Layout from '../layouts/Layout.astro';
+import PageHeading from '../components/PageHeading.astro';
+import { site } from '../lib/site';
+import { getLeadForm } from '../server/leads';
+const form = getLeadForm(Astro.request);
+Astro.response.headers.set('Cache-Control', 'no-store');
+if (form.cookie) Astro.response.headers.set('Set-Cookie', form.cookie);
+const selected = Astro.url.searchParams.get('service');
+const services = [['not-sure', 'עדיין לא בטוח/ה'], ['whatsapp', 'WhatsApp'], ['phone', 'טלפון'], ['both', 'WhatsApp וטלפון']];
+---
+<Layout title="יצירת קשר ובדיקת התאמה | TamidZamin" description="ספרו לנו על העסק ועל הפניות שאתם מקבלים. בדקו התאמה לסוכן AI בוואטסאפ או בטלפון, בלי לקבוע תור או להתחבר לשירות לפני אישור.">
+  <PageHeading title="בואו נכיר את העסק שלכם." description="מה מגיע היום, מה מתפספס ואיפה אפשר לעשות סדר? מתחילים בכמה פרטים." />
+  <section class="page-section"><div class="container contact-grid">
+    <form class="contact-form" method="post" action="/api/lead/" id="lead-form">
+      <h2>בדיקת התאמה לעסק</h2>
+      <p class="form-description">שדות המסומנים בכוכבית הם חובה. אין צורך לשלוח פרטי לקוחות, כתובות שירות או מידע רגיש.</p>
+      {!form.enabled && <div class="notice" role="status"><strong>טופס הפניות עדיין לא מחובר.</strong><p>זו תצוגה מקדימה. אי אפשר לשלוח כאן פרטים כרגע, ולא נשלחה שום פנייה. אפשר לעיין בשירותים ובשאלות הנפוצות עד לפתיחת ערוץ הקשר.</p></div>}
+      <fieldset disabled={!form.enabled}>
+        <legend class="honeypot">פרטי הפנייה</legend>
+        <input type="hidden" name="token" value={form.token} />
+        <div class="honeypot" aria-hidden="true"><label for="website">Website</label><input id="website" name="website" tabindex="-1" autocomplete="off" /></div>
+        <div class="form-grid">
+          <div class="field"><label for="name">שם מלא *</label><input id="name" name="name" autocomplete="name" required minlength="2" maxlength="80" aria-describedby="name-error" /><span class="field-error" id="name-error"></span></div>
+          <div class="field"><label for="phone">טלפון לחזרה *</label><input id="phone" name="phone" type="tel" dir="ltr" inputmode="tel" autocomplete="tel" required maxlength="30" aria-describedby="phone-error" /><span class="field-error" id="phone-error"></span></div>
+          <div class="field"><label for="business">שם העסק / תחום העיסוק *</label><input id="business" name="business" autocomplete="organization" required minlength="2" maxlength="120" aria-describedby="business-error" /><span class="field-error" id="business-error"></span></div>
+          <div class="field"><label for="email">דוא״ל <span>(לא חובה)</span></label><input id="email" name="email" type="email" dir="ltr" autocomplete="email" maxlength="254" aria-describedby="email-error" /><span class="field-error" id="email-error"></span></div>
+          <div class="field full"><label for="service">איזה ערוץ מעניין אתכם? *</label><select id="service" name="service" required aria-describedby="service-error">{services.map(([value, label]) => <option value={value} selected={selected === value || (!selected && value === 'not-sure')}>{label}</option>)}</select><span class="field-error" id="service-error"></span></div>
+          <div class="field full"><label for="message">מה הייתם רוצים לשפר? <span>(לא חובה, עד 2,000 תווים)</span></label><textarea id="message" name="message" rows="4" maxlength="2000" aria-describedby="message-error" placeholder="למשל: קשה לי לחזור להודעות כשאני אצל לקוחות."></textarea><span class="field-error" id="message-error"></span></div>
+        </div>
+        <div class="consent"><input type="checkbox" id="consent" name="consent" value="yes" required aria-describedby="consent-error" /><label for="consent">אני מסכים/ה לשימוש בפרטים לצורך טיפול בפנייה וחזרה אליי, בהתאם ל<a href="/privacy/">מדיניות הפרטיות</a>. אין כאן הסכמה לדיוור שיווקי. *</label></div><span class="field-error" id="consent-error"></span>
+        <div class="form-status" id="form-status" role="status" aria-live="polite" tabindex="-1"></div>
+        <button type="submit" class="button" id="submit-lead">שליחת בקשה לבדיקת התאמה</button>
+      </fieldset>
+      <noscript><p class="form-description">אפשר לשלוח את הטופס גם ללא JavaScript כשהשירות מחובר. לאחר השליחה יוצג עמוד עם תוצאת הבקשה.</p></noscript>
+    </form>
+    <aside class="contact-aside"><h2>ומה קורה אחרי הפנייה?</h2><ol><li>בודקים את הפרטים ואת מה שתרצו לשפר.</li><li>ממשיכים לשיחה אנושית על התאמה, תשתיות וגבולות.</li><li>מחליטים יחד אם יש בסיס להמשך. אין כאן הזמנת שירות או קביעת פגישה.</li></ol>
+      <div class="notice"><strong>רוצים לראות הדגמה?</strong><p>ציינו זאת בפנייה. אין כרגע קישור להדגמה חיה מאושרת באתר. השיחות המוצגות בעמוד הבית הן המחשה בלבד.</p></div>
+      {(site.email || site.phone || site.whatsapp || site.booking) && <div class="contact-links"><h2>אפשר גם ישירות</h2>{site.email && <a class="text-link" href={`mailto:${site.email}`}><bdi>{site.email}</bdi></a>}{site.phone && <a class="text-link" href={`tel:${site.phone.replace(/[\s()-]/g, '')}`}><bdi>{site.phone}</bdi></a>}{site.whatsapp && <a class="text-link" href={`https://wa.me/${site.whatsapp.replace(/\D/g, '')}`}>לפתיחת שיחה בוואטסאפ</a>}{site.booking && <a class="text-link" href={site.booking} rel="noopener noreferrer">לתיאום שיחה במערכת החיצונית</a>}</div>}
+      <p><a class="text-link" href="/faq/">לפני שפונים: שאלות ותשובות</a></p>
+    </aside>
+  </div></section>
+  <script>
+    const form = document.querySelector<HTMLFormElement>('#lead-form');
+    const status = document.querySelector<HTMLDivElement>('#form-status');
+    const button = document.querySelector<HTMLButtonElement>('#submit-lead');
+    form?.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!status || !button || button.disabled) return;
+      form.querySelectorAll('.field-error').forEach((node) => { node.textContent = ''; });
+      form.querySelectorAll('[aria-invalid]').forEach((node) => node.removeAttribute('aria-invalid'));
+      status.textContent = 'שולחים את הפנייה וממתינים לאישור הקבלה…';
+      status.dataset.state = 'loading';
+      button.disabled = true;
+      button.textContent = 'ממתינים לאישור…';
+      form.setAttribute('aria-busy', 'true');
+      let accepted = false;
+      let uncertain = false;
+      try {
+        const values = new URLSearchParams();
+        new FormData(form).forEach((value, key) => { if (typeof value === 'string') values.set(key, value); });
+        const response = await fetch(form.action, {
+          method: 'POST', headers: { Accept: 'application/json' },
+          body: values, credentials: 'same-origin', signal: AbortSignal.timeout(15000),
+        });
+        const result: unknown = await response.json();
+        if (!result || typeof result !== 'object' || !('message' in result) || typeof result.message !== 'string' || !('ok' in result)) throw new Error('Invalid server response');
+        accepted = response.ok && result.ok === true;
+        const reference = 'reference' in result && typeof result.reference === 'string' ? ` מספר פנייה: ${result.reference}` : '';
+        status.textContent = result.message + reference;
+        status.dataset.state = accepted ? 'success' : 'error';
+        uncertain = !accepted && Boolean(reference) && [409, 502, 503, 504].includes(response.status);
+        if ('errors' in result && result.errors && typeof result.errors === 'object') {
+          for (const [name, message] of Object.entries(result.errors)) {
+            const error = document.getElementById(`${name}-error`);
+            const input = document.getElementById(name);
+            if (error && typeof message === 'string') {
+              error.textContent = message;
+              input?.setAttribute('aria-invalid', 'true');
+            }
+          }
+        }
+        if (accepted) {
+          form.reset();
+          button.textContent = 'הבקשה התקבלה';
+        }
+      } catch {
+        uncertain = true;
+        status.dataset.state = 'error';
+        status.textContent = 'לא הצלחנו לקבל אישור מהשרת. ייתכן שהפנייה התקבלה. כדי להימנע מכפילות, אל תשלחו אותה מחדש; פנו דרך פרטי הקשר המפורסמים בעמוד לבירור. הפרטים נשארו בטופס.';
+      } finally {
+        form.removeAttribute('aria-busy');
+        if (uncertain) button.textContent = 'לא התקבל אישור — נדרש בירור';
+        else if (!accepted) {
+          button.disabled = false;
+          button.textContent = 'ניסיון שליחה נוסף';
+        }
+        status.focus();
+      }
+    });
+  </script>
+</Layout>

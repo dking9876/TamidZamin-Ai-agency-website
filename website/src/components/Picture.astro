@@ -1,0 +1,9 @@
+---
+interface Props { name: string; alt: string; width?: number; height?: number; class?: string; eager?: boolean; }
+const { name, alt, width = 640, height = 427, class: className, eager = false } = Astro.props;
+const variants: Record<string, number[]> = {
+  hero: [768, 1280, 1920], support: [640, 960], about: [640, 960], logo: [300, 600],
+};
+const sizes = variants[name] || [320, 640];
+---
+<img class={className} src={`/images/${name}-${sizes[sizes.length - 1]}.webp`} srcset={sizes.map((w) => `/images/${name}-${w}.webp ${w}w`).join(', ')} sizes={name === 'hero' ? '100vw' : name === 'logo' ? '190px' : '(max-width: 680px) 92vw, 45vw'} width={width} height={height} alt={alt} loading={eager ? 'eager' : 'lazy'} decoding="async" fetchpriority={eager ? 'high' : 'auto'} />

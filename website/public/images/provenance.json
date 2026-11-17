@@ -1,0 +1,173 @@
+[
+  {
+    "file": "hero-768.webp",
+    "source": "website design assets\\01_hero_background.png",
+    "sha256": "a62077fb7768c0593a934a18bef34bb3de6218ca65ffd56ff06c70ce9116d3cb",
+    "sourceWidth": 2172,
+    "sourceHeight": 724,
+    "transformation": "resize to max 768px wide; WebP",
+    "provenance": "User-supplied approved asset. No claim about depicted people or authorship."
+  },
+  {
+    "file": "hero-1280.webp",
+    "source": "website design assets\\01_hero_background.png",
+    "sha256": "a62077fb7768c0593a934a18bef34bb3de6218ca65ffd56ff06c70ce9116d3cb",
+    "sourceWidth": 2172,
+    "sourceHeight": 724,
+    "transformation": "resize to max 1280px wide; WebP",
+    "provenance": "User-supplied approved asset. No claim about depicted people or authorship."
+  },
+  {
+    "file": "hero-1920.webp",
+    "source": "website design assets\\01_hero_background.png",
+    "sha256": "a62077fb7768c0593a934a18bef34bb3de6218ca65ffd56ff06c70ce9116d3cb",
+    "sourceWidth": 2172,
+    "sourceHeight": 724,
+    "transformation": "resize to max 1920px wide; WebP",
+    "provenance": "User-supplied approved asset. No claim about depicted people or authorship."
+  },
+  {
+    "file": "plumber-320.webp",
+    "source": "website design assets\\02_trade_plumber.png",
+    "sha256": "51504a5248c925935677ff174973db67eacb6d8cce65dcf1bbeb4e95f4c9f747",
+    "sourceWidth": 1448,
+    "sourceHeight": 1086,
+    "transformation": "resize to max 320px wide; WebP",
+    "provenance": "User-supplied approved asset. No claim about depicted people or authorship."
+  },
+  {
+    "file": "plumber-640.webp",
+    "source": "website design assets\\02_trade_plumber.png",
+    "sha256": "51504a5248c925935677ff174973db67eacb6d8cce65dcf1bbeb4e95f4c9f747",
+    "sourceWidth": 1448,
+    "sourceHeight": 1086,
+    "transformation": "resize to max 640px wide; WebP",
+    "provenance": "User-supplied approved asset. No claim about depicted people or authorship."
+  },
+  {
+    "file": "electrician-320.webp",
+    "source": "website design assets\\03_trade_electrician.png",
+    "sha256": "12ef35fc2bf7dd5a4fd87ee41d1a600fb381d05bb02cf69d6af61b182a474946",
+    "sourceWidth": 1448,
+    "sourceHeight": 1086,
+    "transformation": "resize to max 320px wide; WebP",
+    "provenance": "User-supplied approved asset. No claim about depicted people or authorship."
+  },
+  {
+    "file": "electrician-640.webp",
+    "source": "website design assets\\03_trade_electrician.png",
+    "sha256": "12ef35fc2bf7dd5a4fd87ee41d1a600fb381d05bb02cf69d6af61b182a474946",
+    "sourceWidth": 1448,
+    "sourceHeight": 1086,
+    "transformation": "resize to max 640px wide; WebP",
+    "provenance": "User-supplied approved asset. No claim about depicted people or authorship."
+  },
+  {
+    "file": "repair-320.webp",
+    "source": "website design assets\\04_trade_repair_technician.png",
+    "sha256": "dcceef509ba271a86c100cf05b580e5fc65245ab9322f723be3e0c41ac2f9da9",
+    "sourceWidth": 1448,
+    "sourceHeight": 1086,
+    "transformation": "resize to max 320px wide; WebP",
+    "provenance": "User-supplied approved asset. No claim about depicted people or authorship."
+  },
+  {
+    "file": "repair-640.webp",
+    "source": "website design assets\\04_trade_repair_technician.png",
+    "sha256": "dcceef509ba271a86c100cf05b580e5fc65245ab9322f723be3e0c41ac2f9da9",
+    "sourceWidth": 1448,
+    "sourceHeight": 1086,
+    "transformation": "resize to max 640px wide; WebP",
+    "provenance": "User-supplied approved asset. No claim about depicted people or authorship."
+  },
+  {
+    "file": "hvac-320.webp",
+    "source": "website design assets\\05_trade_hvac_technician.png",
+    "sha256": "b2cc3b7453542e44eca846652998826e96d4af4075f344836c74cb380d34c4df",
+    "sourceWidth": 1448,
+    "sourceHeight": 1086,
+    "transformation": "resize to max 320px wide; WebP",
+    "provenance": "User-supplied approved asset. No claim about depicted people or authorship."
+  },
+  {
+    "file": "hvac-640.webp",
+    "source": "website design assets\\05_trade_hvac_technician.png",
+    "sha256": "b2cc3b7453542e44eca846652998826e96d4af4075f344836c74cb380d34c4df",
+    "sourceWidth": 1448,
+    "sourceHeight": 1086,
+    "transformation": "resize to max 640px wide; WebP",
+    "provenance": "User-supplied approved asset. No claim about depicted people or authorship."
+  },
+  {
+    "file": "contractor-320.webp",
+    "source": "website design assets\\06_trade_contractor.png",
+    "sha256": "ffef37d58b3e5215364c5d171d01ab744e2b48ec9746c845df62b95c0821395a",
+    "sourceWidth": 1448,
+    "sourceHeight": 1086,
+    "transformation": "resize to max 320px wide; WebP",
+    "provenance": "User-supplied approved asset. No claim about depicted people or authorship."
+  },
+  {
+    "file": "contractor-640.webp",
+    "source": "website design assets\\06_trade_contractor.png",
+    "sha256": "ffef37d58b3e5215364c5d171d01ab744e2b48ec9746c845df62b95c0821395a",
+    "sourceWidth": 1448,
+    "sourceHeight": 1086,
+    "transformation": "resize to max 640px wide; WebP",
+    "provenance": "User-supplied approved asset. No claim about depicted people or authorship."
+  },
+  {
+    "file": "support-640.webp",
+    "source": "website design assets\\07_human_support.png",
+    "sha256": "e668a292a0cea6ff36fc3c5fdebee1d055d27afdd1a4cdd0f5249658da4d2094",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "transformation": "resize to max 640px wide; WebP",
+    "provenance": "User-supplied approved asset. No claim about depicted people or authorship."
+  },
+  {
+    "file": "support-960.webp",
+    "source": "website design assets\\07_human_support.png",
+    "sha256": "e668a292a0cea6ff36fc3c5fdebee1d055d27afdd1a4cdd0f5249658da4d2094",
+    "sourceWidth": 1672,
+    "sourceHeight": 941,
+    "transformation": "resize to max 960px wide; WebP",
+    "provenance": "User-supplied approved asset. No claim about depicted people or authorship."
+  },
+  {
+    "file": "about-640.webp",
+    "source": "website design assets\\08_about_technician.png",
+    "sha256": "ffef37d58b3e5215364c5d171d01ab744e2b48ec9746c845df62b95c0821395a",
+    "sourceWidth": 1448,
+    "sourceHeight": 1086,
+    "transformation": "resize to max 640px wide; WebP",
+    "provenance": "User-supplied approved asset. No claim about depicted people or authorship."
+  },
+  {
+    "file": "about-960.webp",
+    "source": "website design assets\\08_about_technician.png",
+    "sha256": "ffef37d58b3e5215364c5d171d01ab744e2b48ec9746c845df62b95c0821395a",
+    "sourceWidth": 1448,
+    "sourceHeight": 1086,
+    "transformation": "resize to max 960px wide; WebP",
+    "provenance": "User-supplied approved asset. No claim about depicted people or authorship."
+  },
+  {
+    "file": "logo-300.webp",
+    "source": "website design assets\\09_tamidzamin_logo.png",
+    "sha256": "73dbdc96dfd0fdf854e3cda85614f1ec7156c524438a7e1db6ab33cd4a13b00d",
+    "sourceWidth": 1550,
+    "sourceHeight": 360,
+    "transformation": "resize to max 300px wide; WebP",
+    "provenance": "User-supplied approved asset. No claim about depicted people or authorship."
+  },
+  {
+    "file": "logo-600.webp",
+    "source": "website design assets\\09_tamidzamin_logo.png",
+    "sha256": "73dbdc96dfd0fdf854e3cda85614f1ec7156c524438a7e1db6ab33cd4a13b00d",
+    "sourceWidth": 1550,
+    "sourceHeight": 360,
+    "transformation": "resize to max 600px wide; WebP",
+    "provenance": "User-supplied approved asset. No claim about depicted people or authorship."
+  }
+]

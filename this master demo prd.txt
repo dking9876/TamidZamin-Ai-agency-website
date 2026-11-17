@@ -1,0 +1,61 @@
+TrisMaster — Demo Requirements
+AI customer information intake | WhatsApp and Phone | Version 1.0 | 3 November 2026
+1. Purpose and Scope
+Build a demonstration AI assistant for TrisMaster that handles inquiries about electric shutter repair only. Customers can contact the business through WhatsApp text/messages or a phone call. The assistant collects the same core information on either channel, prepares a concise request summary, lets the customer correct it, and shares the summary for human follow-up.
+The demo does not diagnose faults, quote prices, schedule appointments, accept payments, or offer other services.
+2. Supported Channels and Languages
+Channel
+Expected behavior
+WhatsApp
+Chat-based intake; accept text, photos, videos, and voice messages in the same conversation;
+Phone
+Voice-based intake; use caller ID when available; read back a concise summary and obtain verbal confirmation. 
+
+
+Support Hebrew and Russian. Detect the customer’s language automatically, respond in that language, and follow a language switch. Default to Hebrew if unclear. For WhatsApp, if Russian/english was used at any point, send the final written summary in Russian/english and Hebrew  otherwise use Hebrew. Phone summaries are spoken in the customer’s current language.
+3. Information to Collect
+Field
+Requirement
+Customer name
+First and last name.
+Phone number
+Automatically capture WhatsApp sender number or phone caller ID when available; do not request it during the demo.
+Address
+City, street, house number, floor and apartment (where applicable).
+Problem description
+Short customer description of the electric shutter issue; at most one simple clarification if needed.
+Urgency
+Urgent / within a few days / flexible / unknown.
+Preferred availability
+Preferred days or times for a technician; no appointment is booked.
+Photos (WhatsApp only)
+Request at least one photo; one received photo is sufficient. If unavailable or promised later, record that status and continue.
+
+4. Conversation Flow
+1. Greet the customer as an AI assistant and identify the language; do not repeat the greeting.
+2. Understand the electric shutter problem. Extract any information already supplied.
+3. Collect only missing name and address details. Use channel metadata for the phone number.
+4. Ask about urgency and preferred technician availability, unless already provided.
+5. WhatsApp: request at least one photo if none has been received. Once one photo arrives, move to the summary as soon as the remaining details are available. If the customer cannot send one or will send it later, proceed without waiting.
+6. Produce a summary, ask for confirmation, and accept corrections without restarting the conversation.
+7. On confirmation, share the summary with the configured human follow-up destination and close politely. If transfer/storage is not confirmed, do not claim it succeeded.
+5. Summary and Handoff
+The summary must contain customer information:
+Name
+Phone number
+Address
+Electric shutter problem description
+Urgency
+Preferred availability
+Photo status (WhatsApp only)
+For phone calls, read the summary aloud and capture verbal confirmation. For the phone channel only, send the resulting text summary to the business by email or WhatsApp at the end of the call.
+If the customer corrects one or more fields, update only those fields, repeat the complete corrected summary, and request confirmation again. If confirmation is declined, mark the request unconfirmed and make it available for human review. A request for a human representative takes priority over automated intake; stop automated replies after confirmed takeover.
+6. Demo Rules and Acceptance Criteria
+• Keep exchanges short, friendly, and natural; ask one question at a time, except grouped address details. Avoid repeated or technical diagnostic questions.
+• Never invent missing customer details, photo contents, technician availability, appointment times, or successful system actions.
+• WhatsApp and phone both collect the same core fields; only WhatsApp requires a photo-status step.
+• A single WhatsApp photo completes the photo step; multiple photos and early photos must not trigger extra questions.
+• Hebrew, Russian, mixed-language, corrections, confirmation, and human-handoff scenarios work as specified. 
+• An approved summary is delivered to the configured recipient/workflow with an observable success or failure result.
+
+

@@ -1,0 +1,14 @@
+---
+import Icon from './Icon.astro';
+import { faqs } from '../lib/site';
+interface Props { all?: boolean; }
+const items = Astro.props.all ? faqs : faqs.slice(0, 4);
+---
+<div class="faq-list">
+  {items.map(({ question, answer }) => (
+    <details>
+      <summary>{question}<Icon name="plus" size={20} /></summary>
+      <p>{answer}</p>
+    </details>
+  ))}
+</div>

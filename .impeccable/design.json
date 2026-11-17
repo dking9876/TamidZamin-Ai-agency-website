@@ -1,0 +1,1878 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-17T03:33:24.565Z",
+  "title": "Design System: TamidZamin",
+  "extensions": {
+    "colorMeta": {
+      "blue": {
+        "role": "primary",
+        "displayName": "Electric action blue",
+        "tonalRamp": [
+          "oklch(15% 0.04866 257.55)",
+          "oklch(26% 0.11679 257.55)",
+          "oklch(38% 0.16546 257.55)",
+          "oklch(50% 0.19465 257.55)",
+          "oklch(62% 0.19465 257.55)",
+          "oklch(74% 0.14599 257.55)",
+          "oklch(86% 0.07786 257.55)",
+          "oklch(95% 0.02336 257.55)"
+        ]
+      },
+      "blue-hover": {
+        "role": "primary",
+        "displayName": "Readable deep action blue",
+        "tonalRamp": [
+          "oklch(15% 0.04398 256.81)",
+          "oklch(26% 0.10555 256.81)",
+          "oklch(38% 0.14953 256.81)",
+          "oklch(50% 0.17592 256.81)",
+          "oklch(62% 0.17592 256.81)",
+          "oklch(74% 0.13194 256.81)",
+          "oklch(86% 0.07037 256.81)",
+          "oklch(95% 0.02111 256.81)"
+        ]
+      },
+      "cyan": {
+        "role": "primary",
+        "displayName": "Focus cyan",
+        "tonalRamp": [
+          "oklch(15% 0.03673 236.71)",
+          "oklch(26% 0.08814 236.71)",
+          "oklch(38% 0.12487 236.71)",
+          "oklch(50% 0.14690 236.71)",
+          "oklch(62% 0.14690 236.71)",
+          "oklch(74% 0.11018 236.71)",
+          "oklch(86% 0.05876 236.71)",
+          "oklch(95% 0.01763 236.71)"
+        ]
+      },
+      "navy": {
+        "role": "neutral",
+        "displayName": "Supporting navy",
+        "tonalRamp": [
+          "oklch(15% 0.01211 258.97)",
+          "oklch(26% 0.02906 258.97)",
+          "oklch(38% 0.04116 258.97)",
+          "oklch(50% 0.04843 258.97)",
+          "oklch(62% 0.04843 258.97)",
+          "oklch(74% 0.03632 258.97)",
+          "oklch(86% 0.01937 258.97)",
+          "oklch(95% 0.00581 258.97)"
+        ]
+      },
+      "navy-soft": {
+        "role": "neutral",
+        "displayName": "Navigation navy",
+        "tonalRamp": [
+          "oklch(15% 0.01508 258.63)",
+          "oklch(26% 0.03619 258.63)",
+          "oklch(38% 0.05127 258.63)",
+          "oklch(50% 0.06031 258.63)",
+          "oklch(62% 0.06031 258.63)",
+          "oklch(74% 0.04523 258.63)",
+          "oklch(86% 0.02412 258.63)",
+          "oklch(95% 0.00724 258.63)"
+        ]
+      },
+      "navy-deep": {
+        "role": "neutral",
+        "displayName": "Supporting footer navy",
+        "tonalRamp": [
+          "oklch(15% 0.01024 258.89)",
+          "oklch(26% 0.02459 258.89)",
+          "oklch(38% 0.03483 258.89)",
+          "oklch(50% 0.04098 258.89)",
+          "oklch(62% 0.04098 258.89)",
+          "oklch(74% 0.03073 258.89)",
+          "oklch(86% 0.01639 258.89)",
+          "oklch(95% 0.00492 258.89)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Reading ink",
+        "tonalRamp": [
+          "oklch(15% 0.01398 260.27)",
+          "oklch(26% 0.03356 260.27)",
+          "oklch(38% 0.04754 260.27)",
+          "oklch(50% 0.05593 260.27)",
+          "oklch(62% 0.05593 260.27)",
+          "oklch(74% 0.04194 260.27)",
+          "oklch(86% 0.02237 260.27)",
+          "oklch(95% 0.00671 260.27)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Secondary reading slate",
+        "tonalRamp": [
+          "oklch(15% 0.01109 260.55)",
+          "oklch(26% 0.02663 260.55)",
+          "oklch(38% 0.03772 260.55)",
+          "oklch(50% 0.04438 260.55)",
+          "oklch(62% 0.04438 260.55)",
+          "oklch(74% 0.03328 260.55)",
+          "oklch(86% 0.01775 260.55)",
+          "oklch(95% 0.00533 260.55)"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "White paper",
+        "tonalRamp": [
+          "oklch(15% 0.00000 0.00)",
+          "oklch(26% 0.00000 0.00)",
+          "oklch(38% 0.00000 0.00)",
+          "oklch(50% 0.00000 0.00)",
+          "oklch(62% 0.00000 0.00)",
+          "oklch(74% 0.00000 0.00)",
+          "oklch(86% 0.00000 0.00)",
+          "oklch(95% 0.00000 0.00)"
+        ]
+      },
+      "wash": {
+        "role": "neutral",
+        "displayName": "Supporting cool wash",
+        "tonalRamp": [
+          "oklch(15% 0.00156 255.47)",
+          "oklch(26% 0.00374 255.47)",
+          "oklch(38% 0.00530 255.47)",
+          "oklch(50% 0.00623 255.47)",
+          "oklch(62% 0.00623 255.47)",
+          "oklch(74% 0.00467 255.47)",
+          "oklch(86% 0.00249 255.47)",
+          "oklch(95% 0.00075 255.47)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Supporting panel line",
+        "tonalRamp": [
+          "oklch(15% 0.00389 257.20)",
+          "oklch(26% 0.00934 257.20)",
+          "oklch(38% 0.01324 257.20)",
+          "oklch(50% 0.01557 257.20)",
+          "oklch(62% 0.01557 257.20)",
+          "oklch(74% 0.01168 257.20)",
+          "oklch(86% 0.00623 257.20)",
+          "oklch(95% 0.00187 257.20)"
+        ]
+      },
+      "on-dark": {
+        "role": "neutral",
+        "displayName": "Supporting light text",
+        "tonalRamp": [
+          "oklch(15% 0.00717 256.49)",
+          "oklch(26% 0.01720 256.49)",
+          "oklch(38% 0.02436 256.49)",
+          "oklch(50% 0.02866 256.49)",
+          "oklch(62% 0.02866 256.49)",
+          "oklch(74% 0.02150 256.49)",
+          "oklch(86% 0.01146 256.49)",
+          "oklch(95% 0.00344 256.49)"
+        ]
+      },
+      "error": {
+        "role": "error",
+        "displayName": "Form error red",
+        "tonalRamp": [
+          "oklch(15% 0.04312 18.24)",
+          "oklch(26% 0.10348 18.24)",
+          "oklch(38% 0.14659 18.24)",
+          "oklch(50% 0.17246 18.24)",
+          "oklch(62% 0.17246 18.24)",
+          "oklch(74% 0.12935 18.24)",
+          "oklch(86% 0.06898 18.24)",
+          "oklch(95% 0.02070 18.24)"
+        ]
+      },
+      "success": {
+        "role": "success",
+        "displayName": "Form success green",
+        "tonalRamp": [
+          "oklch(15% 0.02441 156.27)",
+          "oklch(26% 0.05857 156.27)",
+          "oklch(38% 0.08298 156.27)",
+          "oklch(50% 0.09762 156.27)",
+          "oklch(62% 0.09762 156.27)",
+          "oklch(74% 0.07322 156.27)",
+          "oklch(86% 0.03905 156.27)",
+          "oklch(95% 0.01171 156.27)"
+        ]
+      },
+      "home-navy": {
+        "role": "neutral",
+        "displayName": "Homepage blue-black",
+        "tonalRamp": [
+          "oklch(15% 0.00725 239.48)",
+          "oklch(26% 0.01740 239.48)",
+          "oklch(38% 0.02465 239.48)",
+          "oklch(50% 0.02900 239.48)",
+          "oklch(62% 0.02900 239.48)",
+          "oklch(74% 0.02175 239.48)",
+          "oklch(86% 0.01160 239.48)",
+          "oklch(95% 0.00348 239.48)"
+        ]
+      },
+      "home-navy-deep": {
+        "role": "neutral",
+        "displayName": "Homepage footer blue-black",
+        "tonalRamp": [
+          "oklch(15% 0.00753 244.41)",
+          "oklch(26% 0.01807 244.41)",
+          "oklch(38% 0.02559 244.41)",
+          "oklch(50% 0.03011 244.41)",
+          "oklch(62% 0.03011 244.41)",
+          "oklch(74% 0.02258 244.41)",
+          "oklch(86% 0.01204 244.41)",
+          "oklch(95% 0.00361 244.41)"
+        ]
+      },
+      "home-on-dark": {
+        "role": "neutral",
+        "displayName": "Homepage light text",
+        "tonalRamp": [
+          "oklch(15% 0.00558 243.82)",
+          "oklch(26% 0.01338 243.82)",
+          "oklch(38% 0.01896 243.82)",
+          "oklch(50% 0.02230 243.82)",
+          "oklch(62% 0.02230 243.82)",
+          "oklch(74% 0.01673 243.82)",
+          "oklch(86% 0.00892 243.82)",
+          "oklch(95% 0.00268 243.82)"
+        ]
+      },
+      "home-wash": {
+        "role": "neutral",
+        "displayName": "Homepage pale wave ground",
+        "tonalRamp": [
+          "oklch(15% 0.00198 253.85)",
+          "oklch(26% 0.00475 253.85)",
+          "oklch(38% 0.00673 253.85)",
+          "oklch(50% 0.00792 253.85)",
+          "oklch(62% 0.00792 253.85)",
+          "oklch(74% 0.00594 253.85)",
+          "oklch(86% 0.00317 253.85)",
+          "oklch(95% 0.00095 253.85)"
+        ]
+      },
+      "pill-paper": {
+        "role": "neutral",
+        "displayName": "Pale action surface",
+        "tonalRamp": [
+          "oklch(15% 0.00213 247.91)",
+          "oklch(26% 0.00512 247.91)",
+          "oklch(38% 0.00726 247.91)",
+          "oklch(50% 0.00854 247.91)",
+          "oklch(62% 0.00854 247.91)",
+          "oklch(74% 0.00640 247.91)",
+          "oklch(86% 0.00341 247.91)",
+          "oklch(95% 0.00102 247.91)"
+        ]
+      },
+      "pill-ink": {
+        "role": "neutral",
+        "displayName": "Pale action ink",
+        "tonalRamp": [
+          "oklch(15% 0.01047 252.78)",
+          "oklch(26% 0.02513 252.78)",
+          "oklch(38% 0.03560 252.78)",
+          "oklch(50% 0.04189 252.78)",
+          "oklch(62% 0.04189 252.78)",
+          "oklch(74% 0.03141 252.78)",
+          "oklch(86% 0.01675 252.78)",
+          "oklch(95% 0.00503 252.78)"
+        ]
+      },
+      "pill-hover": {
+        "role": "neutral",
+        "displayName": "Pale action hover",
+        "tonalRamp": [
+          "oklch(15% 0.00882 240.28)",
+          "oklch(26% 0.02116 240.28)",
+          "oklch(38% 0.02998 240.28)",
+          "oklch(50% 0.03527 240.28)",
+          "oklch(62% 0.03527 240.28)",
+          "oklch(74% 0.02645 240.28)",
+          "oklch(86% 0.01411 240.28)",
+          "oklch(95% 0.00423 240.28)"
+        ]
+      },
+      "pill-outline-hover": {
+        "role": "neutral",
+        "displayName": "Outlined action hover",
+        "tonalRamp": [
+          "oklch(15% 0.01630 247.47)",
+          "oklch(26% 0.03912 247.47)",
+          "oklch(38% 0.05543 247.47)",
+          "oklch(50% 0.06521 247.47)",
+          "oklch(62% 0.06521 247.47)",
+          "oklch(74% 0.04890 247.47)",
+          "oklch(86% 0.02608 247.47)",
+          "oklch(95% 0.00782 247.47)"
+        ]
+      },
+      "pill-border": {
+        "role": "neutral",
+        "displayName": "Pale action border",
+        "tonalRamp": [
+          "oklch(15% 0.00677 241.17)",
+          "oklch(26% 0.01624 241.17)",
+          "oklch(38% 0.02300 241.17)",
+          "oklch(50% 0.02706 241.17)",
+          "oklch(62% 0.02706 241.17)",
+          "oklch(74% 0.02030 241.17)",
+          "oklch(86% 0.01082 241.17)",
+          "oklch(95% 0.00325 241.17)"
+        ]
+      },
+      "pill-outline-border": {
+        "role": "neutral",
+        "displayName": "Outlined action border",
+        "tonalRamp": [
+          "oklch(15% 0.01249 244.68)",
+          "oklch(26% 0.02998 244.68)",
+          "oklch(38% 0.04247 244.68)",
+          "oklch(50% 0.04997 244.68)",
+          "oklch(62% 0.04997 244.68)",
+          "oklch(74% 0.03747 244.68)",
+          "oklch(86% 0.01999 244.68)",
+          "oklch(95% 0.00600 244.68)"
+        ]
+      },
+      "pill-icon": {
+        "role": "primary",
+        "displayName": "Hero arrow blue",
+        "tonalRamp": [
+          "oklch(15% 0.04363 254.47)",
+          "oklch(26% 0.10470 254.47)",
+          "oklch(38% 0.14833 254.47)",
+          "oklch(50% 0.17450 254.47)",
+          "oklch(62% 0.17450 254.47)",
+          "oklch(74% 0.13088 254.47)",
+          "oklch(86% 0.06980 254.47)",
+          "oklch(95% 0.02094 254.47)"
+        ]
+      },
+      "input-line": {
+        "role": "neutral",
+        "displayName": "Field stroke",
+        "tonalRamp": [
+          "oklch(15% 0.00878 256.79)",
+          "oklch(26% 0.02107 256.79)",
+          "oklch(38% 0.02985 256.79)",
+          "oklch(50% 0.03511 256.79)",
+          "oklch(62% 0.03511 256.79)",
+          "oklch(74% 0.02634 256.79)",
+          "oklch(86% 0.01405 256.79)",
+          "oklch(95% 0.00421 256.79)"
+        ]
+      },
+      "input-placeholder": {
+        "role": "neutral",
+        "displayName": "Field placeholder slate",
+        "tonalRamp": [
+          "oklch(15% 0.01004 258.84)",
+          "oklch(26% 0.02410 258.84)",
+          "oklch(38% 0.03414 258.84)",
+          "oklch(50% 0.04016 258.84)",
+          "oklch(62% 0.04016 258.84)",
+          "oklch(74% 0.03012 258.84)",
+          "oklch(86% 0.01606 258.84)",
+          "oklch(95% 0.00482 258.84)"
+        ]
+      },
+      "faq-paper": {
+        "role": "neutral",
+        "displayName": "Homepage FAQ paper",
+        "tonalRamp": [
+          "oklch(15% 0.00155 255.47)",
+          "oklch(26% 0.00372 255.47)",
+          "oklch(38% 0.00528 255.47)",
+          "oklch(50% 0.00621 255.47)",
+          "oklch(62% 0.00621 255.47)",
+          "oklch(74% 0.00466 255.47)",
+          "oklch(86% 0.00248 255.47)",
+          "oklch(95% 0.00074 255.47)"
+        ]
+      },
+      "faq-line": {
+        "role": "neutral",
+        "displayName": "Homepage FAQ line",
+        "tonalRamp": [
+          "oklch(15% 0.00459 250.59)",
+          "oklch(26% 0.01103 250.59)",
+          "oklch(38% 0.01562 250.59)",
+          "oklch(50% 0.01838 250.59)",
+          "oklch(62% 0.01838 250.59)",
+          "oklch(74% 0.01378 250.59)",
+          "oklch(86% 0.00735 250.59)",
+          "oklch(95% 0.00221 250.59)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Homepage display",
+        "purpose": "Hero only, above 1100px; explicit tablet overrides follow."
+      },
+      "display-mobile": {
+        "displayName": "Homepage mobile display",
+        "purpose": "Hero at max-width 680px."
+      },
+      "headline-reading": {
+        "displayName": "Supporting page title",
+        "purpose": "PageHeading; 2.45rem at max-width 680px."
+      },
+      "headline": {
+        "displayName": "Shared headline baseline",
+        "purpose": "Global h2; many actual page sections override its size."
+      },
+      "headline-process": {
+        "displayName": "Homepage process heading",
+        "purpose": "Compact centered process heading; not a universal homepage h2."
+      },
+      "title": {
+        "displayName": "Shared title baseline",
+        "purpose": "Global h3, overridden by compact homepage labels."
+      },
+      "body": {
+        "displayName": "Reading and input body",
+        "purpose": "Body and native field baseline."
+      },
+      "label-button": {
+        "displayName": "Supporting action",
+        "purpose": "Blue/secondary buttons; header adjusts font size."
+      },
+      "label-pill": {
+        "displayName": "Homepage action",
+        "purpose": "Filled and outlined pills, with responsive context overrides."
+      },
+      "label-field": {
+        "displayName": "Field label",
+        "purpose": "Persistent labels, separate from lighter optional hints."
+      },
+      "label-nav": {
+        "displayName": "Desktop navigation",
+        "purpose": "The final unscoped home.css rule applies on every route."
+      }
+    },
+    "shadows": [
+      {
+        "name": "pill-rest",
+        "value": "0 3px 9px #00000012",
+        "purpose": "Filled pills only; outlined pills explicitly have none."
+      },
+      {
+        "name": "button-hover",
+        "value": "0 5px 16px #00000018",
+        "purpose": "Shared button hover, including the header hybrid; disabled removes shadow."
+      },
+      {
+        "name": "faq-home",
+        "value": "0 2px 5px #345c7820",
+        "purpose": "Homepage FAQ containers only."
+      },
+      {
+        "name": "mobile-nav",
+        "value": "0 12px 25px #00000030",
+        "purpose": "Open mobile menu overlay."
+      }
+    ],
+    "motion": [
+      {
+        "name": "button-state",
+        "value": "background-color 160ms ease-out, box-shadow 160ms ease-out",
+        "purpose": "Shared buttons."
+      },
+      {
+        "name": "pill-state",
+        "value": "background 140ms ease-out",
+        "purpose": "Filled and outlined pills."
+      },
+      {
+        "name": "faq-disclosure",
+        "value": "transform 160ms ease-out",
+        "purpose": "Plus SVG rotates 45deg when details is open."
+      },
+      {
+        "name": "page-scroll",
+        "value": "smooth",
+        "purpose": "HTML scroll behavior; auto under reduced motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "compact-desktop",
+        "value": "1100px",
+        "query": "(max-width: 1100px)",
+        "purpose": "Shared gutters; compact homepage typography/devices and header."
+      },
+      {
+        "name": "navigation-and-home-tablet",
+        "value": "880px",
+        "query": "(max-width: 880px)",
+        "purpose": "All-route mobile navigation; homepage structural simplification."
+      },
+      {
+        "name": "supporting-contact-stack",
+        "value": "820px",
+        "query": "(max-width: 820px)",
+        "purpose": "Supporting contact grid becomes one column."
+      },
+      {
+        "name": "mobile",
+        "value": "680px",
+        "query": "(max-width: 680px)",
+        "purpose": "Small gutters, stacked content, two-column homepage tile groups."
+      },
+      {
+        "name": "narrow-mobile",
+        "value": "360px",
+        "query": "(max-width: 360px)",
+        "purpose": "Device and compact label reductions."
+      }
+    ],
+    "scope": {
+      "importOrder": [
+        "website\\src\\styles\\global.css",
+        "website\\src\\styles\\home.css"
+      ],
+      "fontImport": "@fontsource-variable/heebo",
+      "fontImportSource": "website\\src\\layouts\\Layout.astro",
+      "rootDirection": "rtl",
+      "rootLanguage": "he",
+      "homepageSelector": "body.homepage",
+      "homepageRoute": "/",
+      "customProperties": {
+        ":root": {
+          "--blue": "{colors.blue}",
+          "--blue-hover": "{colors.blue-hover}",
+          "--cyan": "{colors.cyan}",
+          "--navy": "{colors.navy}",
+          "--navy-soft": "{colors.navy-soft}",
+          "--navy-deep": "{colors.navy-deep}",
+          "--ink": "{colors.ink}",
+          "--muted": "{colors.muted}",
+          "--paper": "{colors.paper}",
+          "--wash": "{colors.wash}",
+          "--line": "{colors.line}",
+          "--on-dark": "{colors.on-dark}",
+          "--error": "{colors.error}",
+          "--success": "{colors.success}",
+          "--radius": "{rounded.panel}"
+        },
+        ".homepage": {
+          "--navy": "{colors.home-navy}",
+          "--navy-deep": "{colors.home-navy-deep}",
+          "--on-dark": "{colors.home-on-dark}",
+          "--wash": "{colors.home-wash}"
+        }
+      },
+      "sharedLaterOverrides": [
+        {
+          "selector": ".site-header .header-cta",
+          "scope": "all routes",
+          "note": "Pale pill surface; inherited button typography, border, transition and hover shadow. Higher specificity preserves the pale background on hover."
+        },
+        {
+          "selector": ".desktop-nav",
+          "scope": "all routes",
+          "note": "22px base gap, 14px at max-width 1100px; hidden at max-width 880px."
+        },
+        {
+          "selector": ".desktop-nav a",
+          "scope": "all routes",
+          "note": "14px base label, 13px at max-width 1100px."
+        }
+      ],
+      "localHeaderBackground": {
+        "selector": ".homepage .site-header",
+        "declarations": {
+          "background": "#071421"
+        }
+      },
+      "excludedLegacy": [
+        {
+          "selectors": [
+            ".hero",
+            ".hero-image",
+            ".hero-grid",
+            ".hero-copy",
+            ".channels",
+            ".channels-grid",
+            ".channel-copy",
+            ".phone-examples",
+            ".trades",
+            ".trade-grid",
+            ".human-section",
+            ".human-grid",
+            ".about-band",
+            ".about-grid"
+          ],
+          "reason": "Not the current index.astro composition. Do not replace home-* rules with their values."
+        },
+        {
+          "query": "(min-width: 1600px)",
+          "selectors": [
+            ".hero",
+            ".hero-copy"
+          ],
+          "reason": "Legacy-only widening rule, not a current homepage breakpoint."
+        }
+      ],
+      "retainedSharedBases": [
+        ".phone-shell",
+        ".chat-body .bubble",
+        ".chat-body .outgoing",
+        ".voice-phone",
+        ".waveform",
+        ".call-icon",
+        ".faq-list",
+        ".button",
+        ".text-link"
+      ],
+      "layout": {
+        "container": {
+          "width": "min(var(--container), calc(100% - 64px))",
+          "customProperty": {
+            "--container": "1180px"
+          }
+        },
+        "reading": {
+          "maxWidth": "800px"
+        },
+        "heroCopy": {
+          "width": "47%",
+          "direction": "rtl",
+          "parentDirection": "ltr"
+        },
+        "channelStage": {
+          "gridTemplateColumns": "1fr 1.52fr 1fr",
+          "direction": "ltr",
+          "gap": "22px"
+        },
+        "contactGrid": {
+          "gridTemplateColumns": "minmax(0, 1.4fr) minmax(0, .8fr)",
+          "gap": "65px"
+        },
+        "formGrid": {
+          "gridTemplateColumns": "1fr 1fr",
+          "gap": "20px"
+        }
+      }
+    },
+    "responsiveVariants": [
+      {
+        "query": "(max-width: 1100px)",
+        "source": "website\\src\\styles\\global.css",
+        "rules": [
+          {
+            "selector": ".container",
+            "declarations": {
+              "width": "calc(100% - 48px)"
+            }
+          },
+          {
+            "selector": ".contact-grid",
+            "declarations": {
+              "gap": "35px"
+            }
+          }
+        ]
+      },
+      {
+        "query": "(max-width: 1100px)",
+        "source": "website\\src\\styles\\home.css",
+        "rules": [
+          {
+            "selector": ".homepage .header-inner",
+            "declarations": {
+              "min-height": "56px"
+            }
+          },
+          {
+            "selector": ".home-hero",
+            "declarations": {
+              "min-height": "320px"
+            }
+          },
+          {
+            "selector": ".home-hero-copy",
+            "declarations": {
+              "width": "45%",
+              "padding-block": "22px 18px"
+            }
+          },
+          {
+            "selector": ".home-hero h1",
+            "declarations": {
+              "font-size": "44px"
+            }
+          },
+          {
+            "selector": ".hero-actions .pill",
+            "declarations": {
+              "padding-inline": "17px",
+              "font-size": "14px"
+            }
+          },
+          {
+            "selector": ".device-stage .phone-shell",
+            "declarations": {
+              "width": "139px",
+              "height": "235px"
+            }
+          },
+          {
+            "selector": ".faq-strip .faq-list summary",
+            "declarations": {
+              "font-size": "13px",
+              "padding": "10px 13px"
+            }
+          }
+        ]
+      },
+      {
+        "query": "(max-width: 880px)",
+        "source": "website\\src\\styles\\home.css",
+        "rules": [
+          {
+            "selector": ".desktop-nav, .header-cta",
+            "declarations": {
+              "display": "none"
+            }
+          },
+          {
+            "selector": ".mobile-menu",
+            "declarations": {
+              "display": "block"
+            }
+          },
+          {
+            "selector": ".home-hero h1",
+            "declarations": {
+              "font-size": "37px"
+            }
+          },
+          {
+            "selector": ".hero-actions",
+            "declarations": {
+              "flex-wrap": "wrap"
+            }
+          },
+          {
+            "selector": ".channel-stage",
+            "declarations": {
+              "grid-template-columns": "1fr 1fr",
+              "gap": "22px"
+            }
+          },
+          {
+            "selector": ".device-stage",
+            "declarations": {
+              "grid-column": "1/-1",
+              "grid-row": "2"
+            }
+          },
+          {
+            "selector": ".device-stage .phone-shell",
+            "declarations": {
+              "width": "165px",
+              "height": "294px"
+            }
+          },
+          {
+            "selector": ".handoff-art",
+            "declarations": {
+              "display": "none"
+            }
+          },
+          {
+            "selector": ".faq-strip",
+            "declarations": {
+              "grid-template-columns": "1fr",
+              "gap": "20px"
+            }
+          }
+        ]
+      },
+      {
+        "query": "(max-width: 820px)",
+        "source": "website\\src\\styles\\global.css",
+        "rules": [
+          {
+            "selector": ".contact-grid",
+            "declarations": {
+              "grid-template-columns": "1fr"
+            }
+          }
+        ]
+      },
+      {
+        "query": "(max-width: 680px)",
+        "source": "website\\src\\styles\\global.css",
+        "rules": [
+          {
+            "selector": ".container",
+            "declarations": {
+              "width": "calc(100% - 36px)"
+            }
+          },
+          {
+            "selector": ".page-heading h1",
+            "declarations": {
+              "font-size": "2.45rem"
+            }
+          },
+          {
+            "selector": ".service-grid, .process",
+            "declarations": {
+              "grid-template-columns": "1fr",
+              "gap": "20px"
+            }
+          },
+          {
+            "selector": ".service-detail",
+            "declarations": {
+              "padding": "25px"
+            }
+          },
+          {
+            "selector": ".contact-form",
+            "declarations": {
+              "padding": "21px 18px"
+            }
+          },
+          {
+            "selector": ".form-grid",
+            "declarations": {
+              "grid-template-columns": "1fr",
+              "gap": "17px"
+            }
+          },
+          {
+            "selector": ".faq-list summary",
+            "declarations": {
+              "padding": "15px",
+              "font-size": "15px",
+              "gap": "12px"
+            }
+          }
+        ]
+      },
+      {
+        "query": "(max-width: 680px)",
+        "source": "website\\src\\styles\\home.css",
+        "rules": [
+          {
+            "selector": ".homepage .header-inner",
+            "declarations": {
+              "min-height": "64px"
+            }
+          },
+          {
+            "selector": ".home-hero",
+            "declarations": {
+              "padding-block-start": "235px"
+            }
+          },
+          {
+            "selector": ".home-hero-image",
+            "declarations": {
+              "height": "290px",
+              "object-position": "72% center"
+            }
+          },
+          {
+            "selector": ".home-hero-copy",
+            "declarations": {
+              "width": "100%",
+              "padding": "0 0 26px",
+              "text-align": "center"
+            }
+          },
+          {
+            "selector": ".home-hero h1",
+            "declarations": {
+              "font-size": "clamp(2.4rem,9vw,3.2rem)",
+              "line-height": "1.08"
+            }
+          },
+          {
+            "selector": ".hero-actions .pill",
+            "declarations": {
+              "padding-inline": "19px",
+              "font-size": "15px"
+            }
+          },
+          {
+            "selector": ".home-process ol",
+            "declarations": {
+              "grid-template-columns": "1fr 1fr",
+              "gap": "25px 10px"
+            }
+          },
+          {
+            "selector": ".angled-trades",
+            "declarations": {
+              "grid-template-columns": "repeat(2,minmax(0,1fr))",
+              "gap": "15px"
+            }
+          },
+          {
+            "selector": ".angled-trade",
+            "declarations": {
+              "transform": "skew(-6deg)"
+            }
+          },
+          {
+            "selector": ".benefits-strip > ul",
+            "declarations": {
+              "grid-template-columns": "1fr 1fr",
+              "gap": "25px 20px"
+            }
+          },
+          {
+            "selector": ".human-strip",
+            "declarations": {
+              "grid-template-columns": "1fr",
+              "gap": "0",
+              "text-align": "center"
+            }
+          },
+          {
+            "selector": ".about-strip",
+            "declarations": {
+              "grid-template-columns": "1fr",
+              "gap": "23px"
+            }
+          },
+          {
+            "selector": ".evidence-strip",
+            "declarations": {
+              "grid-template-columns": "1fr",
+              "gap": "19px",
+              "text-align": "center"
+            }
+          },
+          {
+            "selector": ".faq-strip .faq-list",
+            "declarations": {
+              "grid-template-columns": "1fr",
+              "gap": "11px"
+            }
+          },
+          {
+            "selector": ".faq-strip .faq-list summary",
+            "declarations": {
+              "font-size": "15px",
+              "min-height": "49px"
+            }
+          },
+          {
+            "selector": ".close-strip",
+            "declarations": {
+              "flex-direction": "column",
+              "gap": "23px",
+              "text-align": "center"
+            }
+          },
+          {
+            "selector": ".device-stage .phone-shell",
+            "declarations": {
+              "width": "139px",
+              "height": "271px"
+            }
+          }
+        ]
+      },
+      {
+        "query": "(max-width: 360px)",
+        "source": "website\\src\\styles\\home.css",
+        "rules": [
+          {
+            "selector": ".device-stage .phone-shell",
+            "declarations": {
+              "width": "126px"
+            }
+          },
+          {
+            "selector": ".brand-connector",
+            "declarations": {
+              "width": "32px"
+            }
+          },
+          {
+            "selector": ".hero-actions .pill",
+            "declarations": {
+              "font-size": "14px",
+              "padding-inline": "17px"
+            }
+          }
+        ]
+      }
+    ],
+    "focus": {
+      "source": "website\\src\\styles\\global.css",
+      "rules": [
+        {
+          "selector": ":focus-visible",
+          "declarations": {
+            "outline": "3px solid var(--cyan)",
+            "outline-offset": "5px"
+          }
+        },
+        {
+          "selector": "input:focus-visible, textarea:focus-visible, select:focus-visible",
+          "declarations": {
+            "outline-color": "var(--blue)",
+            "outline-offset": "2px"
+          }
+        },
+        {
+          "selector": ".skip-link:focus",
+          "declarations": {
+            "transform": "translateY(0)"
+          }
+        },
+        {
+          "selector": "main:focus",
+          "declarations": {
+            "outline": "none"
+          }
+        }
+      ],
+      "note": "Main is a skip-link destination, not a replacement for interactive focus. Disabled fields cannot be focused in the current preview."
+    },
+    "reducedMotion": {
+      "query": "(prefers-reduced-motion: reduce)",
+      "rules": [
+        {
+          "source": "website\\src\\styles\\global.css",
+          "selector": "html",
+          "declarations": {
+            "scroll-behavior": "auto"
+          }
+        },
+        {
+          "source": "website\\src\\styles\\global.css",
+          "selector": ".trade img, .button, .faq-list summary svg",
+          "declarations": {
+            "transition": "none"
+          }
+        },
+        {
+          "source": "website\\src\\styles\\global.css",
+          "selector": ".trade:hover img",
+          "declarations": {
+            "transform": "none"
+          }
+        },
+        {
+          "source": "website\\src\\styles\\home.css",
+          "selector": ".pill",
+          "declarations": {
+            "transition": "none"
+          }
+        }
+      ],
+      "note": "Legacy trade scaling is suppressed; static homepage image skew and waveform bars are not animations."
+    },
+    "stateContracts": {
+      "buttonDisabled": {
+        "selector": ".button:disabled",
+        "opacity": ".65",
+        "cursor": "not-allowed",
+        "boxShadow": "none"
+      },
+      "contactFieldsetDisabled": {
+        "selector": ".contact-form fieldset:disabled",
+        "opacity": ".65",
+        "currentPreview": true,
+        "note": "Native disabled descendants; submit opacity compounds with its own disabled rule."
+      },
+      "fieldInvalid": {
+        "selector": ".field [aria-invalid=true]",
+        "borderColor": "{colors.error}",
+        "associatedText": ".field-error"
+      },
+      "status": {
+        "selector": ".form-status",
+        "states": [
+          "loading",
+          "error",
+          "success"
+        ],
+        "emptyHidden": true,
+        "liveRegion": "polite",
+        "productionDeliveryVerified": false
+      },
+      "faq": {
+        "element": "details",
+        "multipleOpenAllowed": true,
+        "openIconTransform": "rotate(45deg)",
+        "openQuestionColor": "{colors.blue-hover}"
+      },
+      "mobileMenu": {
+        "element": "details",
+        "escapeCloses": true,
+        "escapeFocusTarget": "summary",
+        "outsideClickCloses": true,
+        "modal": false,
+        "focusTrap": false
+      },
+      "pressed": {
+        "dedicatedVisualRule": false
+      },
+      "chips": {
+        "implemented": false,
+        "note": "Pills are navigation/actions, not filters or selectable chips."
+      }
+    },
+    "tokenSources": {
+      "colors": {
+        "blue": [
+          "global",
+          ":root",
+          "--blue"
+        ],
+        "blue-hover": [
+          "global",
+          ":root",
+          "--blue-hover"
+        ],
+        "cyan": [
+          "global",
+          ":root",
+          "--cyan"
+        ],
+        "navy": [
+          "global",
+          ":root",
+          "--navy"
+        ],
+        "navy-soft": [
+          "global",
+          ":root",
+          "--navy-soft"
+        ],
+        "navy-deep": [
+          "global",
+          ":root",
+          "--navy-deep"
+        ],
+        "ink": [
+          "global",
+          ":root",
+          "--ink"
+        ],
+        "muted": [
+          "global",
+          ":root",
+          "--muted"
+        ],
+        "paper": [
+          "global",
+          ":root",
+          "--paper"
+        ],
+        "wash": [
+          "global",
+          ":root",
+          "--wash"
+        ],
+        "line": [
+          "global",
+          ":root",
+          "--line"
+        ],
+        "on-dark": [
+          "global",
+          ":root",
+          "--on-dark"
+        ],
+        "error": [
+          "global",
+          ":root",
+          "--error"
+        ],
+        "success": [
+          "global",
+          ":root",
+          "--success"
+        ],
+        "home-navy": [
+          "home",
+          ".homepage",
+          "--navy"
+        ],
+        "home-navy-deep": [
+          "home",
+          ".homepage",
+          "--navy-deep"
+        ],
+        "home-on-dark": [
+          "home",
+          ".homepage",
+          "--on-dark"
+        ],
+        "home-wash": [
+          "home",
+          ".homepage",
+          "--wash"
+        ],
+        "pill-paper": [
+          "home",
+          ".pill",
+          "background"
+        ],
+        "pill-ink": [
+          "home",
+          ".pill",
+          "color"
+        ],
+        "pill-hover": [
+          "home",
+          ".pill:hover",
+          "background"
+        ],
+        "pill-outline-hover": [
+          "home",
+          ".pill-outline:hover",
+          "background"
+        ],
+        "pill-border": [
+          "home",
+          ".pill",
+          "border",
+          "color"
+        ],
+        "pill-outline-border": [
+          "home",
+          ".pill-outline",
+          "border-color"
+        ],
+        "pill-icon": [
+          "home",
+          ".pill-icon",
+          "background"
+        ],
+        "input-line": [
+          "global",
+          ".field input, .field textarea, .field select",
+          "border",
+          "color"
+        ],
+        "input-placeholder": [
+          "global",
+          ".field input::placeholder, .field textarea::placeholder",
+          "color"
+        ],
+        "faq-paper": [
+          "home",
+          ".faq-strip .faq-list details",
+          "background"
+        ],
+        "faq-line": [
+          "home",
+          ".faq-strip .faq-list details",
+          "border",
+          "color"
+        ]
+      },
+      "rounded": {
+        "field": [
+          "global",
+          ".field input, .field textarea, .field select",
+          "border-radius"
+        ],
+        "button": [
+          "global",
+          ".button",
+          "border-radius"
+        ],
+        "panel": [
+          "global",
+          ":root",
+          "--radius"
+        ],
+        "faq-home": [
+          "home",
+          ".faq-strip .faq-list details",
+          "border-radius"
+        ],
+        "pill": [
+          "home",
+          ".pill",
+          "border-radius"
+        ],
+        "circle": [
+          "home",
+          ".pill-icon",
+          "border-radius"
+        ]
+      },
+      "spacing": {
+        "gap-small": [
+          "global",
+          ".field",
+          "gap"
+        ],
+        "gap-medium": [
+          "home",
+          ".pill",
+          "gap"
+        ],
+        "gap-action": [
+          "global",
+          ".button",
+          "gap"
+        ],
+        "gap-form": [
+          "global",
+          ".form-grid",
+          "gap"
+        ],
+        "gap-panel": [
+          "global",
+          ".service-grid",
+          "gap"
+        ],
+        "gutter-mobile": [
+          "global",
+          ".container",
+          "width",
+          "half-subtracted-width",
+          "(max-width: 680px)"
+        ],
+        "gutter-tablet": [
+          "global",
+          ".container",
+          "width",
+          "half-subtracted-width",
+          "(max-width: 1100px)"
+        ],
+        "gutter-desktop": [
+          "global",
+          ".container",
+          "width",
+          "half-subtracted-width"
+        ],
+        "section-reading": [
+          "global",
+          ".page-section",
+          "padding-block"
+        ]
+      },
+      "typography": {
+        "display": {
+          "source": "home",
+          "selector": ".home-hero h1",
+          "inherits": [
+            "global:body"
+          ]
+        },
+        "display-mobile": {
+          "source": "home",
+          "selector": ".home-hero h1",
+          "query": "(max-width: 680px)",
+          "inherits": [
+            "global:body",
+            "home:.home-hero h1"
+          ]
+        },
+        "headline-reading": {
+          "source": "global",
+          "selector": ".page-heading h1",
+          "inherits": [
+            "global:body",
+            "global:h1, h2, h3",
+            "global:h1"
+          ]
+        },
+        "headline": {
+          "source": "global",
+          "selector": "h2",
+          "inherits": [
+            "global:body",
+            "global:h1, h2, h3"
+          ]
+        },
+        "headline-process": {
+          "source": "home",
+          "selector": ".home-process h2",
+          "inherits": [
+            "global:body",
+            "global:h1, h2, h3",
+            "global:h2"
+          ]
+        },
+        "title": {
+          "source": "global",
+          "selector": "h3",
+          "inherits": [
+            "global:body",
+            "global:h1, h2, h3"
+          ]
+        },
+        "body": {
+          "source": "global",
+          "selector": "body",
+          "defaultWeight": 400
+        },
+        "label-button": {
+          "source": "global",
+          "selector": ".button",
+          "inherits": [
+            "global:body"
+          ]
+        },
+        "label-pill": {
+          "source": "home",
+          "selector": ".pill",
+          "inherits": [
+            "global:body"
+          ]
+        },
+        "label-field": {
+          "source": "global",
+          "selector": ".field label",
+          "inherits": [
+            "global:body"
+          ]
+        },
+        "label-nav": {
+          "source": "home",
+          "selector": ".desktop-nav a",
+          "inherits": [
+            "global:body"
+          ],
+          "defaultWeight": 400
+        }
+      },
+      "componentSelectors": {
+        "button-primary": "global:.button",
+        "button-primary-hover": "global:.button:hover",
+        "button-secondary": "global:.button.secondary",
+        "button-secondary-hover": "global:.button.secondary:hover",
+        "pill-primary": "home:.pill",
+        "pill-primary-hover": "home:.pill:hover",
+        "pill-outline": "home:.pill-outline",
+        "pill-outline-hover": "home:.pill-outline:hover",
+        "pill-icon": "home:.pill-icon",
+        "header-cta": "home:.site-header .header-cta",
+        "header-cta-home": "home:.site-header .header-cta",
+        "service-card": "global:.service-detail",
+        "contact-panel": "global:.contact-form",
+        "input-field": "global:.field input, .field textarea, .field select",
+        "faq-home": "home:.faq-strip .faq-list details",
+        "faq-reading": "global:.faq-list details",
+        "navigation": "global:.desktop-nav a",
+        "notice": "global:.notice"
+      },
+      "sourceAliases": {
+        "global": "website\\src\\styles\\global.css",
+        "home": "website\\src\\styles\\home.css"
+      },
+      "tupleFormat": [
+        "sourceAlias",
+        "selector",
+        "property",
+        "optionalExtraction",
+        "optionalMediaQuery"
+      ]
+    },
+    "materials": {
+      "icons": {
+        "source": "website\\src\\components\\Icon.astro",
+        "viewBox": "0 0 24 24",
+        "fill": "none",
+        "stroke": "currentColor",
+        "strokeWidth": 1.7,
+        "linecap": "round",
+        "linejoin": "round",
+        "ariaHidden": true
+      },
+      "rasters": [
+        {
+          "path": "website\\public\\images\\blue-edge.webp",
+          "selector": ".home-hero::after",
+          "purpose": "Hero electric-blue lower edge."
+        },
+        {
+          "path": "website\\public\\images\\edge-band.webp",
+          "selector": ".blue-edge::after",
+          "purpose": "Reusable dark-band light edge."
+        },
+        {
+          "path": "website\\public\\images\\pale-waves.webp",
+          "selector": ".pale-waves",
+          "purpose": "Pale section wave background."
+        },
+        {
+          "path": "website\\public\\images\\connector.webp",
+          "selector": ".brand-connector, .handoff-art > span",
+          "purpose": "Brand/human-handoff light connector."
+        },
+        {
+          "path": "website\\public\\images\\process-medallion.webp",
+          "selector": ".step-icon",
+          "purpose": "Process icon surround."
+        },
+        {
+          "path": "website\\public\\images\\step-arrow.webp",
+          "selector": ".home-process li:not(:last-child)::after",
+          "purpose": "Process connector, hidden on mobile."
+        }
+      ],
+      "illustrationOnly": [
+        {
+          "selector": ".device-stage .phone-shell",
+          "declarations": {
+            "width": "165px",
+            "height": "265px",
+            "border": "3px solid #259fe9",
+            "outline": "1px solid #b0e6ff",
+            "border-radius": "25px",
+            "box-shadow": "0 4px 15px #008fff55, 4px 5px 5px #00000070, inset 2px 2px 2px #eefaff8a",
+            "transform": "none"
+          },
+          "note": "Dimensional illustration construction, not general card tokens. Miniature copy is not an endorsed reading scale."
+        },
+        {
+          "selector": ".angled-trade",
+          "declarations": {
+            "transform": "skew(-12deg)",
+            "border-radius": "12px"
+          },
+          "counterTransform": "skew(12deg)",
+          "mobileSkew": "6deg"
+        },
+        {
+          "selector": ".about-photo",
+          "declarations": {
+            "transform": "skew(-8deg)",
+            "border-radius": "26px 10px",
+            "height": "205px"
+          },
+          "imageTransform": "skew(8deg) scale(1.16)"
+        }
+      ],
+      "picture": {
+        "source": "website\\src\\components\\Picture.astro",
+        "format": "webp",
+        "widthVariants": {
+          "hero": [
+            768,
+            1280,
+            1920
+          ],
+          "support": [
+            640,
+            960
+          ],
+          "about": [
+            640,
+            960
+          ],
+          "logo": [
+            300,
+            600
+          ],
+          "default": [
+            320,
+            640
+          ]
+        },
+        "sizes": {
+          "hero": "100vw",
+          "logo": "190px",
+          "default": "(max-width: 680px) 92vw, 45vw"
+        },
+        "decoding": "async",
+        "defaultLoading": "lazy",
+        "eagerFetchPriority": "high",
+        "note": "Existing source hints, not idealized image-slot measurements."
+      }
+    },
+    "provenance": {
+      "mode": "scan",
+      "authority": "website design assets\\אתר TamidZamin_ סוכני AI לעסקים בישראל.webp",
+      "product": "PRODUCT.md",
+      "surfaceContract": ".impeccable\\surfaces\\website.md",
+      "spec": ".github\\skills\\impeccable\\reference\\document.md",
+      "metaphorInvented": false,
+      "sourceFiles": [
+        {
+          "path": "website\\src\\styles\\global.css",
+          "sha256": "321b2834bc886c0345aec6ff30552b723067c09525daff5a2b7c661a092ae905"
+        },
+        {
+          "path": "website\\src\\styles\\home.css",
+          "sha256": "0042cab8edd9082756b22d4839c7c20fc301a6e2ca8fbce68640195abe2f3395"
+        },
+        {
+          "path": "website\\src\\layouts\\Layout.astro",
+          "sha256": "ef7e3a2752f344e2768ac71dc0edcbf036fa76f39bd7c39989205626f21c20d6"
+        },
+        {
+          "path": "website\\src\\components\\Icon.astro",
+          "sha256": "e509409ceb9a01a5f8f9a4c5d27ad462108100a52e0e34c4eae5b82420cfc7ae"
+        },
+        {
+          "path": "website\\src\\components\\Picture.astro",
+          "sha256": "80a390821939071ca07e067f1413963356db97991d2075ed0f0d2ef8bcc1004d"
+        },
+        {
+          "path": "website\\src\\components\\FAQ.astro",
+          "sha256": "87a2f1c492c8c76a07012a6e85a12caab5ea64ce97cdb509eb5c9030ead4c06b"
+        },
+        {
+          "path": "website\\src\\components\\CTA.astro",
+          "sha256": "4685e7cab52f81ac59fb75a3d6694071af492431ee38cfd24c76ba5e5565c9fa"
+        },
+        {
+          "path": "website\\src\\pages\\index.astro",
+          "sha256": "4ffa768de703d138c88d11b99d4978483772b9adcb9fe671bba98054fdac360b"
+        },
+        {
+          "path": "website\\src\\pages\\contact.astro",
+          "sha256": "a1070f3b2be14e5c1b7f01867c67bfde54ffee83e42cd1e8f57a5e699bcea762"
+        }
+      ],
+      "additionalEvidence": [
+        "website\\src\\components\\PageHeading.astro",
+        "website\\src\\pages\\services\\index.astro",
+        "website\\src\\pages\\404.astro",
+        "website\\src\\lib\\site.ts",
+        "website\\package.json"
+      ],
+      "assets": {
+        "directory": "website\\public\\images",
+        "manifest": "website\\public\\images\\provenance.json",
+        "originalSourceCount": 9,
+        "originalHashesMatchedManifest": true,
+        "shippingRasterCount": 27,
+        "manifestDerivativeCount": 19,
+        "companionRecordCount": 25,
+        "preparationSources": [
+          "website\\scripts\\prepare-assets.mjs",
+          "website\\scripts\\prepare-decoration.mjs"
+        ],
+        "scriptDocumentedDerivatives": [
+          {
+            "file": "website\\public\\images\\icon.png",
+            "source": "website design assets\\09_tamidzamin_logo.png",
+            "record": "website\\scripts\\prepare-assets.mjs",
+            "note": "Logo extraction and contain resize; no adjacent JSON companion."
+          },
+          {
+            "file": "website\\public\\images\\social.jpg",
+            "source": "website design assets\\01_hero_background.png",
+            "record": "website\\scripts\\prepare-assets.mjs",
+            "note": "Hero-derived social image; no adjacent JSON companion."
+          }
+        ],
+        "note": "All six decorative WebPs are code-authored by prepare-decoration.mjs. Asset provenance is recorded as supplied/derived/code-authored, never invented model generation."
+      },
+      "preview": {
+        "url": "http://localhost:4321/",
+        "mirror": "C:\\Users\\USER\\AppData\\Local\\TamidZamin\\website-preview",
+        "browser": "Existing Microsoft Edge through installed Playwright; headless, no new server",
+        "sampledRoutes": [
+          "/",
+          "/contact/",
+          "/services/"
+        ],
+        "sampledWidths": [
+          1440,
+          1024,
+          800,
+          508
+        ],
+        "checked": [
+          "Heebo loaded",
+          "filled/outlined hero cascade",
+          "outlined hover",
+          "keyboard focus outline",
+          "reduced-motion pill and scrolling",
+          "supporting controls",
+          "800px shared menu/contact stack"
+        ],
+        "measuredReferenceLimitation": {
+          "viewportWidth": 1024,
+          "headerHeight": 56,
+          "heroHeight": 320,
+          "headerAndHeroEnd": 376,
+          "contractReferenceEnd": 317
+        },
+        "finalSingleFixReview": "SHIP at scoped fix-verification level",
+        "finishReviewReport": {
+          "source": "User-supplied final finish-review verdict",
+          "reportedAt": "2026-11-17T05:33:24.565+02:00",
+          "scope": "All seven prior material fixes plus the single corrected hero-outline regression",
+          "reportedResolution": "All scoped fixes resolved; captures and hashes valid; no direct regression",
+          "independentlyRerunByDocumenter": false,
+          "wholeSurfacePixelMatchCertification": false,
+          "historicalEngineGateCertification": false
+        },
+        "pixelPerfectClaim": false,
+        "historicalCompGateClaim": false,
+        "productionLaunchOrDeliveryClaim": false
+      }
+    },
+    "notCanonized": [
+      {
+        "finding": "Miniature device conversation text reaches 8-9px and tighter values in nested demo details.",
+        "reason": "Illustration-scale legibility limitation, not a reusable reading standard; no application edit authorized."
+      },
+      {
+        "finding": "Reference-proportional heights differ from the actual usable, factual layout.",
+        "reason": "Measured discrepancy remains explicit; do not legitimize it as a fixed target or claim pixel-perfect conformity."
+      },
+      {
+        "finding": "Earlier global hero/channel values and unused legacy shadows remain in source.",
+        "reason": "They are not the current homepage system; no cleanup authorized."
+      }
+    ],
+    "tonalRampProvenance": {
+      "kind": "synthesized-for-panel",
+      "normative": false,
+      "algorithm": "Convert each canonical sRGB hex to OKLCH; hold hue, step lightness through 15/26/38/50/62/74/86/95 percent and taper chroma toward both ends.",
+      "note": "No shipped eight-step scale exists. These visualization-only ramps must not be adopted as application tokens."
+    },
+    "snippetPolicy": {
+      "scope": "Namespaced ds- standalone HTML/CSS; native elements and inline source SVG paths only.",
+      "customProperties": "Use actual root CSS variables with source-value fallbacks; homepage navy variants are explicitly scoped where relevant.",
+      "font": "Heebo Variable inherits the host's self-hosted face; sans-serif fallback applies if rendered outside the website.",
+      "previewOnly": "Links are non-submitting examples. Field state samples do not enable or submit the real form.",
+      "reset": "No universal reset or framework dependency. The panel supplies its box-sizing baseline.",
+      "staticComponents": "No invented hover, pressed or disabled styling where source has none."
+    }
+  },
+  "components": [
+    {
+      "name": "Pale hero pill",
+      "kind": "button",
+      "refersTo": "pill-primary",
+      "description": "Homepage primary action with the actual blue circular arrow; responsive hero overrides included.",
+      "html": "<div dir=\"rtl\"><a class=\"ds-hero-pill\" href=\"#\"><span>לבדיקת התאמה</span><span class=\"ds-pill-icon\"><svg width=\"15\" height=\"15\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M19 12H5m7-7-7 7 7 7\"/></svg></span></a></div>",
+      "css": ".ds-hero-pill{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:44px;padding:9px 22px;border:1px solid #d7e9f7;border-radius:99px;background:#f5faff;color:#0a1a2c;font-family:'Heebo Variable',sans-serif;font-size:15px;font-weight:750;line-height:1.4;text-decoration:none;box-shadow:0 3px 9px #00000012;transition:background 140ms ease-out}.ds-hero-pill:hover{background:#d5edff}.ds-hero-pill:focus-visible{outline:3px solid var(--cyan,#37bbff);outline-offset:5px}.ds-pill-icon{display:grid;place-items:center;width:25px;height:25px;border-radius:50%;background:#0f73d7;color:white}.ds-pill-icon svg{flex-shrink:0;vertical-align:middle}@media(max-width:1100px){.ds-hero-pill{padding-inline:17px;font-size:14px}}@media(max-width:680px){.ds-hero-pill{padding-inline:19px;font-size:15px}}@media(max-width:360px){.ds-hero-pill{padding-inline:17px;font-size:14px}}@media(prefers-reduced-motion:reduce){.ds-hero-pill{transition:none}}"
+    },
+    {
+      "name": "Outlined hero pill",
+      "kind": "button",
+      "refersTo": "pill-outline",
+      "description": "The corrected second hero action: transparent surface, white text, blue circle; presented on homepage navy.",
+      "html": "<div class=\"ds-dark-stage\" dir=\"rtl\"><a class=\"ds-outline-pill\" href=\"#\">איך זה עובד<span class=\"ds-outline-icon\"><svg width=\"15\" height=\"15\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M19 12H5m7-7-7 7 7 7\"/></svg></span></a></div>",
+      "css": ".ds-dark-stage{--navy:#081721;background:var(--navy);color:white}.ds-outline-pill{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:44px;padding:9px 22px;border:1px solid #94b2cc;border-radius:99px;background:transparent;color:white;font-family:'Heebo Variable',sans-serif;font-size:15px;font-weight:750;line-height:1.4;text-decoration:none;box-shadow:none;transition:background 140ms ease-out}.ds-outline-pill:hover{background:#123451}.ds-outline-pill:focus-visible{outline:3px solid var(--cyan,#37bbff);outline-offset:5px}.ds-outline-icon{display:grid;place-items:center;width:25px;height:25px;border-radius:50%;background:#0f73d7;color:white}.ds-outline-icon svg{flex-shrink:0;vertical-align:middle}@media(max-width:1100px){.ds-outline-pill{padding-inline:17px;font-size:14px}}@media(max-width:680px){.ds-outline-pill{padding-inline:19px;font-size:15px}}@media(max-width:360px){.ds-outline-pill{padding-inline:17px;font-size:14px}}@media(prefers-reduced-motion:reduce){.ds-outline-pill{transition:none}}"
+    },
+    {
+      "name": "Supporting primary button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Shared blue CTA and form action; type=button keeps this sample non-submitting.",
+      "html": "<div dir=\"rtl\"><button type=\"button\" class=\"ds-button\">בואו נבדוק התאמה<svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M19 12H5m7-7-7 7 7 7\"/></svg></button></div>",
+      "css": ".ds-button{display:inline-flex;align-items:center;justify-content:center;gap:14px;padding:12px 25px;min-height:50px;background:var(--blue,#086bdf);color:var(--paper,#ffffff);border:1px solid transparent;border-radius:6px;text-decoration:none;font-family:'Heebo Variable',sans-serif;font-size:16px;font-weight:650;line-height:1.5;cursor:pointer;transition:background-color 160ms ease-out,box-shadow 160ms ease-out}.ds-button svg{flex-shrink:0;vertical-align:middle}.ds-button:hover{background:var(--blue-hover,#0963c9);box-shadow:0 5px 16px #00000018}.ds-button:focus-visible{outline:3px solid var(--cyan,#37bbff);outline-offset:5px}.ds-button:disabled{cursor:not-allowed;opacity:.65;box-shadow:none}@media(prefers-reduced-motion:reduce){.ds-button{transition:none}}"
+    },
+    {
+      "name": "Supporting secondary button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Transparent, line-bordered action used beside the primary action on the 404 page.",
+      "html": "<div dir=\"rtl\"><a class=\"ds-secondary\" href=\"#\">לשירותים שלנו</a></div>",
+      "css": ".ds-secondary{display:inline-flex;align-items:center;justify-content:center;gap:14px;padding:12px 25px;min-height:50px;background:transparent;color:var(--ink,#11213c);border:1px solid var(--line,#dce3ed);border-radius:6px;text-decoration:none;font-family:'Heebo Variable',sans-serif;font-size:16px;font-weight:650;line-height:1.5;transition:background-color 160ms ease-out,box-shadow 160ms ease-out}.ds-secondary:hover{background:var(--wash,#f3f6fa);box-shadow:0 5px 16px #00000018}.ds-secondary:focus-visible{outline:3px solid var(--cyan,#37bbff);outline-offset:5px}@media(prefers-reduced-motion:reduce){.ds-secondary{transition:none}}"
+    },
+    {
+      "name": "Labeled contact field",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "Isolated enabled style sample, not the live preview's disabled fieldset. Invalid styling and associated error text are preserved.",
+      "html": "<div class=\"ds-field\" dir=\"rtl\"><label for=\"ds-name\">שם מלא *</label><input id=\"ds-name\" autocomplete=\"name\" required minlength=\"2\" maxlength=\"80\" aria-describedby=\"ds-name-error\"/><span class=\"ds-field-error\" id=\"ds-name-error\"></span></div>",
+      "css": ".ds-field{display:flex;flex-direction:column;gap:6px;min-width:0;color:var(--ink,#11213c);font-family:'Heebo Variable',sans-serif;line-height:1.7}.ds-field label{font-weight:600;font-size:15px}.ds-field input{width:100%;min-height:48px;border:1px solid #94a3b8;background:var(--paper,#ffffff);color:var(--ink,#11213c);padding:10px 12px;border-radius:5px;font-family:'Heebo Variable',sans-serif;font-size:16px;line-height:1.7;caret-color:var(--blue,#086bdf)}.ds-field input::placeholder{color:#65748b;opacity:1}.ds-field input:focus-visible{outline:3px solid var(--blue,#086bdf);outline-offset:2px}.ds-field [aria-invalid=true]{border-color:var(--error,#a91e36)}.ds-field-error{color:var(--error,#a91e36);font-size:13px;min-height:0}.ds-field-error:empty{display:none}"
+    },
+    {
+      "name": "Shared navigation and header action",
+      "kind": "nav",
+      "refersTo": "navigation",
+      "description": "Representative existing links and hybrid header CTA. Native mobile disclosure switches at 880px on all routes; full-site Escape/outside behavior requires Layout.astro.",
+      "html": "<div class=\"ds-nav-stage\"><nav class=\"ds-desktop-nav\" aria-label=\"ניווט לדוגמה\"><a href=\"#\" aria-current=\"page\">פתרונות</a><a href=\"#\">איך זה עובד</a><a href=\"#\">אודות</a></nav><a class=\"ds-header-cta\" href=\"#\">בואו נדבר<svg width=\"17\" height=\"17\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M19 12H5m7-7-7 7 7 7\"/></svg></a><details class=\"ds-mobile-menu\" dir=\"rtl\"><summary aria-label=\"פתיחת תפריט ניווט\"><svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 6h16M4 12h16M4 18h16\"/></svg></summary><nav aria-label=\"ניווט לנייד לדוגמה\"><a href=\"#\">פתרונות</a><a href=\"#\">איך זה עובד</a><a href=\"#\">יצירת קשר</a></nav></details></div>",
+      "css": ".ds-nav-stage{position:relative;display:flex;direction:ltr;align-items:center;justify-content:space-between;gap:26px;background:var(--navy,#08162c);color:var(--paper,#ffffff);font-family:'Heebo Variable',sans-serif;font-size:16px;line-height:1.7}.ds-desktop-nav{display:flex;direction:rtl;align-items:center;gap:22px}.ds-desktop-nav a{display:flex;align-items:center;min-height:44px;font-size:14px;color:var(--on-dark,#c8d5e7);text-decoration:none}.ds-desktop-nav a:hover,.ds-desktop-nav a[aria-current]{color:var(--paper,#ffffff);text-decoration:underline;text-decoration-color:var(--cyan,#37bbff);text-underline-offset:8px}.ds-header-cta{display:inline-flex;direction:rtl;align-items:center;justify-content:center;gap:14px;min-height:43px;padding:8px 20px;font-size:15px;font-weight:650;line-height:1.5;background:#f5faff;color:var(--navy,#08162c);border:1px solid transparent;border-radius:99px;text-decoration:none;transition:background-color 160ms ease-out,box-shadow 160ms ease-out}.ds-header-cta:hover{box-shadow:0 5px 16px #00000018}.ds-mobile-menu{display:none}.ds-mobile-menu>summary{display:grid;place-items:center;width:44px;height:44px;list-style:none;border:1px solid #314762;border-radius:5px;cursor:pointer}.ds-mobile-menu>summary::-webkit-details-marker{display:none}.ds-mobile-menu nav{position:absolute;inset-inline:0;inset-block-start:100%;background:#102340;padding:12px 18px 20px;box-shadow:0 12px 25px #00000030;display:grid}.ds-mobile-menu nav a{padding:12px;border-block-end:1px solid #30445f;text-decoration:none;color:inherit}.ds-nav-stage a:focus-visible,.ds-mobile-menu>summary:focus-visible{outline:3px solid var(--cyan,#37bbff);outline-offset:5px}@media(max-width:1100px){.ds-desktop-nav{gap:14px}.ds-desktop-nav a{font-size:13px}}@media(max-width:880px){.ds-desktop-nav,.ds-header-cta{display:none}.ds-mobile-menu{display:block}}@media(max-width:820px){.ds-header-cta{padding-inline:12px;font-size:13px}}@media(max-width:680px){.ds-mobile-menu[open]>summary{background:var(--navy-soft,#102340)}}@media(prefers-reduced-motion:reduce){.ds-header-cta{transition:none}}"
+    },
+    {
+      "name": "Supporting service card",
+      "kind": "card",
+      "refersTo": "service-card",
+      "description": "Flat, bordered service explanation; no invented card hover elevation.",
+      "html": "<article class=\"ds-service\" dir=\"rtl\"><svg width=\"36\" height=\"36\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M21 11.5a8.5 8.5 0 0 1-12.3 7.6L3 21l1.9-5.7A8.5 8.5 0 1 1 21 11.5ZM8 10h8m-8 4h5\"/></svg><h2>סוכן AI בוואטסאפ</h2><p>ערוץ כתוב שבו הלקוח יכול להסביר מה הוא צריך, להשלים פרטים ולאשר סיכום לקראת המשך טיפול.</p><a class=\"ds-service-link\" href=\"#\">להכיר את התהליך</a></article>",
+      "css": ".ds-service{border:1px solid var(--line,#dce3ed);border-radius:var(--radius,9px);padding:32px;color:var(--ink,#11213c);font-family:'Heebo Variable',sans-serif;font-size:16px;line-height:1.7}.ds-service>svg{color:var(--blue,#086bdf);margin-block-end:17px;vertical-align:middle}.ds-service h2{font-size:1.8rem;font-weight:750;line-height:1.2;letter-spacing:-.02em;text-wrap:balance;overflow-wrap:anywhere;margin:0}.ds-service p{color:var(--muted,#52617a);margin-block:18px;text-wrap:pretty}.ds-service-link{display:inline-flex;align-items:center;gap:10px;font-weight:650;color:var(--blue-hover,#0963c9);min-height:44px;text-decoration:none;text-underline-offset:.22em}.ds-service-link:hover{text-decoration:underline}.ds-service-link:focus-visible{outline:3px solid var(--cyan,#37bbff);outline-offset:5px}@media(max-width:680px){.ds-service{padding:25px}}"
+    },
+    {
+      "name": "Homepage FAQ disclosure",
+      "kind": "custom",
+      "refersTo": "faq-home",
+      "description": "Rounder, softly shadowed native disclosure; the mobile summary retains the 1100px padding override.",
+      "html": "<details class=\"ds-home-faq\" dir=\"rtl\"><summary>האם הסוכן מחליף את בעל העסק?<svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 5v14M5 12h14\"/></svg></summary><p>לא. המטרה היא להוריד חלק מעבודת קבלת הפניות, לא להחליף שיקול דעת מקצועי. מקרים חריגים, בקשות שלא הוגדרו ומצבים שמצריכים אדם מועברים להמשך טיפול בהתאם לתהליך שסוכם.</p></details>",
+      "css": ".ds-home-faq{background:#f8fbff;border:1px solid #e0eaf5;border-radius:16px;box-shadow:0 2px 5px #345c7820;color:var(--ink,#11213c);font-family:'Heebo Variable',sans-serif;font-size:16px;line-height:1.7}.ds-home-faq summary{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 16px;font-weight:600;font-size:14px;list-style:none;min-height:44px;cursor:pointer}.ds-home-faq summary::-webkit-details-marker{display:none}.ds-home-faq summary svg{color:var(--blue,#086bdf);flex-shrink:0;vertical-align:middle;transition:transform 160ms ease-out}.ds-home-faq[open] summary svg{transform:rotate(45deg)}.ds-home-faq[open] summary{color:var(--blue-hover,#0963c9)}.ds-home-faq summary:focus-visible{outline:3px solid var(--cyan,#37bbff);outline-offset:5px}.ds-home-faq p{margin:0;padding:0 16px 16px;color:var(--muted,#52617a);font-size:16px;max-width:75ch;text-wrap:pretty}@media(max-width:1100px){.ds-home-faq summary{font-size:13px;padding:10px 13px}}@media(max-width:680px){.ds-home-faq summary{font-size:15px;min-height:49px}}@media(prefers-reduced-motion:reduce){.ds-home-faq summary svg{transition:none}}"
+    },
+    {
+      "name": "Supporting FAQ disclosure",
+      "kind": "custom",
+      "refersTo": "faq-reading",
+      "description": "Flat supporting-page variant; larger default padding and 58px minimum summary height.",
+      "html": "<details class=\"ds-reading-faq\" dir=\"rtl\"><summary>האם הסוכן מחליף את בעל העסק?<svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 5v14M5 12h14\"/></svg></summary><p>לא. המטרה היא להוריד חלק מעבודת קבלת הפניות, לא להחליף שיקול דעת מקצועי. מקרים חריגים, בקשות שלא הוגדרו ומצבים שמצריכים אדם מועברים להמשך טיפול בהתאם לתהליך שסוכם.</p></details>",
+      "css": ".ds-reading-faq{border:1px solid var(--line,#dce3ed);background:var(--paper,#ffffff);border-radius:6px;color:var(--ink,#11213c);font-family:'Heebo Variable',sans-serif;font-size:16px;line-height:1.7}.ds-reading-faq summary{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px 22px;font-weight:600;list-style:none;min-height:58px;cursor:pointer}.ds-reading-faq summary::-webkit-details-marker{display:none}.ds-reading-faq summary svg{color:var(--blue,#086bdf);flex-shrink:0;vertical-align:middle;transition:transform 160ms ease-out}.ds-reading-faq[open] summary svg{transform:rotate(45deg)}.ds-reading-faq[open] summary{color:var(--blue-hover,#0963c9)}.ds-reading-faq summary:focus-visible{outline:3px solid var(--cyan,#37bbff);outline-offset:5px}.ds-reading-faq p{margin:0;padding:0 22px 20px;color:var(--muted,#52617a);max-width:75ch;text-wrap:pretty}@media(max-width:680px){.ds-reading-faq summary{padding:15px;font-size:15px;gap:12px}.ds-reading-faq p{padding:0 15px 19px;font-size:15px}}@media(prefers-reduced-motion:reduce){.ds-reading-faq summary svg{transition:none}}"
+    },
+    {
+      "name": "Preview notice",
+      "kind": "card",
+      "refersTo": "notice",
+      "description": "Actual explanatory contact notice; no invented active delivery or dismiss behavior.",
+      "html": "<div class=\"ds-notice\" role=\"status\" dir=\"rtl\"><strong>טופס הפניות עדיין לא מחובר.</strong><p>זו תצוגה מקדימה. אי אפשר לשלוח כאן פרטים כרגע, ולא נשלחה שום פנייה. אפשר לעיין בשירותים ובשאלות הנפוצות עד לפתיחת ערוץ הקשר.</p></div>",
+      "css": ".ds-notice{background:var(--wash,#f3f6fa);border:1px solid var(--line,#dce3ed);border-radius:var(--radius,9px);padding:22px 25px;margin-block:25px;color:var(--ink,#11213c);font-family:'Heebo Variable',sans-serif;font-size:16px;line-height:1.7}.ds-notice strong{display:block;margin-block-end:6px}.ds-notice p{font-size:15px;margin-block:5px;text-wrap:pretty}@media(max-width:680px){.ds-notice{padding:18px}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Approved TamidZamin reference",
+    "overview": "This is an observed authority label, not a newly chosen metaphor. The supplied TamidZamin reference owns the visual direction: deep blue-black bands, pale surfaces, electric-blue decoration, compact Hebrew headings, supplied trade photographs, and rounded actions. Professional, plain Hebrew and correct RTL are confirmed commitments in `PRODUCT.md`.\n\nThe implemented system has two related scopes, not one flattened theme. The homepage uses compact photographic bands, light pill actions, and authored raster light edges. Supporting service, reading, and contact pages use the shared navy palette, roomier content, conventional blue buttons, and bordered panels. This document records finished source; it does not establish service capabilities or certify launch readiness.",
+    "keyCharacteristics": [
+      "Hebrew RTL text with deliberately LTR visual groups and isolated Latin names.",
+      "Homepage blue-black and pale-wave bands; supporting navy and white reading surfaces.",
+      "One self-hosted variable typeface, heavy compact headings, and visible action hierarchy.",
+      "Supplied photographic assets, inline SVG icons, and reusable raster decoration.",
+      "Explicit focus, native disclosure controls, and reduced-motion overrides."
+    ],
+    "rules": [
+      {
+        "name": "The Scope Before Swatch Rule",
+        "body": "Resolve the route and the final cascade before selecting a color; homepage overrides do not replace the supporting-page palette.",
+        "section": "colors"
+      },
+      {
+        "name": "The Hebrew First Rule",
+        "body": "Keep Hebrew text RTL and preserve deliberate LTR composition wrappers and bdi isolation; do not reverse the entire layout to reposition one element.",
+        "section": "typography"
+      },
+      {
+        "name": "The Depth Has a Job Rule",
+        "body": "Keep service and form panels flat; reserve the observed soft shadows for controls, disclosures, navigation, and illustrative materials.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** preserve the homepage/supporting-page scopes and the global-then-home import order.",
+      "**Do** keep the first hero action pale and the second outlined, including their blue circular arrows.",
+      "**Do** preserve readable Hebrew, logical-direction layout, visible focus, and native disclosure semantics.",
+      "**Do** reuse supplied imagery and documented derivatives without modifying the nine originals.",
+      "**Do** keep illustrative content labeled and let real copy and controls determine section height."
+    ],
+    "donts": [
+      "**Don't** use legacy hero/channel selectors as the current homepage authority.",
+      "**Don't** infer active services, customer identities, results, or delivery from illustrative UI or styled states.",
+      "**Don't** turn raster blue edges, photo skew, or device glow into generic treatment for every panel.",
+      "**Don't** promote miniature phone text into the reusable typography scale or force the reference's heights by clipping content.",
+      "**Don't** treat synthesized tonal ramps as shipped palette values or this record as a final-review or accessibility certification."
+    ]
+  }
+}

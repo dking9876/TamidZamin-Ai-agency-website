@@ -1,0 +1,21 @@
+# Replace the hostname only after domain, hosting and publication approval.
+# Keep the Node service on loopback; only Caddy should be externally reachable.
+your-approved-domain.invalid {
+    encode zstd gzip
+    header {
+        X-Content-Type-Options nosniff
+        X-Frame-Options DENY
+        Referrer-Policy strict-origin-when-cross-origin
+        Permissions-Policy "camera=(), microphone=(), geolocation=()"
+        Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; form-action 'self'; frame-ancestors 'none'; base-uri 'none'; object-src 'none'"
+        Strict-Transport-Security "max-age=31536000"
+        -Server
+    }
+    @assets path /_astro/*
+    header @assets Cache-Control "public, max-age=31536000, immutable"
+    @images path /images/*
+    header @images Cache-Control "public, max-age=86400"
+    @private path /contact/* /api/*
+    header @private Cache-Control "no-store"
+    reverse_proxy 127.0.0.1:4321
+}

@@ -1,0 +1,12 @@
+node_modules
+dist
+.astro
+.env
+.env.*
+data
+test-results
+playwright-report
+tests
+README.md
+VERIFICATION.md
+*.zip

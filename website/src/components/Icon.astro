@@ -1,0 +1,25 @@
+---
+interface Props { name: 'arrow' | 'check' | 'chat' | 'phone' | 'user' | 'menu' | 'close' | 'plus' | 'shield' | 'clock' | 'target' | 'list' | 'robot' | 'wrench' | 'bolt' | 'tools' | 'fan' | 'helmet'; size?: number; }
+const { name, size = 24 } = Astro.props;
+const paths = {
+  arrow: 'M19 12H5m7-7-7 7 7 7',
+  check: 'm5 12 4 4L19 6',
+  chat: 'M21 11.5a8.5 8.5 0 0 1-12.3 7.6L3 21l1.9-5.7A8.5 8.5 0 1 1 21 11.5ZM8 10h8m-8 4h5',
+  phone: 'M7 3H4a1 1 0 0 0-1 1c0 9.4 7.6 17 17 17a1 1 0 0 0 1-1v-3l-5-2-2 2a15 15 0 0 1-7-7l2-2-2-5Z',
+  user: 'M20 21v-2a7 7 0 0 0-14 0v2M17 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z',
+  menu: 'M4 6h16M4 12h16M4 18h16',
+  close: 'm6 6 12 12M6 18 18 6',
+  plus: 'M12 5v14M5 12h14',
+  shield: 'm12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6l8-3Zm-4 9 3 3 5-6',
+  clock: 'M12 8v5l3 2M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z',
+  target: 'm14 10 6-6m-3 0h3v3M15 4a9 9 0 1 0 5 5M12 8a4 4 0 1 0 4 4',
+  list: 'M9 6h11M9 12h11M9 18h11M3 6h1m-1 6h1m-1 6h1',
+  robot: 'M9 3h6m-3 0v3M7 6h10a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V9a3 3 0 0 1 3-3Zm1 5v2m8-2v2m-6 3h4M1 10v5m22-5v5',
+  wrench: 'M14 4a6 6 0 0 0-7 7L3 17a2.8 2.8 0 0 0 4 4l6-5a6 6 0 0 0 7-7l-4 4-4-4 2-5Z',
+  bolt: 'm13 2-9 12h7l-1 8 10-13h-7l1-7Z',
+  tools: 'm4 3 4 1 1 4 11 11-2 2L7 10 3 9 2 5l2-2Zm16 0-5 5m-5 7-7 6-1-1 6-7',
+  fan: 'M12 10c-7-7 1-12 3-7 1 3-1 6-3 7Zm2 2c7-7 12 1 7 3-3 1-6-1-7-3Zm-2 2c7 7-1 12-3 7-1-3 1-6 3-7Zm-2-2C3 19-2 11 3 9c3-1 6 1 7 3Zm4 0a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z',
+  helmet: 'M3 16a9 9 0 0 1 6-9m6 0a9 9 0 0 1 6 9M9 12V5h6v7M2 16h20v4H2v-4Z',
+};
+---
+<svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={paths[name]} /></svg>

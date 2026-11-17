@@ -1,0 +1,31 @@
+# Dependencies, build outputs and machine-local state
+node_modules/
+dist/
+dist-seo-test/
+.astro/
+.vercel/
+coverage/
+test-results/
+playwright-report/
+*.log
+.DS_Store
+Thumbs.db
+
+# Never commit delivery credentials or customer/protection databases
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.sqlite
+*.sqlite-*
+*.db
+data/
+
+# Source lives in Git; local delivery archives and generated review captures do not
+TamidZamin-website-source-*.zip
+.impeccable/build/
+.impeccable/review/
+.impeccable/mocks/
+.impeccable/questions/
+.impeccable/config.local.json
