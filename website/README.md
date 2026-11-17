@@ -229,6 +229,10 @@ npm run verify:launch
 Browser tests use the installed Microsoft Edge via Playwright. On a machine
 without Edge, install a supported Playwright browser and change the channel.
 See `VERIFICATION.md` for measured results and remaining limitations.
+For a deployed preview, set `TEST_BASE_URL` to the URL being visited and
+`TEST_SITE_ORIGIN` to its configured canonical origin before `test:browser`.
+Without an explicit `SITE_URL`, Vercel uses its unique deployment URL for the
+canonical origin, even when the visit URL is the stable project alias.
 
 After dependency changes, verify `npm ci` in a fresh checkout with npm 12 and a
 supported Node 24 release, then run `npm test`, `npm run build:vercel` and

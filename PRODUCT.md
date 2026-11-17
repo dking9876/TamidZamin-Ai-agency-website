@@ -10,11 +10,15 @@ web
 
 Delegated by the user's request: a simple maintainable crawlable site. Astro with
 prerendered content and a Node server for contact intake. No public deployment
-has been authorized. The website application lives in `website`.
+was authorized during the initial implementation. The website application lives
+in `website`.
 The user moved the source to a local Git repository and requested a GitHub push
 for Vercel import. A Vercel preview target is supported; its lead form remains
 disabled until persistent anti-spam/idempotency storage is adapted for serverless
 hosting. The dedicated Node target remains available.
+On 17 November 2026 the owner connected and attempted a Vercel deployment, then
+requested help fixing its failed installation. The hosted preview now works.
+This does not approve enabling lead delivery, indexing or unverified claims.
 
 ## Users
 

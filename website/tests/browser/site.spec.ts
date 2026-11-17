@@ -17,7 +17,7 @@ test('all pages: real HTTP, Hebrew semantics, unique SEO and accessible content'
     expect(descriptions.has(description!)).toBe(false);
     titles.add(title); descriptions.add(description!);
     expect(description!.length).toBeGreaterThan(40);
-    expect(await page.locator('link[rel="canonical"]').getAttribute('href')).toBe(new URL(path, 'http://localhost:4321').href);
+    expect(await page.locator('link[rel="canonical"]').getAttribute('href')).toBe(new URL(path, process.env.TEST_SITE_ORIGIN || 'http://localhost:4321').href);
     await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex, nofollow');
     await page.evaluate(() => document.fonts.ready);
     const audit = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa']).analyze();

@@ -2,7 +2,8 @@
 
 Checked locally on **17 November 2026** using Node 24.12.0, Astro 7.4.12,
 Microsoft Edge, Playwright 1.65.1, axe-core integration and Lighthouse 13.6.0.
-These results describe this local build, not a deployed service.
+The original results below describe the local implementation. The clean-install
+correction section also records the subsequently verified Vercel deployment.
 
 ## Clean-install correction
 
@@ -24,6 +25,17 @@ Correction checks on 17 November 2026:
 - No application behavior, dependency versions, approval gates or Vercel install
   command were changed. npm's nonblocking esbuild install-script warning did
   not prevent the tested build; no permissive script-policy bypass was added.
+
+Hosted follow-up: Vercel marked commit `551a28c` **Ready** after a 31-second
+build. All five browser suites then passed against
+`https://tamidzamin-ai-agency.vercel.app`, including accessibility checks on all
+nine public routes, responsive images/layout, navigation, native FAQs, 404,
+no-JavaScript behavior and noindex/disabled-intake safeguards. The suite accepts
+an explicit `TEST_SITE_ORIGIN` so preview metadata is verified against the
+unique Vercel deployment origin rather than a hard-coded local URL.
+Live HTTP checks confirmed security headers on both static and SSR pages and
+`Cache-Control: no-store` on contact. This is a working hosted **preview**, not
+approval to enable intake, indexing or unsupported company claims.
 
 ## Local Git migration and Vercel preparation
 
@@ -57,8 +69,9 @@ The Vercel preparation was checked locally on the same date:
 
 Vercel is **preview-only** for this version: persistent SQLite cannot safely be
 used across serverless instances. Delivery and public launch gates remain
-blocked there until a durable backend is implemented and approved. No hosting
-deployment, DNS update, spending or real communication was performed.
+blocked there until a durable backend is implemented and approved. The initial
+preparation performed no hosting deployment, DNS update, spending or real
+communication; the later owner-initiated Vercel deployment is recorded above.
 
 ## Verified engineering results
 
