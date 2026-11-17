@@ -230,6 +230,13 @@ Browser tests use the installed Microsoft Edge via Playwright. On a machine
 without Edge, install a supported Playwright browser and change the channel.
 See `VERIFICATION.md` for measured results and remaining limitations.
 
+After dependency changes, verify `npm ci` in a fresh checkout with npm 12 and a
+supported Node 24 release, then run `npm test`, `npm run build:vercel` and
+`npm run test:vercel`. An existing `node_modules` tree and npm 11 can hide missing
+optional-package lock entries that npm 12 rejects. The lockfile regression tests
+cover the exact EMNAPI dependencies used by the WASM compiler bindings.
+Do not replace Vercel's `npm ci` with `npm install` to bypass a lockfile error.
+
 `test:seo` builds an isolated, clearly fictitious `.test`-domain fixture to
 verify launch-mode canonical URLs, structured data and sitemap output. It does
 not publish, contact that domain, enable the real preview, or save approval flags.

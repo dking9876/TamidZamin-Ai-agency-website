@@ -4,6 +4,27 @@ Checked locally on **17 November 2026** using Node 24.12.0, Astro 7.4.12,
 Microsoft Edge, Playwright 1.65.1, axe-core integration and Lighthouse 13.6.0.
 These results describe this local build, not a deployed service.
 
+## Clean-install correction
+
+The first hosted Vercel build exposed four missing EMNAPI lockfile entries.
+The exact error was reproduced with npm 12.2.2; npm 11.6.2 accepted the same
+incomplete lockfile. npm regenerated the missing optional dependencies without
+changing any existing package version or bypassing `npm ci`.
+
+Correction checks on 17 November 2026:
+
+- Two new lockfile regression cases fail against the original lockfile and pass
+  after repair.
+- An isolated clean install using Node 24.22.3 and npm 12.2.2 passes, followed by
+  all **26 unit tests**, the Vercel production build and generated-function smoke
+  checks. The lockfile is unchanged by the clean install/build.
+- npm 12 also completes a separate clean Linux x64/glibc-targeted install with
+  scripts disabled. This checks platform dependency resolution on Windows; it
+  is not a claim that the Linux runtime was exercised locally.
+- No application behavior, dependency versions, approval gates or Vercel install
+  command were changed. npm's nonblocking esbuild install-script warning did
+  not prevent the tested build; no permissive script-policy bypass was added.
+
 ## Local Git migration and Vercel preparation
 
 The canonical source is now in the local Git repository, not Google Drive.
@@ -44,7 +65,7 @@ deployment, DNS update, spending or real communication was performed.
 | Check | Result |
 |---|---|
 | Production build and Astro/TypeScript check | Pass; 0 errors, 0 warnings, 0 hints |
-| Unit tests | 24 passed: 19 backend cases, unpublished launch gate, 4 deployment cases |
+| Unit tests | 26 passed: 19 backend cases, unpublished launch gate, 4 deployment cases, 2 lockfile cases |
 | Browser suites | 5 passed |
 | Automated WCAG A/AA checks | 0 violations across all 9 public routes |
 | Responsive checks | No horizontal overflow at 320, 390, 680, 768, 1024, 1440 and 1920px on homepage, services and contact |
