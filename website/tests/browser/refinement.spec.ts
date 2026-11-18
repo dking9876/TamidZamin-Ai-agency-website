@@ -394,8 +394,10 @@ test.describe('refinement: native navigation and fallbacks', () => {
       await anchorVisible(page, 'process');
       const mobile = viewport.width <= 880;
       for (const id of ['channels', 'process']) {
-        if (mobile) await page.locator('.mobile-menu > summary').click();
-        else await page.locator('.solutions-menu > summary').click();
+        if (mobile) {
+          await page.locator('.mobile-menu > summary').click();
+          await page.locator('.mobile-secondary > summary').click();
+        } else await page.locator('.solutions-menu > summary').click();
         await page.locator(`${mobile ? '.mobile-menu' : '.desktop-nav'} a[href="/#${id}"]`).click();
         if (mobile) await expect(page.locator('.mobile-menu')).not.toHaveAttribute('open', '');
         await anchorVisible(page, id);
@@ -454,6 +456,7 @@ test.describe('refinement: native navigation and fallbacks', () => {
       expect((await toggle.boundingBox())!.height).toBeGreaterThanOrEqual(44);
       await toggle.tap();
       await expect(menu).toHaveAttribute('open', '');
+      await page.locator('.mobile-secondary > summary').tap();
       const link = menu.locator('a[href="/#process"]');
       expect((await link.boundingBox())!.height).toBeGreaterThanOrEqual(44);
       await link.tap();
@@ -483,6 +486,7 @@ test.describe('refinement: native navigation and fallbacks', () => {
         if (viewport.width < 881) {
           await page.locator('.mobile-menu > summary').click();
           await expect(page.locator('.mobile-menu')).toHaveAttribute('open', '');
+          await page.locator('.mobile-secondary > summary').click();
           await page.locator('.mobile-menu a[href="/#process"]').click();
         } else {
           await page.locator('.solutions-menu > summary').click();

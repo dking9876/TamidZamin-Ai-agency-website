@@ -64,12 +64,21 @@ results were fabricated. Supplied people are labeled illustrative.
 footer and launch-gated sitemap. All nine public content pages are linked;
 API endpoints, crawler files and the 404 page are intentionally not menu items.
 
-The desktop header has Home, a Solutions disclosure (overview, WhatsApp and
-phone), About, FAQ, useful information (privacy and accessibility), and Contact.
-Homepage section shortcuts are retained inside Solutions, separate from pages.
-The mobile menu groups the same destinations in a viewport-bounded, scrollable
-panel, with Contact at the top. The footer repeats the page links in labeled
-groups. Exact current pages and their containing desktop group are highlighted.
+The desktop header has Home, Services (overview, WhatsApp and phone), About,
+FAQ, Privacy and accessibility, and Contact. Homepage section shortcuts remain
+inside Services and are explicitly labeled as links within the homepage.
+The mobile menu shows six concise, full-width page links and a full-width
+Contact action. WhatsApp and phone sit underneath the service overview; the
+long descriptions are desktop-only. All seven primary destinations fit without
+scrolling even at 320x568. A labeled More information disclosure contains
+privacy, accessibility and homepage shortcuts. It starts expanded on a legal
+page so the current link remains visible, and resets on other pages when the
+outer menu closes. No page or shortcut was removed.
+
+The header stays reachable while scrolling on all pages with JavaScript,
+except short viewports up to 500px tall; anchors account for its measured height.
+The footer repeats all page links in labeled groups. Exact current pages and
+their containing desktop group are highlighted.
 
 Menus use native `details`/`summary`, including without JavaScript. Enhancement
 adds Escape/focus return, outside-click and focus-leave dismissal, closing after

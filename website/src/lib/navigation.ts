@@ -5,9 +5,9 @@ export const mainLinks = [
 ] as const;
 
 export const serviceLinks = [
-  { href: '/services/', label: 'כל הפתרונות', description: 'השירותים, התהליך וההתאמה לעסק', icon: 'list' },
-  { href: '/services/whatsapp/', label: 'סוכן AI בוואטסאפ', description: 'איסוף פרטים והכנת סיכום בשיחה', icon: 'chat' },
-  { href: '/services/phone/', label: 'סוכן AI טלפוני', description: 'קבלת פניות גם בשיחה קולית', icon: 'phone' },
+  { href: '/services/', label: 'השירותים שלנו', description: 'השירותים, התהליך וההתאמה לעסק', icon: 'list' },
+  { href: '/services/whatsapp/', label: 'סוכן וואטסאפ', description: 'איסוף פרטים והכנת סיכום בשיחה', icon: 'chat' },
+  { href: '/services/phone/', label: 'סוכן טלפוני', description: 'קבלת פניות גם בשיחה קולית', icon: 'phone' },
 ] as const;
 
 export const utilityLinks = [
@@ -16,7 +16,7 @@ export const utilityLinks = [
 ] as const;
 
 export const sectionLinks = [
-  { href: '/#channels', label: 'ערוצי המענה' },
+  { href: '/#channels', label: 'וואטסאפ וטלפון' },
   { href: '/#process', label: 'איך זה עובד' },
   { href: '/#trades', label: 'למי זה מתאים' },
   { href: '/#benefits', label: 'יתרונות' },

@@ -7,6 +7,9 @@ test.use({ reducedMotion: 'reduce' });
 async function openNavigationFor(page: Page, href: string, mobile: boolean) {
   if (mobile) {
     await page.locator('.mobile-menu > summary').click();
+    if (utilityLinks.some((link) => link.href === href) && await page.locator('.mobile-secondary').getAttribute('open') === null) {
+      await page.locator('.mobile-secondary > summary').click();
+    }
   } else if (serviceLinks.some((link) => link.href === href)) {
     await page.locator('.solutions-menu > summary').click();
   } else if (utilityLinks.some((link) => link.href === href)) {
@@ -99,6 +102,7 @@ for (const viewport of [
         await page.locator(menu.toggle).click();
         const panel = page.locator(menu.panel);
         await expect(panel).toBeVisible();
+        if (mobile) await page.locator('.mobile-secondary > summary').click();
         await expect.poll(async () => panel.evaluate((element) => {
           const box = element.getBoundingClientRect();
           return box.left >= 0 && box.right <= innerWidth && box.bottom <= innerHeight + 1;
@@ -126,12 +130,83 @@ test('open desktop and mobile menus pass accessibility checks', async ({ page })
     const toggles = width <= 880 ? ['.mobile-menu > summary'] : ['.solutions-menu > summary', '.utility-menu > summary'];
     for (const toggle of toggles) {
       await page.locator(toggle).click();
+      if (width <= 880) await page.locator('.mobile-secondary > summary').click();
       await page.evaluate(() => document.fonts.ready);
       const audit = await new AxeBuilder({ page }).include('.site-header').withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa']).analyze();
       expect(audit.violations.map(({ id, nodes }) => ({ id, targets: nodes.map(({ target }) => target) }))).toEqual([]);
       await page.keyboard.press('Escape');
     }
   }
+});
+
+for (const viewport of [{ width: 320, height: 568 }, { width: 390, height: 844 }, { width: 430, height: 932 }]) {
+  test(`${viewport.width}px: core pages and Contact are immediately visible without menu scrolling`, async ({ page }) => {
+    await page.setViewportSize(viewport);
+    await page.goto('/');
+    await page.evaluate(() => document.fonts.ready);
+    await page.locator('.mobile-menu > summary').click();
+    await expect(page.locator('.mobile-secondary')).not.toHaveAttribute('open', '');
+    await expect(page.locator('.mobile-menu nav a:visible')).toHaveCount(7);
+    await expect(page.locator('.mobile-menu .nav-link-description')).toHaveCount(0);
+    for (const link of await page.locator('.mobile-page-link, .mobile-contact').all()) {
+      await expect(link).toBeInViewport({ ratio: 1 });
+      expect((await link.boundingBox())!.height).toBeGreaterThanOrEqual(48);
+      expect(await link.evaluate((element) => parseFloat(getComputedStyle(element).fontSize))).toBeGreaterThanOrEqual(16);
+    }
+    expect(await page.locator('.mobile-menu nav').evaluate((nav) => nav.scrollHeight - nav.clientHeight)).toBeLessThanOrEqual(1);
+    expect((await page.locator('.mobile-menu nav').boundingBox())!.height).toBeLessThanOrEqual(480);
+  });
+}
+
+test('mobile secondary links are keyboard-operable and reset when the menu closes', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/');
+  await page.locator('.mobile-menu > summary').click();
+  const more = page.locator('.mobile-secondary > summary');
+  await more.focus();
+  await page.keyboard.press('Enter');
+  await expect(page.locator('.mobile-secondary')).toHaveAttribute('open', '');
+  await expect(page.locator('.mobile-menu')).toHaveAttribute('open', '');
+  await page.keyboard.press('Tab');
+  await expect(page.locator('.mobile-secondary a').first()).toBeFocused();
+  await page.keyboard.press('Escape');
+  await expect(page.locator('.mobile-menu')).not.toHaveAttribute('open', '');
+  await expect(page.locator('.mobile-menu > summary')).toBeFocused();
+  await page.keyboard.press('Enter');
+  await expect(page.locator('.mobile-secondary')).not.toHaveAttribute('open', '');
+  await page.goto('/privacy/');
+  await page.locator('.mobile-menu > summary').click();
+  await expect(page.locator('.mobile-secondary')).toHaveAttribute('open', '');
+  await expect(page.locator('.mobile-secondary a[href="/privacy/"]')).toHaveAttribute('aria-current', 'page');
+});
+
+test('supporting-page navigation stays reachable while scrolling and anchors clear the header', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/services/#plumber');
+  await expect.poll(async () => page.evaluate(() => {
+    const header = document.querySelector('.site-header')!.getBoundingClientRect();
+    const section = document.querySelector('#plumber')!.getBoundingClientRect();
+    return header.top === 0 && section.top >= header.bottom;
+  })).toBe(true);
+  await page.locator('.site-footer').scrollIntoViewIfNeeded();
+  await expect(page.locator('.mobile-menu > summary')).toBeInViewport({ ratio: 1 });
+  await page.locator('.mobile-menu > summary').click();
+  await page.locator('.mobile-page-link[href="/faq/"]').click();
+  await expect(page).toHaveURL(/\/faq\/$/);
+});
+
+test.describe('phone touch navigation', () => {
+  test.use({ hasTouch: true, viewport: { width: 390, height: 844 } });
+  test('primary and secondary destinations respond to touch', async ({ page }) => {
+    await page.goto('/');
+    await page.locator('.mobile-menu > summary').tap();
+    await page.locator('.mobile-page-link[href="/services/whatsapp/"]').tap();
+    await expect(page).toHaveURL(/\/services\/whatsapp\/$/);
+    await page.locator('.mobile-menu > summary').tap();
+    await page.locator('.mobile-secondary > summary').tap();
+    await page.locator('.mobile-secondary a[href="/accessibility/"]').tap();
+    await expect(page).toHaveURL(/\/accessibility\/$/);
+  });
 });
 
 test('all page links remain available without JavaScript', async ({ browser, baseURL }) => {

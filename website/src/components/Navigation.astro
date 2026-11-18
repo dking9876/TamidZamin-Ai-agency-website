@@ -5,6 +5,8 @@ import { mainLinks, serviceLinks, utilityLinks, sectionLinks, contactLink } from
 
 const path = Astro.url.pathname.replace(/\/?$/, '/');
 const current = (href: string) => path === href ? 'page' : undefined;
+const mobileLinks = [mainLinks[0], ...serviceLinks, ...mainLinks.slice(1)];
+const utilityCurrent = utilityLinks.some(({ href }) => path === href);
 ---
 <header class="site-header">
   <div class="header-inner container">
@@ -13,7 +15,7 @@ const current = (href: string) => path === href ? 'page' : undefined;
       <a class="nav-top-link" href={mainLinks[0].href} aria-current={current(mainLinks[0].href)}>{mainLinks[0].label}</a>
       <details class="nav-disclosure solutions-menu" name="desktop-navigation" data-nav-disclosure>
         <summary class="nav-top-link" aria-controls="solutions-panel" data-current={serviceLinks.some(({ href }) => path === href) || undefined}>
-          פתרונות <Icon name="chevron" size={16} />
+          שירותים <Icon name="chevron" size={16} />
         </summary>
         <div class="nav-panel solutions-panel" id="solutions-panel">
           <div class="nav-services">
@@ -26,52 +28,54 @@ const current = (href: string) => path === href ? 'page' : undefined;
             ))}
           </div>
           <div class="nav-shortcuts">
-            <p class="nav-group-title">מבט על התהליך</p>
+            <p class="nav-group-title">קיצורי דרך בעמוד הבית</p>
             {sectionLinks.map((link) => <a href={link.href}>{link.label}<Icon name="arrow" size={16} /></a>)}
           </div>
         </div>
       </details>
       {mainLinks.slice(1).map((link) => <a class="nav-top-link" href={link.href} aria-current={current(link.href)}>{link.label}</a>)}
       <details class="nav-disclosure utility-menu" name="desktop-navigation" data-nav-disclosure>
-        <summary class="nav-top-link" aria-controls="utility-panel" data-current={utilityLinks.some(({ href }) => path === href) || undefined}>
-          מידע שימושי <Icon name="chevron" size={16} />
+        <summary class="nav-top-link" aria-controls="utility-panel" data-current={utilityCurrent || undefined}>
+          פרטיות ונגישות <Icon name="chevron" size={16} />
         </summary>
         <div class="nav-panel utility-panel" id="utility-panel">
           {utilityLinks.map((link) => <a href={link.href} aria-current={current(link.href)}>{link.label}<Icon name="arrow" size={16} /></a>)}
         </div>
       </details>
     </nav>
-    <a href={contactLink.href} class="button header-cta" aria-current={current(contactLink.href)}>בואו נדבר <Icon name="arrow" size={17} /></a>
+    <a href={contactLink.href} class="button header-cta" aria-current={current(contactLink.href)}>{contactLink.label} <Icon name="arrow" size={17} /></a>
     <details class="mobile-menu" data-nav-disclosure>
       <summary aria-label="תפריט ניווט" aria-controls="mobile-navigation">
         <span class="menu-open-label">תפריט</span><span class="menu-close-label">סגירה</span>
         <svg class="menu-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16" /><path d="M4 12h16" /><path d="M4 18h16" /></svg>
       </summary>
       <nav id="mobile-navigation" aria-label="ניווט לנייד">
-        <div class="mobile-nav-start">
-          <a href={mainLinks[0].href} aria-current={current(mainLinks[0].href)}>{mainLinks[0].label}</a>
-          <a class="button mobile-contact" href={contactLink.href} aria-current={current(contactLink.href)}>{contactLink.label}<Icon name="arrow" size={18} /></a>
-        </div>
-        <div class="mobile-nav-group">
-          <p class="nav-group-title">פתרונות לעסק</p>
-          {serviceLinks.map((link) => (
-            <a class="nav-service" href={link.href} aria-current={current(link.href)}>
-              <Icon name={link.icon} size={23} />
-              <span><span class="nav-link-title">{link.label}</span><span class="nav-link-description">{link.description}</span></span>
-              <Icon name="arrow" size={17} />
+        <div class="mobile-page-list">
+          {mobileLinks.map((link) => (
+            <a class:list={['mobile-page-link', {
+              'mobile-service-child': link.href.startsWith('/services/') && link.href !== '/services/',
+              'mobile-group-start': link.href === '/services/' || link.href === '/about/',
+            }]} href={link.href} aria-current={current(link.href)}>
+              {'icon' in link && link.href !== '/services/' && <Icon name={link.icon} size={21} />}
+              <span>{link.label}</span>
+              <Icon name={current(link.href) ? 'check' : 'arrow'} size={18} />
             </a>
           ))}
         </div>
-        <div class="mobile-nav-group mobile-main-links">
-          {mainLinks.slice(1).map((link) => <a href={link.href} aria-current={current(link.href)}>{link.label}<Icon name="arrow" size={17} /></a>)}
-        </div>
-        <div class="mobile-nav-group">
-          <p class="nav-group-title">מבט על התהליך</p>
-          <div class="mobile-section-links">{sectionLinks.map((link) => <a href={link.href}>{link.label}</a>)}</div>
-        </div>
-        <div class="mobile-nav-group mobile-utility-links">
-          {utilityLinks.map((link) => <a href={link.href} aria-current={current(link.href)}>{link.label}</a>)}
-        </div>
+        <a class="button mobile-contact" href={contactLink.href} aria-current={current(contactLink.href)}>{contactLink.label}<Icon name="arrow" size={18} /></a>
+        <details class="mobile-secondary" open={utilityCurrent} data-current={utilityCurrent || undefined}>
+          <summary aria-controls="mobile-secondary-links">
+            <span>מידע נוסף<span class="mobile-secondary-hint">פרטיות, נגישות וקיצורי דרך</span></span>
+            <Icon name="chevron" size={18} />
+          </summary>
+          <div id="mobile-secondary-links">
+            {utilityLinks.map((link) => <a href={link.href} aria-current={current(link.href)}>{link.label}<Icon name="arrow" size={16} /></a>)}
+            <div class="mobile-shortcuts">
+              <p class="nav-group-title">קיצורי דרך בעמוד הבית</p>
+              {sectionLinks.map((link) => <a href={link.href}>{link.label}<Icon name="arrow" size={16} /></a>)}
+            </div>
+          </div>
+        </details>
       </nav>
     </details>
   </div>
@@ -85,6 +89,10 @@ const current = (href: string) => path === href ? 'page' : undefined;
   for (const menu of disclosures) {
     menu.addEventListener('toggle', () => {
       if (menu.open) disclosures.forEach((other) => { if (other !== menu) close(other); });
+      else {
+        const secondary = menu.querySelector<HTMLDetailsElement>('.mobile-secondary');
+        if (secondary) secondary.open = secondary.hasAttribute('data-current');
+      }
     });
     menu.addEventListener('click', (event) => {
       if (event.target instanceof Element && event.target.closest('a')) close(menu);

@@ -159,7 +159,7 @@ test('native FAQ interpolates its layout, reverses cleanly and stays keyboard op
 test('mobile menu has a bounded entrance and an immediate reduced-motion alternative', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/');
-  const summary = page.locator('.mobile-menu summary');
+  const summary = page.locator('.mobile-menu > summary');
   await summary.focus();
   await page.keyboard.press('Enter');
   await expect(page.locator('.mobile-menu nav')).toHaveCSS('animation-name', 'menu-arrive');
