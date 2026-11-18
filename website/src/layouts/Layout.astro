@@ -26,7 +26,7 @@ const schema = {
 <html lang="he" dir="rtl">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="color-scheme" content="light" />
     <meta name="theme-color" content="#08162c" />
     {path === '/' && <link rel="preload" href="/images/blue-edge.webp" as="image" fetchpriority="high" />}
@@ -97,6 +97,27 @@ const schema = {
       document.addEventListener('click', (event) => {
         if (menu?.open && event.target instanceof Node && !menu.contains(event.target)) menu.open = false;
       });
+      menu?.querySelector('nav')?.addEventListener('click', (event) => {
+        if (event.target instanceof Element && event.target.closest('a')) menu.open = false;
+      });
+      menu?.addEventListener('focusout', () => {
+        requestAnimationFrame(() => {
+          if (menu.open && !menu.contains(document.activeElement)) menu.open = false;
+        });
+      });
+      const desktop = matchMedia('(min-width: 881px)');
+      desktop.addEventListener('change', () => { if (desktop.matches && menu) menu.open = false; });
+      if (document.body.classList.contains('homepage')) {
+        const header = document.querySelector<HTMLElement>('.site-header');
+        if (header) {
+          const measureHeader = () => {
+            document.documentElement.style.setProperty('--header-height', `${header.getBoundingClientRect().height}px`);
+          };
+          new ResizeObserver(measureHeader).observe(header);
+          measureHeader();
+          document.body.classList.add('header-measured');
+        }
+      }
     </script>
   </body>
 </html>

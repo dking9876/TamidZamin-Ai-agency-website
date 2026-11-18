@@ -5,7 +5,7 @@ adapters. Content pages are prerendered; the contact page and lead endpoint run
 on the server. No client framework, analytics, advertising, remote fonts or
 live AI service is included.
 
-**Current state: local preview, not approved for public launch.** Real lead
+**Current state: preview only, not approved for lead activation or indexing.** Real lead
 delivery is disabled. The site is noindex, robots blocks crawling, and the
 sitemap intentionally contains no public URLs until launch is configured.
 
@@ -211,7 +211,41 @@ The site is intentionally not a screenshot rendered as a page.
 
 Project design records: `..\PRODUCT.md`, `..\DESIGN.md`,
 `..\.impeccable\surfaces\website.md`, `..\.impeccable\design.json`.
-Impeccable was activated natively. No hooks or live mode were enabled.
+Impeccable was activated natively for the original implementation. During the
+18 November refinement, native activation was unavailable; its installed
+SKILL.md, setup instructions and layout/animate/adapt/optimize/harden/audit/polish
+playbooks were read directly from the earlier Google Drive installation.
+The Windows context loader and manual finishing detector were used. No hooks,
+permission-bypassing editing features or live mode were enabled.
+
+### Homepage composition and motion
+
+The approved image still defines the visual identity, not fixed poster heights.
+The owner approved spacious proportions on 18 November. All ten main desktop
+sections use a viewport-based **minimum** height; the footer and supporting
+pages do not. Longer copy, expanded FAQs and enlarged text can grow.
+
+- `src/styles/home.css` owns homepage composition, 600/880/1024px adaptations
+  and restrained interaction feedback. Keep new fullscreen rules scoped to
+  direct homepage sections, not global `section` selectors.
+- The hero uses `100svh` minus actual header height. `Layout.astro` measures
+  the header with ResizeObserver. Its 4.75rem/4.25rem CSS fallback reserves
+  space before enhancement. Homepage stickiness is enhanced only with JS;
+  no-JS and short (<=500px high) headers remain nonsticky.
+- Native anchors and history remain untouched. Scroll padding accounts for
+  the measured header. Do not introduce wheel/touch interception or scroll snap.
+- `src/scripts/home-motion.ts` is homepage-only progressive enhancement:
+  a 520ms image entrance (never hidden headline/CTA), one 1760ms process/handoff
+  sequence, 620ms device entrance and 650ms About-photo reveal.
+- Animations run once, pause offscreen/in hidden tabs, and settle. Live reduced-
+  motion changes cancel them. Default HTML/CSS is visible without JavaScript.
+  Keep the waveform static and the phones clearly labeled illustrative.
+- Native menu and FAQ disclosures stay usable without JS. JS adds menu closing
+  on Escape, link following, outside click, focus exit and desktop resize.
+
+No motion library, dependency, backend change or business claim was added.
+Do not regenerate supplied assets to adjust layout; use the existing responsive
+derivatives and check focal subjects at each viewport.
 
 ## Verification
 
@@ -223,12 +257,19 @@ npm run test:seo
 # With the production preview running at localhost:4321:
 npm run test:browser
 node scripts\capture.mjs
+node scripts\capture-refinement.mjs
 npm run verify:launch
 ```
 
 Browser tests use the installed Microsoft Edge via Playwright. On a machine
 without Edge, install a supported Playwright browser and change the channel.
 See `VERIFICATION.md` for measured results and remaining limitations.
+The refinement capture accepts `TEST_BASE_URL` and `REVIEW_DIR`; use a production
+preview for final evidence, not the Astro development toolbar. The targeted
+`refinement.spec.ts` browser tests measure actual section bounds, anchor behavior
+and animation lifecycle instead of treating CSS declarations as proof.
+Before/after screenshots and Lighthouse reports are local review artifacts,
+not publication or a new approval to launch.
 For a deployed preview, set `TEST_BASE_URL` to the URL being visited and
 `TEST_SITE_ORIGIN` to its configured canonical origin before `test:browser`.
 Without an explicit `SITE_URL`, Vercel uses its unique deployment URL for the

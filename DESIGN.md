@@ -34,15 +34,15 @@ colors:
 typography:
   display:
     fontFamily: "'Heebo Variable', sans-serif"
-    fontSize: "clamp(2.45rem, 4.25vw, 3.7rem)"
+    fontSize: "clamp(2.75rem, 5.2vw, 4.75rem)"
     fontWeight: 850
-    lineHeight: 1.03
+    lineHeight: 1.1
     letterSpacing: "-.025em"
   display-mobile:
     fontFamily: "'Heebo Variable', sans-serif"
-    fontSize: "clamp(2.4rem,9vw,3.2rem)"
+    fontSize: "clamp(2.5rem, 10.5vw, 3.1rem)"
     fontWeight: 850
-    lineHeight: 1.08
+    lineHeight: 1.1
     letterSpacing: "-.025em"
   headline-reading:
     fontFamily: "'Heebo Variable', sans-serif"
@@ -58,9 +58,9 @@ typography:
     letterSpacing: "-.02em"
   headline-process:
     fontFamily: "'Heebo Variable', sans-serif"
-    fontSize: "1.9rem"
+    fontSize: "clamp(2.25rem, 4vw, 3.75rem)"
     fontWeight: 800
-    lineHeight: 1.2
+    lineHeight: 1.16
     letterSpacing: "-.02em"
   title:
     fontFamily: "'Heebo Variable', sans-serif"
@@ -79,7 +79,7 @@ typography:
     lineHeight: 1.5
   label-pill:
     fontFamily: "'Heebo Variable', sans-serif"
-    fontSize: "15px"
+    fontSize: "1rem"
     fontWeight: 750
     lineHeight: 1.4
   label-field:
@@ -131,7 +131,7 @@ components:
     textColor: "{colors.pill-ink}"
     typography: "{typography.label-pill}"
     rounded: "{rounded.pill}"
-    padding: "9px 22px"
+    padding: "12px 24px"
   pill-primary-hover:
     backgroundColor: "{colors.pill-hover}"
   pill-outline:
@@ -139,15 +139,15 @@ components:
     textColor: "{colors.paper}"
     typography: "{typography.label-pill}"
     rounded: "{rounded.pill}"
-    padding: "9px 22px"
+    padding: "12px 24px"
   pill-outline-hover:
     backgroundColor: "{colors.pill-outline-hover}"
   pill-icon:
     backgroundColor: "{colors.pill-icon}"
     textColor: "{colors.paper}"
     rounded: "{rounded.circle}"
-    width: "25px"
-    height: "25px"
+    width: "28px"
+    height: "28px"
   header-cta:
     backgroundColor: "{colors.pill-paper}"
     textColor: "{colors.navy}"
@@ -196,9 +196,9 @@ components:
 
 **Creative North Star: "Approved TamidZamin reference"**
 
-This is an observed authority label, not a newly chosen metaphor. The supplied TamidZamin reference owns the visual direction: deep blue-black bands, pale surfaces, electric-blue decoration, compact Hebrew headings, supplied trade photographs, and rounded actions. Professional, plain Hebrew and correct RTL are confirmed commitments in `PRODUCT.md`.
+This is an observed authority label, not a newly chosen metaphor. The supplied TamidZamin reference owns the visual direction: deep blue-black bands, pale surfaces, electric-blue decoration, heavy Hebrew headings, supplied trade photographs, and rounded actions. Professional, plain Hebrew and correct RTL are confirmed commitments in `PRODUCT.md`. On 18 November 2026 the owner approved spacious website proportions instead of the reference's compressed poster proportions.
 
-The implemented system has two related scopes, not one flattened theme. The homepage uses compact photographic bands, light pill actions, and authored raster light edges. Supporting service, reading, and contact pages use the shared navy palette, roomier content, conventional blue buttons, and bordered panels. This document records finished source; it does not establish service capabilities or certify launch readiness.
+The implemented system has two related scopes, not one flattened theme. The homepage uses viewport-scale photographic compositions, light pill actions, and authored raster light edges. Supporting service, reading, and contact pages use the shared navy palette, content-led heights, conventional blue buttons, and bordered panels. This document records source; it does not establish service capabilities or certify launch readiness.
 
 **Key Characteristics:**
 - Hebrew RTL text with deliberately LTR visual groups and isolated Latin names.
@@ -239,13 +239,13 @@ The layout imports `@fontsource-variable/heebo` before both stylesheets. The run
 
 ### Hierarchy
 
-- **Display:** homepage hero, represented by `display`; the two-line source heading uses the heavy 850 weight. At widths up to 1100px it becomes 44px, up to 880px 37px, and up to 680px uses `display-mobile`. These are explicit overrides, not one uninterrupted fluid scale.
-- **Headline:** `headline-reading` is the supporting page title. At mobile widths up to 680px it becomes 2.45rem. The shared `headline` is the h2 baseline; compact homepage section headings frequently override it with 24-30px sizes and weight 800. `headline-process` records a reused heading treatment, not a universal homepage h2.
-- **Title:** `title` is the shared h3 baseline. Homepage process and benefit labels use compact 16-17px bold treatments.
-- **Body:** `body` is the shared reading/input baseline. Homepage paragraphs commonly tighten leading to 1.4-1.5; supporting introductory copy is larger and roomier. Reading columns max out at 800px; page title and intro measures are 24ch and 63ch.
-- **Labels:** separate button, pill, field, and navigation roles preserve their actual weights and leading. Desktop navigation becomes 13px at widths up to 1100px.
+- **Display:** homepage hero uses `display`, weight 850 and 1.1 leading. Up to 880px it uses `clamp(2.75rem, 6.5vw, 3.75rem)`; up to 600px it uses `display-mobile`. The closing section has a separate editorial headline capped at 6rem.
+- **Headline:** `headline-reading` remains the supporting page title. Homepage `--home-title` is `clamp(2.25rem, 4vw, 3.75rem)`, weight 800 and 1.16 leading; up to 600px it becomes `clamp(2rem, 8.5vw, 2.75rem)`. Channel titles are smaller to support the device composition.
+- **Title:** `title` remains the shared h3 baseline; process labels use 1.35rem, benefits 1.3rem, and About values 1.15rem.
+- **Body:** `body` is the shared reading/input baseline. Homepage paragraphs use 1.65 leading with 1-1.25rem copy depending on role. Reading columns max out at 800px; page title and intro measures remain 24ch and 63ch.
+- **Labels:** navigation is .875rem; primary homepage pills 1rem, secondary channel actions .875rem. Miniature illustrative phone copy is not the body type scale.
 
-Headings use balanced wrapping and allow long-word breaks; paragraphs use pretty wrapping. No fixed modular ratio is evident. Tiny embedded phone copy is not part of this reusable type ramp.
+Headings use balanced wrapping and allow long-word breaks; paragraphs use pretty wrapping. Text uses rem-based sizes so user text enlargement is respected.
 
 **The Hebrew First Rule.** Keep Hebrew text RTL and preserve deliberate LTR composition wrappers and bdi isolation; do not reverse the entire layout to reposition one element.
 
@@ -253,20 +253,25 @@ Headings use balanced wrapping and allow long-word breaks; paragraphs use pretty
 
 `Layout.astro` imports `global.css`, then `home.css`, on every page. The body receives the homepage class only at `/`. Consequently, unscoped navigation rules and the pale rounded header CTA from the second stylesheet also affect supporting pages.
 
-Shared containers use `min(1180px, calc(100% - 64px))`. At widths up to 1100px they use `calc(100% - 48px)`; at widths up to 680px, `calc(100% - 36px)`. Shared reading sections have larger vertical padding than homepage strips. The spacing tokens describe observed reusable gaps and gutters, not an invented base grid.
+Shared containers use `min(1180px, calc(100% - 64px))`, then 48px total gutter up to 1100px and 36px up to 680px. Homepage widths up to 600px use a 40px total gutter.
 
-- **Desktop homepage:** left-hand hero copy occupies 47% of its container, with the supplied worker/van image across the band. Mixed-direction three-part channel, human, and About groups preserve the reference's visual placement. Process is four columns; trades and benefits are five; FAQ rows are two columns beside a title; the closing CTA is horizontal.
-- **Up to 1100px:** homepage header minimum height becomes 56px, hero minimum height 320px, copy width 45%, and channel devices shrink. Supporting containers and contact gaps also contract.
-- **Up to 880px:** all routes switch to the native disclosure menu. Homepage devices move below the channel descriptions; supporting art and multi-part strips simplify. This overrides the older global navigation switch at 680px.
-- **Up to 820px:** the supporting contact layout becomes one column. This is distinct from the homepage's 880px breakpoint.
-- **Up to 680px:** homepage hero photograph is 290px high above centered copy, with 235px top padding on the section; actions wrap. Process, trades, and benefits use two columns, with final odd trade/benefit items spanning both. Human, About, evidence, FAQ, and closing CTA stack. Service panels and form fields also become single-column; contact padding becomes 21px 18px.
-- **Up to 360px:** device widths and connectors compress further. The old global hero rules do not describe the current homepage.
+Only direct homepage `main > section` elements get the composition rules. At desktop widths of at least 1024px, each main section has a minimum block size of `100svh - actual header height`. The hero has that minimum at every width, so the in-flow header plus hero fill the initial small viewport. No section has a fixed height or scroll snap. Expanded text and FAQs can exceed the minimum. Footer, legal pages, supporting pages and nested components are excluded.
 
-The default homepage header minimum height is 62px, then 56px at up to 1100px and 64px at up to 680px. Supporting header dimensions remain separately governed by global rules.
+The header reserves 4.75rem on desktop and 4.25rem up to 880px. A ResizeObserver writes its actual height, including wrapping or text enlargement, to `--header-height`. Progressive enhancement makes the homepage header sticky; without JavaScript it remains in flow so an open native menu does not cover an anchor destination. At heights up to 500px it is nonsticky, even with JavaScript. Supporting headers remain nonsticky.
 
-**Measured limitation:** at a 1024px viewport the running build's header plus hero ends at 376px (56px + 320px), versus the contract's reference anchor at 317px. This is an observation, not a target token. Typography, factual copy, and usable controls expand the composition; reference anchors must not become clipping heights. This documentation pass makes no pixel-perfect or historical comp-gate claim.
+`--section-space` is `clamp(3rem, 6vw, 6rem)` (3.5rem on phones). It is not the mechanism used to fill the viewport: flex/grid composition and minimum height are. `--composition-gap` is `clamp(2rem, 4vw, 4rem)`. Large and tight intervals distinguish sections from their internal groups.
 
-**Finish-review status:** the user supplied the final verdict on 2026-11-17: **SHIP at scoped fix-verification level**. All seven prior material fixes and the corrected hero-outline regression are resolved; captures and hashes are valid, with no direct regression reported. This records the supplied review result, not a new review performed by the documenter, a whole-surface pixel-match certification, or a historical engine-gate certification.
+- **Hero:** copy occupies the left 49%, with the worker/van photograph behind the right. Image height is bounded by 55vw, object position is 80%, and a top mask blends it into navy without stretching the image. At up to 880px the photograph sits above centered copy; short/zoomed content grows naturally. A static, focusable scroll cue links to channels.
+- **Channels:** larger illustrative phones anchor the center of two service explanations. Tablet moves devices beneath the explanations; phones stack the two explanations around the device group. Both nearby labeling and the section disclaimer state this is illustrative, not live.
+- **Process:** four generously spaced nodes joined right-to-left. Tablet uses two rows; phones use one vertical reading column. Step order remains the existing factual order.
+- **Trades:** the supplied angled photographs form a larger gallery beneath a heading/intro row. Five desktop columns become three on tablet and two on phones.
+- **Benefits:** a large heading beside five open, ruled value groups in two columns; the human responsibility value spans the last row. No generic card grid is added.
+- **Human/About:** larger imagery and two-column editorial compositions replace strips. Human handoff symbols remain decorative; About keeps its oblique frame. Both stack on phones.
+- **Evidence:** requirements copy is typeset as a clearly bounded specification, not a testimonial or active demo. No new capability claims.
+- **FAQ:** a two-column title/list composition, with one full-width question per list row, makes the content substantial at desktop size. Multiple native disclosures may remain open.
+- **Closing:** an oversized headline and horizontal action compose the last full-height section. The compact footer remains content-sized.
+
+The earlier 17 November scoped fix review and compressed section measurements are historical, not acceptance thresholds for this approved refinement. Current measured geometry and verification limits live in `website/VERIFICATION.md`. This is not a pixel-match or accessibility certification.
 
 ## Elevation & Depth
 
@@ -274,9 +279,9 @@ Depth combines tonal bands, photographic overlays, raster blue light edges, subt
 
 ### Shadow Vocabulary
 
-- **Pill rest:** `0 3px 9px #00000012`; outlined pills explicitly remove it.
+- **Pill rest:** flat pale/outlined controls; feedback uses color and a small arrow translation, not floating shadows.
 - **Shared button hover:** `0 5px 16px #00000018`; disabled buttons remove it.
-- **Homepage FAQ:** `0 2px 5px #345c7820`.
+- **Homepage FAQ:** pale surface with a visible border, no floating shadow.
 - **Mobile navigation:** `0 12px 25px #00000030`.
 
 The phone-frame glow, inset light, and layered photographic masks are signature illustration construction, not a generic card shadow. Raster wave edges are supplied through background images; do not substitute CSS gradients for those images. The hero's CSS contrast overlay is a separate, actually implemented layer.
@@ -287,7 +292,7 @@ The phone-frame glow, inset light, and layered photographic masks are signature 
 
 Pills use the fully rounded treatment, field/menu controls use small corners, and service/contact/notice panels use the shared panel radius. Homepage FAQ containers are rounder than supporting FAQ containers.
 
-The homepage also uses clipped and counter-skewed imagery: trades skew -12deg on desktop and -6deg on mobile, while their content counter-skews; About imagery uses -8deg with counter-skewed content and asymmetric 26px/10px corners. These are image-frame treatments, not transformations for text, forms, or general cards.
+The homepage also uses clipped and counter-skewed imagery: trades and About skew -6deg, with counter-skewed contents; About retains asymmetric 26px/10px corners. These are image-frame treatments, not transformations for text, forms, or general cards.
 
 SVG icons share a 24-unit viewBox, no fill, currentColor strokes of 1.7, and rounded caps/joins. Their dimensions vary with context. Decorative icons are aria-hidden; meaningful wording remains real text. No glyph icon font is used.
 
@@ -297,11 +302,11 @@ SVG icons share a 24-unit viewBox, no fill, currentColor strokes of 1.7, and rou
 
 **Two deliberately distinct families.** Supporting blue buttons use the shared button tokens, 50px minimum height, and a 14px icon gap. Their secondary variant is transparent with a line-colored border and wash hover, as used on the 404 page.
 
-Homepage pills use 44px minimum height, a 10px gap, and a pale filled or outlined surface. Hero actions share the blue 25px circular arrow container; the secondary action remains outlined. Channel and closing actions need not contain that circle. Responsive hero padding and label sizes are recorded in the sidecar.
+Homepage pills use 50px minimum height, a 12px gap, and a pale filled or outlined surface. Hero actions share the blue 28px circular arrow container; the secondary action remains outlined. The final action has a 60px minimum height.
 
 The shared header action is a hybrid: it keeps the button's typography/transition, but takes the pale surface and pill radius from the later stylesheet. Its navy text follows route scope. Its higher-specificity background remains pale on hover while the button hover shadow applies.
 
-Buttons transition background and shadow over 160ms ease-out; pills transition background over 140ms ease-out. No separate pressed animation is defined. A disabled button has a not-allowed cursor and .65 opacity; the disabled contact fieldset independently applies .65 opacity, so its disabled submit button inherits a compounded visual dimming.
+Buttons retain 160ms feedback. Pills transition color/border/pressed position over 160ms. Hover and focus both translate the directional arrow 3px toward the destination; pressing moves the control down 1px. Reduced motion removes translations but retains legible state colors. A disabled button retains the existing not-allowed cursor and .65 opacity; the disabled contact fieldset independently applies .65 opacity. Intake behavior is unchanged.
 
 ### Cards / Containers
 
@@ -317,13 +322,13 @@ Invalid controls use an error border and associated error text. Empty error/stat
 
 Logo left, centered RTL links, and the pale action right are achieved with an LTR header wrapper. Desktop links have 44px minimum height; hover/current-page treatment is an underline accented in cyan with white text.
 
-The mobile menu is a native details/summary disclosure with a 44px square trigger and a navy-soft overlay below the header. Escape closes it and restores trigger focus; clicking outside closes it. It is not a modal, and no focus trap is implemented. The homepage footer is compact; supporting footers retain a roomier grid.
+The mobile menu is a native details/summary disclosure with a 44px square trigger and a navy-soft overlay below the header. The overlay has a viewport-bounded, scrollable maximum height. Escape closes it and restores trigger focus; outside clicks, following links, leaving the menu by keyboard, and switching to desktop close it too. It is not a modal and has no focus trap. Native hash navigation and history are not intercepted. Homepage anchor padding uses the measured sticky-header height plus 16px; short nonsticky layouts use 16px.
 
 ### FAQ
 
 Both variants use native details/summary, visible question text, and a plus SVG rotating 45deg when open. The open question turns blue-hover. Multiple rows can remain open; there is no exclusive-accordion script.
 
-Homepage rows use the rounded, softly shadowed variant and two columns until mobile. Supporting rows are flat, smaller-radius containers with roomier default summaries. The sidecar keeps their exact breakpoint-specific padding and sizes separate.
+Homepage rows use the rounded bordered variant in a single question column beside the title, stacking below it at narrower widths. Summary height is at least 76px on desktop and 64px on phones. Hover, focus-within and open states strengthen the border; native plus rotation remains. Supporting FAQs retain their smaller-radius reading layout.
 
 ### Imagery and illustration
 
@@ -333,7 +338,18 @@ Nine numbered PNG originals are preserved. The shipping image directory contains
 
 ### Focus and reduced motion
 
-Shared interactive focus is a 3px cyan outline with 5px offset. Fields use blue with a 2px offset. The skip link becomes visible on focus. Under reduced motion, smooth scrolling becomes auto; button, pill, FAQ-icon, and legacy trade transitions are removed, and the legacy trade hover scaling is suppressed. Static skew, gradients, raster lights, and the non-animated waveform remain static; this is not a site-wide removal of transforms.
+Shared interactive focus is a 3px cyan outline with 5px offset. Fields use blue with a 2px offset. The skip link becomes visible on focus.
+
+`website/src/scripts/home-motion.ts` enhances only the homepage, with no dependency:
+
+- The hero photograph arrives over 520ms; headline, copy and CTA are never hidden or delayed.
+- One inquiry -> AI -> confirmed summary -> human sequence pulses the four process nodes and traces the RTL connectors. It lasts at most 1760ms and settles; it does not repeat on re-entry.
+- Devices enter over 620ms with 16px travel. About imagery opens through a small 650ms crop reveal. Other sections stay still rather than repeating fade-up effects everywhere.
+- `--motion-feedback` is 160ms; image hover is 260ms. Authored arrivals use `cubic-bezier(0.16, 1, 0.3, 1)`.
+- IntersectionObserver pauses animations offscreen. Visibility changes pause them in hidden tabs; page lifecycle events cover back/forward restoration. No animation loop, wheel/touch listener, scroll timer, custom cursor or live phone control is added.
+- With reduced motion, authored sequences do not start; changing the preference cancels active ones and shows their static base composition. Smooth anchor scrolling becomes instant. State colors and native FAQ disclosure still explain interactions.
+
+Meaningful content is visible and crawlable before JavaScript; no reveal stylesheet hides it. Phone waveforms are static illustrations. Brief one-shot sequences need no persistent playback control.
 
 ## Do's and Don'ts
 

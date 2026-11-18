@@ -19,6 +19,10 @@ hosting. The dedicated Node target remains available.
 On 17 November 2026 the owner connected and attempted a Vercel deployment, then
 requested help fixing its failed installation. The hosted preview now works.
 This does not approve enabling lead delivery, indexing or unverified claims.
+On 18 November 2026 the owner approved committing and pushing the completed
+homepage refinement to the existing GitHub repository to update its connected
+Vercel deployment. This approval still excludes enabling lead delivery,
+indexing, real demos or unsupported claims.
 
 ## Users
 
@@ -55,6 +59,10 @@ TamidZamin. Professional, plain Hebrew and correct RTL.
 The user approved `website design assets\אתר TamidZamin_ סוכני AI לעסקים בישראל.webp`
 as the spatial and visual reference and requires the numbered PNG assets to be
 used without changing the originals.
+On 18 November 2026 the owner explicitly approved replacing its compressed
+proportions with spacious viewport-scale homepage compositions and purposeful
+motion. This is a refinement: identity, supplied imagery, factual content,
+section order, functionality and launch safeguards remain binding.
 
 ## Evidence on Hand
 

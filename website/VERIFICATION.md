@@ -1,5 +1,176 @@
 # Verification and launch status
 
+## Git-linked deployment approval - 18 November 2026
+
+After the local refinement was completed, the owner explicitly requested a
+commit and push to update the existing connected Vercel deployment.
+The local Vercel production build passes with zero Astro/TypeScript diagnostics.
+`test:vercel` also passes for generated output, Node 24, static routes/assets,
+404 routing, crawler safeguards, headers, SSR contact and disabled API behavior.
+No environment variables, DNS, backend behavior or launch gates were changed.
+This authorizes updating the hosted preview, not activating leads or indexing.
+
+## Viewport and motion refinement - 18 November 2026
+
+The initial work was a **local-only refinement**, not a rebuild or deployment. The repository
+was clean before editing; the earlier production website chat was idle. No
+existing user changes were reverted. No commit, push, deployment, DNS change,
+purchase or real communication was performed during that initial phase.
+
+The approved Hebrew/RTL identity, navy/white/electric-blue palette, original
+imagery, ten-section homepage order, factual copy and safeguards remain.
+The only new visitor copy is a scroll invitation and an explicit "illustration
+only / no active call" label. The screenshot's compressed proportions were
+expanded with the owner's explicit approval.
+
+### Actual geometry, not just CSS declarations
+
+Microsoft Edge 157.0.4341.60 / Playwright, production Node build, default 16px
+root text and static reduced-motion captures:
+
+| Viewport | Header | Hero bottom from document top | Result |
+|---|---:|---:|---|
+| 360 x 800 | 68px | 806.34px | Natural 6.34px growth for wrapped content; no clipping |
+| 390 x 844 | 68px | 844px | Header and hero exactly fill the viewport |
+| 768 x 1024 | 68px | 1024px | Header and hero exactly fill the viewport |
+| 1024 x 768 | 76px | 768px | All 10 sections measure 692px, the available height |
+| 1440 x 900 | 76px | 900px | All 10 sections measure 824px, the available height |
+| 1440 x 500 | 76px, nonsticky | 681.52px | Content grows; section heights 456.50-737.27px, all above the 424px minimum |
+| 844 x 390 | 68px, nonsticky | 904.06px | Short landscape layout grows naturally; all content remains reachable |
+
+All seven captures have **no horizontal overflow and no text outside section
+bounds**. At desktop widths the minimum applies only to direct homepage
+sections. The footer remains content-sized (153px in the 1440px capture), and
+supporting/legal pages retain their original content-led layout.
+
+At 1440 x 1000, the unchanged baseline header/hero ended at 472px; the refined
+version ends at 1000px. At 1024 x 768 it moved from 376px to 768px. These are
+measured geometry comparisons, not vertically stretched reference images.
+
+### Engineering and interaction verification
+
+- Production build and Astro/TypeScript check: **0 errors, warnings or hints**.
+- Existing unit tests: **26 passed**.
+- Existing browser suites: **5 passed** on the production preview, including
+  axe WCAG A/AA checks on all nine public routes, internal links, responsive
+  images, keyboard menu/FAQ/skip-link behavior, no-JS FAQ, 404 and safeguards.
+- New refinement regressions: **28 passed**. The final combined run passed
+  **all 33 browser tests in 46.2 seconds**, with no retries. Coverage includes
+  measured geometry/text containment, 200% root text plus all FAQs expanded
+  at 390/1024/1440px, direct hashes and back/forward history, keyboard and
+  synthesized touch, no-JS homepage/menu/FAQ, real WAAPI progress and offscreen
+  pause/resume, one-shot completion, initial/live reduced motion and rendered
+  photo contrast. The visibility-event case is explicitly synthetic.
+- Existing responsive route checks pass at 320, 390, 680, 768, 1024, 1440 and
+  1920px. New captures add 360px and both short viewports above.
+- Local-only delivery integration: **5 verification groups passed**, including
+  real browser correction/error/timeout paths against a loopback mock receiver.
+- Isolated launch-mode SEO fixture passes. This does not enable indexing in the
+  actual preview or contact an external service.
+- `verify:launch` **fails as expected** on the unconfigured preview. Noindex,
+  blocked robots, empty sitemap, disabled form and rejected lead submissions
+  remain intact. Backend/configuration code and dependencies were not changed.
+- A preliminary run against the development server encountered Astro toolbar
+  headings inside shadow DOM. This was not an application failure; final tests
+  run against production without the toolbar, rather than weakening assertions.
+
+### Rendered contrast and motion inspection
+
+Visual review covered desktop, tablet, phone, short screens, individual section
+compositions, the mobile menu and expanded FAQs. A screenshot does not establish
+animation behavior: live browser timelines were sampled as well.
+
+- A real Lumi browser run at 508px recorded **140 animation frames**, **106
+  distinct process-icon transform states**, then zero running process
+  animations and all four icons back at their static transforms.
+- A separate isolated headed Edge run sampled the desktop sequence and native
+  wheel/PageDown scrolling. Median frame interval was **16.7ms**, p95 **17.3ms**.
+  The sequence settled, a 233px wheel input remained a normal scroll, and
+  PageDown advanced normally without snapping.
+- These are local unthrottled lab samples, not a physical phone GPU, field INP
+  measurement or universal 60fps guarantee.
+- The attempted real background-tab/minimized-window tests continued reporting
+  `document.visibilityState = visible` in this automation environment. Do not
+  describe those attempts as a real hidden-tab pass. The implementation uses
+  visibilitychange/document.hidden; synthetic lifecycle coverage is distinguished
+  from physical browser visibility testing.
+- The finishing pass found a text-over-photo contrast risk that automated axe
+  did not detect. The left hero overlay was strengthened. With text temporarily
+  hidden and its layout retained, conservative sampling of **every background
+  pixel in the text bounding boxes** now gives body-copy contrast **6.90:1**
+  at 1440px and **7.17:1** at 1024px; headline minima are **7.67:1** and
+  **9.78:1**. Tablet/mobile text sits on navy (above 18:1 in those captures).
+  These bounds are stricter than sampling only pixels behind glyph strokes.
+
+### Before/after production performance
+
+Same local machine, Edge and Lighthouse mobile simulation, fresh production
+builds, noindex retained. Single runs are directional, not statistically
+significant performance improvements:
+
+| Metric | Unchanged baseline | Final refinement |
+|---|---:|---:|
+| Performance | 93 | 94 |
+| Accessibility | 100 | 100 |
+| Best practices | 100 | 100 |
+| SEO | 69 | 69 |
+| LCP | 2.9s | 2.8s |
+| TBT | 180ms | 160ms |
+| CLS | 0 | 0.009 |
+| Transfer size | 511,938 bytes | 415,249 bytes |
+
+SEO remains intentionally limited by crawler blocking. LCP remains above the
+2.5s "good" threshold in this simulated run; measure on the actual HTTPS host
+and physical devices before launch. The new homepage-only motion module is
+approximately 1.9KB uncompressed; no motion dependency, remote font, analytics,
+continuous animation loop or new raster asset was added.
+
+### Impeccable finishing checks
+
+Native activation was unavailable. The installed SKILL.md, local setup notes,
+context loader and layout/animate/adapt/optimize/harden/audit/polish/craft-floor
+guidance were read directly. No hooks, live mode, permission bypass, installation
+repair or automatic configuration changes were enabled.
+
+The required one-time manual detector scanned the changed UI and returned
+`[]` (zero findings). The source diff/whitespace check passed. Subsequent visual
+polish addressed the photo seam and conservative text contrast; the detector
+was not repeatedly run as a substitute for rendered verification.
+
+| Technical audit dimension | Score / 4 | Evidence / limit |
+|---|---:|---|
+| Accessibility | 3 | Axe, keyboard, native disclosures and rendered hero contrast; no screen-reader certification |
+| Performance | 3 | Small JS, no loops/dependencies, CLS 0.009; simulated LCP still 2.8s |
+| Theming | 3 | Existing palette/font/materials retained; localized illustrative colors remain intentional |
+| Responsive design | 3 | Measured widths, short screens and content growth; physical devices/Safari untested |
+| Implementation integrity | 4 | Coherent reference identity, factual content, static fallback and unchanged launch gates |
+| Total | **16 / 20** | Good; bounded remaining verification gaps, not a full accessibility certification |
+
+No P0/P1 functional defect remains in the verified scope. The LCP target is a
+remaining P2 performance concern; hardware/browser coverage is a verification
+limit rather than a fabricated pass. This is an implementation finishing review,
+not the earlier independent reference-reproduction verdict.
+
+### Evidence and remaining limits
+
+Before/after screenshots, measured geometry, expanded states, Lighthouse JSON,
+pixel-contrast data and runtime motion evidence are kept locally in this Lumi
+session's `files` directory:
+
+`C:\Users\USER\AppData\Roaming\Lumi\copilot\session-state\9b8d1284-c7b4-41fb-b65d-8426ca77384b\files`
+
+Reproduce current captures with `scripts\capture-refinement.mjs`; use
+`TEST_BASE_URL` for the running production preview and `REVIEW_DIR` for output.
+The matching desktop/mobile before-after PNGs are delivered separately.
+
+Physical iPhone/Android browser controls, Safari/Firefox, assistive-technology
+reading order, forced-colors mode and real hidden-tab visibility remain
+unverified. `svh`, native disclosures, logical RTL layout and visible default
+content are implementation safeguards, not substitutes for those device tests.
+There is no public launch approval or claim that any illustrative phone is live.
+
+## Historical verification
+
 Checked locally on **17 November 2026** using Node 24.12.0, Astro 7.4.12,
 Microsoft Edge, Playwright 1.65.1, axe-core integration and Lighthouse 13.6.0.
 The original results below describe the local implementation. The clean-install

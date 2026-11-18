@@ -25,10 +25,14 @@ STORY: Recognize missed inquiries while working, understand WhatsApp and phone
 intake, see relevant trades, understand human involvement, then request a fit
 discussion. No testimonial or quantified result without evidence.
 
-FIRST VIEWPORT: Compact navigation with original logo at left, section links
-in reference order and white CTA at right. Full-width supplied trade photograph
+FIRST VIEWPORT: Navigation with original logo at left, section links
+in reference order and white CTA at right. Supplied trade photograph
 with worker/van on the right, two-line Hebrew headline and paired pill actions
-on the left. Reference header/hero ends at y317 of1024px-wide comp. Channels
+on the left. Header plus hero fill the initial small viewport; the next section
+starts below it. On 18 November 2026 the owner explicitly approved spacious
+viewport-scale homepage compositions instead of compressed poster proportions.
+Use minimum heights, not clipping heights; mobile/short/zoomed content grows.
+Channels
 place WhatsApp explanation/chat left, central brand connector, voice/phone
 right. RTL text within each group.
 
@@ -47,9 +51,13 @@ Open: all launch details unconfigured by explicit user choice. Preserve design
 while replacing unsupported reference claims and testimonial with factual
 explanation. No hooks, live mode, public publishing, or real communication.
 
-Reference geometry measured during review at1024px: hero0-317; channels317-536;
+Historical reference geometry measured during review at1024px: hero0-317; channels317-536;
 process536-696; trades696-837; benefits837-940; human940-1058; About1058-1204;
 proof1204-1296; FAQ1296-1397; CTA1397-1482; footer after1482. These are proportional
-anchors, not fixed heights that can clip accessible copy.
+anchors from the original compact pass, not current height targets.
+The approved refinement retains identity, section order and content, with
+one brief inquiry-to-AI-to-human sequence, selective entrances, native scrolling,
+keyboard-equivalent feedback and a static reduced-motion/no-JavaScript path.
+Current source geometry and limitations are documented in website/VERIFICATION.md.
 Review round1 disposition=rebuild: corrected the initial mistaken interpretation
 of section topology. No historical comp gate is claimed retrospectively.
