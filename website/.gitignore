@@ -7,6 +7,9 @@ dist-seo-test/
 .env.*
 !.env.example
 data/
+!src/data/
+src/data/*
+!src/data/call-transcript.json
 test-results/
 playwright-report/
 .DS_Store

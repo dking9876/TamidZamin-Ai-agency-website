@@ -47,6 +47,15 @@ production integration. The owner subsequently requested a GitHub push,
 approving the connected website preview update without enabling lead delivery
 or indexing.
 
+On 19 November the owner supplied the Hebrew transcript and requested
+synchronized display inside the demo phone. Preserve the supplied words and
+speaker order, including ambiguous transcription, as a quote of the recording.
+Statements in the recording about receiving a request or arranging a visit
+are not independent evidence that a production handoff or booking occurred.
+The owner's subsequent request authorizes pushing the completed transcript
+update to the existing GitHub branch and connected website preview. Lead
+delivery and indexing safeguards remain unchanged.
+
 `this master demo prd.txt` is now nonempty. It specifies a TrisMaster electric
 shutter intake demo, not evidence of a working deployment or company-wide
 capabilities. It covers contact information, issue, urgency, preferred

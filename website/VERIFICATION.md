@@ -1,5 +1,56 @@
 # Verification and launch status
 
+## Synchronized phone transcript - 19 November 2026
+
+The supplied Hebrew transcript is now displayed inside the demo phone as
+48 timed phrases covering all 21 original speaker turns. User wording,
+punctuation and order are preserved, including ambiguous transcription.
+The source MP3 is unchanged. The owner requested a GitHub push after completion.
+
+### Alignment evidence
+
+Alignment ran locally with FFmpeg 8.1 and faster-whisper 1.2.1 / CTranslate2
+4.9.0, using independent Hebrew word-timestamp passes from
+`Systran/faster-whisper-small` and
+`mobiuslabsgmbh/faster-whisper-large-v3-turbo`. Word timing was checked against
+silence and RMS/peak-energy boundaries. No recording or transcript was sent
+to a transcription service. Recognition differences were used for timing,
+not to rewrite the supplied text.
+
+Timing values have 0.01-second resolution, but practical acoustic boundary
+uncertainty is about 0.10-0.25 seconds; this is signal/ASR alignment, not manual
+listening or word-level karaoke. Cues are ordered, non-overlapping and preserve
+silence gaps. The longest phrase is 45 characters.
+
+### Verified
+
+- Production build and Astro/TypeScript check: 63 files, zero errors,
+  warnings or hints. No website dependency changes.
+- Six unit tests pass: verbatim reconstruction of all turns, correct speaker
+  order, ordered cue boundaries, exact-edge/silence selection, seek context,
+  timestamp formatting and unchanged audio SHA-256.
+- 62 related browser cases verified on the production build: 61 passed in
+  the broad run; the no-JavaScript case passed after fixing its font-loading
+  race. The final rerun of all nine transcript cases passed. No production
+  code changed between these two production test runs.
+- All 48 cues were sought and checked for the correct highlight and full
+  visibility at 320, 768, 1024 and 1440px. Inner scrolling never moved the
+  page. Normal playback follows the media clock; runtime highlight mismatch
+  did not persist for 100ms. This runtime check is separate from acoustic
+  timing uncertainty above.
+- Pause, seek, replay, end, silence, manual reading, return-to-call, 200%
+  text, native no-JavaScript reading, reduced motion and keyboard operation
+  pass. Existing real playback, touch, failure/retry, navigation, hero,
+  responsive and preview-safeguard checks remain green.
+- Axe reported no A/AA violations in the tested phone state. Desktop, phone
+  and narrow-desktop captures were inspected. The UI detector returned `[]`.
+
+The transcript is not a live region that speaks over the audio. It does not
+prove that statements made in the recording about receiving a request or
+arranging a visit actually completed an integration. Browser tests use
+installed Edge with emulated mobile viewports, not physical-device/Safari
+certification. Hosted deployment verification is separate.
+
 ## Recorded phone demonstration - 18 November 2026
 
 The homepage phone now plays the owner's exact 135-second MP3 on activation.

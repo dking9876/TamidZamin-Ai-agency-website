@@ -24,7 +24,7 @@ for (const width of [320, 360, 390, 430, 600, 601, 768, 880, 881]) {
       return {
         scrollWidth: document.documentElement.scrollWidth,
         articles,
-        demoFontSizes: [...document.querySelectorAll('.bubble, .chat-summary, .phone-top, .recording-toggle strong, .recording-description')]
+        demoFontSizes: [...document.querySelectorAll('.bubble, .chat-summary, .phone-top, .recording-heading strong, .recording-description, .transcript-cue p')]
           .map((element) => parseFloat(getComputedStyle(element).fontSize)),
         controls: [...document.querySelectorAll('main a, main summary, .site-footer a, .mobile-menu > summary')]
           .filter((element) => element.getClientRects().length > 0)
@@ -83,6 +83,8 @@ for (const width of [320, 360, 390, 430, 600, 601, 768, 880, 881]) {
     const actions = page.locator('.home-channel > a');
     await actions.first().focus();
     await page.keyboard.press('Tab');
+    await expect(page.locator('.recording-transcript')).toBeFocused();
+    await page.keyboard.press('Tab');
     await expect(page.locator('.recording-toggle')).toBeFocused();
     await page.keyboard.press('Tab');
     await expect(page.locator('.recording-restart')).toBeFocused();
@@ -110,8 +112,9 @@ test('mobile demo text grows at 200% without device clipping', async ({ page }) 
       if (!node.textContent?.trim()) continue;
       const range = document.createRange();
       range.selectNodeContents(node);
+      const inTranscript = node.parentElement?.closest('.recording-transcript');
       for (const rect of range.getClientRects()) {
-        if (rect.left < bounds.left || rect.right > bounds.right || rect.top < bounds.top || rect.bottom > bounds.bottom) {
+        if (rect.left < bounds.left || rect.right > bounds.right || (!inTranscript && (rect.top < bounds.top || rect.bottom > bounds.bottom))) {
           clipped.push(node.textContent);
         }
       }

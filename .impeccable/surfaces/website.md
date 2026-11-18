@@ -115,3 +115,13 @@ playback. No autoplay or media fetch before activation. The waveform indicates
 actual playback state and stays still with reduced motion. Label it a recorded
 demonstration, not a live call. WhatsApp remains illustrative; publication,
 lead delivery and indexing safeguards are unchanged.
+
+On 19 November the owner supplied the conversation transcript and requested
+full audio coordination inside the phone. Keep the existing frame and
+playback controls, replacing the large waveform with a readable RTL
+agent/customer transcript. Highlight and follow the current spoken phrase
+from the real media clock; seek, pause, replay and silence must stay aligned.
+Allow manual reading and a clear return to automatic following without moving
+the whole page. Keep all supplied wording and the no-JavaScript transcript.
+The owner subsequently requested a GitHub push of the completed update.
+No live-service claims, lead activation or broader redesign are authorized.

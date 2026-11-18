@@ -386,13 +386,22 @@ the source while retaining the current scene position and manual pause.
 When paused, source changes show the matching poster and defer video loading
 until play. A native `picture` supplies the correct poster even without JS.
 
-`website/src/components/CallDemo.astro` preserves the blue-rimmed phone frame
-and makes its main screen a native play/pause button. A pale 56px play icon
-and a Hebrew action label provide the primary affordance. A native LTR seek
-slider, tabular elapsed/total time and a 44px restart action sit below it;
-there are no nested interactive controls. The 135-second owner recording
-is explicitly labeled as recorded, not live. Errors appear in a status
-region with retry and direct-file recovery.
+`website/src/components/CallDemo.astro` preserves the blue-rimmed phone frame.
+The owner's 19 November transcript request replaces the large decorative
+waveform with a bounded RTL conversation reader. Agent/customer labels,
+subtle opposing bubble alignment and timestamps distinguish the voices.
+A cyan 1px outline highlights the phrase at the current audio position.
+Long responses are split into phrases so the spoken summary stays readable.
+No text is rewritten to imply a better conversation or a successful action.
+
+A pale 44px play icon and Hebrew action label remain in a full-width control
+below the reader, alongside a small waveform. The native LTR seek slider,
+tabular elapsed/total time and 44px restart action remain below it. The reader
+is a keyboard-focusable region, not a nested play button. Manual scrolling
+exposes a 44px return-to-call action without changing layout height. Following
+scrolls only the inner reader and never changes page scroll or keyboard focus.
+The 135-second recording remains explicitly recorded, not live. Errors appear
+in a status region with retry and direct-file recovery.
 
 `website/src/scripts/call-demo.ts` requests audio only after activation.
 The existing cyan waveform becomes an animated playback indicator only while
@@ -400,6 +409,11 @@ audio is playing, never a purported live amplitude trace. Pausing, buffering
 and completion stop it; reduced motion leaves it static while audio works.
 Hidden tabs and page exit pause the recording without automatic resumption.
 Native audio controls and a direct link provide the no-JavaScript fallback.
+The complete transcript is available without JavaScript as well. Media time
+owns highlighting, including seeks, pauses, silence, replay and buffering;
+there is no guessed transcript timer. Reduced motion keeps the highlight and
+uses immediate scrolling. The transcript is not an aria-live region: reading
+assistance must not speak over the recording.
 No live telephony, third-party player or external communication is added.
 
 Meaningful content is visible and crawlable before JavaScript; no reveal stylesheet hides it. Delayed chat entrances use temporary Web Animations effects only, reverting to fully visible content on finish or cancellation. Authored arrival sequences are shorter than three seconds; the background video and user-controlled recording indicator are deliberate looping exceptions with pause controls. No motion dependency or production capability is added.

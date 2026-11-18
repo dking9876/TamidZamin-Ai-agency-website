@@ -38,6 +38,9 @@
     "sha256": "363c48fa31ac18088552e84f92d39b4190e334519abd87e299e6f3e13a7cac59",
     "transform": "None. Exact original MP3 bytes, given a browser-appropriate .mp3 extension. 135 seconds, mono, 16000 Hz, 2160044 bytes.",
     "purpose": "User-initiated playback of the recorded phone demonstration, not a live call or evidence of a deployed customer integration.",
+    "transcriptFile": "../../src/data/call-transcript.json",
+    "transcriptSource": "Owner-provided Hebrew transcript, 19 November 2026. All 21 turns retained verbatim in 48 readable phrases.",
+    "transcriptAlignment": "Local faster-whisper small and large-v3-turbo Hebrew word timestamps, cross-checked against silence and RMS/peak boundaries. Practical boundary uncertainty about 0.10-0.25 seconds; no external transcription service or audio edits.",
     "publication": "Owner supplied the recording for the website and subsequently requested a GitHub push on 18 November 2026 for the connected preview update. Recording contents and participant permissions remain the owner's responsibility."
   },
   "hero-poster-mobile.webp": {

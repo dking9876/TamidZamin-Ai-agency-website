@@ -1,28 +1,44 @@
 ---
 import Icon from './Icon.astro';
+import transcript from '../data/call-transcript.json';
+import { formatCallTime } from '../lib/call-transcript';
 ---
 <figure class="device-stage call-demo" id="phone-demo" data-motion="devices">
   <div class="phone-shell voice-phone recording-phone" data-state="idle">
-    <button class="recording-toggle" type="button" aria-controls="demo-call-audio" aria-label="האזנה לשיחת ההדגמה" hidden>
+    <div class="recording-heading">
       <Icon name="phone" size={26} />
-      <strong dir="ltr">TamidZamin AI</strong>
-      <span class="recording-description">שיחת הדגמה מוקלטת</span>
+      <div><strong dir="ltr">TamidZamin AI</strong><span class="recording-description">שיחת הדגמה מוקלטת</span></div>
+    </div>
+    <div class="recording-transcript" role="region" aria-label="תמליל שיחת ההדגמה" tabindex="0">
+      <ol id="call-transcript-list">
+        {transcript.map((cue, index) => (
+          <li class="transcript-cue" data-cue={index} data-speaker={cue.speaker}>
+            <div class="transcript-meta"><strong>{cue.speaker === 'agent' ? 'הסוכן' : 'הלקוח'}</strong><span dir="ltr">{formatCallTime(cue.start)}</span></div>
+            <p>{cue.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+    <div class="transcript-follow-row" hidden>
+      <span class="transcript-follow-note"><Icon name="check" size={14} />התמליל עוקב אחרי השיחה</span>
+      <button class="recording-follow" type="button" aria-controls="call-transcript-list" hidden><Icon name="replay" size={15} />חזרה לשיחה</button>
+    </div>
+    <button class="recording-toggle" type="button" aria-controls="demo-call-audio" aria-label="האזנה לשיחת ההדגמה" hidden>
+      <span class="recording-play" aria-hidden="true">
+        <svg class="recording-play-icon" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="m9 5 10 7-10 7V5Z" /></svg>
+        <svg class="recording-pause-icon" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M8 5v14M16 5v14" /></svg>
+      </span>
+      <span class="recording-action">לחצו להאזנה</span>
       <span class="waveform" aria-hidden="true">
         {[12, 22, 36, 18, 48, 30, 55, 25, 43, 22, 36, 14, 26].map((height, index) =>
           <i style={`height:${height}px;--beat-delay:${index * -90}ms`} />)}
       </span>
-      <span class="recording-play" aria-hidden="true">
-        <svg class="recording-play-icon" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="m9 5 10 7-10 7V5Z" /></svg>
-        <svg class="recording-pause-icon" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M8 5v14M16 5v14" /></svg>
-      </span>
-      <span class="recording-action">לחצו להאזנה</span>
     </button>
     <div class="recording-controls" hidden>
       <div class="recording-time" dir="ltr" aria-hidden="true"><span class="recording-elapsed">0:00</span><span class="recording-duration">2:15</span></div>
       <input class="recording-seek" type="range" min="0" max="135" value="0" step="0.1" dir="ltr" aria-label="מיקום בשיחת ההדגמה" aria-valuetext="0:00 מתוך 2:15" aria-controls="demo-call-audio" disabled />
       <button class="recording-restart" type="button" aria-controls="demo-call-audio"><Icon name="replay" size={16} /><span>מההתחלה</span></button>
     </div>
-    <p class="recording-fallback"><bdi>TamidZamin AI</bdi><br />שיחת הדגמה מוקלטת</p>
     <audio id="demo-call-audio" src="/media/demo-call.mp3" preload="none" controls aria-label="הקלטת שיחת ההדגמה של TamidZamin"></audio>
   </div>
   <figcaption class="device-caption recording-caption">
@@ -39,36 +55,65 @@ import Icon from './Icon.astro';
     flex-direction: column;
     padding: 0;
   }
+  .recording-heading { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 28px 12px 20px; }
+  .recording-heading > svg { color: var(--cyan); flex-shrink: 0; width: 22px; }
+  .recording-heading strong { display: block; font-size: 1rem; overflow-wrap: anywhere; }
+  .recording-description { display: block; font-size: .875rem; color: var(--on-dark); margin-block-start: 4px; }
+  .recording-transcript {
+    block-size: 16rem;
+    overflow: auto;
+    padding: 12px;
+    text-align: start;
+    border-block: 1px solid #244359;
+    scrollbar-width: thin;
+    scrollbar-color: #527d99 #06101b;
+    scroll-padding-block: 12px;
+  }
+  .recording-transcript:focus-visible { outline-offset: -3px; }
+  .recording-transcript ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+  .transcript-cue { min-width: 0; margin-inline-end: 10px; padding: 10px; border: 1px solid transparent; border-radius: 10px 10px 3px 10px; background: #102340; }
+  .transcript-cue[data-speaker="customer"] { margin-inline: 10px 0; border-radius: 10px 10px 10px 3px; background: #0c202e; }
+  .transcript-cue[aria-current="true"] { border-color: var(--cyan); background: #123451; }
+  .transcript-meta { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 12px; font-size: .75rem; color: var(--on-dark); font-variant-numeric: tabular-nums; }
+  .transcript-meta strong { color: var(--cyan); font-weight: 650; }
+  .transcript-cue[data-speaker="customer"] .transcript-meta strong { color: var(--paper); }
+  .recording-transcript .transcript-cue p { margin: 6px 0 0; font-size: .875rem; line-height: 1.65; color: var(--paper); overflow-wrap: anywhere; }
+  .recording-transcript ::selection { color: var(--navy-deep); background: var(--cyan); }
+  .transcript-follow-row { min-height: 44px; display: grid; place-items: center; padding-inline: 8px; }
+  .transcript-follow-note { display: flex; align-items: center; gap: 6px; font-size: .75rem; color: var(--on-dark); }
+  .transcript-follow-note svg { flex-shrink: 0; color: var(--cyan); }
+  .recording-follow { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 8px; border: 0; border-radius: 6px; color: var(--cyan); background: transparent; font-size: .8125rem; cursor: pointer; }
+  .recording-follow:is(:hover, :focus-visible) { background: #ffffff0d; color: var(--paper); }
   .recording-toggle {
-    flex: 1;
-    width: 100%;
+    width: calc(100% - 24px);
+    margin-inline: 12px;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    padding: 32px 12px 12px;
+    gap: 10px;
+    min-height: 64px;
+    padding: 8px 0;
     border: 0;
     background: transparent;
     color: var(--paper);
     cursor: pointer;
     font: inherit;
   }
-  .recording-toggle > svg { color: var(--cyan); margin-block-end: 12px; }
-  .recording-toggle strong { font-size: 1rem; overflow-wrap: anywhere; max-width: 100%; }
-  .recording-description { font-size: .875rem; color: var(--on-dark); margin-block-start: 4px; }
-  .device-stage .recording-toggle .waveform { width: 100%; margin-block: 20px; }
+  .device-stage .recording-toggle .waveform { width: 36px; height: 24px; gap: 2px; margin: 0; flex-shrink: 0; margin-inline-start: auto; overflow: hidden; }
+  .device-stage .recording-toggle .waveform i { max-height: 22px; width: 2px; }
   .recording-play {
     display: grid;
     place-items: center;
-    width: 56px;
-    height: 56px;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
     border-radius: 50%;
     background: var(--pill-paper);
     color: var(--pill-ink);
     transition: background-color var(--motion-feedback) ease-out;
   }
   .recording-toggle:is(:hover, :focus-visible) .recording-play { background: var(--cyan); }
-  .recording-toggle:focus-visible { outline-offset: -7px; border-radius: 24px 24px 8px 8px; }
-  .recording-action { font-size: .9375rem; font-weight: 650; margin-block-start: 12px; }
+  .recording-toggle:focus-visible { outline-offset: 3px; border-radius: 6px; }
+  .recording-action { font-size: .875rem; font-weight: 650; text-align: start; }
   .recording-pause-icon,
   [data-state="playing"] .recording-play-icon,
   [data-state="loading"] .recording-play-icon { display: none; }
@@ -111,12 +156,20 @@ import Icon from './Icon.astro';
   .recording-status { color: var(--paper); }
   .recording-download { display: inline-flex; align-items: center; min-height: 44px; color: var(--cyan); text-underline-offset: .25em; }
   .recording-phone > audio { width: 100%; margin-block: 24px; }
-  .recording-fallback { padding: 32px 12px 0; }
   .call-demo [hidden] { display: none; }
   @keyframes call-wave { from { transform: scaleY(.35); } to { transform: scaleY(1); } }
   @media (max-width: 880px) {
-    .recording-toggle strong { font-size: 1.125rem; }
+    .recording-heading strong { font-size: 1.125rem; }
+    .recording-transcript { block-size: 17rem; }
+    .recording-transcript .transcript-cue p { font-size: .9375rem; }
     .recording-time, .recording-restart { font-size: .875rem; }
+  }
+  @media (min-width: 881px) and (max-width: 1100px) {
+    .recording-heading { flex-direction: column; gap: 8px; }
+    .recording-transcript { padding-inline: 8px; }
+    .transcript-cue { margin-inline-end: 0; padding: 8px; }
+    .transcript-cue[data-speaker="customer"] { margin-inline: 0; }
+    .device-stage .recording-toggle .waveform { display: none; }
   }
   @media (prefers-reduced-motion: reduce) {
     [data-state="playing"] .waveform i { animation: none; }

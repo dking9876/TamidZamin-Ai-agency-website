@@ -131,9 +131,11 @@ keyboard behavior and existing layout/navigation safeguards.
 
 `src/components/CallDemo.astro` and `src/scripts/call-demo.ts` replace the old
 silent phone illustration at `/#phone-demo`. Clicking or tapping the phone
-plays/pauses the original 2:15 recording. Elapsed/total time, a native seek
-slider and a restart button remain inside the existing responsive phone frame.
-The phone service page links directly to the player.
+plays/pauses the original 2:15 recording. The owner's Hebrew transcript is
+displayed inside the phone, with separate agent/customer bubbles and a
+highlight on the currently spoken phrase. Elapsed/total time, a native seek
+slider and a restart button remain visible below the transcript. The phone
+service page links directly to the player.
 
 `public/media/demo-call.mp3` is the exact owner-supplied attachment, not
 re-encoded or trimmed. Its format, size and SHA-256 are in
@@ -153,10 +155,35 @@ The owner subsequently approved pushing this implementation and recording to
 the existing GitHub repository for its connected website preview deployment.
 No live telephony, lead delivery or indexing is enabled by that approval.
 
-Run `npx playwright test call-demo.spec.ts motion.spec.ts mobile-layout.spec.ts`
+### Synchronized transcript
+
+`src/data/call-transcript.json` contains the timed phrases from the owner's
+19 November transcript. Text and speaker order are preserved verbatim,
+including unclear wording; the recording itself is not edited. Long replies
+are divided into readable phrases rather than squeezing the full summary into
+one screen. The text is a quotation of the recorded demo, not independent
+verification of a booked visit, received request or delivered handoff.
+
+The highlight follows `audio.currentTime`, using animation frames only during
+playback and media events for pauses and seeks. It has no independent elapsed
+timer. Silence gaps have no active speaker. Seeking and restarting immediately
+restore the appropriate transcript context; playback stalls cannot make the
+text run ahead of the sound.
+
+Only the inner transcript scrolls; playback never scrolls the page or moves
+keyboard focus. Manual scrolling/keyboard reading suspends automatic following
+until the visitor uses the Hebrew return-to-call action, resumes, seeks or restarts.
+Reduced motion retains synchronization with immediate rather than animated
+scrolling. The complete transcript remains readable without JavaScript, and
+screen readers are not interrupted by a live announcement of every phrase.
+
+Run `npx tsx --test tests/call-transcript.test.ts` for text integrity, timeline
+boundaries and recording identity.
+Run `npx playwright test call-demo.spec.ts call-transcript.spec.ts motion.spec.ts mobile-layout.spec.ts`
 against a running preview for real MP3 decoding/playback, seeking, replay,
 failed-download recovery, rapid input, keyboard/touch, reduced motion,
-no-JavaScript fallback, accessibility and responsive regression coverage.
+no-JavaScript fallback, cue-by-cue synchronization, manual reading,
+accessibility and responsive regression coverage.
 
 ## Configuration
 

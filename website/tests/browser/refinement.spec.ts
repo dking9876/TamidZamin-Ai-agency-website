@@ -109,6 +109,8 @@ async function textClipping(page: Page) {
     let node: Node | null;
     while ((node = walker.nextNode())) {
       const parent = node.parentElement!;
+      // The transcript is a deliberate vertical reader, verified cue-by-cue separately.
+      const inTranscript = parent.closest('.recording-transcript');
       if (!node.textContent?.trim() || parent.closest('script, style, svg, [aria-hidden="true"]')) continue;
       const closed = parent.closest('details:not([open])');
       if (closed && !closed.querySelector('summary')?.contains(parent)) continue;
@@ -125,7 +127,7 @@ async function textClipping(page: Page) {
           section: label(section), element: label(parent), text: node.textContent.trim().slice(0, 100),
           rect: { left: r.left, right: r.right, top: r.top, bottom: r.bottom },
         };
-        if (r.left < -3 || r.right > innerWidth + 3 || r.top < bounds.top - 3 || r.bottom > bounds.bottom + 3) {
+        if (r.left < -3 || r.right > innerWidth + 3 || (!inTranscript && (r.top < bounds.top - 3 || r.bottom > bounds.bottom + 3))) {
           issues.push({ ...detail, reason: 'outside viewport width or owning section', bounds: bounds.toJSON() });
         }
         for (let ancestor: Element | null = parent; ancestor && ancestor !== main; ancestor = ancestor.parentElement) {
@@ -135,7 +137,7 @@ async function textClipping(page: Page) {
           if (!clipX && !clipY) continue;
           const box = ancestor.getBoundingClientRect();
           if ((clipX && (r.left < box.left - 3 || r.right > box.right + 3))
-            || (clipY && (r.top < box.top - 3 || r.bottom > box.bottom + 3))) {
+            || (clipY && !inTranscript && (r.top < box.top - 3 || r.bottom > box.bottom + 3))) {
             issues.push({ ...detail, reason: 'clipped by ancestor', ancestor: label(ancestor), bounds: box.toJSON() });
             break;
           }
