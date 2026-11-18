@@ -1,0 +1,103 @@
+{
+  "created": "2026-11-18",
+  "purpose": "Three edited background-film options for the TamidZamin homepage. Illustrative stock footage, not customers, staff, testimonials, or evidence of product capabilities.",
+  "reference": "https://www.broccoli.com/",
+  "referenceUse": "Direction only: everyday service work, full-bleed footage, quiet pacing. No Broccoli assets are included.",
+  "license": "https://www.pexels.com/license/",
+  "licenseChecked": "2026-11-18",
+  "licenseNotes": "Pexels permits free website and marketing use, editing, and use without attribution. Do not imply endorsement by depicted people or brands, portray people offensively, sell unaltered copies, or redistribute as stock.",
+  "sources": [
+    {
+      "id": "7647713",
+      "title": "A Man Fixing an Object Inside the Apartment",
+      "creator": "Anastasia Shuraeva",
+      "page": "https://www.pexels.com/video/a-man-fixing-an-object-inside-the-apartment-7647713/",
+      "download": "https://videos.pexels.com/video-files/7647713/7647713-hd_1920_1080_24fps.mp4"
+    },
+    {
+      "id": "7584762",
+      "title": "A Person doing Plumbing",
+      "creator": "Stepan SK",
+      "page": "https://www.pexels.com/video/a-person-doing-plumbing-7584762/",
+      "download": "https://videos.pexels.com/video-files/7584762/7584762-hd_1920_1080_25fps.mp4"
+    },
+    {
+      "id": "8293017",
+      "title": "A Man Checking the Gas Range",
+      "creator": "RDNE Stock project",
+      "page": "https://www.pexels.com/video/a-man-checking-the-gas-range-8293017/",
+      "download": "https://videos.pexels.com/video-files/8293017/8293017-hd_1920_1080_30fps.mp4"
+    },
+    {
+      "id": "7480739",
+      "title": "A Man Working while Wearing a Beanie",
+      "creator": "cottonbro studio",
+      "page": "https://www.pexels.com/video/a-man-working-while-wearing-a-beanie-7480739/",
+      "download": "https://videos.pexels.com/video-files/7480739/7480739-hd_2048_1080_25fps.mp4"
+    },
+    {
+      "id": "6957872",
+      "title": "A Person Loading an Electric Drill",
+      "creator": "Kaboompics",
+      "page": "https://www.pexels.com/video/a-person-loading-an-electric-drill-6957872/",
+      "download": "https://videos.pexels.com/video-files/6957872/6957872-hd_2048_1080_25fps.mp4"
+    },
+    {
+      "id": "7493223",
+      "title": "Man Inside a Workshop Looking at Camera",
+      "creator": "cottonbro studio",
+      "page": "https://www.pexels.com/video/man-inside-a-workshop-looking-at-camera-7493223/",
+      "download": "https://videos.pexels.com/video-files/7493223/7493223-hd_2048_1080_25fps.mp4"
+    },
+    {
+      "id": "8986493",
+      "title": "Mechanic Getting a Tool in a Tool Box",
+      "creator": "Artem Podrez",
+      "page": "https://www.pexels.com/video/mechanic-getting-a-tool-in-a-tool-box-8986493/",
+      "download": "https://videos.pexels.com/video-files/8986493/8986493-hd_1920_1080_30fps.mp4"
+    },
+    {
+      "id": "8986477",
+      "title": "Person Looking at Tools in the Garage",
+      "creator": "Artem Podrez",
+      "page": "https://www.pexels.com/video/person-looking-at-tools-in-the-garage-8986477/",
+      "download": "https://videos.pexels.com/video-files/8986477/8986477-hd_1920_1080_30fps.mp4"
+    },
+    {
+      "id": "8987069",
+      "title": "Man Sitting on Tire While Using Cellphone",
+      "creator": "Artem Podrez",
+      "page": "https://www.pexels.com/video/man-sitting-on-tire-while-using-cellphone-8987069/",
+      "download": "https://videos.pexels.com/video-files/8987069/8987069-hd_1920_1080_30fps.mp4"
+    }
+  ],
+  "edits": [
+    {
+      "id": "01-home-service",
+      "name": "Home Service",
+      "seconds": 12.75,
+      "shotSeconds": 5,
+      "slowdown": 1.12,
+      "grade": "eq=contrast=1.04:brightness=-0.018:saturation=0.85,colorbalance=bs=0.025:bm=0.012:rs=-0.01",
+      "shots": [{"id":"7647713","start":1},{"id":"7584762","start":4.5},{"id":"8293017","start":3}]
+    },
+    {
+      "id": "02-craft-and-care",
+      "name": "Craft & Care",
+      "seconds": 15,
+      "shotSeconds": 5.75,
+      "slowdown": 1.18,
+      "grade": "eq=contrast=1.035:brightness=-0.012:saturation=0.81,colorbalance=rm=0.018:bh=-0.012",
+      "shots": [{"id":"7480739","start":3},{"id":"6957872","start":2},{"id":"7493223","start":8}]
+    },
+    {
+      "id": "03-connected-workday",
+      "name": "Connected Workday",
+      "seconds": 12,
+      "shotSeconds": 4.75,
+      "slowdown": 1.14,
+      "grade": "hflip,eq=contrast=1.055:brightness=-0.018:saturation=0.79,colorbalance=bs=0.022:bm=0.015",
+      "shots": [{"id":"8986493","start":2},{"id":"8986477","start":3},{"id":"8987069","start":2}]
+    }
+  ]
+}

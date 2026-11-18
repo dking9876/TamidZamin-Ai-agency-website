@@ -1,5 +1,54 @@
 # Verification and launch status
 
+## Full-bleed video hero - 18 November 2026
+
+The owner supplied the original-photos film and requested a video background
+covering the entire hero on desktop and phones, with text on top, plus a Git
+push of all pending work. This authorizes the connected preview update, not
+lead activation, indexing or real customer communications.
+
+### Implemented
+
+- The exact supplied 14-second, 1280x720 silent MP4 replaces the hero photograph.
+  Video and first-frame poster cover every hero edge. The copy and actions
+  remain accessible Hebrew HTML, over responsive contrast scrims.
+- The previous split mobile photo/copy treatment and still-image zoom are
+  removed. The existing headline arrival, blue edge, action hierarchy and
+  all other sections are preserved. Minimum heights allow enlarged text and
+  short landscape layouts to grow rather than clipping.
+- Muted inline looping playback has a labeled keyboard-operable pause/play
+  control. Manual pause survives scroll re-entry. Offscreen, visibility and
+  page-lifecycle changes suspend playback.
+- Initial reduced motion and disabled JavaScript show the poster without
+  requesting video. A live reduced-motion change restores the poster and
+  requires manual play if the preference is later disabled. Blocked autoplay
+  offers manual play; failed media retains the poster and announces the
+  fallback. Media is same-origin, not embedded from Google Drive.
+
+### Verification
+
+- Node build and Vercel build: passed, 52 checked files, zero errors,
+  warnings or hints. `npm run test:vercel` passed. The packaged Vercel MP4
+  matches the source SHA-256 exactly.
+- All 71 browser tests passed with no retries, using installed Microsoft
+  Edge: 50 hero/refinement cases plus 21 site/mobile-layout/motion cases.
+- Real playback time advances, the clip loops, keyboard pause/resume works,
+  and the media rectangle matches the full hero at 320, 390, 768, 844, 1440
+  and 1920px. Poster-only paths request no MP4.
+- Pixel-sampled contrast passes over full headline/body boxes on the poster
+  and six film positions covering every scene, at 1440, 1024, 390 and 320px.
+  Large text meets 3:1 and body text meets 4.5:1.
+- Existing axe checks, Hebrew semantics, navigation, no-JavaScript behavior,
+  200% text, motion cancellation, preview/noindex and disabled-delivery
+  safeguards pass. Desktop/phone captures were visually inspected across
+  three scenes; the video remains visible behind the overlay on both.
+- The final changed-UI Impeccable detector returned `[]`.
+
+These are desktop Edge tests with emulated screen sizes, not physical iPhone,
+Android or Safari verification. Page-lifecycle events were synthesized;
+real OS backgrounding and low-power autoplay restrictions remain unverified.
+Hosted deployment status is checked separately after the push.
+
 ## Hero arrival and mobile simplification - 18 November 2026
 
 This refinement was initially **local only**, after the earlier animation

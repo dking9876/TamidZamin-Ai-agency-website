@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#081721">
+  <title>TamidZamin | Animated hero options</title>
+  <script type="importmap">{"imports":{"three":"./vendor/three.module.js"}}</script>
+  <style>
+    @font-face{font-family:"Heebo Variable";src:url("assets/heebo-hebrew.woff2") format("woff2");font-weight:100 900;font-display:swap;unicode-range:U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F}
+    @font-face{font-family:"Heebo Variable";src:url("assets/heebo-latin.woff2") format("woff2");font-weight:100 900;font-display:swap}
+    :root{font-family:"Heebo Variable",sans-serif;color:#f5faff;background:#081721;color-scheme:dark;--cyan:#37bbff;--muted:#c8d5e7;--line:#31556e}
+    *{box-sizing:border-box}
+    body{margin:0}
+    button,a{-webkit-tap-highlight-color:transparent}
+    button{font:inherit;cursor:pointer;color:inherit}
+    a{color:#8fdaff;text-underline-offset:.25em}
+    button:focus-visible,a:focus-visible{outline:3px solid var(--cyan);outline-offset:5px}
+    ::selection{background:var(--cyan);color:#081721}
+    html{scrollbar-color:#547995 #081721}
+    .top{display:flex;align-items:center;justify-content:space-between;padding:18px 4vw;border-bottom:1px solid var(--line);gap:20px}
+    .brand{display:flex;align-items:center;gap:24px}
+    .brand img{width:135px;height:auto}
+    .brand h1{font-size:17px;font-weight:500;margin:0;color:var(--muted)}
+    .top>span{font-size:13px;color:var(--muted)}
+    .options{display:flex;gap:32px;padding:0 4vw;border-bottom:1px solid var(--line)}
+    .option{flex:1;background:none;border:0;text-align:left;padding:21px 0;position:relative;font-size:17px;color:var(--muted);font-weight:650}
+    .option[aria-pressed=true]{color:#fff}
+    .option[aria-pressed=true]::after{content:"";position:absolute;inset-inline:0;bottom:-1px;height:3px;background:var(--cyan)}
+    .option:hover{color:#fff}
+    .toolbar{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:14px 4vw}
+    .toolbar>div{display:flex;gap:8px;flex-wrap:wrap}
+    .control{background:transparent;border:1px solid #94b2cc;border-radius:6px;min-height:44px;padding:9px 16px;font-size:13px}
+    .control:hover{background:#123451}
+    .control[aria-pressed=true]{color:#081721;background:#d5edff}
+    .toolbar a{font-size:13px}
+    .hero{position:relative;isolation:isolate;overflow:hidden;min-height:670px;height:76svh;max-height:900px;background:#081721}
+    .artwork{position:absolute;inset:0;z-index:-1;touch-action:pan-y}
+    canvas,.fallback{display:block;width:100%;height:100%;object-fit:cover}
+    .fallback{position:absolute;inset:0;z-index:-1}
+    .hero-brand{position:absolute;top:24px;right:4.5%;width:160px;height:auto}
+    .copy{position:absolute;left:4.5%;top:50%;transform:translateY(-50%);width:47%;max-width:720px;direction:rtl;text-align:right}
+    .copy h2,.phone-footer h2{font-size:clamp(44px,5.6vw,88px);font-weight:800;line-height:1.12;letter-spacing:-.025em;margin:0}
+    .copy h2 span,.phone-footer h2 span{display:block}
+    .copy h2 span:last-child,.phone-footer h2 span:last-child{color:var(--cyan)}
+    .copy p,.phone-footer p{font-size:clamp(17px,1.35vw,20px);line-height:1.7;max-width:40ch;margin:28px 0 32px;color:#fff}
+    .hero-actions{display:flex;align-items:center;gap:28px}
+    .sample-cta{background:#f5faff;color:#0a1a2c;padding:16px 28px;border-radius:99px;font-size:17px;font-weight:750;display:inline-flex;align-items:center;gap:20px}
+    .sample-cta svg{background:#0f73d7;color:#fff;border-radius:50%;padding:7px;width:30px;height:30px}
+    .secondary{color:#d3e1ed}
+    .points{display:flex;gap:25px;padding:0;margin:28px 0 0;list-style:none;font-size:15px;color:#d3e1ed}
+    .art-hint{position:absolute;bottom:22px;right:4vw;font-size:13px;color:var(--muted)}
+    .raw .copy,.raw .hero-brand,.raw .art-hint{visibility:hidden}
+    .notes{display:grid;grid-template-columns:1fr auto;gap:30px;padding:32px 4vw 20px}
+    .notes h2{font-size:28px;line-height:1.2;letter-spacing:-.02em;margin:0 0 12px}
+    .notes p{max-width:65ch;color:var(--muted);line-height:1.65;margin:0}
+    .links{align-self:center;display:grid;gap:10px;font-size:14px}
+    #status{font-size:13px;color:#8fdaff;margin:0;min-height:44px;padding:0 4vw 24px}
+    footer{border-top:1px solid var(--line);padding:24px 4vw 32px;color:var(--muted);font-size:13px;line-height:1.7}
+    footer p{max-width:90ch;margin:0}
+    [hidden]{display:none!important}
+    .phone-footer{display:none}
+    body.render .top,body.render .options,body.render .toolbar,body.render .notes,body.render #status,body.render footer{display:none}
+    body.render .hero{min-height:0;max-height:none;width:100vw;height:100vh}
+    body.render .copy,body.render .hero-brand,body.render .art-hint{display:none}
+    body.render{overflow:hidden}
+    body.phone-template .hero{display:none}
+    body.phone-template .phone-footer{display:block;width:720px;height:560px;padding:18px 54px 28px;direction:rtl;text-align:right;background:#081721;position:relative}
+    body.phone-template .phone-footer h2{font-size:55px;line-height:1.13}
+    body.phone-template .phone-footer p{font-size:23px;margin:24px 0 25px;line-height:1.55;max-width:none}
+    body.phone-template .phone-footer .sample-cta{font-size:23px;padding:15px 28px}
+    body.phone-template .phone-footer .sample-cta svg{width:32px;height:32px}
+    body.phone-template .phone-footer .phone-label{position:absolute;bottom:20px;left:54px;font-size:17px;color:#c8d5e7;direction:ltr}
+    @media(max-width:700px){
+      .top{padding:16px 20px}.brand{gap:14px}.brand img{width:105px}.brand h1{font-size:14px}.top>span{display:none}
+      .options{padding-inline:20px;gap:15px}.option{font-size:13px;line-height:1.4;padding-block:17px}
+      .toolbar{padding:12px 20px;align-items:flex-start}.control{padding-inline:12px}.toolbar>a{max-width:100px}
+      .hero{height:790px;min-height:790px;max-height:none}
+      .artwork{height:390px}
+      .copy{top:365px;left:24px;right:24px;width:auto;transform:none;max-width:460px;margin-inline:auto}
+      .copy h2{font-size:clamp(33px,10.4vw,40px)}
+      .copy p{font-size:16px;margin:24px 0}
+      .hero-brand{top:20px;right:24px;width:120px}
+      .hero-actions{display:block}.sample-cta{display:flex;justify-content:center;padding:13px 20px}
+      .secondary{display:block;text-align:center;margin-top:15px}.points{display:none}
+      .art-hint{bottom:15px;left:24px;right:24px;text-align:center;font-size:12px}
+      .notes{display:block;padding:28px 20px 16px}.notes h2{font-size:25px}.links{margin-top:20px}#status,footer{padding-inline:20px}
+      .raw .artwork{height:100%}
+      body.render .artwork{height:100%}
+    }
+  </style>
+</head>
+<body>
+  <header class="top"><div class="brand"><img src="assets/logo.webp" alt="TamidZamin"><h1>Animated hero options</h1></div><span>Original animation. No real people.</span></header>
+  <nav class="options" aria-label="Animated scene options">
+    <button class="option" data-scene="0" aria-pressed="true" type="button">Message Playground</button>
+    <button class="option" data-scene="1" aria-pressed="false" type="button">Little Service Street</button>
+    <button class="option" data-scene="2" aria-pressed="false" type="button">Helpful Workshop</button>
+  </nav>
+  <main>
+    <div class="toolbar"><div><button class="control" id="pause" type="button">Pause animation</button><button class="control" id="react" type="button">Make it react</button><button class="control" id="raw" type="button" aria-pressed="false">Artwork only</button></div><a id="download" href="videos/01-message-playground.mp4" download>Download hero MP4</a></div>
+    <section class="hero" id="hero" aria-label="Animated background with the current website headline">
+      <div class="artwork" id="artwork"><img class="fallback" id="fallback" src="posters/01-message-playground.jpg" alt=""><canvas id="canvas" aria-hidden="true"></canvas></div>
+      <img class="hero-brand" src="assets/logo.webp" alt="">
+      <div class="copy" dir="rtl" lang="he">
+        <h2><span>כל פנייה מתחילה</span><span>במענה נכון.</span></h2>
+        <p>סוכני AI בוואטסאפ ובטלפון לעסקי שירות. אוספים פרטים, מסדרים פניות ומשאירים את ההחלטות המקצועיות אצלכם.</p>
+        <div class="hero-actions"><span class="sample-cta">לבדיקת התאמה <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5m7-7-7 7 7 7"/></svg></span><span class="secondary">איך זה עובד</span></div>
+        <ul class="points"><li>טלפון ווואטסאפ</li><li>פניות מסודרות</li><li>עם מענה אנושי</li></ul>
+      </div>
+      <p class="art-hint">Move your mouse or tap the artwork. Nothing is sent.</p>
+    </section>
+    <section class="notes"><div><h2 id="scene-title">Message Playground</h2><p id="description">A playful world of animated conversations.</p></div><div class="links"><a id="phone-download" href="videos/01-message-playground-phone-preview.mp4" download>Watch the phone-friendly preview</a><a id="mobile-download" href="videos/01-message-playground-mobile.mp4" download>Smaller mobile background</a></div></section>
+    <p id="status" role="status" aria-live="polite">Loading the animated scene...</p>
+    <section class="phone-footer" dir="rtl" lang="he">
+      <h2><span>כל פנייה מתחילה</span><span>במענה נכון.</span></h2>
+      <p>סוכני AI בוואטסאפ ובטלפון לעסקי שירות. אוספים פרטים, מסדרים פניות ומשאירים את ההחלטות המקצועיות אצלכם.</p>
+      <span class="sample-cta">לבדיקת התאמה <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5m7-7-7 7 7 7"/></svg></span>
+      <span class="phone-label" id="phone-label">Message Playground · Animation preview</span>
+    </section>
+  </main>
+  <footer><p>Original, illustrative 3D scenes for TamidZamin. These are not live conversations or evidence of product capabilities. The MP4s loop silently; mouse/tap interaction belongs to this web version, not the video files. Sample calls to action are inactive. Your existing website is unchanged.</p></footer>
+  <script type="module" src="preview.mjs"></script>
+</body>
+</html>

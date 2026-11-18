@@ -18,19 +18,6 @@ function animate(group: MotionGroup, replay = false) {
   };
   switch (element.dataset.motion) {
     case 'hero': {
-      const image = element.querySelector<HTMLImageElement>('.home-hero-image');
-      if (image) {
-        const arrive = () => add(image, [
-          { transform: 'scale(1.075)', opacity: 0.55 },
-          { transform: 'scale(1)', opacity: 1 },
-        ], 1000);
-        if (image.complete && image.naturalWidth > 0) arrive();
-        else image.addEventListener('load', () => {
-          if (reducedMotion.matches || group.cancelled) return;
-          arrive();
-          sync(group);
-        }, { once: true });
-      }
       element.querySelectorAll('.hero-title-line').forEach((line, index) => {
         add(line, [
           { transform: 'translateX(18px)', filter: 'blur(3px)', opacity: 0.6 },

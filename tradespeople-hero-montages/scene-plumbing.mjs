@@ -1,0 +1,104 @@
+import { C, path, line, ellipse, round, poly, limb, head, tool, plant } from './paint.mjs';
+
+export function drawPlumbing(ctx, t) {
+  const wave = Math.sin(t * Math.PI * .72);
+  const angle = .76 + .13 * Math.sin(t * Math.PI * 1.3);
+  const handX = 1360 - Math.sin(angle) * 90;
+  const handY = 608 + Math.cos(angle) * 90;
+  const wall = ctx.createLinearGradient(0, 0, 1500, 900);
+  wall.addColorStop(0, '#9bb8b0'); wall.addColorStop(.7, '#e1e2cf'); wall.addColorStop(1, '#d3d9c9');
+  ctx.fillStyle = wall; ctx.fillRect(0, 0, 1600, 900);
+  ctx.fillStyle = '#e9e9d8'; ctx.fillRect(0, 285, 1600, 190);
+  for (let y = 287; y < 475; y += 63) line(ctx, [[0, y], [1600, y]], '#cad6cb', 3);
+  for (let x = 25; x < 1600; x += 125) line(ctx, [[x, 285], [x, 475]], '#cad6cb', 2);
+  round(ctx, 0, 0, 570, 261, 2, '#769c96');
+  for (let x = 0; x < 570; x += 190) {
+    round(ctx, x + 12, 10, 166, 237, 7, '#87aaa1', '#608b88', 2);
+    line(ctx, [[x + 154, 174], [x + 154, 216]], '#d7dfcd', 7);
+  }
+  round(ctx, 1220, -20, 390, 299, 2, '#597f83');
+  round(ctx, 1237, -5, 357, 270, 2, '#f3e9cf');
+  const sky = ctx.createLinearGradient(1240, 0, 1580, 250);
+  sky.addColorStop(0, '#bdd5cb'); sky.addColorStop(1, '#e6e5c4');
+  ctx.fillStyle = sky; ctx.fillRect(1248, 0, 335, 253);
+  path(ctx, 'M1248 220 Q1330 167 1393 213 Q1470 143 1583 196 L1583 253 L1248 253Z', '#a8c3a5');
+  line(ctx, [[1415, 0], [1415, 259]], '#f3e9cf', 13);
+  line(ctx, [[1246, 127], [1586, 127]], '#f3e9cf', 11);
+  poly(ctx, [[1260, 276], [1567, 276], [1600, 681], [969, 681]], '#e7dfc2');
+  ctx.fillStyle = '#b7c8b7'; ctx.fillRect(0, 760, 1600, 140);
+  for (let i = 0; i < 5; i++) line(ctx, [[i * 400 - 250, 900], [i * 290 + 120, 760]], '#a2b7ab', 2);
+  line(ctx, [[0, 838], [1600, 838]], '#a2b7ab', 2);
+  ellipse(ctx, 1226, 824, 330, 32, 'rgba(27,62,68,.15)');
+  round(ctx, 480, 441, 1120, 324, 1, '#64928f');
+  for (let x = 490; x < 1010; x += 260) {
+    round(ctx, x + 12, 469, 235, 272, 5, '#75a29b', '#4b8283', 3);
+    line(ctx, [[x + 211, 500], [x + 211, 548]], '#d2ded3', 6);
+  }
+  round(ctx, 1216, 458, 384, 290, 3, '#254c55');
+  path(ctx, 'M1224 467 L1592 467 L1592 482 L1224 482Z', '#163c49');
+  poly(ctx, [[1471, 477], [1593, 459], [1593, 740], [1471, 717]], '#86aaa0', '#4b7f7d', 2);
+  line(ctx, [[1491, 510], [1491, 550]], '#e1e7d8', 5);
+  round(ctx, 470, 422, 1140, 31, 5, '#eedfc4');
+  round(ctx, 476, 423, 1124, 9, 3, '#fff1d2');
+  ellipse(ctx, 1383, 420, 151, 15, '#799898');
+  ellipse(ctx, 1383, 418, 124, 9, '#446870');
+  path(ctx, 'M1475 419 L1475 359 Q1475 319 1444 318 Q1412 319 1412 351 L1412 363', null, '#6c9298', 18);
+  path(ctx, 'M1472 414 L1472 355 Q1472 329 1447 326', null, '#d4e4df', 5);
+  line(ctx, [[1505, 421], [1505, 386], [1523, 377]], '#779aa0', 8);
+  round(ctx, 1138, 388, 37, 34, 7, '#d1b795');
+  round(ctx, 1149, 373, 13, 18, 3, '#839d91');
+  plant(ctx, 1550, 372, .46, .015 * wave);
+  path(ctx, 'M1284 458 L1468 458 L1428 501 L1333 501Z', '#7a969a');
+  line(ctx, [[1360, 498], [1360, 625]], '#9db7b7', 22);
+  path(ctx, 'M1360 618 L1360 658 Q1360 695 1397 695 Q1431 695 1431 662 L1431 604 L1534 604', null, '#acc7c3', 21);
+  path(ctx, 'M1355 507 L1355 636 M1361 665 Q1365 687 1394 688 M1435 608 L1523 608', null, '#e3ece0', 5);
+  round(ctx, 1341, 534, 37, 20, 3, '#658d93', '#b9ccc7', 2);
+  round(ctx, 1340, 599, 39, 20, 4, '#628991', '#d2dfd5', 2);
+  round(ctx, 1411, 626, 38, 18, 3, '#779e9f');
+  round(ctx, 1519, 587, 23, 34, 3, '#779e9f');
+  ellipse(ctx, 1393, 737, 72, 15, '#163b47');
+  path(ctx, 'M1321 737 L1334 792 Q1396 819 1453 790 L1464 737Z', '#799a93');
+  ellipse(ctx, 1393, 738, 69, 13, '#bacabd');
+  ellipse(ctx, 1393, 739, 57, 7, '#507982');
+  path(ctx, 'M1330 751 Q1388 707 1455 751', null, '#d9dfc9', 5);
+
+  const bob = wave * 2.3;
+  ctx.save(); ctx.translate(0, bob);
+  path(ctx, 'M1050 666 Q1107 656 1144 705 L1159 764 L1104 804 L1028 782 L1012 733Z', '#193e53');
+  path(ctx, 'M1117 714 Q1166 692 1193 717 L1240 778 Q1233 802 1210 801 L1155 759 L1127 789 L1080 766Z', '#285570');
+  path(ctx, 'M1036 724 Q1019 758 985 784 L937 798 L942 828 L1010 834 Q1060 824 1100 781Z', '#34617a');
+  path(ctx, 'M951 797 L989 795 L1009 829 Q1014 846 998 848 L917 846 Q908 835 920 819Z', '#273c45');
+  path(ctx, 'M1207 783 L1243 778 L1266 797 L1297 806 Q1312 818 1297 830 L1222 833 L1197 811Z', '#273c45');
+  path(ctx, 'M918 838 L1002 839 M1218 823 L1299 820', null, '#779293', 4);
+  path(ctx, 'M1013 568 Q1036 535 1089 546 L1134 567 Q1161 598 1155 648 L1124 717 Q1085 742 1020 701 L999 644Z', '#2d7c9a');
+  path(ctx, 'M1004 605 Q1020 632 1048 651 L1046 714 L1020 700Z', '#22637d');
+  path(ctx, 'M1088 555 L1106 576 L1082 606 L1054 570Z', '#28617c');
+  path(ctx, 'M1098 561 L1113 585 L1121 570', '#74b6bf');
+  path(ctx, 'M1108 597 L1140 612 L1124 642 L1091 626Z', '#3c92a8', '#88bdc3', 1.4);
+  line(ctx, [[1115, 594], [1127, 600]], '#d8e6d9', 3);
+  path(ctx, 'M1025 683 Q1072 716 1131 701', null, '#1a3e50', 9);
+  round(ctx, 1101, 698, 22, 14, 2, '#c2b792', '#1d4256', 3);
+  path(ctx, 'M1046 682 L1062 688 L1054 732 L1037 724Z', '#b9895f');
+  tool(ctx, 1039, 703, -.22, .37);
+  head(ctx, 1094 + wave, 496, .91, { cap: true, tilt: .13 + wave * .025, blink: Math.cos(t * 3.6) > .987, smile: false });
+  limb(ctx, [[1127, 586], [1201, 610]], 51, '#317e99', '#235c74');
+  path(ctx, 'M1176 591 L1198 593 L1219 618 L1195 633Z', '#80b2ba');
+  limb(ctx, [[1204, 613], [1270, 579], [1323, 582]], 24, C.skin, C.skinShade);
+  ellipse(ctx, 1328, 583, 20, 12, C.skin);
+  path(ctx, 'M1321 581 Q1336 566 1341 576 L1336 584 M1328 586 L1346 588', null, C.skinShade, 3);
+  limb(ctx, [[1082, 594], [1162, 661]], 51, '#3c8aa4', '#225d76');
+  path(ctx, 'M1137 642 L1162 637 L1183 663 L1162 682Z', '#8ebdc2');
+  limb(ctx, [[1167, 666], [1229, 687], [handX, handY]], 27, C.skin, C.skinShade);
+  tool(ctx, 1360, 609, angle, 1.05);
+  ellipse(ctx, handX, handY, 18, 14, C.skin);
+  path(ctx, `M${handX - 10} ${handY + 1} L${handX + 5} ${handY + 8} M${handX - 5} ${handY - 5} L${handX + 10} ${handY + 3}`, null, C.skinShade, 2.5);
+  ctx.restore();
+
+  ellipse(ctx, 820, 833, 124, 21, 'rgba(19,54,62,.13)');
+  round(ctx, 721, 748, 184, 88, 10, '#b67854', '#664c41', 3);
+  path(ctx, 'M719 769 Q812 789 906 769 L906 795 Q810 811 719 795Z', '#cc946b');
+  path(ctx, 'M778 749 L778 728 Q813 710 850 728 L850 749', null, '#3d4c47', 13);
+  round(ctx, 792, 783, 23, 28, 4, '#c9c5a5');
+  line(ctx, [[742, 809], [742, 820], [882, 820], [882, 809]], '#e1b58a', 2);
+  path(ctx, 'M1530 884 Q1470 826 1518 753 Q1561 791 1540 851 Q1546 750 1598 712 L1600 900Z', '#426e69');
+}

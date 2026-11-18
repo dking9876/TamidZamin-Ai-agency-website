@@ -67,6 +67,14 @@ Later that day the owner requested a more premium hero appearance and a
 noticeable entrance on reload, with less clutter on phones. This permits
 authored headline motion and a quieter mobile hero action hierarchy, replacing
 the earlier static-headline and equally prominent paired-action treatments.
+Later on 18 November the owner supplied `tamidzamin-original-photos-film.mp4`
+and explicitly requested a full-bleed video hero on phones and computers,
+with the existing text over the video, inspired by Broccoli's hero. This
+supersedes the still-photograph and stacked-mobile hero treatments only.
+Silent looping playback is approved for this decorative background, with a
+pause control and static reduced-motion/no-JavaScript fallback. The owner
+requested pushing all pending repository work to GitHub; existing preview
+safeguards and restrictions on real lead delivery remain unchanged.
 
 ## Evidence on Hand
 

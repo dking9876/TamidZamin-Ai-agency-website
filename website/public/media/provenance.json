@@ -1,0 +1,15 @@
+{
+  "hero-film.mp4": {
+    "source": "https://drive.google.com/file/d/1zr9uvdIKO9J5Nx1vjUZfeO7NqbXaIosc/view",
+    "sourceFilename": "tamidzamin-original-photos-film.mp4",
+    "sha256": "8bcd0241a3380e8cb9c2f20ea87b5d56d88f6296610acff9224828990d4c8ded",
+    "transform": "None. Exact user-supplied silent H.264 MP4, 1280x720, 24fps, 14 seconds.",
+    "originRecord": "../../../photo-animated-hero/sources.json",
+    "description": "AI-animated supplied brand artwork. Illustrative people, not identified staff or customers."
+  },
+  "hero-poster.webp": {
+    "source": "hero-film.mp4",
+    "transform": "First frame extracted with FFmpeg, libwebp quality 85, original 1280x720 dimensions.",
+    "purpose": "Loading, reduced-motion, no-JavaScript and playback-failure fallback."
+  }
+}

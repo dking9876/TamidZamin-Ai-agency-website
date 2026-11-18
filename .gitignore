@@ -29,3 +29,5 @@ TamidZamin-website-source-*.zip
 .impeccable/mocks/
 .impeccable/questions/
 .impeccable/config.local.json
+.impeccable/hook.cache.json
+.github/skills/impeccable/scripts/bin/

@@ -59,17 +59,29 @@ results were fabricated. Supplied people are labeled illustrative.
 
 ## Motion
 
-The hero has a bounded arrival on each full load/reload: its supplied photograph
-settles, the two headline lines resolve into focus, and the existing blue edge
-draws across the scene. The body and CTA are available immediately, including
-when the image loads slowly. On phones, one full-width primary action and a
-quiet process link replace competing pill actions, with redundant hero badges
-and the extra scroll prompt omitted.
+The hero uses the owner's exact 14-second, silent H.264 montage as a full-bleed
+background on phones and computers. Video and poster use `object-fit: cover`;
+the existing Hebrew headline, copy and actions stay on top, protected by
+responsive navy scrims. The two headline lines resolve into focus on each full
+load/reload and the existing blue edge draws across the scene. The body and
+CTA are available immediately, even while media loads. Phones retain one
+full-width primary action and a quiet process link, without redundant badges
+or the extra scroll prompt.
+
+`src/scripts/hero-video.ts` starts muted inline playback while the hero is
+visible and provides a keyboard-operable play/pause control. Playback pauses
+offscreen, in hidden tabs and on pagehide. A manual pause survives re-entry.
+Initial reduced motion and no JavaScript display the poster without downloading
+video. Live reduced-motion changes restore the poster; switching back requires
+manual play. Blocked autoplay offers manual play; download/codec failures keep
+the poster and announce the fallback. No external video player or Drive request
+is used.
 
 The homepage enhances its illustrative conversations with short chat/summary
 and voice-waveform sequences. Each runs once on entry; the visitor can replay
 an individual illustration with its labeled button. These are not live agents.
-No animation dependency, audio, external request or continuous loop is added.
+No animation dependency, audio or external request is added. Only the explicitly
+approved hero background loops; the existing illustrative sequences still settle.
 
 `src/scripts/home-motion.ts` pauses effects offscreen/in hidden tabs, cancels
 them when reduced motion is requested, and leaves all content readable without
@@ -259,17 +271,34 @@ pages do not. Longer copy, expanded FAQs and enlarged text can grow.
 - Native anchors and history remain untouched. Scroll padding accounts for
   the measured header. Do not introduce wheel/touch interception or scroll snap.
 - `src/scripts/home-motion.ts` is homepage-only progressive enhancement:
-  a 520ms image entrance (never hidden headline/CTA), one 1760ms process/handoff
+  the bounded headline/blue-edge arrival (never hidden headline/CTA), one 1760ms process/handoff
   sequence, 620ms device entrance and 650ms About-photo reveal.
 - Animations run once, pause offscreen/in hidden tabs, and settle. Live reduced-
   motion changes cancel them. Default HTML/CSS is visible without JavaScript.
-  Keep the waveform static and the phones clearly labeled illustrative.
+  Keep the phones clearly labeled illustrative. The separate hero-video
+  controller is the documented looping exception above.
 - Native menu and FAQ disclosures stay usable without JS. JS adds menu closing
   on Escape, link following, outside click, focus exit and desktop resize.
 
 No motion library, dependency, backend change or business claim was added.
 Do not regenerate supplied assets to adjust layout; use the existing responsive
 derivatives and check focal subjects at each viewport.
+
+### Hero video asset
+
+`public/media/hero-film.mp4` is an unchanged copy of the owner's supplied
+`tamidzamin-original-photos-film.mp4`: 1280x720, 24fps, 14 seconds, 3,643,628 bytes,
+silent H.264 with fast-start metadata. The first frame supplies
+`hero-poster.webp`. `public/media/provenance.json` records its source and SHA-256;
+the poster sidecar records its derivation. No baked-in text, desktop scrim or
+phone-preview render is used. Do not replace the source with a Drive viewing URL.
+`npm run assets` regenerates the older image derivatives, not these video assets.
+
+Hero tests cover actual advancing playback, looping, cover geometry from
+320px through 1920px, keyboard pause/resume, offscreen and page lifecycle
+behavior, slow/failed media, blocked autoplay, no-JavaScript and reduced-motion
+fallbacks. Contrast tests sample the poster and six positions across the film,
+covering every scene, at desktop and phone widths.
 
 ## Verification
 

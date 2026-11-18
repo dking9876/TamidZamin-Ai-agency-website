@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-17T03:33:24.565Z",
+  "generatedAt": "2026-11-18T12:28:22.120Z",
   "title": "Design System: TamidZamin",
   "extensions": {
     "colorMeta": {
@@ -414,11 +414,11 @@
     "typographyMeta": {
       "display": {
         "displayName": "Homepage display",
-        "purpose": "Hero only, above 1100px; explicit tablet overrides follow."
+        "purpose": "Homepage hero above 880px; tablet and phone overrides are separate."
       },
       "display-mobile": {
         "displayName": "Homepage mobile display",
-        "purpose": "Hero at max-width 680px."
+        "purpose": "Homepage hero at max-width 600px."
       },
       "headline-reading": {
         "displayName": "Supporting page title",
@@ -430,11 +430,11 @@
       },
       "headline-process": {
         "displayName": "Homepage process heading",
-        "purpose": "Compact centered process heading; not a universal homepage h2."
+        "purpose": "The shared homepage heading scale, used by process and other main sections."
       },
       "title": {
         "displayName": "Shared title baseline",
-        "purpose": "Global h3, overridden by compact homepage labels."
+        "purpose": "Global h3 baseline; process, benefit and About labels have contextual overrides."
       },
       "body": {
         "displayName": "Reading and input body",
@@ -460,77 +460,124 @@
     "shadows": [
       {
         "name": "pill-rest",
-        "value": "0 3px 9px #00000012",
-        "purpose": "Filled pills only; outlined pills explicitly have none."
+        "value": "none",
+        "purpose": "Pale and outlined homepage actions remain flat."
       },
       {
         "name": "button-hover",
         "value": "0 5px 16px #00000018",
-        "purpose": "Shared button hover, including the header hybrid; disabled removes shadow."
+        "purpose": "Shared supporting buttons and header CTA."
       },
       {
         "name": "faq-home",
-        "value": "0 2px 5px #345c7820",
-        "purpose": "Homepage FAQ containers only."
+        "value": "none",
+        "purpose": "Homepage disclosures use surface and border, not elevation."
       },
       {
         "name": "mobile-nav",
         "value": "0 12px 25px #00000030",
-        "purpose": "Open mobile menu overlay."
+        "purpose": "Open mobile navigation overlay."
+      },
+      {
+        "name": "device-illustration",
+        "value": "0 10px 24px #008fff25, 4px 8px 12px #00000070",
+        "purpose": "Illustrative phone construction only; not a card token."
       }
     ],
     "motion": [
       {
-        "name": "button-state",
-        "value": "background-color 160ms ease-out, box-shadow 160ms ease-out",
-        "purpose": "Shared buttons."
+        "name": "feedback",
+        "value": "160ms",
+        "purpose": "Control and disclosure feedback."
+      },
+      {
+        "name": "image-hover",
+        "value": "260ms",
+        "purpose": "Photographic hover feedback."
+      },
+      {
+        "name": "arrival-ease",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Brief one-shot entrances."
       },
       {
         "name": "pill-state",
-        "value": "background 140ms ease-out",
-        "purpose": "Filled and outlined pills."
+        "value": "background-color var(--motion-feedback) ease-out, transform var(--motion-feedback) ease-out, border-color var(--motion-feedback) ease-out",
+        "purpose": "Surface, border and pressed-position feedback."
       },
       {
-        "name": "faq-disclosure",
-        "value": "transform 160ms ease-out",
-        "purpose": "Plus SVG rotates 45deg when details is open."
+        "name": "hero-arrival",
+        "value": "1020ms",
+        "purpose": "Two headline lines (640ms, staggered 90ms) and blue edge (900ms after 120ms). Body and CTA never wait; video supplies photographic motion."
+      },
+      {
+        "name": "hero-video",
+        "value": "14s",
+        "purpose": "User-approved silent looping background across the full desktop/mobile hero. Manual pause; offscreen/hidden-page suspension; static reduced-motion/no-JavaScript poster. Source: website/public/media/provenance.json."
+      },
+      {
+        "name": "device-arrival",
+        "value": "620ms",
+        "purpose": "Each channel figure independently; 16px travel, once."
+      },
+      {
+        "name": "photo-arrival",
+        "value": "650ms",
+        "purpose": "About photograph crop reveal, once."
+      },
+      {
+        "name": "handoff-sequence",
+        "value": "1760ms",
+        "purpose": "Four ordered process nodes; no repeating loop."
       },
       {
         "name": "page-scroll",
         "value": "smooth",
-        "purpose": "HTML scroll behavior; auto under reduced motion."
+        "purpose": "Native anchors; auto under reduced motion."
       }
     ],
     "breakpoints": [
       {
+        "name": "homepage-viewport-sections",
+        "value": "1024px",
+        "query": "(min-width: 1024px)",
+        "purpose": "Minimum viewport-scale height for direct homepage sections."
+      },
+      {
         "name": "compact-desktop",
         "value": "1100px",
         "query": "(max-width: 1100px)",
-        "purpose": "Shared gutters; compact homepage typography/devices and header."
+        "purpose": "Shared gutters and narrower homepage composition."
       },
       {
         "name": "navigation-and-home-tablet",
         "value": "880px",
         "query": "(max-width: 880px)",
-        "purpose": "All-route mobile navigation; homepage structural simplification."
+        "purpose": "Mobile navigation and two vertical channel articles."
       },
       {
         "name": "supporting-contact-stack",
         "value": "820px",
         "query": "(max-width: 820px)",
-        "purpose": "Supporting contact grid becomes one column."
+        "purpose": "Supporting contact form and aside stack."
       },
       {
-        "name": "mobile",
+        "name": "supporting-mobile",
         "value": "680px",
         "query": "(max-width: 680px)",
-        "purpose": "Small gutters, stacked content, two-column homepage tile groups."
+        "purpose": "Supporting-page mobile layout and shared 18px gutters."
       },
       {
-        "name": "narrow-mobile",
-        "value": "360px",
-        "query": "(max-width: 360px)",
-        "purpose": "Device and compact label reductions."
+        "name": "homepage-mobile",
+        "value": "600px",
+        "query": "(max-width: 600px)",
+        "purpose": "Sequential channel articles, one-column benefits, safe-area gutters and responsive actions."
+      },
+      {
+        "name": "short-viewport",
+        "value": "500px",
+        "query": "(max-height: 500px)",
+        "purpose": "Nonsticky homepage header; content remains naturally sized."
       }
     ],
     "scope": {
@@ -560,13 +607,23 @@
           "--on-dark": "{colors.on-dark}",
           "--error": "{colors.error}",
           "--success": "{colors.success}",
-          "--radius": "{rounded.panel}"
+          "--radius": "{rounded.panel}",
+          "--home-header-base": "4.75rem",
+          "--motion-feedback": "160ms",
+          "--motion-arrival": "260ms",
+          "--ease-arrival": "cubic-bezier(0.16, 1, 0.3, 1)"
         },
         ".homepage": {
           "--navy": "{colors.home-navy}",
           "--navy-deep": "{colors.home-navy-deep}",
           "--on-dark": "{colors.home-on-dark}",
-          "--wash": "{colors.home-wash}"
+          "--wash": "{colors.home-wash}",
+          "--section-space": "clamp(3rem, 6vw, 6rem)",
+          "--composition-gap": "clamp(2rem, 4vw, 4rem)",
+          "--home-title": "clamp(2.25rem, 4vw, 3.75rem)",
+          "--pill-paper": "#f5faff",
+          "--pill-ink": "#0a1a2c",
+          "--pill-hover": "#d5edff"
         }
       },
       "sharedLaterOverrides": [
@@ -583,7 +640,7 @@
         {
           "selector": ".desktop-nav a",
           "scope": "all routes",
-          "note": "14px base label, 13px at max-width 1100px."
+          "note": ".875rem labels on every route; home.css overrides earlier global responsive font sizes."
         }
       ],
       "localHeaderBackground": {
@@ -635,6 +692,7 @@
       "layout": {
         "container": {
           "width": "min(var(--container), calc(100% - 64px))",
+          "margin-inline": "auto",
           "customProperty": {
             "--container": "1180px"
           }
@@ -643,24 +701,72 @@
           "maxWidth": "800px"
         },
         "heroCopy": {
-          "width": "47%",
           "direction": "rtl",
-          "parentDirection": "ltr"
+          "width": "49%",
+          "padding-block": "24px"
         },
         "channelStage": {
-          "gridTemplateColumns": "1fr 1.52fr 1fr",
-          "direction": "ltr",
-          "gap": "22px"
+          "display": "grid",
+          "grid-template-columns": "minmax(0, 1fr) 56px minmax(0, 1fr)",
+          "align-items": "center",
+          "direction": "ltr"
+        },
+        "channelArticle": {
+          "display": "grid",
+          "grid-template-columns": "minmax(0, 1.35fr) minmax(0, 1fr)",
+          "grid-template-rows": "1fr auto 1fr",
+          "column-gap": "28px",
+          "min-width": "0"
+        },
+        "phoneArticle": {
+          "grid-template-columns": "minmax(0, 1fr) minmax(0, 1.35fr)"
+        },
+        "homepageSections": {
+          "padding-block": "var(--section-space)"
+        },
+        "desktopSectionMinimum": {
+          "min-height": "calc(100svh - var(--header-height, var(--home-header-base)))",
+          "display": "flex",
+          "flex-direction": "column",
+          "justify-content": "center"
+        },
+        "mobileTokens": {
+          "--section-space": "clamp(3rem, 12vw, 4rem)",
+          "--composition-gap": "2rem",
+          "--home-title": "clamp(2rem, 8.5vw, 2.75rem)",
+          "--page-gutter": "max(20px, env(safe-area-inset-left), env(safe-area-inset-right))"
+        },
+        "mobileHeroActions": {
+          "display": "grid",
+          "grid-template-columns": "repeat(auto-fit, minmax(min(100%, 9rem), 1fr))",
+          "gap": "12px"
+        },
+        "mobileChannelStage": {
+          "grid-template-columns": "minmax(0, 1fr)",
+          "gap": "48px"
         },
         "contactGrid": {
-          "gridTemplateColumns": "minmax(0, 1.4fr) minmax(0, .8fr)",
-          "gap": "65px"
+          "display": "grid",
+          "grid-template-columns": "minmax(0, 1.4fr) minmax(0, .8fr)",
+          "gap": "65px",
+          "align-items": "start"
         },
         "formGrid": {
-          "gridTemplateColumns": "1fr 1fr",
+          "display": "grid",
+          "grid-template-columns": "1fr 1fr",
           "gap": "20px"
+        },
+        "note": "Declarations are source evidence, not replacements for the normative DESIGN.md token frontmatter. Preserve stylesheet order and responsive overrides."
+      },
+      "documentedOverrides": [
+        {
+          "selector": ".faq-strip .faq-list details",
+          "property": "border",
+          "implementation": "1px solid #d6e2ef",
+          "documentedToken": "{colors.faq-line}",
+          "note": "The current component has a local border override. Preserve the existing DESIGN.md color token rather than silently rewriting normative frontmatter."
         }
-      }
+      ]
     },
     "responsiveVariants": [
       {
@@ -674,125 +780,55 @@
             }
           },
           {
-            "selector": ".contact-grid",
+            "selector": ".header-inner",
             "declarations": {
-              "gap": "35px"
-            }
-          }
-        ]
-      },
-      {
-        "query": "(max-width: 1100px)",
-        "source": "website\\src\\styles\\home.css",
-        "rules": [
-          {
-            "selector": ".homepage .header-inner",
-            "declarations": {
-              "min-height": "56px"
+              "gap": "20px",
+              "min-height": "72px"
             }
           },
           {
-            "selector": ".home-hero",
+            "selector": ".brand",
             "declarations": {
-              "min-height": "320px"
+              "width": "170px"
             }
           },
           {
-            "selector": ".home-hero-copy",
+            "selector": ".desktop-nav",
             "declarations": {
-              "width": "45%",
-              "padding-block": "22px 18px"
-            }
-          },
-          {
-            "selector": ".home-hero h1",
-            "declarations": {
-              "font-size": "44px"
-            }
-          },
-          {
-            "selector": ".hero-actions .pill",
-            "declarations": {
-              "padding-inline": "17px",
-              "font-size": "14px"
-            }
-          },
-          {
-            "selector": ".device-stage .phone-shell",
-            "declarations": {
-              "width": "139px",
-              "height": "235px"
-            }
-          },
-          {
-            "selector": ".faq-strip .faq-list summary",
-            "declarations": {
-              "font-size": "13px",
-              "padding": "10px 13px"
-            }
-          }
-        ]
-      },
-      {
-        "query": "(max-width: 880px)",
-        "source": "website\\src\\styles\\home.css",
-        "rules": [
-          {
-            "selector": ".desktop-nav, .header-cta",
-            "declarations": {
-              "display": "none"
-            }
-          },
-          {
-            "selector": ".mobile-menu",
-            "declarations": {
-              "display": "block"
-            }
-          },
-          {
-            "selector": ".home-hero h1",
-            "declarations": {
-              "font-size": "37px"
-            }
-          },
-          {
-            "selector": ".hero-actions",
-            "declarations": {
-              "flex-wrap": "wrap"
-            }
-          },
-          {
-            "selector": ".channel-stage",
-            "declarations": {
-              "grid-template-columns": "1fr 1fr",
               "gap": "22px"
             }
           },
           {
-            "selector": ".device-stage",
+            "selector": ".phone-shell",
             "declarations": {
-              "grid-column": "1/-1",
-              "grid-row": "2"
+              "width": "161px",
+              "height": "311px"
             }
           },
           {
-            "selector": ".device-stage .phone-shell",
+            "selector": ".phone-top",
             "declarations": {
-              "width": "165px",
-              "height": "294px"
+              "padding-inline": "6px",
+              "font-size": "10px"
             }
           },
           {
-            "selector": ".handoff-art",
+            "selector": ".chat-body .bubble",
             "declarations": {
-              "display": "none"
+              "font-size": "9px"
             }
           },
           {
-            "selector": ".faq-strip",
+            "selector": ".trade h3",
             "declarations": {
-              "grid-template-columns": "1fr",
-              "gap": "20px"
+              "font-size": "14px",
+              "inset-inline": "10px"
+            }
+          },
+          {
+            "selector": ".contact-grid",
+            "declarations": {
+              "gap": "35px"
             }
           }
         ]
@@ -802,9 +838,66 @@
         "source": "website\\src\\styles\\global.css",
         "rules": [
           {
+            "selector": ".desktop-nav",
+            "declarations": {
+              "gap": "16px"
+            }
+          },
+          {
+            "selector": ".desktop-nav a",
+            "declarations": {
+              "font-size": "13px"
+            }
+          },
+          {
+            "selector": ".header-cta",
+            "declarations": {
+              "padding-inline": "12px",
+              "font-size": "13px"
+            }
+          },
+          {
+            "selector": ".brand",
+            "declarations": {
+              "width": "150px"
+            }
+          },
+          {
+            "selector": ".phone-shell",
+            "declarations": {
+              "width": "190px",
+              "height": "335px"
+            }
+          },
+          {
+            "selector": ".chat-body .bubble",
+            "declarations": {
+              "font-size": "10px"
+            }
+          },
+          {
+            "selector": ".trade h3",
+            "declarations": {
+              "font-size": "13px",
+              "display": "block"
+            }
+          },
+          {
+            "selector": ".trade h3 svg",
+            "declarations": {
+              "display": "none"
+            }
+          },
+          {
             "selector": ".contact-grid",
             "declarations": {
               "grid-template-columns": "1fr"
+            }
+          },
+          {
+            "selector": ".contact-aside",
+            "declarations": {
+              "max-width": "65ch"
             }
           }
         ]
@@ -820,9 +913,273 @@
             }
           },
           {
+            "selector": ".header-inner",
+            "declarations": {
+              "min-height": "70px",
+              "gap": "12px"
+            }
+          },
+          {
+            "selector": ".brand",
+            "declarations": {
+              "width": "156px"
+            }
+          },
+          {
+            "selector": ".desktop-nav, .header-cta",
+            "declarations": {
+              "display": "none"
+            }
+          },
+          {
+            "selector": ".mobile-menu",
+            "declarations": {
+              "display": "block"
+            }
+          },
+          {
+            "selector": ".mobile-menu > summary",
+            "declarations": {
+              "display": "grid",
+              "place-items": "center",
+              "width": "44px",
+              "height": "44px",
+              "list-style": "none",
+              "border": "1px solid #314762",
+              "border-radius": "5px"
+            }
+          },
+          {
+            "selector": ".mobile-menu[open] > summary",
+            "declarations": {
+              "background": "var(--navy-soft)"
+            }
+          },
+          {
+            "selector": ".mobile-menu nav",
+            "declarations": {
+              "position": "absolute",
+              "inset-inline": "0",
+              "inset-block-start": "100%",
+              "background": "var(--navy-soft)",
+              "padding": "12px 18px 20px",
+              "box-shadow": "0 12px 25px #00000030",
+              "display": "grid"
+            }
+          },
+          {
+            "selector": ".mobile-menu nav a",
+            "declarations": {
+              "padding": "13px 12px",
+              "border-block-end": "1px solid #30445f",
+              "text-decoration": "none"
+            }
+          },
+          {
+            "selector": ".phone-shell",
+            "declarations": {
+              "width": "158px",
+              "height": "310px"
+            }
+          },
+          {
+            "selector": ".phone-top",
+            "declarations": {
+              "font-size": "9px"
+            }
+          },
+          {
+            "selector": ".chat-body .bubble",
+            "declarations": {
+              "font-size": "9px"
+            }
+          },
+          {
+            "selector": ".phone-caption",
+            "declarations": {
+              "font-size": "7px"
+            }
+          },
+          {
+            "selector": ".voice-phone",
+            "declarations": {
+              "padding-inline": "8px"
+            }
+          },
+          {
+            "selector": ".voice-phone > strong",
+            "declarations": {
+              "font-size": "13px"
+            }
+          },
+          {
+            "selector": ".voice-phone p",
+            "declarations": {
+              "font-size": "11px"
+            }
+          },
+          {
+            "selector": ".section-footnote",
+            "declarations": {
+              "font-size": "11px",
+              "max-width": "46ch",
+              "margin-inline": "auto",
+              "margin-block-start": "22px"
+            }
+          },
+          {
+            "selector": "h2",
+            "declarations": {
+              "font-size": "1.95rem"
+            }
+          },
+          {
+            "selector": ".section-intro",
+            "declarations": {
+              "margin-block": "18px 25px",
+              "font-size": "15px"
+            }
+          },
+          {
+            "selector": ".trade:last-child",
+            "declarations": {
+              "grid-column": "1/-1"
+            }
+          },
+          {
+            "selector": ".trade:last-child img",
+            "declarations": {
+              "aspect-ratio": "2.8"
+            }
+          },
+          {
+            "selector": ".trade h3",
+            "declarations": {
+              "font-size": "16px",
+              "display": "flex",
+              "inset-inline": "13px"
+            }
+          },
+          {
+            "selector": ".trade h3 svg",
+            "declarations": {
+              "display": "block"
+            }
+          },
+          {
+            "selector": ".faq-section",
+            "declarations": {
+              "padding-block": "40px 28px"
+            }
+          },
+          {
+            "selector": ".faq-list summary",
+            "declarations": {
+              "padding": "15px",
+              "font-size": "15px",
+              "gap": "12px"
+            }
+          },
+          {
+            "selector": ".faq-list details p",
+            "declarations": {
+              "padding": "0 15px 19px",
+              "font-size": "15px"
+            }
+          },
+          {
+            "selector": ".closing-cta",
+            "declarations": {
+              "padding-block": "42px 35px"
+            }
+          },
+          {
+            "selector": ".closing-cta p",
+            "declarations": {
+              "font-size": "15px"
+            }
+          },
+          {
+            "selector": ".closing-cta .button",
+            "declarations": {
+              "width": "100%"
+            }
+          },
+          {
+            "selector": ".cta-note",
+            "declarations": {
+              "font-size": "11px"
+            }
+          },
+          {
+            "selector": ".footer-main",
+            "declarations": {
+              "grid-template-columns": "1fr 1fr",
+              "gap": "24px 20px"
+            }
+          },
+          {
+            "selector": ".footer-brand",
+            "declarations": {
+              "grid-column": "1/-1"
+            }
+          },
+          {
+            "selector": ".footer-main nav",
+            "declarations": {
+              "grid-template-columns": "1fr",
+              "gap": "2px"
+            }
+          },
+          {
+            "selector": ".footer-main nav a",
+            "declarations": {
+              "min-height": "40px"
+            }
+          },
+          {
+            "selector": ".footer-bottom",
+            "declarations": {
+              "display": "grid",
+              "gap": "7px",
+              "font-size": "11px"
+            }
+          },
+          {
+            "selector": ".preview-label",
+            "declarations": {
+              "margin": "0"
+            }
+          },
+          {
+            "selector": ".page-heading",
+            "declarations": {
+              "padding-block": "25px 38px"
+            }
+          },
+          {
             "selector": ".page-heading h1",
             "declarations": {
               "font-size": "2.45rem"
+            }
+          },
+          {
+            "selector": ".page-heading p",
+            "declarations": {
+              "font-size": "17px"
+            }
+          },
+          {
+            "selector": ".breadcrumbs",
+            "declarations": {
+              "font-size": "13px",
+              "margin-block-end": "19px"
+            }
+          },
+          {
+            "selector": ".page-section",
+            "declarations": {
+              "padding-block": "36px"
             }
           },
           {
@@ -839,6 +1196,46 @@
             }
           },
           {
+            "selector": ".process li",
+            "declarations": {
+              "display": "grid",
+              "grid-template-columns": "35px 1fr",
+              "column-gap": "10px"
+            }
+          },
+          {
+            "selector": ".process li::before",
+            "declarations": {
+              "grid-row": "span 2"
+            }
+          },
+          {
+            "selector": ".process p",
+            "declarations": {
+              "grid-column": "2"
+            }
+          },
+          {
+            "selector": ".trade-detail",
+            "declarations": {
+              "grid-template-columns": "90px 1fr",
+              "gap": "18px",
+              "align-items": "start"
+            }
+          },
+          {
+            "selector": ".trade-detail h3",
+            "declarations": {
+              "font-size": "1.2rem"
+            }
+          },
+          {
+            "selector": ".trade-detail p",
+            "declarations": {
+              "font-size": "14px"
+            }
+          },
+          {
             "selector": ".contact-form",
             "declarations": {
               "padding": "21px 18px"
@@ -852,162 +1249,899 @@
             }
           },
           {
-            "selector": ".faq-list summary",
+            "selector": ".notice",
             "declarations": {
-              "padding": "15px",
-              "font-size": "15px",
-              "gap": "12px"
-            }
-          }
-        ]
-      },
-      {
-        "query": "(max-width: 680px)",
-        "source": "website\\src\\styles\\home.css",
-        "rules": [
-          {
-            "selector": ".homepage .header-inner",
-            "declarations": {
-              "min-height": "64px"
-            }
-          },
-          {
-            "selector": ".home-hero",
-            "declarations": {
-              "padding-block-start": "235px"
-            }
-          },
-          {
-            "selector": ".home-hero-image",
-            "declarations": {
-              "height": "290px",
-              "object-position": "72% center"
-            }
-          },
-          {
-            "selector": ".home-hero-copy",
-            "declarations": {
-              "width": "100%",
-              "padding": "0 0 26px",
-              "text-align": "center"
-            }
-          },
-          {
-            "selector": ".home-hero h1",
-            "declarations": {
-              "font-size": "clamp(2.4rem,9vw,3.2rem)",
-              "line-height": "1.08"
-            }
-          },
-          {
-            "selector": ".hero-actions .pill",
-            "declarations": {
-              "padding-inline": "19px",
-              "font-size": "15px"
-            }
-          },
-          {
-            "selector": ".home-process ol",
-            "declarations": {
-              "grid-template-columns": "1fr 1fr",
-              "gap": "25px 10px"
-            }
-          },
-          {
-            "selector": ".angled-trades",
-            "declarations": {
-              "grid-template-columns": "repeat(2,minmax(0,1fr))",
-              "gap": "15px"
-            }
-          },
-          {
-            "selector": ".angled-trade",
-            "declarations": {
-              "transform": "skew(-6deg)"
-            }
-          },
-          {
-            "selector": ".benefits-strip > ul",
-            "declarations": {
-              "grid-template-columns": "1fr 1fr",
-              "gap": "25px 20px"
-            }
-          },
-          {
-            "selector": ".human-strip",
-            "declarations": {
-              "grid-template-columns": "1fr",
-              "gap": "0",
-              "text-align": "center"
-            }
-          },
-          {
-            "selector": ".about-strip",
-            "declarations": {
-              "grid-template-columns": "1fr",
-              "gap": "23px"
-            }
-          },
-          {
-            "selector": ".evidence-strip",
-            "declarations": {
-              "grid-template-columns": "1fr",
-              "gap": "19px",
-              "text-align": "center"
-            }
-          },
-          {
-            "selector": ".faq-strip .faq-list",
-            "declarations": {
-              "grid-template-columns": "1fr",
-              "gap": "11px"
-            }
-          },
-          {
-            "selector": ".faq-strip .faq-list summary",
-            "declarations": {
-              "font-size": "15px",
-              "min-height": "49px"
-            }
-          },
-          {
-            "selector": ".close-strip",
-            "declarations": {
-              "flex-direction": "column",
-              "gap": "23px",
-              "text-align": "center"
-            }
-          },
-          {
-            "selector": ".device-stage .phone-shell",
-            "declarations": {
-              "width": "139px",
-              "height": "271px"
+              "padding": "18px"
             }
           }
         ]
       },
       {
         "query": "(max-width: 360px)",
+        "source": "website\\src\\styles\\global.css",
+        "rules": [
+          {
+            "selector": ".phone-shell",
+            "declarations": {
+              "width": "134px"
+            }
+          },
+          {
+            "selector": ".phone-top",
+            "declarations": {
+              "padding-inline": "5px"
+            }
+          },
+          {
+            "selector": ".phone-avatar",
+            "declarations": {
+              "width": "20px"
+            }
+          },
+          {
+            "selector": ".chat-body",
+            "declarations": {
+              "padding-inline": "6px"
+            }
+          },
+          {
+            "selector": ".phone-caption",
+            "declarations": {
+              "font-size": "6.5px"
+            }
+          }
+        ]
+      },
+      {
+        "query": "(hover: hover)",
         "source": "website\\src\\styles\\home.css",
         "rules": [
           {
+            "selector": ".angled-trade:hover > img",
+            "declarations": {
+              "transform": "skew(calc(-1 * var(--skew))) translateX(9%) scale(1.035)"
+            }
+          }
+        ]
+      },
+      {
+        "query": "(min-width: 1024px)",
+        "source": "website\\src\\styles\\home.css",
+        "rules": [
+          {
+            "selector": ".homepage main > section:not(.home-hero)",
+            "declarations": {
+              "min-height": "calc(100svh - var(--header-height, var(--home-header-base)))",
+              "display": "flex",
+              "flex-direction": "column",
+              "justify-content": "center"
+            }
+          }
+        ]
+      },
+      {
+        "query": "(max-width: 1100px)",
+        "source": "website\\src\\styles\\home.css",
+        "rules": [
+          {
+            "selector": ".desktop-nav",
+            "declarations": {
+              "gap": "14px"
+            }
+          },
+          {
+            "selector": ".homepage .brand",
+            "declarations": {
+              "width": "142px"
+            }
+          },
+          {
+            "selector": ".channel-stage",
+            "declarations": {
+              "grid-template-columns": "minmax(0, 1fr) 32px minmax(0, 1fr)"
+            }
+          },
+          {
+            "selector": ".home-channel",
+            "declarations": {
+              "column-gap": "20px"
+            }
+          },
+          {
             "selector": ".device-stage .phone-shell",
             "declarations": {
-              "width": "126px"
+              "min-height": "380px"
+            }
+          },
+          {
+            "selector": ".angled-trades",
+            "declarations": {
+              "gap": "14px"
+            }
+          },
+          {
+            "selector": ".angled-trade h3",
+            "declarations": {
+              "font-size": "1.05rem"
+            }
+          },
+          {
+            "selector": ".faq-strip",
+            "declarations": {
+              "grid-template-columns": "180px minmax(0, 1fr)"
+            }
+          }
+        ]
+      },
+      {
+        "query": "(max-width: 880px)",
+        "source": "website\\src\\styles\\home.css",
+        "rules": [
+          {
+            "selector": ":root",
+            "declarations": {
+              "--home-header-base": "4.25rem"
+            }
+          },
+          {
+            "selector": ".desktop-nav, .header-cta",
+            "declarations": {
+              "display": "none"
+            }
+          },
+          {
+            "selector": ".mobile-menu",
+            "declarations": {
+              "display": "block"
+            }
+          },
+          {
+            "selector": ".mobile-menu > summary",
+            "declarations": {
+              "display": "grid",
+              "place-items": "center",
+              "width": "44px",
+              "height": "44px",
+              "list-style": "none",
+              "border": "1px solid #48627e",
+              "border-radius": "5px",
+              "transition": "background-color var(--motion-feedback) ease-out"
+            }
+          },
+          {
+            "selector": ".mobile-menu > summary:is(:hover, :focus-visible), .mobile-menu[open] > summary",
+            "declarations": {
+              "background": "var(--navy-soft)"
+            }
+          },
+          {
+            "selector": ".mobile-menu nav",
+            "declarations": {
+              "position": "absolute",
+              "inset-inline": "0",
+              "inset-block-start": "100%",
+              "background": "#102340",
+              "padding": "12px max(18px, env(safe-area-inset-right)) 20px",
+              "box-shadow": "0 12px 25px #00000030",
+              "display": "grid",
+              "max-height": "calc(100svh - var(--header-height, var(--home-header-base)))",
+              "overflow-y": "auto"
+            }
+          },
+          {
+            "selector": ".mobile-menu nav a",
+            "declarations": {
+              "padding": "12px",
+              "min-height": "48px",
+              "border-block-end": "1px solid #30445f",
+              "text-decoration": "none"
+            }
+          },
+          {
+            "selector": ".mobile-menu nav a:is(:hover, :focus-visible)",
+            "declarations": {
+              "background": "#193654",
+              "text-decoration": "underline"
+            }
+          },
+          {
+            "selector": ".homepage .brand",
+            "declarations": {
+              "width": "157px"
+            }
+          },
+          {
+            "selector": ".homepage main > .home-hero",
+            "declarations": {
+              "padding-block": "clamp(140px, 22svh, 240px) 88px",
+              "justify-content": "end"
+            }
+          },
+          {
+            "selector": ".home-hero::before",
+            "declarations": {
+              "background": "linear-gradient(0deg, #061421ed, #061421cc 45%, #06142199 65%, #06142133)"
+            }
+          },
+          {
+            "selector": ".home-hero-copy",
+            "declarations": {
+              "width": "100%",
+              "max-width": "38rem",
+              "margin-inline": "auto",
+              "padding": "20px 0",
+              "text-align": "center"
+            }
+          },
+          {
+            "selector": ".home-hero h1",
+            "declarations": {
+              "font-size": "clamp(2.75rem, 6.5vw, 3.75rem)"
+            }
+          },
+          {
+            "selector": ".hero-actions, .hero-points",
+            "declarations": {
+              "justify-content": "center"
+            }
+          },
+          {
+            "selector": ".hero-points",
+            "declarations": {
+              "gap": "12px 20px",
+              "margin-block-start": "24px"
+            }
+          },
+          {
+            "selector": ".channel-stage",
+            "declarations": {
+              "grid-template-columns": "repeat(2, minmax(0, 1fr))",
+              "gap": "48px 32px",
+              "align-items": "stretch"
+            }
+          },
+          {
+            "selector": ".home-channel",
+            "declarations": {
+              "grid-template-columns": "minmax(0, 1fr)",
+              "grid-template-rows": "auto auto 1fr auto",
+              "gap": "24px"
+            }
+          },
+          {
+            "selector": ".home-channel > :is(h2, .check-list, .pill, .device-stage)",
+            "declarations": {
+              "grid-column": "1"
+            }
+          },
+          {
+            "selector": ".home-channel > h2",
+            "declarations": {
+              "grid-row": "1"
+            }
+          },
+          {
+            "selector": ".home-channel > .device-stage",
+            "declarations": {
+              "grid-row": "2",
+              "width": "min(100%, 17.5rem)",
+              "justify-self": "center"
+            }
+          },
+          {
+            "selector": ".home-channel > .check-list",
+            "declarations": {
+              "grid-row": "3",
+              "margin": "0",
+              "justify-self": "center"
+            }
+          },
+          {
+            "selector": ".home-channel > .pill",
+            "declarations": {
+              "grid-row": "4",
+              "width": "min(100%, 20rem)",
+              "justify-self": "center"
             }
           },
           {
             "selector": ".brand-connector",
             "declarations": {
-              "width": "32px"
+              "display": "none"
+            }
+          },
+          {
+            "selector": ".home-channel h2",
+            "declarations": {
+              "justify-content": "center"
+            }
+          },
+          {
+            "selector": ".device-stage .chat-phone",
+            "declarations": {
+              "margin-block-start": "0"
+            }
+          },
+          {
+            "selector": ".device-stage .phone-shell",
+            "declarations": {
+              "min-height": "24rem"
+            }
+          },
+          {
+            "selector": ".device-stage .phone-top",
+            "declarations": {
+              "padding": "24px 16px 16px",
+              "font-size": ".875rem",
+              "gap": "8px"
+            }
+          },
+          {
+            "selector": ".device-stage .chat-body",
+            "declarations": {
+              "padding": "16px 16px 24px"
+            }
+          },
+          {
+            "selector": ".device-stage .bubble",
+            "declarations": {
+              "font-size": ".875rem",
+              "padding": "12px"
+            }
+          },
+          {
+            "selector": ".device-stage .chat-summary",
+            "declarations": {
+              "font-size": ".875rem"
+            }
+          },
+          {
+            "selector": ".device-stage .voice-phone",
+            "declarations": {
+              "padding": "32px 16px 24px"
+            }
+          },
+          {
+            "selector": ".device-stage .voice-phone > strong",
+            "declarations": {
+              "font-size": "1.125rem"
+            }
+          },
+          {
+            "selector": ".device-stage .voice-phone > span:not(.call-icon)",
+            "declarations": {
+              "font-size": ".875rem"
+            }
+          },
+          {
+            "selector": ".device-stage .voice-phone > p",
+            "declarations": {
+              "font-size": "1rem"
+            }
+          },
+          {
+            "selector": ".device-stage .call-icon",
+            "declarations": {
+              "width": "44px",
+              "height": "44px"
+            }
+          },
+          {
+            "selector": ".device-stage .call-icon svg",
+            "declarations": {
+              "width": "23px"
+            }
+          },
+          {
+            "selector": ".home-process ol",
+            "declarations": {
+              "grid-template-columns": "repeat(2, minmax(0, 1fr))"
+            }
+          },
+          {
+            "selector": ".home-process li:nth-child(2) .flow-line",
+            "declarations": {
+              "display": "none"
+            }
+          },
+          {
+            "selector": ".trade-intro",
+            "declarations": {
+              "align-items": "start"
+            }
+          },
+          {
+            "selector": ".angled-trades",
+            "declarations": {
+              "grid-template-columns": "repeat(3, minmax(0, 1fr))",
+              "gap": "24px"
+            }
+          },
+          {
+            "selector": ".angled-trade > img",
+            "declarations": {
+              "height": "260px"
+            }
+          },
+          {
+            "selector": ".benefits-strip",
+            "declarations": {
+              "grid-template-columns": "1fr 1.4fr"
+            }
+          },
+          {
+            "selector": ".human-strip, .about-strip",
+            "declarations": {
+              "gap": "28px"
+            }
+          },
+          {
+            "selector": ".faq-strip",
+            "declarations": {
+              "grid-template-columns": "1fr",
+              "gap": "32px"
+            }
+          },
+          {
+            "selector": ".faq-strip h2 br",
+            "declarations": {
+              "display": "none"
+            }
+          },
+          {
+            "selector": ".close-strip",
+            "declarations": {
+              "flex-wrap": "wrap"
+            }
+          }
+        ]
+      },
+      {
+        "query": "(max-width: 600px)",
+        "source": "website\\src\\styles\\home.css",
+        "rules": [
+          {
+            "selector": ".homepage",
+            "declarations": {
+              "--section-space": "clamp(3rem, 12vw, 4rem)",
+              "--composition-gap": "2rem",
+              "--home-title": "clamp(2rem, 8.5vw, 2.75rem)",
+              "--page-gutter": "max(20px, env(safe-area-inset-left), env(safe-area-inset-right))"
+            }
+          },
+          {
+            "selector": ".homepage .container",
+            "declarations": {
+              "width": "calc(100% - 2 * var(--page-gutter))"
+            }
+          },
+          {
+            "selector": ".homepage main > .home-hero",
+            "declarations": {
+              "padding-block": "clamp(96px, 18svh, 180px) 88px"
+            }
+          },
+          {
+            "selector": ".hero-video-toggle",
+            "declarations": {
+              "inset-inline-start": "var(--page-gutter)",
+              "inset-block-end": "16px"
+            }
+          },
+          {
+            "selector": ".home-hero-copy",
+            "declarations": {
+              "padding-block": "12px",
+              "text-align": "start"
+            }
+          },
+          {
+            "selector": ".home-hero h1",
+            "declarations": {
+              "font-size": "clamp(2.25rem, 10.4vw, 3.5rem)",
+              "line-height": "1.14"
+            }
+          },
+          {
+            "selector": ".home-hero-copy > p",
+            "declarations": {
+              "margin-block": "24px",
+              "max-width": "36ch",
+              "font-size": "1rem"
+            }
+          },
+          {
+            "selector": ".desktop-break",
+            "declarations": {
+              "display": "none"
+            }
+          },
+          {
+            "selector": ".hero-actions",
+            "declarations": {
+              "display": "grid",
+              "grid-template-columns": "minmax(0, 1fr)",
+              "gap": "8px"
             }
           },
           {
             "selector": ".hero-actions .pill",
             "declarations": {
-              "font-size": "14px",
-              "padding-inline": "17px"
+              "min-height": "56px",
+              "font-size": "1rem",
+              "padding-inline": "24px",
+              "gap": "12px"
+            }
+          },
+          {
+            "selector": ".hero-points, .home-hero .scroll-cue",
+            "declarations": {
+              "display": "none"
+            }
+          },
+          {
+            "selector": ".channel-stage",
+            "declarations": {
+              "grid-template-columns": "minmax(0, 1fr)",
+              "gap": "48px"
+            }
+          },
+          {
+            "selector": ".home-channel",
+            "declarations": {
+              "width": "min(100%, 28rem)",
+              "margin-inline": "auto"
+            }
+          },
+          {
+            "selector": ".phone-channel",
+            "declarations": {
+              "padding-block-start": "48px",
+              "border-block-start": "1px solid #446079"
+            }
+          },
+          {
+            "selector": ".demo-disclosure",
+            "declarations": {
+              "margin-block-start": "32px"
+            }
+          },
+          {
+            "selector": ".home-process h2",
+            "declarations": {
+              "margin-block-end": "var(--composition-gap)"
+            }
+          },
+          {
+            "selector": ".home-process ol",
+            "declarations": {
+              "grid-template-columns": "1fr",
+              "text-align": "start",
+              "gap": "28px"
+            }
+          },
+          {
+            "selector": ".home-process li",
+            "declarations": {
+              "display": "grid",
+              "grid-template-columns": "64px minmax(0, 1fr)",
+              "column-gap": "16px",
+              "padding": "0"
+            }
+          },
+          {
+            "selector": ".step-icon",
+            "declarations": {
+              "width": "64px",
+              "height": "64px",
+              "grid-row": "1/3",
+              "margin": "0"
+            }
+          },
+          {
+            "selector": ".step-icon > svg",
+            "declarations": {
+              "width": "32px",
+              "height": "32px"
+            }
+          },
+          {
+            "selector": ".home-process h3",
+            "declarations": {
+              "align-self": "end",
+              "font-size": "1.25rem"
+            }
+          },
+          {
+            "selector": ".home-process p",
+            "declarations": {
+              "font-size": "1rem",
+              "margin-block-start": "8px"
+            }
+          },
+          {
+            "selector": ".home-process .flow-line",
+            "declarations": {
+              "display": "none"
+            }
+          },
+          {
+            "selector": ".trade-intro",
+            "declarations": {
+              "display": "block"
+            }
+          },
+          {
+            "selector": ".trade-intro p",
+            "declarations": {
+              "margin-block-start": "24px"
+            }
+          },
+          {
+            "selector": ".angled-trades",
+            "declarations": {
+              "grid-template-columns": "repeat(2, minmax(0, 1fr))",
+              "gap": "20px",
+              "padding-inline": "12px"
+            }
+          },
+          {
+            "selector": ".angled-trade",
+            "declarations": {
+              "width": "100%",
+              "aspect-ratio": "3/4",
+              "min-height": "180px"
+            }
+          },
+          {
+            "selector": ".angled-trade > img",
+            "declarations": {
+              "height": "100%"
+            }
+          },
+          {
+            "selector": ".angled-trade h3",
+            "declarations": {
+              "font-size": "1rem",
+              "inset-inline": "8px"
+            }
+          },
+          {
+            "selector": ".angled-trade:last-child",
+            "declarations": {
+              "grid-column": "1/-1",
+              "aspect-ratio": "16/9"
+            }
+          },
+          {
+            "selector": ".angled-trade:last-child > img",
+            "declarations": {
+              "object-position": "center 40%"
+            }
+          },
+          {
+            "selector": ".benefits-strip, .human-strip, .about-strip, .evidence-strip",
+            "declarations": {
+              "grid-template-columns": "minmax(0, 1fr)",
+              "gap": "var(--composition-gap)"
+            }
+          },
+          {
+            "selector": ".benefits-strip h2 br",
+            "declarations": {
+              "display": "none"
+            }
+          },
+          {
+            "selector": ".benefits-strip > ul",
+            "declarations": {
+              "grid-template-columns": "minmax(0, 1fr)",
+              "gap": "20px"
+            }
+          },
+          {
+            "selector": ".benefits-strip li",
+            "declarations": {
+              "display": "grid",
+              "grid-template-columns": "32px minmax(0, 1fr)",
+              "gap": "4px 16px",
+              "padding-block-end": "20px"
+            }
+          },
+          {
+            "selector": ".benefits-strip li > svg",
+            "declarations": {
+              "grid-row": "1/3",
+              "width": "28px",
+              "height": "28px",
+              "margin": "0"
+            }
+          },
+          {
+            "selector": ".benefits-strip h3",
+            "declarations": {
+              "font-size": "1.125rem"
+            }
+          },
+          {
+            "selector": ".benefits-strip li p",
+            "declarations": {
+              "grid-column": "2",
+              "margin": "0"
+            }
+          },
+          {
+            "selector": ".human-strip > img",
+            "declarations": {
+              "grid-column": "1",
+              "grid-row": "2",
+              "aspect-ratio": "1.4"
+            }
+          },
+          {
+            "selector": ".human-intro",
+            "declarations": {
+              "grid-column": "1",
+              "grid-row": "1"
+            }
+          },
+          {
+            "selector": ".handoff-art",
+            "declarations": {
+              "grid-column": "1",
+              "grid-row": "3",
+              "gap": "16px"
+            }
+          },
+          {
+            "selector": ".handoff-art > span",
+            "declarations": {
+              "width": "64px",
+              "height": "64px"
+            }
+          },
+          {
+            "selector": ".handoff-art > span svg",
+            "declarations": {
+              "width": "32px",
+              "height": "32px"
+            }
+          },
+          {
+            "selector": ".about-photo",
+            "declarations": {
+              "grid-column": "1",
+              "grid-row": "3",
+              "margin-inline": "16px"
+            }
+          },
+          {
+            "selector": ".about-photo img",
+            "declarations": {
+              "aspect-ratio": "1.2"
+            }
+          },
+          {
+            "selector": ".evidence-strip p",
+            "declarations": {
+              "grid-column": "1",
+              "grid-row": "2",
+              "padding-block": "24px",
+              "font-size": "1rem"
+            }
+          },
+          {
+            "selector": ".evidence-strip p > svg",
+            "declarations": {
+              "width": "32px",
+              "height": "32px",
+              "margin-block-end": "24px"
+            }
+          },
+          {
+            "selector": ".evidence-strip p strong",
+            "declarations": {
+              "font-size": "1.25rem",
+              "margin-block-end": "16px"
+            }
+          },
+          {
+            "selector": ".evidence-strip .pill",
+            "declarations": {
+              "width": "100%"
+            }
+          },
+          {
+            "selector": ".home-evidence .demo-disclosure",
+            "declarations": {
+              "text-align": "start"
+            }
+          },
+          {
+            "selector": ".faq-strip .faq-list",
+            "declarations": {
+              "grid-template-columns": "minmax(0, 1fr)",
+              "gap": "12px"
+            }
+          },
+          {
+            "selector": ".faq-strip .faq-list summary",
+            "declarations": {
+              "padding": "16px",
+              "min-height": "64px"
+            }
+          },
+          {
+            "selector": ".faq-strip .faq-list details p",
+            "declarations": {
+              "padding": "0 16px 20px"
+            }
+          },
+          {
+            "selector": ".close-strip",
+            "declarations": {
+              "gap": "32px"
+            }
+          },
+          {
+            "selector": ".close-strip .pill",
+            "declarations": {
+              "width": "100%",
+              "min-width": "0"
+            }
+          },
+          {
+            "selector": ".close-strip p",
+            "declarations": {
+              "font-size": "1.125rem"
+            }
+          },
+          {
+            "selector": ".homepage .footer-main",
+            "declarations": {
+              "direction": "rtl",
+              "display": "grid",
+              "grid-template-columns": "repeat(2, minmax(0, 1fr))",
+              "align-items": "start",
+              "gap": "24px 20px"
+            }
+          },
+          {
+            "selector": ".homepage .footer-brand",
+            "declarations": {
+              "grid-column": "1/-1"
+            }
+          },
+          {
+            "selector": ".homepage .footer-main nav",
+            "declarations": {
+              "display": "grid",
+              "grid-template-columns": "minmax(0, 1fr)",
+              "gap": "4px"
+            }
+          }
+        ]
+      },
+      {
+        "query": "(max-height: 500px)",
+        "source": "website\\src\\styles\\home.css",
+        "rules": [
+          {
+            "selector": ".homepage.header-measured .site-header",
+            "declarations": {
+              "position": "relative"
+            }
+          },
+          {
+            "selector": "html:has(.homepage)",
+            "declarations": {
+              "scroll-padding-top": "16px"
+            }
+          },
+          {
+            "selector": ".homepage main > .home-hero",
+            "declarations": {
+              "padding-block-end": "76px"
             }
           }
         ]
@@ -1071,13 +2205,41 @@
         },
         {
           "source": "website\\src\\styles\\home.css",
-          "selector": ".pill",
+          "selector": "html:has(.homepage)",
+          "declarations": {
+            "scroll-behavior": "auto"
+          }
+        },
+        {
+          "source": "website\\src\\styles\\home.css",
+          "selector": ".pill, .pill svg, .text-link svg, .header-cta svg, .scroll-cue svg, .angled-trade > img",
           "declarations": {
             "transition": "none"
           }
+        },
+        {
+          "source": "website\\src\\styles\\home.css",
+          "selector": ":is(.pill, .text-link, .header-cta):is(:hover, :focus-visible) svg, .scroll-cue:is(:hover, :focus-visible) svg",
+          "declarations": {
+            "transform": "none"
+          }
+        },
+        {
+          "source": "website\\src\\styles\\home.css",
+          "selector": ".pill:active, .header-cta:active",
+          "declarations": {
+            "transform": "none"
+          }
+        },
+        {
+          "source": "website\\src\\styles\\home.css",
+          "selector": ".angled-trade:is(:hover, :focus-visible) > img",
+          "declarations": {
+            "transform": "skew(calc(-1 * var(--skew))) translateX(9%)"
+          }
         }
       ],
-      "note": "Legacy trade scaling is suppressed; static homepage image skew and waveform bars are not animations."
+      "note": "CSS removes translations and smooth scrolling; home-motion.ts cancels active WAAPI effects and prevents later replay. Static skew and waveform bars are not animations."
     },
     "stateContracts": {
       "buttonDisabled": {
@@ -1120,10 +2282,18 @@
         "escapeFocusTarget": "summary",
         "outsideClickCloses": true,
         "modal": false,
-        "focusTrap": false
+        "focusTrap": false,
+        "followingLinksCloses": true,
+        "focusoutCloses": true,
+        "switchingToDesktopCloses": true,
+        "viewportBounded": true,
+        "headerMeasurement": "ResizeObserver updates --header-height on the homepage."
       },
       "pressed": {
-        "dedicatedVisualRule": false
+        "dedicatedVisualRule": true,
+        "selector": ".pill:active, .header-cta:active",
+        "transform": "translateY(1px)",
+        "reducedMotionTransform": "none"
       },
       "chips": {
         "implemented": false,
@@ -1273,12 +2443,6 @@
           "home",
           ".faq-strip .faq-list details",
           "background"
-        ],
-        "faq-line": [
-          "home",
-          ".faq-strip .faq-list details",
-          "border",
-          "color"
         ]
       },
       "rounded": {
@@ -1363,6 +2527,27 @@
           "global",
           ".page-section",
           "padding-block"
+        ],
+        "section-mobile": [
+          "home",
+          ".homepage",
+          "--section-space",
+          "identity",
+          "(max-width: 600px)"
+        ],
+        "composition-mobile": [
+          "home",
+          ".homepage",
+          "--composition-gap",
+          "identity",
+          "(max-width: 600px)"
+        ],
+        "channel-separation-mobile": [
+          "home",
+          ".channel-stage",
+          "gap",
+          "identity",
+          "(max-width: 600px)"
         ]
       },
       "typography": {
@@ -1376,7 +2561,7 @@
         "display-mobile": {
           "source": "home",
           "selector": ".home-hero h1",
-          "query": "(max-width: 680px)",
+          "query": "(max-width: 600px)",
           "inherits": [
             "global:body",
             "home:.home-hero h1"
@@ -1401,12 +2586,13 @@
         },
         "headline-process": {
           "source": "home",
-          "selector": ".home-process h2",
+          "selector": ".homepage main > section h2",
           "inherits": [
             "global:body",
             "global:h1, h2, h3",
             "global:h2"
-          ]
+          ],
+          "customProperty": "--home-title"
         },
         "title": {
           "source": "global",
@@ -1457,9 +2643,9 @@
         "button-secondary": "global:.button.secondary",
         "button-secondary-hover": "global:.button.secondary:hover",
         "pill-primary": "home:.pill",
-        "pill-primary-hover": "home:.pill:hover",
+        "pill-primary-hover": "home:.pill:is(:hover, :focus-visible)",
         "pill-outline": "home:.pill-outline",
-        "pill-outline-hover": "home:.pill-outline:hover",
+        "pill-outline-hover": "home:.pill-outline:is(:hover, :focus-visible)",
         "pill-icon": "home:.pill-icon",
         "header-cta": "home:.site-header .header-cta",
         "header-cta-home": "home:.site-header .header-cta",
@@ -1468,7 +2654,7 @@
         "input-field": "global:.field input, .field textarea, .field select",
         "faq-home": "home:.faq-strip .faq-list details",
         "faq-reading": "global:.faq-list details",
-        "navigation": "global:.desktop-nav a",
+        "navigation": "home:.desktop-nav a",
         "notice": "global:.notice"
       },
       "sourceAliases": {
@@ -1519,44 +2705,80 @@
           "path": "website\\public\\images\\process-medallion.webp",
           "selector": ".step-icon",
           "purpose": "Process icon surround."
-        },
-        {
-          "path": "website\\public\\images\\step-arrow.webp",
-          "selector": ".home-process li:not(:last-child)::after",
-          "purpose": "Process connector, hidden on mobile."
         }
       ],
       "illustrationOnly": [
         {
           "selector": ".device-stage .phone-shell",
           "declarations": {
-            "width": "165px",
-            "height": "265px",
+            "width": "100%",
+            "min-width": "0",
+            "height": "auto",
+            "min-height": "clamp(380px, 30vw, 440px)",
             "border": "3px solid #259fe9",
             "outline": "1px solid #b0e6ff",
-            "border-radius": "25px",
-            "box-shadow": "0 4px 15px #008fff55, 4px 5px 5px #00000070, inset 2px 2px 2px #eefaff8a",
-            "transform": "none"
+            "border-radius": "28px",
+            "box-shadow": "0 10px 24px #008fff25, 4px 8px 12px #00000070",
+            "direction": "rtl",
+            "transform": "none",
+            "margin": "0",
+            "position": "relative"
           },
-          "note": "Dimensional illustration construction, not general card tokens. Miniature copy is not an endorsed reading scale."
+          "tablet": {
+            "min-height": "24rem"
+          },
+          "note": "Dimensional illustration, never a live phone control. Mobile/tablet chat is .875rem; each caption states illustration only."
         },
         {
           "selector": ".angled-trade",
           "declarations": {
-            "transform": "skew(-12deg)",
-            "border-radius": "12px"
+            "--skew": "-6deg",
+            "position": "relative",
+            "display": "block",
+            "transform": "skew(var(--skew))",
+            "border": "1px solid #638099",
+            "border-radius": "12px",
+            "overflow": "hidden",
+            "background": "#06121d",
+            "min-width": "0",
+            "transition": "border-color var(--motion-feedback) ease-out"
           },
-          "counterTransform": "skew(12deg)",
-          "mobileSkew": "6deg"
+          "imageDeclarations": {
+            "width": "125%",
+            "max-width": "none",
+            "height": "clamp(260px, 26vw, 360px)",
+            "object-fit": "cover",
+            "transform": "skew(calc(-1 * var(--skew))) translateX(9%)",
+            "transition": "transform var(--motion-arrival) var(--ease-arrival)"
+          },
+          "mobile": {
+            "width": "100%",
+            "aspect-ratio": "3/4",
+            "min-height": "180px"
+          }
         },
         {
           "selector": ".about-photo",
           "declarations": {
-            "transform": "skew(-8deg)",
+            "grid-column": "2",
+            "grid-row": "1/3",
             "border-radius": "26px 10px",
-            "height": "205px"
+            "overflow": "hidden",
+            "transform": "skew(-6deg)",
+            "margin-inline": "20px"
           },
-          "imageTransform": "skew(8deg) scale(1.16)"
+          "imageDeclarations": {
+            "width": "100%",
+            "height": "auto",
+            "aspect-ratio": ".95",
+            "object-fit": "cover",
+            "transform": "skew(6deg) scale(1.16)"
+          },
+          "mobile": {
+            "grid-column": "1",
+            "grid-row": "3",
+            "margin-inline": "16px"
+          }
         }
       ],
       "picture": {
@@ -1719,13 +2941,33 @@
         },
         "pixelPerfectClaim": false,
         "historicalCompGateClaim": false,
-        "productionLaunchOrDeliveryClaim": false
+        "productionLaunchOrDeliveryClaim": false,
+        "historical": true,
+        "note": "Retained 17 November review evidence; not current viewport geometry or a new certification. See website/VERIFICATION.md for subsequent work."
+      },
+      "metadataRefresh": {
+        "generatedAt": "2026-11-18T12:28:22.120Z",
+        "designDocumentPreserved": true,
+        "documentSha256": "6ccf6e025faf13eef9c66cbea441bcf542299ed03355666a05dd3db9dd942045",
+        "sources": [
+          {
+            "path": "website\\src\\styles\\global.css",
+            "sha256": "321b2834bc886c0345aec6ff30552b723067c09525daff5a2b7c661a092ae905"
+          },
+          {
+            "path": "website\\src\\styles\\home.css",
+            "sha256": "29f9ab86fa027ae4dcec37456b0dd94ca80e1e7a99049d140c758b45ee944ea0"
+          }
+        ],
+        "motionSource": "website\\src\\scripts\\home-motion.ts",
+        "verificationReference": "website\\VERIFICATION.md",
+        "newWebsiteBuildOrLaunchClaim": false
       }
     },
     "notCanonized": [
       {
-        "finding": "Miniature device conversation text reaches 8-9px and tighter values in nested demo details.",
-        "reason": "Illustration-scale legibility limitation, not a reusable reading standard; no application edit authorized."
+        "finding": "Phone illustrations use a contextual type scale: .8rem chat on desktop and .875rem on phone/tablet.",
+        "reason": "These examples are not live UI and do not replace the 16px body/input baseline."
       },
       {
         "finding": "Reference-proportional heights differ from the actual usable, factual layout.",
@@ -1758,7 +3000,7 @@
       "refersTo": "pill-primary",
       "description": "Homepage primary action with the actual blue circular arrow; responsive hero overrides included.",
       "html": "<div dir=\"rtl\"><a class=\"ds-hero-pill\" href=\"#\"><span>לבדיקת התאמה</span><span class=\"ds-pill-icon\"><svg width=\"15\" height=\"15\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M19 12H5m7-7-7 7 7 7\"/></svg></span></a></div>",
-      "css": ".ds-hero-pill{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:44px;padding:9px 22px;border:1px solid #d7e9f7;border-radius:99px;background:#f5faff;color:#0a1a2c;font-family:'Heebo Variable',sans-serif;font-size:15px;font-weight:750;line-height:1.4;text-decoration:none;box-shadow:0 3px 9px #00000012;transition:background 140ms ease-out}.ds-hero-pill:hover{background:#d5edff}.ds-hero-pill:focus-visible{outline:3px solid var(--cyan,#37bbff);outline-offset:5px}.ds-pill-icon{display:grid;place-items:center;width:25px;height:25px;border-radius:50%;background:#0f73d7;color:white}.ds-pill-icon svg{flex-shrink:0;vertical-align:middle}@media(max-width:1100px){.ds-hero-pill{padding-inline:17px;font-size:14px}}@media(max-width:680px){.ds-hero-pill{padding-inline:19px;font-size:15px}}@media(max-width:360px){.ds-hero-pill{padding-inline:17px;font-size:14px}}@media(prefers-reduced-motion:reduce){.ds-hero-pill{transition:none}}"
+      "css": ".ds-hero-pill{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:50px;padding:12px 24px;border:1px solid #d7e9f7;border-radius:99px;background:var(--pill-paper,#f5faff);color:var(--pill-ink,#0a1a2c);font-size:1rem;font-weight:750;text-decoration:none;line-height:1.4;transition:background-color var(--motion-feedback,160ms) ease-out, transform var(--motion-feedback,160ms) ease-out, border-color var(--motion-feedback,160ms) ease-out;font-family:'Heebo Variable', sans-serif}.ds-hero-pill:is(:hover,:focus-visible){background:var(--pill-hover,#d5edff)}.ds-hero-pill:focus-visible{outline:3px solid var(--cyan,#37bbff);outline-offset:5px}.ds-hero-pill:active{transform:translateY(1px)}.ds-pill-icon{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:#0f73d7;color:white;flex-shrink:0}.ds-hero-pill svg{transition:transform var(--motion-feedback,160ms) ease-out;flex-shrink:0}.ds-hero-pill:is(:hover,:focus-visible) svg{transform:translateX(-3px)}@media (max-width: 600px){.ds-hero-pill{font-size:.9375rem;padding-inline:12px;gap:8px}}@media (prefers-reduced-motion: reduce){.ds-hero-pill,.ds-hero-pill svg{transition:none}.ds-hero-pill:active,.ds-hero-pill:is(:hover,:focus-visible) svg{transform:none}}"
     },
     {
       "name": "Outlined hero pill",
@@ -1766,7 +3008,7 @@
       "refersTo": "pill-outline",
       "description": "The corrected second hero action: transparent surface, white text, blue circle; presented on homepage navy.",
       "html": "<div class=\"ds-dark-stage\" dir=\"rtl\"><a class=\"ds-outline-pill\" href=\"#\">איך זה עובד<span class=\"ds-outline-icon\"><svg width=\"15\" height=\"15\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M19 12H5m7-7-7 7 7 7\"/></svg></span></a></div>",
-      "css": ".ds-dark-stage{--navy:#081721;background:var(--navy);color:white}.ds-outline-pill{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:44px;padding:9px 22px;border:1px solid #94b2cc;border-radius:99px;background:transparent;color:white;font-family:'Heebo Variable',sans-serif;font-size:15px;font-weight:750;line-height:1.4;text-decoration:none;box-shadow:none;transition:background 140ms ease-out}.ds-outline-pill:hover{background:#123451}.ds-outline-pill:focus-visible{outline:3px solid var(--cyan,#37bbff);outline-offset:5px}.ds-outline-icon{display:grid;place-items:center;width:25px;height:25px;border-radius:50%;background:#0f73d7;color:white}.ds-outline-icon svg{flex-shrink:0;vertical-align:middle}@media(max-width:1100px){.ds-outline-pill{padding-inline:17px;font-size:14px}}@media(max-width:680px){.ds-outline-pill{padding-inline:19px;font-size:15px}}@media(max-width:360px){.ds-outline-pill{padding-inline:17px;font-size:14px}}@media(prefers-reduced-motion:reduce){.ds-outline-pill{transition:none}}"
+      "css": ".ds-dark-stage{background:#081721;color:white}.ds-outline-pill{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:50px;padding:12px 24px;border:1px solid #d7e9f7;border-radius:99px;background:transparent;color:white;font-size:1rem;font-weight:750;text-decoration:none;line-height:1.4;transition:background-color var(--motion-feedback,160ms) ease-out, transform var(--motion-feedback,160ms) ease-out, border-color var(--motion-feedback,160ms) ease-out;border-color:#94b2cc;font-family:'Heebo Variable', sans-serif}.ds-outline-pill:is(:hover,:focus-visible){background:#123451;border-color:var(--cyan,#37bbff)}.ds-outline-pill:focus-visible{outline:3px solid var(--cyan,#37bbff);outline-offset:5px}.ds-outline-pill:active{transform:translateY(1px)}.ds-outline-icon{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:#0f73d7;color:white;flex-shrink:0}.ds-outline-pill svg{transition:transform var(--motion-feedback,160ms) ease-out;flex-shrink:0}.ds-outline-pill:is(:hover,:focus-visible) svg{transform:translateX(-3px)}@media (max-width: 600px){.ds-outline-pill{font-size:.9375rem;padding-inline:12px;gap:8px}}@media (prefers-reduced-motion: reduce){.ds-outline-pill,.ds-outline-pill svg{transition:none}.ds-outline-pill:active,.ds-outline-pill:is(:hover,:focus-visible) svg{transform:none}}"
     },
     {
       "name": "Supporting primary button",
@@ -1798,7 +3040,7 @@
       "refersTo": "navigation",
       "description": "Representative existing links and hybrid header CTA. Native mobile disclosure switches at 880px on all routes; full-site Escape/outside behavior requires Layout.astro.",
       "html": "<div class=\"ds-nav-stage\"><nav class=\"ds-desktop-nav\" aria-label=\"ניווט לדוגמה\"><a href=\"#\" aria-current=\"page\">פתרונות</a><a href=\"#\">איך זה עובד</a><a href=\"#\">אודות</a></nav><a class=\"ds-header-cta\" href=\"#\">בואו נדבר<svg width=\"17\" height=\"17\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M19 12H5m7-7-7 7 7 7\"/></svg></a><details class=\"ds-mobile-menu\" dir=\"rtl\"><summary aria-label=\"פתיחת תפריט ניווט\"><svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 6h16M4 12h16M4 18h16\"/></svg></summary><nav aria-label=\"ניווט לנייד לדוגמה\"><a href=\"#\">פתרונות</a><a href=\"#\">איך זה עובד</a><a href=\"#\">יצירת קשר</a></nav></details></div>",
-      "css": ".ds-nav-stage{position:relative;display:flex;direction:ltr;align-items:center;justify-content:space-between;gap:26px;background:var(--navy,#08162c);color:var(--paper,#ffffff);font-family:'Heebo Variable',sans-serif;font-size:16px;line-height:1.7}.ds-desktop-nav{display:flex;direction:rtl;align-items:center;gap:22px}.ds-desktop-nav a{display:flex;align-items:center;min-height:44px;font-size:14px;color:var(--on-dark,#c8d5e7);text-decoration:none}.ds-desktop-nav a:hover,.ds-desktop-nav a[aria-current]{color:var(--paper,#ffffff);text-decoration:underline;text-decoration-color:var(--cyan,#37bbff);text-underline-offset:8px}.ds-header-cta{display:inline-flex;direction:rtl;align-items:center;justify-content:center;gap:14px;min-height:43px;padding:8px 20px;font-size:15px;font-weight:650;line-height:1.5;background:#f5faff;color:var(--navy,#08162c);border:1px solid transparent;border-radius:99px;text-decoration:none;transition:background-color 160ms ease-out,box-shadow 160ms ease-out}.ds-header-cta:hover{box-shadow:0 5px 16px #00000018}.ds-mobile-menu{display:none}.ds-mobile-menu>summary{display:grid;place-items:center;width:44px;height:44px;list-style:none;border:1px solid #314762;border-radius:5px;cursor:pointer}.ds-mobile-menu>summary::-webkit-details-marker{display:none}.ds-mobile-menu nav{position:absolute;inset-inline:0;inset-block-start:100%;background:#102340;padding:12px 18px 20px;box-shadow:0 12px 25px #00000030;display:grid}.ds-mobile-menu nav a{padding:12px;border-block-end:1px solid #30445f;text-decoration:none;color:inherit}.ds-nav-stage a:focus-visible,.ds-mobile-menu>summary:focus-visible{outline:3px solid var(--cyan,#37bbff);outline-offset:5px}@media(max-width:1100px){.ds-desktop-nav{gap:14px}.ds-desktop-nav a{font-size:13px}}@media(max-width:880px){.ds-desktop-nav,.ds-header-cta{display:none}.ds-mobile-menu{display:block}}@media(max-width:820px){.ds-header-cta{padding-inline:12px;font-size:13px}}@media(max-width:680px){.ds-mobile-menu[open]>summary{background:var(--navy-soft,#102340)}}@media(prefers-reduced-motion:reduce){.ds-header-cta{transition:none}}"
+      "css": ".ds-nav-stage{display:flex;direction:ltr;align-items:center;justify-content:space-between;gap:26px;min-height:80px;position:relative;background:var(--navy,#08162c);color:var(--paper,#ffffff);font-family:'Heebo Variable', sans-serif;font-size:16px;line-height:1.7}.ds-desktop-nav{display:flex;direction:rtl;align-items:center;gap:22px;flex-wrap:wrap;justify-content:center}.ds-desktop-nav a{font-size:.875rem;text-decoration:none;min-height:44px;display:flex;align-items:center;color:var(--on-dark,#c8d5e7);transition:color 160ms ease-out}.ds-desktop-nav a:is(:hover,:focus-visible,[aria-current]){color:var(--paper,#ffffff);text-decoration:underline;text-decoration-color:var(--cyan,#37bbff);text-underline-offset:8px}.ds-header-cta{display:inline-flex;align-items:center;justify-content:center;gap:14px;padding:8px 20px;min-height:44px;background:#f5faff;color:var(--navy,#08162c);border:1px solid transparent;border-radius:99px;text-decoration:none;font-weight:650;line-height:1.5;transition:background-color 160ms ease-out, box-shadow 160ms ease-out;direction:rtl;font-size:15px;font-family:'Heebo Variable', sans-serif}.ds-header-cta:hover{box-shadow:0 5px 16px #00000018}.ds-header-cta svg{transition:transform var(--motion-feedback,160ms) ease-out}.ds-header-cta:is(:hover,:focus-visible) svg{transform:translateX(-3px)}.ds-header-cta:active{transform:translateY(1px)}.ds-mobile-menu{display:none;direction:rtl}.ds-mobile-menu>summary{display:grid;place-items:center;width:44px;height:44px;list-style:none;border:1px solid #48627e;border-radius:5px;transition:background-color var(--motion-feedback,160ms) ease-out}.ds-mobile-menu>summary::-webkit-details-marker{display:none}.ds-mobile-menu>summary:is(:hover,:focus-visible),.ds-mobile-menu[open]>summary{background:var(--navy-soft,#102340)}.ds-mobile-menu nav{position:absolute;inset-inline:0;inset-block-start:100%;background:#102340;padding:12px max(18px, env(safe-area-inset-right)) 20px;box-shadow:0 12px 25px #00000030;display:grid;max-height:calc(100svh - var(--header-height, var(--home-header-base,4.75rem)));overflow-y:auto}.ds-mobile-menu nav a{padding:12px;min-height:48px;border-block-end:1px solid #30445f;text-decoration:none;color:inherit}.ds-mobile-menu nav a:is(:hover,:focus-visible){background:#193654;text-decoration:underline}.ds-nav-stage a:focus-visible,.ds-mobile-menu>summary:focus-visible{outline:3px solid var(--cyan,#37bbff);outline-offset:5px}@media (max-width: 1100px){.ds-desktop-nav{gap:14px}}@media (max-width: 880px){.ds-desktop-nav,.ds-header-cta{display:none}.ds-mobile-menu{display:block}}@media (prefers-reduced-motion: reduce){.ds-header-cta,.ds-header-cta svg{transition:none}.ds-header-cta:active,.ds-header-cta:is(:hover,:focus-visible) svg{transform:none}}"
     },
     {
       "name": "Supporting service card",
@@ -1812,17 +3054,17 @@
       "name": "Homepage FAQ disclosure",
       "kind": "custom",
       "refersTo": "faq-home",
-      "description": "Rounder, softly shadowed native disclosure; the mobile summary retains the 1100px padding override.",
+      "description": "Flat, bordered native disclosure; 76px minimum summary on desktop and 64px on phones.",
       "html": "<details class=\"ds-home-faq\" dir=\"rtl\"><summary>האם הסוכן מחליף את בעל העסק?<svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 5v14M5 12h14\"/></svg></summary><p>לא. המטרה היא להוריד חלק מעבודת קבלת הפניות, לא להחליף שיקול דעת מקצועי. מקרים חריגים, בקשות שלא הוגדרו ומצבים שמצריכים אדם מועברים להמשך טיפול בהתאם לתהליך שסוכם.</p></details>",
-      "css": ".ds-home-faq{background:#f8fbff;border:1px solid #e0eaf5;border-radius:16px;box-shadow:0 2px 5px #345c7820;color:var(--ink,#11213c);font-family:'Heebo Variable',sans-serif;font-size:16px;line-height:1.7}.ds-home-faq summary{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 16px;font-weight:600;font-size:14px;list-style:none;min-height:44px;cursor:pointer}.ds-home-faq summary::-webkit-details-marker{display:none}.ds-home-faq summary svg{color:var(--blue,#086bdf);flex-shrink:0;vertical-align:middle;transition:transform 160ms ease-out}.ds-home-faq[open] summary svg{transform:rotate(45deg)}.ds-home-faq[open] summary{color:var(--blue-hover,#0963c9)}.ds-home-faq summary:focus-visible{outline:3px solid var(--cyan,#37bbff);outline-offset:5px}.ds-home-faq p{margin:0;padding:0 16px 16px;color:var(--muted,#52617a);font-size:16px;max-width:75ch;text-wrap:pretty}@media(max-width:1100px){.ds-home-faq summary{font-size:13px;padding:10px 13px}}@media(max-width:680px){.ds-home-faq summary{font-size:15px;min-height:49px}}@media(prefers-reduced-motion:reduce){.ds-home-faq summary svg{transition:none}}"
+      "css": ".ds-home-faq{border:1px solid #d6e2ef;background:#f8fbff;border-radius:16px;transition:border-color var(--motion-feedback,160ms) ease-out;font-family:'Heebo Variable', sans-serif;color:var(--ink,#11213c);font-size:16px;line-height:1.7}.ds-home-faq summary{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px;font-weight:600;list-style:none;min-height:76px;font-size:1rem;cursor:pointer}.ds-home-faq summary::-webkit-details-marker{display:none}.ds-home-faq summary svg{color:var(--blue,#086bdf);transition:transform 160ms ease-out;flex-shrink:0}.ds-home-faq[open] summary svg{transform:rotate(45deg)}.ds-home-faq[open] summary{color:var(--blue-hover,#0963c9)}.ds-home-faq:is(:hover,:focus-within,[open]){border-color:var(--blue,#086bdf)}.ds-home-faq summary:is(:hover,:focus-visible){color:var(--blue-hover,#0963c9)}.ds-home-faq summary:focus-visible{outline:3px solid var(--cyan,#37bbff);outline-offset:5px}.ds-home-faq p{margin:0;padding:0 20px 24px;color:var(--muted,#52617a);max-width:75ch;font-size:1rem;line-height:1.65;text-wrap:pretty}@media (max-width: 600px){.ds-home-faq summary{padding:16px;min-height:64px}.ds-home-faq p{padding:0 16px 20px}}@media (prefers-reduced-motion: reduce){.ds-home-faq summary svg{transition:none}}"
     },
     {
       "name": "Supporting FAQ disclosure",
       "kind": "custom",
       "refersTo": "faq-reading",
-      "description": "Flat supporting-page variant; larger default padding and 58px minimum summary height.",
+      "description": "Supporting-page native disclosure; shared border/focus feedback, 58px minimum summary height.",
       "html": "<details class=\"ds-reading-faq\" dir=\"rtl\"><summary>האם הסוכן מחליף את בעל העסק?<svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 5v14M5 12h14\"/></svg></summary><p>לא. המטרה היא להוריד חלק מעבודת קבלת הפניות, לא להחליף שיקול דעת מקצועי. מקרים חריגים, בקשות שלא הוגדרו ומצבים שמצריכים אדם מועברים להמשך טיפול בהתאם לתהליך שסוכם.</p></details>",
-      "css": ".ds-reading-faq{border:1px solid var(--line,#dce3ed);background:var(--paper,#ffffff);border-radius:6px;color:var(--ink,#11213c);font-family:'Heebo Variable',sans-serif;font-size:16px;line-height:1.7}.ds-reading-faq summary{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px 22px;font-weight:600;list-style:none;min-height:58px;cursor:pointer}.ds-reading-faq summary::-webkit-details-marker{display:none}.ds-reading-faq summary svg{color:var(--blue,#086bdf);flex-shrink:0;vertical-align:middle;transition:transform 160ms ease-out}.ds-reading-faq[open] summary svg{transform:rotate(45deg)}.ds-reading-faq[open] summary{color:var(--blue-hover,#0963c9)}.ds-reading-faq summary:focus-visible{outline:3px solid var(--cyan,#37bbff);outline-offset:5px}.ds-reading-faq p{margin:0;padding:0 22px 20px;color:var(--muted,#52617a);max-width:75ch;text-wrap:pretty}@media(max-width:680px){.ds-reading-faq summary{padding:15px;font-size:15px;gap:12px}.ds-reading-faq p{padding:0 15px 19px;font-size:15px}}@media(prefers-reduced-motion:reduce){.ds-reading-faq summary svg{transition:none}}"
+      "css": ".ds-reading-faq{border:1px solid var(--line,#dce3ed);background:var(--paper,#ffffff);border-radius:6px;transition:border-color var(--motion-feedback,160ms) ease-out;font-family:'Heebo Variable', sans-serif;color:var(--ink,#11213c);font-size:16px;line-height:1.7}.ds-reading-faq summary{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px 22px;font-weight:600;list-style:none;min-height:58px;cursor:pointer}.ds-reading-faq summary::-webkit-details-marker{display:none}.ds-reading-faq summary svg{color:var(--blue,#086bdf);transition:transform 160ms ease-out;flex-shrink:0}.ds-reading-faq[open] summary svg{transform:rotate(45deg)}.ds-reading-faq[open] summary{color:var(--blue-hover,#0963c9)}.ds-reading-faq:is(:hover,:focus-within,[open]){border-color:var(--blue,#086bdf)}.ds-reading-faq summary:is(:hover,:focus-visible){color:var(--blue-hover,#0963c9)}.ds-reading-faq summary:focus-visible{outline:3px solid var(--cyan,#37bbff);outline-offset:5px}.ds-reading-faq p{margin:0;padding:0 22px 20px;color:var(--muted,#52617a);max-width:75ch;text-wrap:pretty}@media (max-width: 680px){.ds-reading-faq summary{padding:15px;font-size:15px;gap:12px}.ds-reading-faq p{padding:0 15px 19px;font-size:15px}}@media (prefers-reduced-motion: reduce){.ds-reading-faq summary svg{transition:none}}"
     },
     {
       "name": "Preview notice",
@@ -1835,7 +3077,7 @@
   ],
   "narrative": {
     "northStar": "Approved TamidZamin reference",
-    "overview": "This is an observed authority label, not a newly chosen metaphor. The supplied TamidZamin reference owns the visual direction: deep blue-black bands, pale surfaces, electric-blue decoration, compact Hebrew headings, supplied trade photographs, and rounded actions. Professional, plain Hebrew and correct RTL are confirmed commitments in `PRODUCT.md`.\n\nThe implemented system has two related scopes, not one flattened theme. The homepage uses compact photographic bands, light pill actions, and authored raster light edges. Supporting service, reading, and contact pages use the shared navy palette, roomier content, conventional blue buttons, and bordered panels. This document records finished source; it does not establish service capabilities or certify launch readiness.",
+    "overview": "This is an observed authority label, not a newly chosen metaphor. The supplied TamidZamin reference owns the visual direction: deep blue-black bands, pale surfaces, electric-blue decoration, heavy Hebrew headings, supplied trade photographs, and rounded actions. Professional, plain Hebrew and correct RTL are confirmed commitments in `PRODUCT.md`. On 18 November 2026 the owner approved spacious website proportions instead of the reference's compressed poster proportions.\n\nThe implemented system has two related scopes, not one flattened theme. The homepage uses viewport-scale photographic compositions, light pill actions, and authored raster light edges. Supporting service, reading, and contact pages use the shared navy palette, content-led heights, conventional blue buttons, and bordered panels. This document records source; it does not establish service capabilities or certify launch readiness.",
     "keyCharacteristics": [
       "Hebrew RTL text with deliberately LTR visual groups and isolated Latin names.",
       "Homepage blue-black and pale-wave bands; supporting navy and white reading surfaces.",

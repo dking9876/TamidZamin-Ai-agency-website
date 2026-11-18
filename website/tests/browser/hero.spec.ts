@@ -35,7 +35,7 @@ for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 
     await page.setViewportSize(viewport);
     for (const reload of [false, true]) {
       if (reload) await page.reload(); else await page.goto('/');
-      await page.waitForFunction(() => window.__heroMotion.effects.length === 4 && window.__heroMotion.frames > 3);
+      await page.waitForFunction(() => window.__heroMotion.effects.length === 3 && window.__heroMotion.frames > 3);
       const motion = await page.evaluate(() => ({
         effects: window.__heroMotion.effects.map((animation) => ({
           target: (animation.effect as KeyframeEffect).target?.className,
@@ -62,11 +62,11 @@ for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 
 }
 
 for (const cancelBeforeLoad of [false, true]) {
-  test(`slow hero image never blocks copy; cancellation before load: ${cancelBeforeLoad}`, async ({ page }) => {
-    let releaseImage = () => {};
-    const imageGate = new Promise<void>((resolve) => { releaseImage = resolve; });
-    await page.route(/\/images\/hero-\d+\.webp/, async (route) => {
-      await imageGate;
+  test(`slow hero video never blocks copy; reduced motion before load: ${cancelBeforeLoad}`, async ({ page }) => {
+    let releaseVideo = () => {};
+    const videoGate = new Promise<void>((resolve) => { releaseVideo = resolve; });
+    await page.route('**/media/hero-film.mp4', async (route) => {
+      await videoGate;
       await route.continue();
     });
     try {
@@ -74,32 +74,32 @@ for (const cancelBeforeLoad of [false, true]) {
       await page.waitForFunction(() => window.__heroMotion.effects.length === 3);
       await expect(page.locator('.hero-actions > .pill')).toBeVisible();
       await expect(page.locator('#hero-title')).toContainText('כל פנייה מתחילה');
+      await expect(page.locator('.hero-poster')).toBeVisible();
       if (cancelBeforeLoad) {
         await page.emulateMedia({ reducedMotion: 'reduce' });
         await page.waitForFunction(() => window.__heroMotion.effects.every((animation) => animation.playState === 'idle'));
-        await page.emulateMedia({ reducedMotion: 'no-preference' });
       } else {
         await page.waitForFunction(() => window.__heroMotion.effects.every((animation) => animation.playState === 'finished'));
       }
-      releaseImage();
-      await page.waitForFunction(() => document.querySelector<HTMLImageElement>('.home-hero-image')!.naturalWidth > 0);
+      releaseVideo();
       if (cancelBeforeLoad) {
-        await page.evaluate(async () => { await new Promise(requestAnimationFrame); await new Promise(requestAnimationFrame); });
+        await expect(page.locator('.hero-video')).toBeHidden();
+        await expect(page.locator('.hero-video')).toHaveJSProperty('paused', true);
         expect(await page.evaluate(() => window.__heroMotion.effects.length)).toBe(3);
-        expect(await page.locator('.home-hero-image').evaluate((image) => image.getAnimations().length)).toBe(0);
       } else {
-        await page.waitForFunction(() => window.__heroMotion.effects.length === 4);
+        await expect(page.locator('.home-hero')).toHaveAttribute('data-video-ready', '');
+        await expect(page.locator('.hero-video')).toHaveJSProperty('paused', false);
         await page.waitForFunction(() => window.__heroMotion.effects.every((animation) => animation.playState === 'finished'));
       }
     } finally {
-      releaseImage();
+      releaseVideo();
     }
   });
 }
 
 test('changing to reduced motion during the hero entrance leaves a sharp static composition', async ({ page }) => {
   await page.goto('/');
-  await page.waitForFunction(() => window.__heroMotion.effects.length === 4 && window.__heroMotion.frames > 2);
+  await page.waitForFunction(() => window.__heroMotion.effects.length === 3 && window.__heroMotion.frames > 2);
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await expect.poll(() => page.locator('.home-hero').evaluate((element) => element.getAnimations({ subtree: true }).length)).toBe(0);
   for (const line of await page.locator('.hero-title-line').all()) {
@@ -107,9 +107,12 @@ test('changing to reduced motion during the hero entrance leaves a sharp static 
     await expect(line).toHaveCSS('transform', 'none');
     await expect(line).toHaveCSS('opacity', '1');
   }
-  await expect(page.locator('.home-hero-image')).toHaveCSS('transform', 'none');
+  await expect(page.locator('.hero-video')).toHaveJSProperty('paused', true);
+  await expect(page.locator('.hero-video')).toBeHidden();
+  await expect(page.locator('.hero-video-toggle')).toBeHidden();
   await expect(page.locator('.hero-light')).toHaveCSS('clip-path', 'none');
   await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await expect(page.locator('.hero-video')).toHaveJSProperty('paused', true);
   expect(await page.locator('.home-hero').evaluate((element) => element.getAnimations({ subtree: true }).length)).toBe(0);
 });
 
@@ -138,3 +141,127 @@ for (const width of [320, 390, 600]) {
     await expect(page).toHaveURL(/#process$/);
   });
 }
+
+for (const viewport of [
+  { width: 320, height: 740 }, { width: 390, height: 844 },
+  { width: 768, height: 1024 }, { width: 844, height: 390 },
+  { width: 1440, height: 900 }, { width: 1920, height: 1080 },
+]) {
+  test(`video fills every hero edge with overlaid text at ${viewport.width}x${viewport.height}`, async ({ page }) => {
+    await page.setViewportSize(viewport);
+    await page.goto('/');
+    const video = page.locator('.hero-video');
+    await expect(page.locator('.home-hero')).toHaveAttribute('data-video-ready', '');
+    await expect.poll(() => video.evaluate((element: HTMLVideoElement) => element.currentTime)).toBeGreaterThan(0.1);
+    await expect(video).toHaveJSProperty('muted', true);
+    await expect(video).toHaveJSProperty('loop', true);
+    await expect(video).toHaveJSProperty('playsInline', true);
+    await expect(video).toHaveCSS('object-fit', 'cover');
+    const heroBox = (await page.locator('.home-hero').boundingBox())!;
+    const videoBox = (await video.boundingBox())!;
+    for (const axis of ['x', 'y', 'width', 'height'] as const) {
+      expect(videoBox[axis]).toBeCloseTo(heroBox[axis], 0);
+    }
+    for (const selector of ['#hero-title', '.home-hero-copy > p', '.hero-actions']) {
+      const box = (await page.locator(selector).boundingBox())!;
+      expect(box.x).toBeGreaterThanOrEqual(videoBox.x);
+      expect(box.y).toBeGreaterThanOrEqual(videoBox.y);
+      expect(box.x + box.width).toBeLessThanOrEqual(videoBox.x + videoBox.width + 1);
+      expect(box.y + box.height).toBeLessThanOrEqual(videoBox.y + videoBox.height + 1);
+    }
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(viewport.width);
+  });
+}
+
+test('video pauses by keyboard, stays paused on re-entry, resumes and loops silently', async ({ page }) => {
+  await page.goto('/');
+  const video = page.locator('.hero-video');
+  const toggle = page.locator('.hero-video-toggle');
+  await expect(toggle).toHaveAttribute('data-playing', 'true');
+  await toggle.focus();
+  await page.keyboard.press('Enter');
+  await expect(video).toHaveJSProperty('paused', true);
+  await expect(toggle).toHaveAccessibleName('הפעלת סרטון הרקע');
+  const pausedTime = await video.evaluate((element: HTMLVideoElement) => element.currentTime);
+  await page.locator('#faq').scrollIntoViewIfNeeded();
+  await page.locator('.home-hero').scrollIntoViewIfNeeded();
+  await expect(video).toHaveJSProperty('paused', true);
+  expect(await video.evaluate((element: HTMLVideoElement) => element.currentTime)).toBe(pausedTime);
+  await toggle.focus();
+  await page.keyboard.press('Space');
+  await expect(toggle).toHaveAccessibleName('השהיית סרטון הרקע');
+  await expect.poll(() => video.evaluate((element: HTMLVideoElement) => element.currentTime)).toBeGreaterThan(pausedTime);
+  await video.evaluate((element: HTMLVideoElement) => { element.currentTime = element.duration - 0.2; });
+  await expect.poll(() => video.evaluate((element: HTMLVideoElement) => element.currentTime)).toBeLessThan(2);
+  await expect(video).toHaveJSProperty('paused', false);
+  await expect(video).toHaveJSProperty('muted', true);
+});
+
+test('video suspends offscreen and through page lifecycle, then resumes only when appropriate', async ({ page }) => {
+  await page.goto('/');
+  const video = page.locator('.hero-video');
+  await expect(video).toHaveJSProperty('paused', false);
+  await page.locator('#faq').scrollIntoViewIfNeeded();
+  await expect(video).toHaveJSProperty('paused', true);
+  await page.locator('.home-hero').scrollIntoViewIfNeeded();
+  await expect(video).toHaveJSProperty('paused', false);
+  await page.evaluate(() => window.dispatchEvent(new PageTransitionEvent('pagehide')));
+  await expect(video).toHaveJSProperty('paused', true);
+  await page.evaluate(() => window.dispatchEvent(new PageTransitionEvent('pageshow')));
+  await expect(video).toHaveJSProperty('paused', false);
+});
+
+for (const mode of ['reduced-motion', 'no-javascript'] as const) {
+  test(`${mode}: poster fills hero, actions work and video is never requested`, async ({ browser, baseURL }) => {
+    const context = await browser.newContext({
+      javaScriptEnabled: mode !== 'no-javascript',
+      reducedMotion: mode === 'reduced-motion' ? 'reduce' : 'no-preference',
+      viewport: { width: 390, height: 844 },
+    });
+    const page = await context.newPage();
+    const videos: string[] = [];
+    page.on('request', (request) => { if (request.url().endsWith('.mp4')) videos.push(request.url()); });
+    await page.goto(baseURL!);
+    await expect(page.locator('.hero-video')).not.toHaveAttribute('src');
+    await expect(page.locator('.hero-video-toggle')).toBeHidden();
+    await expect(page.locator('.hero-poster')).toBeVisible();
+    expect(await page.locator('.hero-poster').boundingBox()).toEqual(await page.locator('.home-hero').boundingBox());
+    await page.locator('.hero-actions > .pill').click();
+    await expect(page).toHaveURL(/\/contact\/$/);
+    expect(videos).toEqual([]);
+    await context.close();
+  });
+}
+
+test('video download failure keeps the poster and reports the fallback without blocking the CTA', async ({ page }) => {
+  await page.route('**/media/hero-film.mp4', (route) => route.abort('failed'));
+  await page.goto('/');
+  await expect(page.locator('.hero-video-status')).toContainText('סרטון הרקע אינו זמין');
+  await expect(page.locator('.hero-video-toggle')).toBeHidden();
+  await expect(page.locator('.hero-video')).toBeHidden();
+  await expect(page.locator('.hero-poster')).toBeVisible();
+  await page.locator('.hero-actions > .pill').click();
+  await expect(page).toHaveURL(/\/contact\/$/);
+});
+
+test('blocked autoplay provides an explicit manual play action', async ({ page }) => {
+  await page.addInitScript(() => {
+    const play = HTMLMediaElement.prototype.play;
+    let blocked = true;
+    HTMLMediaElement.prototype.play = function () {
+      if (blocked) {
+        blocked = false;
+        return Promise.reject(new DOMException('Autoplay blocked for test', 'NotAllowedError'));
+      }
+      return play.call(this);
+    };
+  });
+  await page.goto('/');
+  await expect(page.locator('.hero-video-status')).toContainText('הדפדפן עצר');
+  const toggle = page.locator('.hero-video-toggle');
+  await expect(toggle).toHaveAccessibleName('הפעלת סרטון הרקע');
+  await toggle.click();
+  await expect(page.locator('.hero-video')).toHaveJSProperty('paused', false);
+  await expect(toggle).toHaveAccessibleName('השהיית סרטון הרקע');
+  await expect(page.locator('.hero-video-status')).toBeEmpty();
+});

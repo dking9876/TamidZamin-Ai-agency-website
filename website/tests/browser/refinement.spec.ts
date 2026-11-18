@@ -290,7 +290,7 @@ test.describe('refinement: static geometry', () => {
   }
 
   for (const viewport of [{ width: 1440, height: 1000 }, { width: 1024, height: 768 }, { width: 390, height: 844 }, { width: 320, height: 740 }]) {
-    test(`${viewport.width}x${viewport.height}: hero contrast across entire headline and body-copy boxes`, async ({ page }, info) => {
+    test(`${viewport.width}x${viewport.height}: hero contrast over the poster and every video scene`, async ({ page }, info) => {
       await page.setViewportSize(viewport);
       await page.goto('/');
       await ready(page);
@@ -316,21 +316,32 @@ test.describe('refinement: static geometry', () => {
       const originalVisibility = await copy.evaluate((element: HTMLElement) => ({
         value: element.style.getPropertyValue('visibility'), priority: element.style.getPropertyPriority('visibility'),
       }));
-      let background: Buffer;
+      const results = [];
       try {
         // Hide ink without changing layout; sample the entire box, not just
         // existing glyph positions, so different line wraps remain protected.
         await copy.evaluate((element: HTMLElement) => { element.style.setProperty('visibility', 'hidden', 'important'); });
-        background = await page.screenshot({ scale: 'css', omitBackground: false });
+        const poster = await page.screenshot({ scale: 'css', omitBackground: false });
+        for (const target of boxes) results.push({ scene: 'poster', ...target, ...await textContrast(poster, target.box, target.foreground) });
+        await page.emulateMedia({ reducedMotion: 'no-preference' });
+        await expect(page.locator('.home-hero')).toHaveAttribute('data-video-ready', '');
+        await page.locator('.hero-video-toggle').click();
+        await expect(page.locator('.hero-video')).toHaveJSProperty('paused', true);
+        for (const time of [0.1, 3.2, 6, 8.8, 11.6, 13.8]) {
+          await page.locator('.hero-video').evaluate(async (element: HTMLVideoElement, position) => {
+            const seeked = new Promise<void>((resolve) => element.addEventListener('seeked', () => resolve(), { once: true }));
+            element.currentTime = position;
+            await seeked;
+          }, time);
+          const background = await page.screenshot({ scale: 'css', omitBackground: false });
+          for (const target of boxes) results.push({ scene: String(time), ...target, ...await textContrast(background, target.box, target.foreground) });
+        }
       } finally {
         await copy.evaluate((element: HTMLElement, original) => {
           if (original.value) element.style.setProperty('visibility', original.value, original.priority);
           else element.style.removeProperty('visibility');
         }, originalVisibility);
       }
-      const results = [];
-      for (const target of boxes) results.push({ ...target, ...await textContrast(background, target.box, target.foreground) });
-      await info.attach('hero-contrast-background', { body: background, contentType: 'image/png' });
       await info.attach('hero-contrast-metrics', { body: JSON.stringify({ viewport, results }, null, 2), contentType: 'application/json' });
       for (const result of results) {
         expect.soft(result.contrast, `${result.selector}: ${JSON.stringify(result)}`).toBeGreaterThanOrEqual(result.minimum);
@@ -552,7 +563,7 @@ test.describe('refinement: actual motion runtime', () => {
         endTimes: window.__refinementMotion.groups[key].map((a) => a.effect!.getComputedTiming().endTime),
         forbidden: window.__refinementMotion.forbidden,
       }), name);
-      const expectedCount = name === 'devices' ? 20 : name === 'hero' ? 4 : 1;
+      const expectedCount = name === 'devices' ? 20 : name === 'hero' ? 3 : 1;
       expect(result.count).toBe(expectedCount);
       for (const endTime of result.endTimes) {
         expect(Number(endTime)).toBeGreaterThan(0);

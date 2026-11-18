@@ -1,0 +1,14 @@
+{
+  "name": "tamidzamin-animated-hero-options",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node serve.mjs",
+    "render": "node render.mjs",
+    "test": "node verify.mjs"
+  },
+  "dependencies": {
+    "three": "0.181.1"
+  }
+}

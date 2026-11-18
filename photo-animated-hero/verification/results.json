@@ -1,0 +1,90 @@
+{
+  "originalAssets": [
+    {
+      "source": "01_hero_background.png",
+      "unchanged": true
+    },
+    {
+      "source": "02_trade_plumber.png",
+      "unchanged": true
+    },
+    {
+      "source": "03_trade_electrician.png",
+      "unchanged": true
+    },
+    {
+      "source": "04_trade_repair_technician.png",
+      "unchanged": true
+    },
+    {
+      "source": "05_trade_hvac_technician.png",
+      "unchanged": true
+    }
+  ],
+  "generationMotion": [
+    {
+      "scene": "01-hero-arrival",
+      "movement": 22.904716435185186,
+      "firstFrameDifference": 2.8968171296296297
+    },
+    {
+      "scene": "02-plumber",
+      "movement": 20.590358796296297,
+      "firstFrameDifference": 2.4718287037037037
+    },
+    {
+      "scene": "03-electrician",
+      "movement": 15.642320601851852,
+      "firstFrameDifference": 2.8036979166666667
+    },
+    {
+      "scene": "04-repair",
+      "movement": 27.87736111111111,
+      "firstFrameDifference": 2.6289467592592595
+    },
+    {
+      "scene": "05-hvac",
+      "movement": 12.474594907407408,
+      "firstFrameDifference": 2.851892361111111
+    }
+  ],
+  "outputs": [
+    {
+      "name": "tamidzamin-hero-desktop.mp4",
+      "duration": 14,
+      "width": 1920,
+      "height": 1080,
+      "bytes": 4309720,
+      "loopDifference": 0.6413657407407407
+    },
+    {
+      "name": "tamidzamin-hero-mobile.mp4",
+      "duration": 14,
+      "width": 960,
+      "height": 960,
+      "bytes": 3560923,
+      "loopDifference": 1.9824189814814814
+    },
+    {
+      "name": "tamidzamin-hero-phone-preview.mp4",
+      "duration": 14,
+      "width": 720,
+      "height": 1280,
+      "bytes": 2073108,
+      "loopDifference": 2.2516493055555555
+    },
+    {
+      "name": "tamidzamin-original-photos-film.mp4",
+      "duration": 14,
+      "width": 1280,
+      "height": 720,
+      "bytes": 3643628,
+      "loopDifference": 1.6328819444444445
+    }
+  ],
+  "textSafeArea": {
+    "leftPercent": 52,
+    "checkedFrames": 336,
+    "maximumY": 55
+  }
+}

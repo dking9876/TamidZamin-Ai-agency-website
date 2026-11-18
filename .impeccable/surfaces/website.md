@@ -27,8 +27,8 @@ intake, see relevant trades, understand human involvement, then request a fit
 discussion. No testimonial or quantified result without evidence.
 
 FIRST VIEWPORT: Navigation with original logo at left, section links
-in reference order and white CTA at right. Supplied trade photograph
-with worker/van on the right, two-line Hebrew headline and a primary pill action
+in reference order and white CTA at right. Supplied trade video
+covers the entire hero, with a two-line Hebrew headline and a primary pill action
 with a quieter secondary text link
 on the left. Header plus hero fill the initial small viewport; the next section
 starts below it. On 18 November 2026 the owner explicitly approved spacious
@@ -76,6 +76,17 @@ The redundant hero benefit row and separate scroll prompt are omitted below
 600px because the body and following sections already carry their information.
 This is a hero refinement, not a new identity or permission to remove content
 and capabilities elsewhere on the site.
+The owner's latest 18 November instruction supersedes that still-image
+arrival and stacked-mobile composition: use the exact supplied 14-second
+original-photos film as a full-bleed background on both phones and computers,
+with all hero text and actions on top, taking inspiration from Broccoli's
+video hero. Keep the existing identity, factual copy, headline arrival,
+blue edge and navigation. Responsive cover cropping fills every hero edge;
+directional contrast scrims protect the existing text. Provide silent inline
+looping playback, a labeled play/pause control and an eager first-frame poster.
+Reduced motion and no JavaScript show the poster without requesting video.
+Offscreen/hidden-page playback pauses; manual pause survives re-entry.
+This video is the explicitly approved exception to the earlier no-loop rule.
 On 18 November 2026 the owner requested a mobile layout refinement across all
 sections, especially the WhatsApp and phone demonstrations. On phones each
 channel now has its own heading, readable illustrative device, features and

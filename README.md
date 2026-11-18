@@ -60,15 +60,51 @@ npm run test:vercel
 Use `npm run build` again before `npm start` to return to the standalone Node
 build. The Vercel build writes `.vercel\output`; it is not committed.
 
+## Impeccable design checks
+
+The project-local skill and Copilot hook live in `.github\skills\impeccable`
+and `.github\hooks\impeccable.json`. The hook scans design-relevant edits and
+returns a reminder; it does not change the website or replace visual review.
+Both Bash and Windows PowerShell launchers are configured.
+
+Run these commands from the **repository root**, not `website`:
+
+```powershell
+& .\.github\skills\impeccable\scripts\impeccable.cmd hooks status
+& .\.github\skills\impeccable\scripts\impeccable.cmd doctor --json --target website
+& .\.github\skills\impeccable\scripts\impeccable.cmd detect --json website\src
+```
+
+On Linux/macOS, use `.github/skills/impeccable/scripts/impeccable` instead.
+Commit the hook and skill to the default branch, then start a new Copilot
+session in this repository so it loads the configuration. The Windows hook
+requires PowerShell 7 (`pwsh`). Downloads of missing platform engines are
+verified against the bundled checksums before execution.
+Machine-specific binaries, local consent and detector cache stay out of Git.
+
+`DESIGN.md` remains the normative design document. Its
+`.impeccable\design.json` companion contains derived metadata and component
+previews; refresh that companion after design-document changes. Installing
+or updating the skill does not refresh these project-specific records.
+When updating hook manifests, preserve the Windows `powershell` entry and
+verify it again; the current installer generates only a Bash entry.
+
 ## Contents
 
 - `website\`: source, lockfile, tests, optimized assets and deployment examples.
 - `website design assets\`: preserved approved reference and original images.
 - `PRODUCT.md`, `DESIGN.md`, `.impeccable\`: product truth and extracted design.
+- `.github\skills`, `.github\agents`, `.github\hooks`: portable Impeccable
+  guidance and automatic Copilot design checks.
 - `this master demo prd.txt`: TrisMaster demo requirements, not proof of a
   deployed service or company-wide capabilities.
+- `website\public\media`: the approved full-bleed hero video, its poster and
+  provenance. Playback and accessibility behavior are in the application guide.
+- The video-option directories and their dated ZIPs preserve the earlier
+  creative work, included in the owner's 18 November "push everything" request.
+  They are not served by the website application.
 
 See [application setup](website/README.md) and
 [verification and launch blockers](website/VERIFICATION.md).
-Dependencies, credentials, data files, source ZIPs and generated screenshots are
-intentionally excluded from Git.
+Dependencies, credentials, data files, website-source ZIPs and Impeccable
+review/cache directories remain excluded from Git.

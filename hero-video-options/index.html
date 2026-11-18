@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#081721">
+  <title>TamidZamin | Choose your hero film</title>
+  <style>
+    @font-face { font-family: "Heebo Variable"; src: url("assets/heebo-hebrew.woff2") format("woff2"); font-weight: 100 900; font-display: swap; unicode-range: U+0590-05FF,U+200C-2010,U+20AA,U+25CC,U+FB1D-FB4F; }
+    @font-face { font-family: "Heebo Variable"; src: url("assets/heebo-latin.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
+    :root { color-scheme: dark; font-family: "Heebo Variable",sans-serif; color: #f5faff; background: #081721; --cyan: #37bbff; --line: #354c5d; --quiet: #bfd0dc; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    button,a { -webkit-tap-highlight-color: transparent; }
+    button { font: inherit; cursor: pointer; color: inherit; }
+    a { color: #a7deff; text-underline-offset: .25em; }
+    button:focus-visible,a:focus-visible,summary:focus-visible { outline: 3px solid var(--cyan); outline-offset: 5px; }
+    ::selection { background: #37bbff; color: #061123; }
+    html { scrollbar-color: #527185 #081721; }
+    .masthead { padding: 18px 4vw; display: flex; justify-content: space-between; align-items: center; gap: 20px; border-bottom: 1px solid var(--line); }
+    .brand { display: flex; align-items: center; gap: 24px; }
+    .brand img { width: 140px; height: auto; }
+    .brand h1 { font-size: 17px; font-weight: 500; margin: 0; color: var(--quiet); }
+    .masthead p { margin: 0; font-size: 13px; color: var(--quiet); }
+    .choices { display: flex; padding: 0 4vw; gap: 32px; border-bottom: 1px solid var(--line); }
+    .choice { position: relative; border: 0; background: transparent; padding: 20px 0 18px; text-align: left; color: var(--quiet); display: grid; gap: 3px; flex: 1; }
+    .choice strong { font-size: 18px; font-weight: 650; }
+    .choice span { font-size: 13px; }
+    .choice[aria-pressed="true"] { color: white; }
+    .choice[aria-pressed="true"]::after { content: ""; height: 3px; position: absolute; bottom: -1px; inset-inline: 0; background: var(--cyan); }
+    .choice:hover { color: #fff; }
+    .preview-tools { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 14px 4vw; }
+    .tool-group { display: flex; gap: 8px; flex-wrap: wrap; }
+    .tool { min-height: 42px; padding: 8px 15px; border: 1px solid #536e81; border-radius: 6px; background: transparent; font-size: 13px; }
+    .tool:hover { background: #152e40; }
+    .tool[aria-pressed="true"] { background: #d7edfa; border-color: #d7edfa; color: #081721; }
+    .download { font-size: 13px; min-height: 42px; display: inline-flex; align-items: center; gap: 7px; }
+    .preview-wrap { background: #040e16; }
+    .stage { position: relative; isolation: isolate; width: 100%; min-height: 660px; height: min(76svh,880px); margin-inline: auto; overflow: hidden; background: #081721; }
+    .stage video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 65% center; z-index: -3; }
+    .scrim { position: absolute; z-index: -2; inset: 0; pointer-events: none; background: linear-gradient(90deg,rgba(5,18,29,.94) 0%,rgba(5,18,29,.88) 35%,rgba(5,18,29,.45) 57%,rgba(5,18,29,.06) 80%),linear-gradient(0deg,rgba(8,23,33,.6),transparent 30%,transparent 80%,rgba(8,23,33,.25)); }
+    .hero-brand { position: absolute; top: 28px; right: 4.5%; width: 168px; }
+    .copy { position: absolute; left: 4.5%; top: 50%; transform: translateY(-50%); width: 47%; max-width: 720px; direction: rtl; text-align: right; }
+    .copy h2 { font-size: clamp(44px,5.6vw,88px); font-weight: 800; line-height: 1.12; letter-spacing: -.025em; margin: 0; }
+    .copy h2 span { display: block; }
+    .copy h2 span:last-child { color: var(--cyan); }
+    .copy p { font-size: clamp(17px,1.35vw,20px); line-height: 1.7; max-width: 40ch; margin: 28px 0 32px; color: white; }
+    .hero-actions { display: flex; align-items: center; gap: 28px; }
+    .sample-cta { background: #f5faff; color: #0a1a2c; padding: 16px 28px; border-radius: 99px; font-size: 17px; font-weight: 750; display: inline-flex; align-items: center; gap: 20px; }
+    .sample-cta svg { background: #0f73d7; color: white; border-radius: 50%; padding: 7px; width: 30px; height: 30px; }
+    .sample-secondary { color: #d3e1ed; }
+    .hero-points { display: flex; gap: 25px; padding: 0; margin: 28px 0 0; list-style: none; font-size: 15px; color: #d3e1ed; }
+    .player { position: absolute; bottom: 24px; right: 4.5%; display: flex; align-items: center; gap: 15px; }
+    .play { min-height: 44px; padding: 9px 18px; border: 1px solid #96aebf; border-radius: 99px; background: #081721eb; }
+    .play:hover { background: #18374d; }
+    .time { font-size: 13px; font-variant-numeric: tabular-nums; background: #081721eb; padding: 8px 12px; border-radius: 99px; }
+    progress { position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; border: 0; background: #263b4a; accent-color: var(--cyan); }
+    progress::-webkit-progress-bar { background: #263b4a; }
+    progress::-webkit-progress-value { background: var(--cyan); }
+    progress::-moz-progress-bar { background: var(--cyan); }
+    .raw .copy,.raw .scrim,.raw .hero-brand { visibility: hidden; }
+    .stage.mobile { width: min(390px,100%); height: 790px; min-height: 0; }
+    .stage.mobile video { height: 380px; object-position: 62% center; }
+    .stage.mobile .scrim { background: linear-gradient(0deg,#081721 48%,rgba(8,23,33,.55) 66%,transparent 82%); }
+    .stage.mobile .copy { top: 325px; bottom: auto; left: 24px; right: 24px; width: auto; transform: none; }
+    .stage.mobile .copy h2 { font-size: clamp(33px,10.4vw,40px); }
+    .stage.mobile .copy p { font-size: 16px; margin: 24px 0; }
+    .stage.mobile .hero-brand { top: 24px; right: 24px; width: 135px; }
+    .stage.mobile .hero-actions { display: block; }
+    .stage.mobile .sample-cta { display: flex; justify-content: center; padding: 13px 20px; }
+    .stage.mobile .sample-secondary { display: block; text-align: center; margin-top: 15px; }
+    .stage.mobile .hero-points { display: none; }
+    .stage.mobile .player { right: 24px; bottom: 20px; }
+    .stage.mobile.raw video { height: 100%; }
+    .film-notes { padding: 32px 4vw 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+    .film-notes h2 { font-size: 28px; line-height: 1.2; margin: 0 0 12px; letter-spacing: -.02em; }
+    .film-notes p { max-width: 65ch; color: var(--quiet); margin: 0; line-height: 1.65; }
+    .film-facts { align-self: center; justify-self: end; text-align: right; }
+    .film-facts p { font-size: 14px; }
+    .film-facts p + p { margin-top: 6px; }
+    #status { font-size: 13px; color: #a7deff; margin: 0; padding: 0 4vw 24px; min-height: 44px; }
+    footer { border-top: 1px solid var(--line); padding: 24px 4vw 36px; color: var(--quiet); font-size: 13px; }
+    footer p { max-width: 85ch; line-height: 1.65; }
+    summary { cursor: pointer; padding: 8px 0; width: fit-content; }
+    .credits { columns: 2; column-gap: 40px; padding-left: 18px; }
+    .credits li { break-inside: avoid; margin: 0 0 12px; }
+    [hidden] { display: none !important; }
+    @media (max-width: 700px) {
+      .masthead { padding: 16px 20px; }
+      .brand { gap: 14px; }
+      .brand img { width: 110px; }
+      .brand h1 { font-size: 14px; }
+      .masthead p { display: none; }
+      .choices { padding-inline: 20px; gap: 16px; }
+      .choice strong { font-size: 14px; line-height: 1.3; }
+      .choice span { display: none; }
+      .choice { padding-block: 18px; }
+      .preview-tools { padding: 12px 20px; gap: 10px; align-items: flex-start; }
+      #mobile-toggle { display: none; }
+      .tool { padding-inline: 10px; }
+      .download { font-size: 12px; }
+      .stage.mobile { width: 100%; }
+      .stage.mobile .copy { max-width: 460px; margin-inline: auto; }
+      .film-notes { display: block; padding: 28px 20px 16px; }
+      .film-notes h2 { font-size: 25px; }
+      .film-facts { text-align: left; margin-top: 18px; }
+      #status { padding-inline: 20px; }
+      footer { padding-inline: 20px; }
+      .credits { columns: 1; }
+    }
+    @media (prefers-reduced-motion: reduce) { *,*::before,*::after { scroll-behavior: auto !important; } }
+  </style>
+</head>
+<body>
+  <header class="masthead">
+    <div class="brand"><img src="assets/logo.webp" alt="TamidZamin" width="140" height="48"><h1>Choose your hero film</h1></div>
+    <p>Private preview. Your website is unchanged.</p>
+  </header>
+  <nav class="choices" aria-label="Video options">
+    <button class="choice" type="button" data-film="0" aria-pressed="true"><strong>Home Service</strong><span>Natural. Relevant. Reassuring.</span></button>
+    <button class="choice" type="button" data-film="1" aria-pressed="false"><strong>Craft &amp; Care</strong><span>Warm. Human. Considered.</span></button>
+    <button class="choice" type="button" data-film="2" aria-pressed="false"><strong>Connected Workday</strong><span>Blue-toned. Connected. In motion.</span></button>
+  </nav>
+  <main>
+    <div class="preview-tools">
+      <div class="tool-group">
+        <button class="tool" id="raw-toggle" type="button" aria-pressed="false">Footage only</button>
+        <button class="tool" id="mobile-toggle" type="button" aria-pressed="false">Mobile preview</button>
+      </div>
+      <a class="download" id="download" href="videos/01-home-service.mp4" download>Download Full HD MP4 <span aria-hidden="true">&darr;</span></a>
+    </div>
+    <div class="preview-wrap">
+      <section class="stage" id="stage" aria-label="Selected film with the existing TamidZamin headline">
+        <video id="film" muted loop playsinline preload="metadata" poster="posters/01-home-service.jpg" aria-hidden="true"></video>
+        <div class="scrim"></div>
+        <img class="hero-brand" src="assets/logo.webp" alt="" width="168" height="58">
+        <div class="copy" dir="rtl" lang="he">
+          <h2><span>כל פנייה מתחילה</span><span>במענה נכון.</span></h2>
+          <p>סוכני AI בוואטסאפ ובטלפון לעסקי שירות. אוספים פרטים, מסדרים פניות ומשאירים את ההחלטות המקצועיות אצלכם.</p>
+          <div class="hero-actions" aria-label="המחשה של כפתורי האתר בלבד">
+            <span class="sample-cta">לבדיקת התאמה <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M19 12H5m7-7-7 7 7 7"/></svg></span>
+            <span class="sample-secondary">איך זה עובד</span>
+          </div>
+          <ul class="hero-points"><li>טלפון ווואטסאפ</li><li>פניות מסודרות</li><li>עם מענה אנושי</li></ul>
+        </div>
+        <div class="player">
+          <span class="time" id="time">0:00 / 0:13</span>
+          <button type="button" class="play" id="play">Play film</button>
+        </div>
+        <progress id="progress" max="1" value="0" aria-label="Film playback progress"></progress>
+      </section>
+    </div>
+    <section class="film-notes" aria-labelledby="film-title">
+      <div><h2 id="film-title">Home Service</h2><p id="film-description">Home maintenance, plumbing and appliance inspection. The closest fit to your home-service audience, with natural color and an unhurried rhythm.</p></div>
+      <div class="film-facts"><p id="film-specs">12.75-second loop / Full HD / 24 fps / silent</p><p><a id="download-mobile" href="videos/01-home-service-mobile.mp4" download>Download lighter mobile MP4</a> &nbsp; <a id="download-poster" href="posters/01-home-service.jpg" download>Poster image</a></p></div>
+    </section>
+    <p id="status" role="status" aria-live="polite">Loading preview...</p>
+  </main>
+  <footer>
+    <p>Three custom edits of licensed stock footage, inspired by Broccoli's quiet, full-screen storytelling. No Broccoli footage is used. People shown are illustrative, not TamidZamin staff, customers or endorsers. The Hebrew text is your current website copy; sample calls to action are not active here.</p>
+    <details>
+      <summary>Footage credits &amp; usage</summary>
+      <p>All source footage is covered by the <a href="https://www.pexels.com/license/" target="_blank" rel="noopener noreferrer">Pexels License</a>, checked 18 November 2026. Free website/marketing use and editing are allowed; do not imply endorsement. Full source and render records: <a href="sources.json">sources.json</a>.</p>
+      <ul class="credits">
+        <li><a href="https://www.pexels.com/video/a-man-fixing-an-object-inside-the-apartment-7647713/" target="_blank" rel="noopener noreferrer">Home maintenance</a> &mdash; Anastasia Shuraeva</li>
+        <li><a href="https://www.pexels.com/video/a-person-doing-plumbing-7584762/" target="_blank" rel="noopener noreferrer">Plumbing detail</a> &mdash; Stepan SK</li>
+        <li><a href="https://www.pexels.com/video/a-man-checking-the-gas-range-8293017/" target="_blank" rel="noopener noreferrer">Appliance inspection</a> &mdash; RDNE Stock project</li>
+        <li><a href="https://www.pexels.com/video/a-man-working-while-wearing-a-beanie-7480739/" target="_blank" rel="noopener noreferrer">Woodworking</a> &mdash; cottonbro studio</li>
+        <li><a href="https://www.pexels.com/video/a-person-loading-an-electric-drill-6957872/" target="_blank" rel="noopener noreferrer">Tool detail</a> &mdash; Kaboompics</li>
+        <li><a href="https://www.pexels.com/video/man-inside-a-workshop-looking-at-camera-7493223/" target="_blank" rel="noopener noreferrer">Craftsman portrait</a> &mdash; cottonbro studio</li>
+        <li><a href="https://www.pexels.com/video/mechanic-getting-a-tool-in-a-tool-box-8986493/" target="_blank" rel="noopener noreferrer">Workshop tools</a> &mdash; Artem Podrez</li>
+        <li><a href="https://www.pexels.com/video/person-looking-at-tools-in-the-garage-8986477/" target="_blank" rel="noopener noreferrer">Workshop detail</a> &mdash; Artem Podrez</li>
+        <li><a href="https://www.pexels.com/video/man-sitting-on-tire-while-using-cellphone-8987069/" target="_blank" rel="noopener noreferrer">Checking a phone</a> &mdash; Artem Podrez</li>
+      </ul>
+    </details>
+    <p>Choose the direction you like in chat. Nothing is published or replaced until you choose.</p>
+  </footer>
+  <script>
+    const films = [
+      { id: '01-home-service', name: 'Home Service', duration: 12.75, description: 'Home maintenance, plumbing and appliance inspection. The closest fit to your home-service audience, with natural color and an unhurried rhythm.' },
+      { id: '02-craft-and-care', name: 'Craft & Care', duration: 15, description: 'Woodworking, a close-up tool detail and the person behind the work. Warmer color, longer shots and a more personal feel. A strong direction for tradespeople and contractors.' },
+      { id: '03-connected-workday', name: 'Connected Workday', duration: 12, description: 'Tools, a busy repair workshop and a worker checking his phone. A cohesive blue-toned story with slightly quicker pacing. This option uses auto-workshop imagery rather than home-service scenes.' }
+    ];
+    const video = document.getElementById('film');
+    const stage = document.getElementById('stage');
+    const playButton = document.getElementById('play');
+    const status = document.getElementById('status');
+    const progress = document.getElementById('progress');
+    const clock = document.getElementById('time');
+    const mobileButton = document.getElementById('mobile-toggle');
+    const narrow = matchMedia('(max-width: 700px)');
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+    const connection = navigator.connection;
+    let active = Math.max(0, films.findIndex(f => '#' + f.id === location.hash));
+    let forceMobile = false;
+    let wantsPlayback = !reduced.matches && !connection?.saveData;
+    let loadVersion = 0;
+    let visible = true;
+    const timeLabel = seconds => `0:${Math.floor(seconds).toString().padStart(2, '0')}`;
+
+    async function playFilm() {
+      const version = loadVersion;
+      try {
+        await video.play();
+        if (version === loadVersion) status.textContent = 'Playing the selected film. Switch options above to compare.';
+      } catch (error) {
+        if (error.name === 'AbortError' && version !== loadVersion) return;
+        if (version !== loadVersion) return;
+        status.textContent = error.name === 'NotAllowedError'
+          ? 'Automatic playback is blocked. Press Play film to start.'
+          : 'Playback could not start. Press Play film to retry, or download the MP4.';
+        console.error('Hero preview playback failed:', error);
+      }
+    }
+
+    function selectFilm(index) {
+      active = index;
+      loadVersion++;
+      const film = films[active];
+      const mobile = forceMobile || narrow.matches;
+      const suffix = mobile ? '-mobile' : '';
+      video.pause();
+      video.poster = `posters/${film.id}${suffix}.jpg`;
+      video.src = `videos/${film.id}${suffix}.mp4`;
+      video.muted = true;
+      video.load();
+      stage.classList.toggle('mobile', mobile);
+      document.querySelectorAll('.choice').forEach((button, i) => button.setAttribute('aria-pressed', String(i === active)));
+      document.getElementById('film-title').textContent = film.name;
+      document.getElementById('film-description').textContent = film.description;
+      document.getElementById('film-specs').textContent = `${film.duration}-second loop / Full HD / 24 fps / silent`;
+      document.getElementById('download').href = `videos/${film.id}.mp4`;
+      document.getElementById('download-mobile').href = `videos/${film.id}-mobile.mp4`;
+      document.getElementById('download-poster').href = `posters/${film.id}.jpg`;
+      progress.value = 0;
+      clock.textContent = `0:00 / ${timeLabel(Math.ceil(film.duration))}`;
+      status.textContent = wantsPlayback
+        ? 'Loading the selected film...'
+        : 'Paused. Press Play film to preview; motion and data-saving preferences are respected.';
+      if (wantsPlayback && !document.hidden && visible) void playFilm();
+    }
+
+    document.querySelectorAll('.choice').forEach(button => button.addEventListener('click', () => {
+      selectFilm(Number(button.dataset.film));
+      history.replaceState(null, '', '#' + films[active].id);
+    }));
+    document.getElementById('raw-toggle').addEventListener('click', event => {
+      const raw = stage.classList.toggle('raw');
+      event.currentTarget.setAttribute('aria-pressed', String(raw));
+    });
+    mobileButton.addEventListener('click', () => {
+      forceMobile = !forceMobile;
+      mobileButton.setAttribute('aria-pressed', String(forceMobile));
+      selectFilm(active);
+    });
+    playButton.addEventListener('click', () => {
+      wantsPlayback = video.paused;
+      if (wantsPlayback) {
+        if (video.error) video.load();
+        void playFilm();
+      } else {
+        video.pause();
+        status.textContent = 'Paused. Press Play film to continue.';
+      }
+    });
+    video.addEventListener('play', () => { playButton.textContent = 'Pause film'; });
+    video.addEventListener('pause', () => {
+      playButton.textContent = 'Play film';
+      if (document.hidden || !visible) status.textContent = 'Paused while the preview is out of view. Return to the film to continue.';
+    });
+    video.addEventListener('loadeddata', () => {
+      if (video.paused) status.textContent = wantsPlayback
+        ? 'Ready. Press Play film to preview.'
+        : 'Paused. Press Play film to preview; motion and data-saving preferences are respected.';
+    });
+    video.addEventListener('timeupdate', () => {
+      if (Number.isFinite(video.duration)) {
+        progress.value = video.currentTime / video.duration;
+        clock.textContent = `${timeLabel(video.currentTime)} / ${timeLabel(Math.ceil(video.duration))}`;
+      }
+    });
+    video.addEventListener('error', () => {
+      status.textContent = 'The video could not load. Check that the videos folder is beside this page, then press Play film to retry.';
+      playButton.textContent = 'Play film';
+    });
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) video.pause();
+      else if (wantsPlayback && visible) void playFilm();
+    });
+    new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      if (!visible) video.pause();
+      else if (wantsPlayback && !document.hidden && video.currentSrc) void playFilm();
+    }, { threshold: 0.1 }).observe(stage);
+    narrow.addEventListener('change', () => selectFilm(active));
+    reduced.addEventListener('change', () => {
+      if (reduced.matches) {
+        wantsPlayback = false;
+        video.pause();
+        status.textContent = 'Paused because reduced motion is enabled. You can still press Play film.';
+      }
+    });
+    connection?.addEventListener('change', () => {
+      if (connection.saveData) {
+        wantsPlayback = false;
+        video.pause();
+        status.textContent = 'Paused because data saving is enabled. You can still press Play film.';
+      }
+    });
+    selectFilm(active);
+  </script>
+</body>
+</html>

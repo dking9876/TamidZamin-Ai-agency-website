@@ -1,0 +1,159 @@
+{
+  "media": [
+    {
+      "name": "01-a-service-day-mobile.mp4",
+      "duration": 12,
+      "size": 1274456,
+      "width": 960,
+      "height": 960,
+      "loopDifference": 0.9801909722222222
+    },
+    {
+      "name": "01-a-service-day-phone-preview.mp4",
+      "duration": 12,
+      "size": 762411,
+      "width": 720,
+      "height": 1280,
+      "loopDifference": 1.2224768518518518
+    },
+    {
+      "name": "01-a-service-day.mp4",
+      "duration": 12,
+      "size": 1960437,
+      "width": 1920,
+      "height": 1080,
+      "loopDifference": 0.5796990740740741
+    },
+    {
+      "name": "02-hands-at-work-mobile.mp4",
+      "duration": 12,
+      "size": 1234668,
+      "width": 960,
+      "height": 960,
+      "loopDifference": 0.8944097222222223
+    },
+    {
+      "name": "02-hands-at-work-phone-preview.mp4",
+      "duration": 12,
+      "size": 747420,
+      "width": 720,
+      "height": 1280,
+      "loopDifference": 1.386244212962963
+    },
+    {
+      "name": "02-hands-at-work.mp4",
+      "duration": 12,
+      "size": 1783939,
+      "width": 1920,
+      "height": 1080,
+      "loopDifference": 0.5834953703703704
+    },
+    {
+      "name": "03-from-home-to-help-mobile.mp4",
+      "duration": 12,
+      "size": 1293803,
+      "width": 960,
+      "height": 960,
+      "loopDifference": 0.6991319444444445
+    },
+    {
+      "name": "03-from-home-to-help-phone-preview.mp4",
+      "duration": 12,
+      "size": 769414,
+      "width": 720,
+      "height": 1280,
+      "loopDifference": 1.0880381944444444
+    },
+    {
+      "name": "03-from-home-to-help.mp4",
+      "duration": 12,
+      "size": 1945582,
+      "width": 1920,
+      "height": 1080,
+      "loopDifference": 0.5159085648148148
+    }
+  ],
+  "loop": [
+    {
+      "edit": 0,
+      "exactTwelveSecondLoop": true
+    },
+    {
+      "edit": 1,
+      "exactTwelveSecondLoop": true
+    },
+    {
+      "edit": 2,
+      "exactTwelveSecondLoop": true
+    }
+  ],
+  "safeArea": [
+    {
+      "name": "01-a-service-day",
+      "frames": 288,
+      "leftPercent": 52,
+      "maximumY": 59
+    },
+    {
+      "name": "02-hands-at-work",
+      "frames": 288,
+      "leftPercent": 52,
+      "maximumY": 57
+    },
+    {
+      "name": "03-from-home-to-help",
+      "frames": 288,
+      "leftPercent": 52,
+      "maximumY": 58
+    }
+  ],
+  "distinctShots": [
+    {
+      "name": "01-a-service-day",
+      "sampledTimes": [
+        1.5,
+        4.5,
+        7.5,
+        10.5
+      ],
+      "meanPixelDifferences": [
+        15.764525462962963,
+        15.917337962962963,
+        13.626585648148149
+      ]
+    },
+    {
+      "name": "02-hands-at-work",
+      "sampledTimes": [
+        1.5,
+        5.5,
+        9.5
+      ],
+      "meanPixelDifferences": [
+        16.63464699074074,
+        16.635399305555556
+      ]
+    },
+    {
+      "name": "03-from-home-to-help",
+      "sampledTimes": [
+        1.5,
+        4.5,
+        7.5,
+        10.5
+      ],
+      "meanPixelDifferences": [
+        13.591909722222223,
+        15.931712962962964,
+        16.131221064814813
+      ]
+    }
+  ],
+  "ui": [
+    "Playback, pause, edit switching, raw mode and accessibility passed.",
+    "Responsive sources at 320/390/768/1440px and offscreen pause passed.",
+    "Reduced-motion starts still and permits deliberate playback.",
+    "Missing-media failure is visible and provides a recovery route.",
+    "Offline file preview loads and switches edits."
+  ]
+}
