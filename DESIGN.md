@@ -109,6 +109,9 @@ spacing:
   gutter-tablet: "24px"
   gutter-desktop: "32px"
   section-reading: "55px"
+  section-mobile: "clamp(3rem, 12vw, 4rem)"
+  composition-mobile: "32px"
+  channel-separation-mobile: "48px"
 components:
   button-primary:
     backgroundColor: "{colors.blue}"
@@ -243,7 +246,7 @@ The layout imports `@fontsource-variable/heebo` before both stylesheets. The run
 - **Headline:** `headline-reading` remains the supporting page title. Homepage `--home-title` is `clamp(2.25rem, 4vw, 3.75rem)`, weight 800 and 1.16 leading; up to 600px it becomes `clamp(2rem, 8.5vw, 2.75rem)`. Channel titles are smaller to support the device composition.
 - **Title:** `title` remains the shared h3 baseline; process labels use 1.35rem, benefits 1.3rem, and About values 1.15rem.
 - **Body:** `body` is the shared reading/input baseline. Homepage paragraphs use 1.65 leading with 1-1.25rem copy depending on role. Reading columns max out at 800px; page title and intro measures remain 24ch and 63ch.
-- **Labels:** navigation is .875rem; primary homepage pills 1rem, secondary channel actions .875rem. Miniature illustrative phone copy is not the body type scale.
+- **Labels:** navigation is .875rem; primary homepage pills 1rem, secondary channel actions .875rem. Illustrative phone copy is not the body type scale; at widths up to 880px chat text is at least .875rem and the spoken example is 1rem, rather than shrinking two devices into one phone-width row.
 
 Headings use balanced wrapping and allow long-word breaks; paragraphs use pretty wrapping. Text uses rem-based sizes so user text enlargement is respected.
 
@@ -253,23 +256,23 @@ Headings use balanced wrapping and allow long-word breaks; paragraphs use pretty
 
 `Layout.astro` imports `global.css`, then `home.css`, on every page. The body receives the homepage class only at `/`. Consequently, unscoped navigation rules and the pale rounded header CTA from the second stylesheet also affect supporting pages.
 
-Shared containers use `min(1180px, calc(100% - 64px))`, then 48px total gutter up to 1100px and 36px up to 680px. Homepage widths up to 600px use a 40px total gutter.
+Shared containers use `min(1180px, calc(100% - 64px))`, then 48px total gutter up to 1100px and 36px up to 680px. Homepage widths up to 600px use at least 20px on each side, increasing equally when either horizontal safe-area inset requires it.
 
 Only direct homepage `main > section` elements get the composition rules. At desktop widths of at least 1024px, each main section has a minimum block size of `100svh - actual header height`. The hero has that minimum at every width, so the in-flow header plus hero fill the initial small viewport. No section has a fixed height or scroll snap. Expanded text and FAQs can exceed the minimum. Footer, legal pages, supporting pages and nested components are excluded.
 
 The header reserves 4.75rem on desktop and 4.25rem up to 880px. A ResizeObserver writes its actual height, including wrapping or text enlargement, to `--header-height`. Progressive enhancement makes the homepage header sticky; without JavaScript it remains in flow so an open native menu does not cover an anchor destination. At heights up to 500px it is nonsticky, even with JavaScript. Supporting headers remain nonsticky.
 
-`--section-space` is `clamp(3rem, 6vw, 6rem)` (3.5rem on phones). It is not the mechanism used to fill the viewport: flex/grid composition and minimum height are. `--composition-gap` is `clamp(2rem, 4vw, 4rem)`. Large and tight intervals distinguish sections from their internal groups.
+`--section-space` is `clamp(3rem, 6vw, 6rem)` and becomes `clamp(3rem, 12vw, 4rem)` on phones. It is not the mechanism used to fill the viewport: flex/grid composition and minimum height are. `--composition-gap` is `clamp(2rem, 4vw, 4rem)`, fixed at 2rem on phones. Large and tight intervals distinguish sections from their internal groups.
 
-- **Hero:** copy occupies the left 49%, with the worker/van photograph behind the right. Image height is bounded by 55vw, object position is 80%, and a top mask blends it into navy without stretching the image. At up to 880px the photograph sits above centered copy; short/zoomed content grows naturally. A static, focusable scroll cue links to channels.
-- **Channels:** larger illustrative phones anchor the center of two service explanations. Tablet moves devices beneath the explanations; phones stack the two explanations around the device group. Both nearby labeling and the section disclaimer state this is illustrative, not live.
-- **Process:** four generously spaced nodes joined right-to-left. Tablet uses two rows; phones use one vertical reading column. Step order remains the existing factual order.
-- **Trades:** the supplied angled photographs form a larger gallery beneath a heading/intro row. Five desktop columns become three on tablet and two on phones.
-- **Benefits:** a large heading beside five open, ruled value groups in two columns; the human responsibility value spans the last row. No generic card grid is added.
-- **Human/About:** larger imagery and two-column editorial compositions replace strips. Human handoff symbols remain decorative; About keeps its oblique frame. Both stack on phones.
+- **Hero:** copy occupies the left 49%, with the worker/van photograph behind the right. Image height is bounded by 55vw, object position is 80%, and a top mask blends it into navy without stretching the image. At up to 880px the photograph sits above centered copy; short/zoomed content grows naturally. On phones the actions share equal-width tracks, stacking when two 9rem tracks cannot fit, including with enlarged text. A static, focusable scroll cue links to channels.
+- **Channels:** each named article owns its heading, illustrative figure with caption, feature list and service link in that DOM order. Desktop keeps the two devices at the center, with explanations outside and the decorative brand connector between them. Up to 880px each article becomes a vertical composition in its own column; up to 600px the articles stack, separated by 48px and a fine rule. Devices are up to 17.5rem wide and at least 24rem high at these narrower sizes, growing with text. Each caption and the shared disclaimer explicitly state this is illustrative, not live. No tabs, carousel or duplicate hidden content.
+- **Process:** four generously spaced nodes joined right-to-left. Tablet uses two rows; phones use a vertical reading column with 64px icons and 16px between icon and copy. Step order remains the existing factual order.
+- **Trades:** the supplied angled photographs form a larger gallery beneath a heading/intro row. Five desktop columns become three on tablet and two on phones. Mobile tiles are width-constrained 3:4 portraits, with a full-width 16:9 last tile and a 180px minimum height; loading images cannot widen the grid.
+- **Benefits:** a large heading beside five open, ruled value groups in two columns; the human responsibility value spans the last row. Phones use one icon/text column with aligned labels and supporting copy. No generic card grid is added.
+- **Human/About:** larger imagery and two-column editorial compositions replace strips. On phones the human explanation precedes its photograph; About keeps its introduction and principles together before the oblique image. DOM order agrees with mobile reading order. Handoff symbols remain decorative and use smaller 64px containers on phones.
 - **Evidence:** requirements copy is typeset as a clearly bounded specification, not a testimonial or active demo. No new capability claims.
 - **FAQ:** a two-column title/list composition, with one full-width question per list row, makes the content substantial at desktop size. Multiple native disclosures may remain open.
-- **Closing:** an oversized headline and horizontal action compose the last full-height section. The compact footer remains content-sized.
+- **Closing:** an oversized headline and horizontal action compose the last full-height section. The compact footer remains content-sized; its two navigation groups stay in stable columns below the logo on phones.
 
 The earlier 17 November scoped fix review and compressed section measurements are historical, not acceptance thresholds for this approved refinement. Current measured geometry and verification limits live in `website/VERIFICATION.md`. This is not a pixel-match or accessibility certification.
 
@@ -344,7 +347,7 @@ Shared interactive focus is a 3px cyan outline with 5px offset. Fields use blue 
 
 - The hero photograph arrives over 520ms; headline, copy and CTA are never hidden or delayed.
 - One inquiry -> AI -> confirmed summary -> human sequence pulses the four process nodes and traces the RTL connectors. It lasts at most 1760ms and settles; it does not repeat on re-entry.
-- Devices enter over 620ms with 16px travel. About imagery opens through a small 650ms crop reveal. Other sections stay still rather than repeating fade-up effects everywhere.
+- Each illustrative device figure enters once over 620ms with 16px travel when its own figure comes into view. About imagery opens through a small 650ms crop reveal. Other sections stay still rather than repeating fade-up effects everywhere.
 - `--motion-feedback` is 160ms; image hover is 260ms. Authored arrivals use `cubic-bezier(0.16, 1, 0.3, 1)`.
 - IntersectionObserver pauses animations offscreen. Visibility changes pause them in hidden tabs; page lifecycle events cover back/forward restoration. No animation loop, wheel/touch listener, scroll timer, custom cursor or live phone control is added.
 - With reduced motion, authored sequences do not start; changing the preference cancels active ones and shows their static base composition. Smooth anchor scrolling becomes instant. State colors and native FAQ disclosure still explain interactions.

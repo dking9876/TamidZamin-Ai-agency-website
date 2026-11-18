@@ -1,5 +1,64 @@
 # Verification and launch status
 
+## Mobile layout refinement - 18 November 2026
+
+This follow-up is **local only**. No commit, push, deployment, live demo,
+contact delivery, indexing or production configuration change was made.
+
+### Layout and reading order
+
+- Each channel now owns a heading, figure, feature list and service action in
+  that DOM order. At phone widths the entire WhatsApp group precedes the phone
+  group. Both have visible illustration-only captions.
+- Phone/tablet demo text is at least 14px at the default root size; each device
+  is up to 280px wide and grows with enlarged text. Tablet pairs the articles;
+  desktop retains the central two-device composition and brand connector.
+- Equal-width hero actions stack when space or enlarged text requires it.
+  Section spacing is 48-64px on phones, with smaller, consistent internal gaps.
+- Process icons leave more room for copy. Trade photos scale proportionally;
+  explicit tile widths prevent an unloaded image and minimum height from
+  widening a small-screen grid. Benefits use one readable icon/text column.
+- Human-handoff copy precedes its photograph; About principles stay together
+  before their image. FAQ padding, evidence spacing, closing action and footer
+  navigation are aligned with the mobile rhythm.
+- All ten homepage sections, Hebrew/RTL content, imagery, colors, real
+  navigation and preview safeguards remain. No tabs, carousel, simulated live
+  interaction or new capability claims were introduced.
+
+### Final verification
+
+- `npm run build`: zero Astro/TypeScript errors, warnings or hints.
+- `npm run test:browser`: **43 passed**, no retries, against the production
+  Node preview in Microsoft Edge. This includes ten new layout regressions and
+  all 33 existing browser tests, with device animation/disclosure expectations
+  updated for two independently observed figures.
+- New regressions cover 320, 360, 390, 430, 600, 601, 768, 880 and 881px:
+  device readability and width, per-channel reading order, visible control
+  heights of at least 44px, keyboard action order, aligned tablet actions,
+  single-column benefits and no horizontal overflow. A 320px / 200% root-text
+  case inspects actual text ranges inside both device frames.
+- Existing coverage passes for 200% text and expanded FAQs, no-JavaScript
+  fallbacks, reduced and one-shot motion, menu/history/anchor behavior, image
+  loading, hero contrast and axe WCAG A/AA checks on all nine public routes.
+  Responsive route checks extend through 1920px.
+- Rendered review covered every mobile section, the two separate demos at
+  320/390px, paired demos at 601/768px, desktop composition at 1440px, expanded
+  FAQs, short landscape layouts and enlarged text. Captured layouts at
+  360x800, 390x844, 768x1024, 1024x768, 1440x900, 1440x500 and 844x390 have no
+  horizontal overflow or text outside their sections. The 360px hero now
+  ends at 800px, without the prior extra wrapped-action height.
+- The isolated baseline layout detector and final full changed-UI detector
+  both returned `[]`. Diff whitespace validation passed.
+
+Before/after screenshots and geometry are retained in the session artifacts:
+
+`C:\Users\USER\AppData\Roaming\Lumi\copilot\session-state\59493c5a-2b1e-4889-9559-7f22e58257c6\files`
+
+These are local browser-emulated viewports, not physical iPhone/Android tests.
+Safari, Firefox, real device safe-area insets and assistive-technology reading
+order remain unverified. No new performance benchmark or launch approval is
+claimed by this layout pass.
+
 ## Git-linked deployment approval - 18 November 2026
 
 After the local refinement was completed, the owner explicitly requested a

@@ -13,7 +13,7 @@ const viewports = [
 const sectionOrder = ['', 'channels', 'process', 'trades', 'benefits', 'human', 'about', 'evidence', 'faq', 'contact'];
 const motionTargets = {
   hero: '.home-hero-image',
-  devices: '.device-stage[data-motion="devices"]',
+  devices: '.whatsapp-channel .device-stage[data-motion="devices"]',
   handoff: 'ol[data-motion="handoff"]',
   photo: '.about-photo[data-motion="photo"]',
 };
@@ -486,7 +486,10 @@ test.describe('refinement: native navigation and fallbacks', () => {
     await page.goto('/');
     await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex, nofollow');
     await expect(page.locator('#channels .demo-disclosure')).toContainText('השיחות להמחשה בלבד');
-    await expect(page.locator('.device-caption')).toContainText('אין שיחה פעילה');
+    await expect(page.locator('.device-caption')).toHaveCount(2);
+    for (const caption of await page.locator('.device-caption').all()) {
+      await expect(caption).toContainText('אין שיחה פעילה');
+    }
     await expect(page.locator('#evidence .demo-disclosure')).toContainText('לא הדגמה חיה מאושרת');
     await page.goto('/contact/');
     await expect(page.locator('fieldset')).toHaveAttribute('disabled', '');
@@ -546,14 +549,17 @@ test.describe('refinement: actual motion runtime', () => {
         endTimes: window.__refinementMotion.groups[key].map((a) => a.effect!.getComputedTiming().endTime),
         forbidden: window.__refinementMotion.forbidden,
       }), name);
-      expect(result.count).toBe(1);
-      expect(Number(result.endTimes[0])).toBeGreaterThan(0);
-      expect(Number(result.endTimes[0])).toBeLessThanOrEqual(800);
+      const expectedCount = name === 'devices' ? 2 : 1;
+      expect(result.count).toBe(expectedCount);
+      for (const endTime of result.endTimes) {
+        expect(Number(endTime)).toBeGreaterThan(0);
+        expect(Number(endTime)).toBeLessThanOrEqual(800);
+      }
       expect(result.forbidden).toBe(0);
       await reveal(page, name === 'hero' ? '#faq' : '.home-hero');
       await reveal(page, motionTargets[name]);
       await frames(page, 10);
-      expect(await page.evaluate((key) => window.__refinementMotion.groups[key].length, name)).toBe(1);
+      expect(await page.evaluate((key) => window.__refinementMotion.groups[key].length, name)).toBe(expectedCount);
     });
   }
 

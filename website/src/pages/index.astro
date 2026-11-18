@@ -25,7 +25,7 @@ const benefits = [
     <div class="container">
       <div class="home-hero-copy">
         <h1 id="hero-title">כל פנייה מתחילה<br />במענה נכון.</h1>
-        <p>סוכני AI בוואטסאפ ובטלפון לעסקי שירות.<br />אוספים פרטים, מסדרים פניות ומשאירים<br class="desktop-break" /> את ההחלטות המקצועיות אצלכם.</p>
+        <p>סוכני AI בוואטסאפ ובטלפון לעסקי שירות.<br /> אוספים פרטים, מסדרים פניות ומשאירים<br class="desktop-break" /> את ההחלטות המקצועיות אצלכם.</p>
         <div class="hero-actions"><a class="pill" href="/contact/">לבדיקת התאמה <span class="pill-icon"><Icon name="arrow" size={15} /></span></a><a class="pill pill-outline" href="#process">איך זה עובד <span class="pill-icon"><Icon name="arrow" size={15} /></span></a></div>
         <ul class="hero-points"><li><Icon name="phone" size={19} />טלפון ווואטסאפ</li><li><Icon name="list" size={19} />פניות מסודרות</li><li><Icon name="user" size={19} />עם מענה אנושי</li></ul>
       </div>
@@ -35,17 +35,28 @@ const benefits = [
 
   <section class="home-channels blue-edge" id="channels" aria-label="פתרונות בוואטסאפ ובטלפון">
     <div class="container channel-stage">
-      <article class="home-channel whatsapp-channel"><h2><Icon name="chat" size={30} />סוכן AI בוואטסאפ</h2><ul class="check-list"><li><Icon name="check" />אוסף פרטים בשיחה קצרה</li><li><Icon name="check" />מבקש תמונה כשצריך</li><li><Icon name="check" />מסכם ומאפשר תיקונים</li><li><Icon name="check" />מכין להמשך טיפול אנושי</li></ul><a class="pill" href="/services/whatsapp/">להכיר את מענה הוואטסאפ <Icon name="arrow" size={15} /></a></article>
-      <div class="device-stage" data-motion="devices" role="group" aria-label="המחשת שיחות בלבד, לא סוכן פעיל">
-        <div class="phone-shell chat-phone">
-          <div class="phone-top"><Icon name="chat" size={19} /><strong>העוזר של העסק</strong></div>
-          <div class="chat-body"><p class="bubble incoming">שלום, אני עוזר AI.<br />איך אפשר לעזור?</p><p class="bubble outgoing">התריס החשמלי לא עולה.</p><p class="bubble incoming">נאסוף כמה פרטים<br />ונכין סיכום לאישורך.</p><div class="chat-summary"><Icon name="check" size={16} /><span>מסכמים ומאשרים<br />לפני המשך הטיפול</span></div></div>
-        </div>
-        <div class="brand-connector"><img src="/images/connector.webp" width="280" height="240" alt="" loading="lazy" /><img class="connector-logo" src="/images/icon.png" width="64" height="64" alt="" loading="lazy" /></div>
-        <div class="phone-shell voice-phone"><Icon name="phone" size={25} /><strong>TamidZamin AI</strong><span>מקשיב. שואל. מסכם.</span><div class="waveform" aria-hidden="true">{[12, 22, 36, 18, 48, 30, 55, 25, 43, 22, 36, 14, 26].map((height) => <i style={`height:${height}px`} />)}</div><p>״מתי נוח לך<br />שבעל המקצוע יחזור?״</p><span class="call-icon"><Icon name="phone" size={23} /></span></div>
-        <span class="device-caption">המחשה בלבד · אין שיחה פעילה</span>
-      </div>
-      <article class="home-channel phone-channel"><h2><Icon name="phone" size={30} />סוכן AI טלפוני</h2><ul class="check-list"><li><Icon name="check" />מבין את סיבת הפנייה</li><li><Icon name="check" />אוסף פרטי קשר ודחיפות</li><li><Icon name="check" />מקריא סיכום לאישור</li><li><Icon name="check" />מעביר ליעד שסוכם ונבדק</li></ul><a class="pill" href="/services/phone/">להכיר את המענה הטלפוני <Icon name="arrow" size={15} /></a></article>
+      <article class="home-channel whatsapp-channel" aria-labelledby="whatsapp-title">
+        <h2 id="whatsapp-title"><Icon name="chat" size={30} />סוכן AI בוואטסאפ</h2>
+        <figure class="device-stage" data-motion="devices">
+          <div class="phone-shell chat-phone">
+            <div class="phone-top"><Icon name="chat" size={19} /><strong>העוזר של העסק</strong></div>
+            <div class="chat-body"><p class="bubble incoming">שלום, אני עוזר AI.<br />איך אפשר לעזור?</p><p class="bubble outgoing">התריס החשמלי לא עולה.</p><p class="bubble incoming">נאסוף כמה פרטים<br />ונכין סיכום לאישורך.</p><div class="chat-summary"><Icon name="check" size={16} /><span>מסכמים ומאשרים<br />לפני המשך הטיפול</span></div></div>
+          </div>
+          <figcaption class="device-caption">המחשה בלבד · אין שיחה פעילה</figcaption>
+        </figure>
+        <ul class="check-list"><li><Icon name="check" />אוסף פרטים בשיחה קצרה</li><li><Icon name="check" />מבקש תמונה כשצריך</li><li><Icon name="check" />מסכם ומאפשר תיקונים</li><li><Icon name="check" />מכין להמשך טיפול אנושי</li></ul>
+        <a class="pill" href="/services/whatsapp/">להכיר את מענה הוואטסאפ <Icon name="arrow" size={15} /></a>
+      </article>
+      <div class="brand-connector" aria-hidden="true"><img src="/images/connector.webp" width="280" height="240" alt="" loading="lazy" /><img class="connector-logo" src="/images/icon.png" width="64" height="64" alt="" loading="lazy" /></div>
+      <article class="home-channel phone-channel" aria-labelledby="phone-title">
+        <h2 id="phone-title"><Icon name="phone" size={30} />סוכן AI טלפוני</h2>
+        <figure class="device-stage" data-motion="devices">
+          <div class="phone-shell voice-phone"><Icon name="phone" size={25} /><strong>TamidZamin AI</strong><span>מקשיב. שואל. מסכם.</span><div class="waveform" aria-hidden="true">{[12, 22, 36, 18, 48, 30, 55, 25, 43, 22, 36, 14, 26].map((height) => <i style={`height:${height}px`} />)}</div><p>״מתי נוח לך<br />שבעל המקצוע יחזור?״</p><span class="call-icon" aria-hidden="true"><Icon name="phone" size={23} /></span></div>
+          <figcaption class="device-caption">המחשה בלבד · אין שיחה פעילה</figcaption>
+        </figure>
+        <ul class="check-list"><li><Icon name="check" />מבין את סיבת הפנייה</li><li><Icon name="check" />אוסף פרטי קשר ודחיפות</li><li><Icon name="check" />מקריא סיכום לאישור</li><li><Icon name="check" />מעביר ליעד שסוכם ונבדק</li></ul>
+        <a class="pill" href="/services/phone/">להכיר את המענה הטלפוני <Icon name="arrow" size={15} /></a>
+      </article>
     </div>
     <p class="demo-disclosure container">השיחות להמחשה בלבד. יכולות, שפות וחיבורים דורשים בדיקה ואישור לכל עסק.</p>
   </section>
@@ -67,15 +78,15 @@ const benefits = [
   <section class="home-benefits pale-waves" id="benefits"><div class="container benefits-strip"><h2>מה חשוב לנו<br /> במענה שלכם?</h2><ul>{benefits.map((item) => <li><Icon name={item.icon} size={34} /><h3>{item.label}</h3><p>{item.text}</p></li>)}</ul></div></section>
 
   <section class="home-human blue-edge" id="human"><div class="container human-strip">
+    <div class="human-intro"><h2>טכנולוגיה שעוזרת.<br />אנשים שלוקחים אחריות.</h2><p>מגדירים מראש מה הסוכן שואל,<br class="desktop-break" /> מה הוא לא יודע ומתי עוברים לאדם.</p><a class="text-link" href="/services/">על התהליך והגבולות <Icon name="arrow" size={18} /></a></div>
     <Picture name="support" alt="תמונת המחשה של אשת שירות עם אוזנייה" width={960} height={540} />
     <div class="handoff-art" aria-hidden="true"><span><Icon name="robot" size={44} /></span><Icon name="arrow" size={35} /><span><Icon name="user" size={44} /></span></div>
-    <div><h2>טכנולוגיה שעוזרת.<br />אנשים שלוקחים אחריות.</h2><p>מגדירים מראש מה הסוכן שואל,<br />מה הוא לא יודע ומתי עוברים לאדם.</p><a class="text-link" href="/services/">על התהליך והגבולות <Icon name="arrow" size={18} /></a></div>
   </div></section>
 
   <section class="home-about pale-waves" id="about"><div class="container about-strip">
-    <div class="about-intro"><h2>השותף הטכנולוגי<br />לעסק העצמאי שלכם.</h2><p><bdi>TamidZamin</bdi> מתמקדת בסוכני AI<br />לעסקי שירות בישראל. פחות פניות<br />שמתפספסות היא המטרה — לא הבטחה.</p><a class="text-link" href="/about/">עוד על TamidZamin <Icon name="arrow" size={17} /></a></div>
-    <div class="about-photo" data-motion="photo"><Picture name="about" alt="תמונת המחשה של בעל מקצוע ליד בית לקוח" width={960} height={720} /></div>
+    <div class="about-intro"><h2>השותף הטכנולוגי<br />לעסק העצמאי שלכם.</h2><p><bdi>TamidZamin</bdi> מתמקדת בסוכני AI<br class="desktop-break" /> לעסקי שירות בישראל. פחות פניות<br class="desktop-break" /> שמתפספסות היא המטרה — לא הבטחה.</p><a class="text-link" href="/about/">עוד על TamidZamin <Icon name="arrow" size={17} /></a></div>
     <ul><li><Icon name="target" size={28} /><div><h3>מתחילים מהעסק שלכם</h3><p>מבינים את הפניות ואת דרך העבודה.</p></div></li><li><Icon name="shield" size={28} /><div><h3>ברור מה כן ומה לא</h3><p>בלי מחירים או יכולות מומצאים.</p></div></li><li><Icon name="user" size={28} /><div><h3>האדם נשאר בתמונה</h3><p>החלטות מקצועיות נשארות אצלכם.</p></div></li></ul>
+    <div class="about-photo" data-motion="photo"><Picture name="about" alt="תמונת המחשה של בעל מקצוע ליד בית לקוח" width={960} height={720} /></div>
   </div></section>
 
   <section class="home-evidence blue-edge" id="evidence"><div class="container evidence-strip"><h2>מה אפשר לראות<br />במפרט ההדגמה?</h2><p><Icon name="list" size={48} /><strong>TrisMaster · קליטת פניות לתריסים חשמליים</strong><br />איסוף פרטים, אישור סיכום והעברה לאדם.<br />ללא אבחון, מחיר, תיאום תור או תשלום.</p><a class="pill pill-outline" href="/services/whatsapp/">על גבולות ההדגמה <Icon name="arrow" size={17} /></a></div><p class="demo-disclosure container">זהו מפרט דרישות, לא עדות מלקוח ולא הדגמה חיה מאושרת.</p></section>
