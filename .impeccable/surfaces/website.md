@@ -19,21 +19,22 @@ OWN-WORLD: Deep blue-black hero/channels; light process; dark angled trade strip
 light benefits; dark human handoff; light About; dark factual demo-evidence
 replacement for the unsupported testimonial; light two-column FAQ; dark
 horizontal CTA and compact footer. Electric-blue wave edges and white pill
-CTAs, with a quiet text link for the secondary hero action. Heavy, compact
-Hebrew headlines; the hero answer line uses the existing cyan accent.
+CTAs remain below the hero. The 19 November hero override uses a light white
+headline, compact blue/outlined rectangular actions and no decorative wave.
+Other sections retain their heavy, compact Hebrew headlines.
 
 STORY: Recognize missed inquiries while working, understand WhatsApp and phone
 intake, see relevant trades, understand human involvement, then request a fit
 discussion. No testimonial or quantified result without evidence.
 
-FIRST VIEWPORT: Navigation with original logo at left, page-first grouped links
-and white CTA at right. The owner's 18 November navigation request supersedes
+FIRST VIEWPORT: Transparent navigation over the footage, with original logo
+at left, page-first grouped links and blue CTA at right. The owner's 18 November navigation request supersedes
 the section-only menu: include all public pages, retain homepage section
 shortcuts in Solutions, and group the same links in the mobile menu and footer.
 Supplied trade video
-covers the entire hero, with a two-line Hebrew headline and a primary pill action
-with a quieter secondary text link
-on the left. Header plus hero fill the initial small viewport; the next section
+covers the entire hero, with a light white two-line Hebrew headline and compact
+blue/outlined actions side by side on the left. The header overlays rather than
+occupies a separate band. The hero fills the initial small viewport; the next section
 starts below it. On 18 November 2026 the owner explicitly approved spacious
 viewport-scale homepage compositions instead of compressed poster proportions.
 Use minimum heights, not clipping heights; mobile/short/zoomed content grows.
@@ -96,6 +97,16 @@ visible in the upper frame and softly extend the moving background below
 for the existing overlaid copy. A text-positioned contrast scrim replaces the
 phone-wide dimming. Serve only the matching film/poster, maintain pause and
 scene position through rotation, and leave the desktop presentation unchanged.
+The owner's 19 November clarification supersedes that phone-fit treatment:
+follow Broccoli's desktop/phone composition, with transparent overlaid navigation,
+a light white headline higher in the frame and two compact adjacent actions.
+Reframe each original shot as a true full-height 9:16 crop, without blurred
+extensions, padding or baked dark lower areas. The actual footage stays visible
+throughout the hero behind HTML text and buttons. Remove the blue hero edge;
+retain the original explanatory paragraph directly below the hero. Use restrained
+black contrast scrims, including a subtle top fade for navigation, never a
+separate copy panel. Preserve existing responsive playback and fallback behavior.
+Current authority: website/src/styles/hero.css and DESIGN.md.
 On 18 November 2026 the owner requested a mobile layout refinement across all
 sections, especially the WhatsApp and phone demonstrations. On phones each
 channel now has its own heading, readable illustrative device, features and

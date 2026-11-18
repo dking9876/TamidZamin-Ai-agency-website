@@ -22,7 +22,7 @@ const benefits = [
 ];
 ---
 <Layout title="TamidZamin | סוכני AI בוואטסאפ ובטלפון לעסקים בישראל" description="אתם בעבודה, והפניות ממשיכות להגיע. TamidZamin מאפיינת פתרונות AI בוואטסאפ ובטלפון לעסקי שירות, לאיסוף פרטים מסודר והמשך טיפול אנושי.">
-  <section class="home-hero blue-edge" aria-labelledby="hero-title" data-motion="hero">
+  <section class="home-hero" aria-labelledby="hero-title" data-motion="hero">
     <div class="hero-visual" aria-hidden="true">
       <picture>
         <source media="(max-width: 600px) and (orientation: portrait)" srcset="/media/hero-poster-mobile.webp" width="720" height="1280" />
@@ -30,16 +30,12 @@ const benefits = [
       </picture>
       <video id="hero-video" class="hero-video" data-src="/media/hero-film.mp4" data-mobile-src="/media/hero-film-mobile.mp4" width="1280" height="720" muted loop playsinline preload="none" tabindex="-1"></video>
     </div>
-    <div class="hero-light" aria-hidden="true"></div>
-    <div class="container">
+    <div class="container hero-content">
       <div class="home-hero-copy">
         <h1 id="hero-title"><span class="hero-title-line">כל פנייה מתחילה</span> <span class="hero-title-line hero-title-answer">במענה נכון.</span></h1>
-        <p>סוכני AI בוואטסאפ ובטלפון לעסקי שירות. אוספים פרטים, מסדרים פניות ומשאירים את ההחלטות המקצועיות אצלכם.</p>
-        <div class="hero-actions"><a class="pill" href="/contact/">לבדיקת התאמה <span class="pill-icon"><Icon name="arrow" size={15} /></span></a><a class="hero-secondary" href="#process">איך זה עובד <Icon name="arrow" size={18} /></a></div>
-        <ul class="hero-points"><li><Icon name="phone" size={19} />טלפון ווואטסאפ</li><li><Icon name="list" size={19} />פניות מסודרות</li><li><Icon name="user" size={19} />עם מענה אנושי</li></ul>
+        <div class="hero-actions"><a class="pill" href="/contact/">לבדיקת התאמה <Icon name="arrow" size={16} /></a><a class="hero-secondary" href="#process">איך זה עובד <Icon name="arrow" size={16} /></a></div>
       </div>
     </div>
-    <a class="scroll-cue" href="#channels"><span>מכאן מתחילה השיחה</span><svg width="20" height="28" viewBox="0 0 20 28" fill="none" aria-hidden="true"><path d="M10 2v22m-6-6 6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg></a>
     <button class="hero-video-toggle" type="button" aria-controls="hero-video" aria-label="הפעלת סרטון הרקע" data-playing="false" hidden>
       <svg class="video-pause-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M8 5v14M16 5v14" /></svg>
       <svg class="video-play-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="m8 5 11 7-11 7V5Z" /></svg>
@@ -49,6 +45,7 @@ const benefits = [
   </section>
 
   <section class="home-channels blue-edge" id="channels" aria-label="פתרונות בוואטסאפ ובטלפון">
+    <p class="home-intro container">סוכני AI בוואטסאפ ובטלפון לעסקי שירות. אוספים פרטים, מסדרים פניות ומשאירים את ההחלטות המקצועיות אצלכם.</p>
     <div class="container channel-stage">
       <article class="home-channel whatsapp-channel" aria-labelledby="whatsapp-title">
         <h2 id="whatsapp-title"><Icon name="chat" size={30} />סוכן AI בוואטסאפ</h2>

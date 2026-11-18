@@ -95,12 +95,12 @@ and no-JavaScript coverage.
 The hero uses the owner's 14-second, silent H.264 montage as a full-bleed
 background. Desktop retains the exact supplied film; portrait phones get a
 dedicated 9:16 edit of the same shots. Video and poster use `object-fit: cover`;
-the existing Hebrew headline, copy and actions stay on top, protected by
-responsive navy scrims. The two headline lines resolve into focus on each full
-load/reload and the existing blue edge draws across the scene. The body and
-CTA are available immediately, even while media loads. Phones retain one
-full-width primary action and a quiet process link, without redundant badges
-or the extra scroll prompt.
+the existing Hebrew headline and actions stay on top, protected by restrained
+black contrast scrims. The 19 November Broccoli-inspired layout uses transparent
+overlaid navigation, light white type and two compact side-by-side actions on
+desktop and phone. Two headline lines resolve into focus on full load/reload;
+the blue edge is removed. Actions never wait for media. The unchanged explanatory
+paragraph now introduces the channels below the hero.
 
 `src/scripts/hero-video.ts` starts muted inline playback while the hero is
 visible and provides a keyboard-operable play/pause control. Playback pauses
@@ -397,14 +397,16 @@ pages do not. Longer copy, expanded FAQs and enlarged text can grow.
 - `src/styles/home.css` owns homepage composition, 600/880/1024px adaptations
   and restrained interaction feedback. Keep new fullscreen rules scoped to
   direct homepage sections, not global `section` selectors.
-- The hero uses `100svh` minus actual header height. `Layout.astro` measures
-  the header with ResizeObserver. Its 4.75rem/4.25rem CSS fallback reserves
-  space before enhancement. Homepage stickiness is enhanced only with JS;
-  no-JS and short (<=500px high) headers remain nonsticky.
-- Native anchors and history remain untouched. Scroll padding accounts for
-  the measured header. Do not introduce wheel/touch interception or scroll snap.
+- `src/styles/hero.css`, loaded after navigation styles, owns the hero and
+  homepage-only header overrides. The transparent header overlays the film.
+  Hero minimum height is `max(820px, 100svh)`, or `max(720px, 100svh)` up to
+  880px; content starts at 280/200px with a measured-header safety allowance.
+  Supporting-page header behavior is unchanged.
+- Native anchors and history remain untouched. Homepage scroll padding is
+  16px; supporting pages account for their sticky header. No wheel/touch
+  interception or scroll snap.
 - `src/scripts/home-motion.ts` is homepage-only progressive enhancement:
-  the bounded headline/blue-edge arrival (never hidden headline/CTA), one 1760ms process/handoff
+  the two bounded headline arrivals (never hidden headline/CTA), one 1760ms process/handoff
   sequence, 620ms device entrance and 650ms About-photo reveal.
 - Animations run once, pause offscreen/in hidden tabs, and settle. Live reduced-
   motion changes cancel them. Default HTML/CSS is visible without JavaScript.
@@ -430,11 +432,11 @@ phone-preview render is used. Do not replace the source with a Drive viewing URL
 `hero-film-mobile.mp4` is a dedicated **720x1280 (9:16)** portrait adaptation,
 selected at `(max-width: 600px) and (orientation: portrait)`. It uses the same
 five original animation clips, scene timings, dissolves and 14-second loop.
-Each shot is reframed to keep the person and their work visible in the upper
-frame, with a softly extended moving background below for the overlaid copy.
-There is no new generation, baked-in text or change to the original film.
+Each shot uses a 396x704 focal crop at y=8, proportionally scaled to 720x1280.
+Sharp real footage fills the entire frame; there is no blurred extension,
+padding, baked dark area, new generation, text or change to the original film.
 Its matching poster is `hero-poster-mobile.webp`. The mobile film is
-2,510,750 bytes; phones do not also download the desktop film or poster.
+3,020,386 bytes; phones do not also download the desktop film or poster.
 
 To reproduce the mobile film and poster using the committed source clips
 and an installed FFmpeg:

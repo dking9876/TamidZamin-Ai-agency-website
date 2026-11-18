@@ -21,12 +21,12 @@ function run(args) {
   if (result.status !== 0) throw new Error(result.stderr || `FFmpeg exited ${result.status}`);
 }
 
-const cropX = [560, 480, 450, 480, 440];
+const cropX = [722, 642, 612, 642, 602];
 const { sourceStarts, sourceLengths, dissolveSeconds: fade, fps, duration } = source.edit;
 const graph = [];
 const clips = source.scenes.map((scene) => join(originals, 'generated-clips', `${scene.name}.mp4`));
 for (const [index] of clips.entries()) {
-  graph.push(`[${index}:v]fps=${fps},trim=start=${sourceStarts[index]}:duration=${sourceLengths[index]},setpts=PTS-STARTPTS,scale=1280:720:flags=lanczos,crop=720:720:${cropX[index]}:0,setsar=1,format=yuv420p[v${index}]`);
+  graph.push(`[${index}:v]fps=${fps},trim=start=${sourceStarts[index]}:duration=${sourceLengths[index]},setpts=PTS-STARTPTS,scale=1280:720:flags=lanczos,crop=396:704:${cropX[index]}:8,scale=720:1280:flags=lanczos,setsar=1,format=yuv420p[v${index}]`);
 }
 graph.push('[v0]split=2[first][loop]');
 graph.push(`[loop]trim=duration=${fade + 1 / fps},setpts=PTS-STARTPTS[head]`);
@@ -38,10 +38,7 @@ for (let index = 1; index < clips.length; index++) {
   offset += sourceLengths[index] - fade;
 }
 graph.push(`[${previous}][head]xfade=transition=fade:duration=${fade}:offset=${offset - 1 / fps}[cycle]`);
-graph.push(`[cycle]trim=start=${fade}:duration=${duration},setpts=PTS-STARTPTS,split=2[subject][ambient]`);
-graph.push('[ambient]scale=1280:1280:flags=lanczos,crop=720:1280,gblur=sigma=24[backdrop]');
-graph.push("[subject]format=yuva420p,geq=lum='lum(X,Y)':cb='cb(X,Y)':cr='cr(X,Y)':a='255*clip((720-Y)/160,0,1)'[foreground]");
-graph.push('[backdrop][foreground]overlay=0:0:shortest=1,setsar=1,format=yuv420p[out]');
+graph.push(`[cycle]trim=start=${fade}:duration=${duration},setpts=PTS-STARTPTS,format=yuv420p[out]`);
 run([
   '-filter_complex_threads', '2', ...clips.flatMap((clip) => ['-i', clip]),
   '-filter_complex', graph.join(';'), '-map', '[out]', '-an',
@@ -59,7 +56,7 @@ run([
 manifest['hero-film-mobile.mp4'] = {
   source: '../../../photo-animated-hero/generated-clips',
   sourceRecord: '../../../photo-animated-hero/sources.json',
-  transform: '720x1280 portrait, 24fps, 14 seconds, silent H.264 with fast-start metadata. Same five shots, timing and loop as the approved film. Scene-specific 720x720 crops keep the person and work in the upper frame; a softly extended moving background fills the lower copy area. No baked-in text, new generation or altered original.',
+  transform: '720x1280 portrait, 24fps, 14 seconds, silent H.264 with fast-start metadata. Same five shots, timing and loop as the approved film. Per-scene 396x704 crops at y=8 are scaled proportionally to 9:16. Real footage fills every pixel: no blurred extension, padding, baked-in dark area or text. No new generation or altered original.',
   cropX,
   sourceClipHashes: Object.fromEntries(await Promise.all(clips.map(async (clip, index) => [
     source.scenes[index].name, hash(await readFile(clip)),

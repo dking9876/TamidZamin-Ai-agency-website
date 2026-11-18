@@ -23,13 +23,6 @@ function animate(group: MotionGroup) {
           { transform: 'translateX(0)', filter: 'blur(0)', opacity: 1 },
         ], 640, index * 90);
       });
-      const light = element.querySelector('.hero-light');
-      if (light) {
-        add(light, [
-          { clipPath: 'inset(0 0 0 100%)' },
-          { clipPath: 'inset(0)' },
-        ], 900, 120, 'backwards');
-      }
       break;
     }
     case 'devices':

@@ -1,5 +1,60 @@
 # Verification and launch status
 
+## Full-frame Broccoli-reference hero - 19 November 2026
+
+The owner clarified that real video must fill the entire mobile hero and
+requested closer desktop/phone layout correspondence to Broccoli. The later
+instruction explicitly requests a Git push. Separate WhatsApp-demo work is
+preserved and is not part of this hero change.
+
+### Implemented
+
+- Transparent homepage navigation overlays the film, with no separate header
+  band. Supporting-page navigation behavior is unchanged.
+- Light white Hebrew headline, physically left-composed but semantically RTL,
+  starts 280px down on desktop and 200px on smaller screens. Compact blue and
+  outlined actions remain adjacent at ordinary phone text sizes.
+- The exact explanatory paragraph moves below the hero. The blue decorative
+  edge, repeated benefit row and scroll prompt are removed from the hero.
+  No Broccoli assets, customer logos, claims or source implementation are used.
+- Phone footage is rebuilt as genuine full-frame 9:16 focal crops of all five
+  original clips. No blurred extension, padding or baked dark lower panel.
+  Output is 720x1280, 24fps, 14 seconds, silent H.264, 3,020,386 bytes.
+  The original desktop film's SHA-256 remains unchanged.
+- Restrained black scrims preserve readability across scenes. A localized
+  top fade protects transparent navigation without becoming a solid header.
+  Play/pause, source selection, rotation and static fallbacks are retained.
+
+### Verified
+
+- Astro/TypeScript check: zero errors, warnings or hints. Standalone production
+  build passed using an isolated output directory to avoid other local work.
+- Vercel production build and deployment-package verification passed, including
+  preview routing, static assets and disabled-delivery behavior.
+- All 97 browser cases passed without retries: hero, refinement, navigation,
+  mobile layout and site/accessibility. Covers 320-1920px, landscape, short
+  screens, 200% text, keyboard/touch controls, menus, source rotation, media
+  failures, reduced motion and no JavaScript.
+- Pixel-sampled contrast passes over the poster and six video positions,
+  including every scene: both title lines >=3:1; navigation/menu labels and
+  both hero actions >=4.5:1 at tested desktop and phone sizes.
+- Decoded lower halves were compared with the corresponding original focal
+  crops in all five scenes. PSNR: 38.97, 42.72, 44.09, 41.20 and 39.94 dB,
+  above the 28 dB verification threshold. This checks actual footage rather
+  than merely the video element's rectangle.
+- Desktop and phone screenshots were visually inspected across multiple
+  scenes, including the bright repair scene after the final contrast fix.
+  Impeccable's final layout scan returned `[]`.
+
+The initial contrast expansion exposed weak mobile-menu contrast on a bright
+scene; the top fade fixes it. Sampling now preserves button surfaces, removes
+only text ink without transitions, and avoids scrolling during scene changes.
+The final complete browser run passed after that correction.
+
+Tests use installed Edge with emulated phone dimensions and touch, not physical
+iPhone/Android or Safari certification. Preview noindex and disabled lead
+delivery remain unchanged.
+
 ## Recorded WhatsApp demonstration - 19 November 2026
 
 The supplied screen recording replaces the illustrative WhatsApp conversation

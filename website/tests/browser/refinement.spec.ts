@@ -274,13 +274,9 @@ test.describe('refinement: static geometry', () => {
       expect.soft(Math.abs(metrics.measuredHeader - metrics.header.height), 'Measured --header-height').toBeLessThanOrEqual(1);
       expect.soft(metrics.hero.bottom, 'The next section must begin below the initial viewport')
         .toBeGreaterThanOrEqual(viewport.height - 1);
-      if (viewport.height > 500) {
-        expect.soft(metrics.header.position).toBe('sticky');
-        expect.soft(Math.abs(metrics.hero.bottom - viewport.height), JSON.stringify(metrics.hero)).toBeLessThanOrEqual(8);
-      } else {
-        expect.soft(metrics.header.position, 'Short viewports must not be obstructed by a sticky header').toBe('relative');
-        expect.soft(metrics.hero.bottom).toBeGreaterThanOrEqual(viewport.height - 2);
-      }
+      expect.soft(metrics.header.position, 'Homepage navigation overlays the footage rather than reserving a separate band').toBe('absolute');
+      expect.soft(metrics.hero.top).toBe(0);
+      expect.soft(metrics.hero.height).toBeGreaterThanOrEqual(Math.max(viewport.width <= 880 ? 720 : 820, viewport.height) - 1);
       if (viewport.width >= 1024) {
         for (const section of metrics.sections) {
           expect.soft(section.height, `#${section.id || 'hero'}: ${JSON.stringify(section)}`)
@@ -299,7 +295,6 @@ test.describe('refinement: static geometry', () => {
       const targets = [
         { selector: '.hero-title-line:first-child', minimum: 3 },
         { selector: '.hero-title-answer', minimum: 3 },
-        { selector: '.home-hero-copy > p', minimum: 4.5 },
       ];
       const boxes = [];
       for (const target of targets) {
@@ -314,6 +309,28 @@ test.describe('refinement: static geometry', () => {
         expect(box!.y + box!.height).toBeLessThanOrEqual(viewport.height);
         boxes.push({ ...target, box: box!, foreground });
       }
+      const controlSelectors = [
+        '.hero-actions a',
+        viewport.width > 880 ? '.desktop-nav .nav-top-link' : '.mobile-menu > summary',
+        ...(viewport.width > 880 ? ['.site-header .header-cta'] : []),
+      ];
+      for (const selector of controlSelectors) {
+        for (const element of await page.locator(selector).all()) {
+          const sample = await element.evaluate((node) => {
+            const range = document.createRange();
+            range.selectNodeContents(node);
+            const rect = range.getBoundingClientRect();
+            return {
+              box: { x: rect.x, y: rect.y, width: rect.width, height: rect.height },
+              foreground: getComputedStyle(node).color.match(/\d+/g)!.slice(0, 3).map(Number),
+            };
+          });
+          boxes.push({ selector, minimum: 4.5, ...sample });
+        }
+      }
+      const hiddenControlInk = await page.addStyleTag({
+        content: controlSelectors.flatMap((selector) => [selector, `${selector} *`]).join(',') + ' { color: transparent !important; text-shadow: none !important; transition: none !important; }',
+      });
       const ink = page.locator('.home-hero-copy > *');
       const originalVisibility = await ink.evaluateAll((elements) => elements.map((element) => ({
         value: (element as HTMLElement).style.getPropertyValue('visibility'),
@@ -321,15 +338,15 @@ test.describe('refinement: static geometry', () => {
       })));
       const results = [];
       try {
-        // Keep the copy's contrast scrim while hiding only its ink.
-        await ink.evaluateAll((elements) => elements.forEach((element) => {
+        // Keep button surfaces and scrims while hiding headline and control ink.
+        await page.locator('#hero-title').evaluate((element) => {
           (element as HTMLElement).style.setProperty('visibility', 'hidden', 'important');
-        }));
+        });
         const poster = await page.screenshot({ scale: 'css', omitBackground: false });
         for (const target of boxes) results.push({ scene: 'poster', ...target, ...await textContrast(poster, target.box, target.foreground) });
         await page.emulateMedia({ reducedMotion: 'no-preference' });
         await expect(page.locator('.home-hero')).toHaveAttribute('data-video-ready', '');
-        await page.locator('.hero-video-toggle').click();
+        await page.locator('.hero-video-toggle').evaluate((element: HTMLButtonElement) => element.click());
         await expect(page.locator('.hero-video')).toHaveJSProperty('paused', true);
         for (const time of [0.1, 3.2, 6, 8.8, 11.6, 13.8]) {
           await page.locator('.hero-video').evaluate(async (element: HTMLVideoElement, position) => {
@@ -341,6 +358,7 @@ test.describe('refinement: static geometry', () => {
           for (const target of boxes) results.push({ scene: String(time), ...target, ...await textContrast(background, target.box, target.foreground) });
         }
       } finally {
+        await hiddenControlInk.evaluate((element) => element.parentNode?.removeChild(element));
         await ink.evaluateAll((elements, originals) => {
           elements.forEach((element, index) => {
             const style = (element as HTMLElement).style;
@@ -577,7 +595,7 @@ test.describe('refinement: actual motion runtime', () => {
         endTimes: window.__refinementMotion.groups[key].map((a) => a.effect!.getComputedTiming().endTime),
         forbidden: window.__refinementMotion.forbidden,
       }), name);
-      const expectedCount = name === 'devices' ? 2 : name === 'hero' ? 3 : 1;
+      const expectedCount = name === 'devices' ? 2 : name === 'hero' ? 2 : 1;
       expect(result.count).toBe(expectedCount);
       for (const endTime of result.endTimes) {
         expect(Number(endTime)).toBeGreaterThan(0);

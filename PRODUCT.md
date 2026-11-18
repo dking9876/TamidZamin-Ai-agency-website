@@ -104,6 +104,13 @@ safeguards and restrictions on real lead delivery remain unchanged.
 The owner's follow-up requested a better phone-sized fit and another Git push.
 Portrait phones now use a dedicated 9:16 adaptation of the same five shots;
 desktop framing, overlaid factual copy and preview safeguards stay unchanged.
+On 19 November the owner clarified that real footage must fill the entire
+phone hero and requested Broccoli's desktop and mobile composition more closely.
+This supersedes the blurred lower extension, heavy cyan headline, blue hero
+edge and stacked phone actions. The homepage now uses transparent overlaid
+navigation, a light white left-composed RTL headline, and two compact adjacent
+buttons. The existing explanatory paragraph moves below the hero; no factual
+copy, other section, business claim or launch safeguard is removed.
 
 ## Evidence on Hand
 

@@ -71,8 +71,9 @@ for (const width of [320, 360, 390, 430, 600, 601, 768, 880, 881, 1024, 1100, 11
         expect(layout.benefits[index].top).toBeGreaterThan(layout.benefits[index - 1].bottom);
         expect(layout.benefits[index].left).toBeCloseTo(layout.benefits[0].left, 0);
       }
-      expect(layout.heroActions[0].width).toBeGreaterThan(layout.heroActions[1].width + 80);
-      expect(layout.heroActions[0].height).toBeGreaterThan(layout.heroActions[1].height);
+      expect(layout.heroActions[0].top).toBeCloseTo(layout.heroActions[1].top, 0);
+      expect(layout.heroActions[0].height).toBeGreaterThanOrEqual(48);
+      expect(layout.heroActions[1].height).toBeGreaterThanOrEqual(48);
       await expect(page.locator('.hero-points')).toBeHidden();
       await expect(page.locator('.home-hero .scroll-cue')).toBeHidden();
     } else if (width <= 1100) {

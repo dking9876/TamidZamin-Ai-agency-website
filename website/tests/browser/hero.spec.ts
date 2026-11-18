@@ -35,7 +35,7 @@ for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 
     await page.setViewportSize(viewport);
     for (const reload of [false, true]) {
       if (reload) await page.reload(); else await page.goto('/');
-      await page.waitForFunction(() => window.__heroMotion.effects.length === 3 && window.__heroMotion.frames > 3);
+      await page.waitForFunction(() => window.__heroMotion.effects.length === 2 && window.__heroMotion.frames > 3);
       const motion = await page.evaluate(() => ({
         effects: window.__heroMotion.effects.map((animation) => ({
           target: (animation.effect as KeyframeEffect).target?.className,
@@ -50,7 +50,7 @@ for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 
       expect(motion.navigation).toBe(reload ? 'reload' : 'navigate');
       expect(motion.effects.every((effect) => effect.iterations === 1 && effect.end <= 1100)).toBe(true);
       expect(motion.effects.filter((effect) => String(effect.target).includes('hero-title'))).toHaveLength(2);
-      expect(motion.effects.some((effect) => effect.frames.some((frame) => frame.clipPath))).toBe(true);
+      expect(motion.effects).toHaveLength(2);
       expect(motion.effects.some((effect) => effect.frames.some((frame) => frame.filter === 'blur(3px)'))).toBe(true);
       await expect(page.locator('.hero-actions > .pill')).toBeVisible();
       await expect(page.locator('.hero-actions > .pill')).toHaveAttribute('href', '/contact/');
@@ -72,7 +72,7 @@ for (const cancelBeforeLoad of [false, true]) {
     });
     try {
       await page.goto('/', { waitUntil: 'domcontentloaded' });
-      await page.waitForFunction(() => window.__heroMotion.effects.length === 3);
+      await page.waitForFunction(() => window.__heroMotion.effects.length === 2);
       await expect(page.locator('.hero-actions > .pill')).toBeVisible();
       await expect(page.locator('#hero-title')).toContainText('כל פנייה מתחילה');
       await expect(page.locator('.hero-poster')).toBeVisible();
@@ -86,7 +86,7 @@ for (const cancelBeforeLoad of [false, true]) {
       if (cancelBeforeLoad) {
         await expect(page.locator('.hero-video')).toBeHidden();
         await expect(page.locator('.hero-video')).toHaveJSProperty('paused', true);
-        expect(await page.evaluate(() => window.__heroMotion.effects.length)).toBe(3);
+        expect(await page.evaluate(() => window.__heroMotion.effects.length)).toBe(2);
       } else {
         await expect(page.locator('.home-hero')).toHaveAttribute('data-video-ready', '');
         await expect(page.locator('.hero-video')).toHaveJSProperty('paused', false);
@@ -100,7 +100,7 @@ for (const cancelBeforeLoad of [false, true]) {
 
 test('changing to reduced motion during the hero entrance leaves a sharp static composition', async ({ page }) => {
   await page.goto('/');
-  await page.waitForFunction(() => window.__heroMotion.effects.length === 3 && window.__heroMotion.frames > 2);
+  await page.waitForFunction(() => window.__heroMotion.effects.length === 2 && window.__heroMotion.frames > 2);
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await expect.poll(() => page.locator('.home-hero').evaluate((element) => element.getAnimations({ subtree: true }).length)).toBe(0);
   for (const line of await page.locator('.hero-title-line').all()) {
@@ -111,14 +111,14 @@ test('changing to reduced motion during the hero entrance leaves a sharp static 
   await expect(page.locator('.hero-video')).toHaveJSProperty('paused', true);
   await expect(page.locator('.hero-video')).toBeHidden();
   await expect(page.locator('.hero-video-toggle')).toBeHidden();
-  await expect(page.locator('.hero-light')).toHaveCSS('clip-path', 'none');
+  await expect(page.locator('.hero-light')).toHaveCount(0);
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await expect(page.locator('.hero-video')).toHaveJSProperty('paused', true);
   expect(await page.locator('.home-hero').evaluate((element) => element.getAnimations({ subtree: true }).length)).toBe(0);
 });
 
 for (const width of [320, 390, 600]) {
-  test(`mobile hero ${width}px: one dominant action and a quieter, complete first viewport`, async ({ page }) => {
+  test(`mobile hero ${width}px: reference-style paired actions and transparent overlaid navigation`, async ({ page }) => {
     await page.setViewportSize({ width, height: 844 });
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.goto('/');
@@ -129,9 +129,18 @@ for (const width of [320, 390, 600]) {
     await expect(page.locator('.scroll-cue')).toBeHidden();
     const primary = (await page.locator('.hero-actions > .pill').boundingBox())!;
     const secondary = (await page.locator('.hero-secondary').boundingBox())!;
-    expect(primary.width).toBeGreaterThan(secondary.width + 80);
-    expect(primary.height).toBeGreaterThanOrEqual(56);
-    expect(secondary.height).toBeGreaterThanOrEqual(44);
+    expect(primary.y).toBeCloseTo(secondary.y, 0);
+    expect(primary.width).toBeLessThan(width * 0.6);
+    expect(primary.height).toBeGreaterThanOrEqual(48);
+    expect(secondary.height).toBeGreaterThanOrEqual(48);
+    const title = page.locator('#hero-title');
+    expect((await title.boundingBox())!.y).toBeCloseTo(200, 0);
+    await expect(title).toHaveCSS('font-weight', '350');
+    await expect(title).toHaveCSS('color', 'rgb(255, 255, 255)');
+    await expect(page.locator('.site-header')).toHaveCSS('position', 'absolute');
+    await expect(page.locator('.site-header')).toHaveCSS('background-color', 'rgba(0, 0, 0, 0)');
+    expect((await page.locator('.home-hero').boundingBox())!.y).toBe(0);
+    await expect(page.locator('.home-intro')).toContainText('סוכני AI בוואטסאפ ובטלפון לעסקי שירות');
     expect(primary.y + primary.height).toBeLessThanOrEqual(844);
     expect(secondary.y + secondary.height).toBeLessThanOrEqual(844);
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(width);
@@ -176,7 +185,7 @@ for (const viewport of [
     for (const axis of ['x', 'y', 'width', 'height'] as const) {
       expect(videoBox[axis]).toBeCloseTo(heroBox[axis], 0);
     }
-    for (const selector of ['#hero-title', '.home-hero-copy > p', '.hero-actions']) {
+    for (const selector of ['#hero-title', '.hero-actions']) {
       const box = (await page.locator(selector).boundingBox())!;
       expect(box.x).toBeGreaterThanOrEqual(videoBox.x);
       expect(box.y).toBeGreaterThanOrEqual(videoBox.y);

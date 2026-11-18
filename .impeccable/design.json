@@ -3,6 +3,17 @@
   "generatedAt": "2026-11-18T12:28:22.120Z",
   "title": "Design System: TamidZamin",
   "extensions": {
+    "heroReferenceRevision": {
+      "date": "2026-11-19",
+      "authority": "website/src/styles/hero.css",
+      "reference": "Broccoli desktop and phone hero composition, adapted with TamidZamin assets and factual Hebrew copy",
+      "overridesEarlierHeroSnapshots": true,
+      "layout": "Transparent absolute header; hero begins at y=0. Desktop minimum max(820px,100svh), up to 880px max(720px,100svh). Left-composed RTL headline begins at 280px desktop or 200px smaller screens.",
+      "type": "Heebo 350, white, 1.08 leading, -.035em tracking; desktop up to 88px, phones 36px.",
+      "actions": "Adjacent blue and white-outlined buttons: 48px minimum height, 6px corners, 14px type, 12px gap. Plain arrows, no icon circles.",
+      "media": "Full-frame original desktop film; portrait 720x1280 crops of the same five clips, without blurred extension, padding or baked lower panel. No blue hero edge. Black contrast scrims protect navigation and text.",
+      "content": "Existing explanatory paragraph preserved directly below the hero; other sections remain unchanged."
+    },
     "colorMeta": {
       "blue": {
         "role": "primary",
@@ -508,12 +519,12 @@
       {
         "name": "hero-arrival",
         "value": "1020ms",
-        "purpose": "Two headline lines (640ms, staggered 90ms) and blue edge (900ms after 120ms). Body and CTA never wait; video supplies photographic motion."
+        "purpose": "Two headline lines, 640ms staggered by 90ms. No decorative edge effect. Actions never wait; video supplies photographic motion."
       },
       {
         "name": "hero-video",
         "value": "14s",
-        "purpose": "User-approved silent looping background across the full hero. Portrait phones up to 600px use a scene-reframed 720x1280 edit and top-aligned matching poster; desktop/landscape keep the wide film. Rotation preserves scene position and manual pause. Offscreen/hidden-page suspension; static reduced-motion/no-JavaScript poster. Source: website/public/media/provenance.json."
+        "purpose": "User-approved silent looping background across the full hero. Portrait phones up to 600px use true full-frame 720x1280 focal crops and a centered matching poster, without blurred extensions or a baked lower panel; desktop/landscape keep the wide film. Rotation preserves scene position and manual pause. Offscreen/hidden-page suspension; static reduced-motion/no-JavaScript poster. Source: website/public/media/provenance.json."
       },
       {
         "name": "device-arrival",
