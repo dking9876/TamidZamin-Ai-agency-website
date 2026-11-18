@@ -125,3 +125,15 @@ Allow manual reading and a clear return to automatic following without moving
 the whole page. Keep all supplied wording and the no-JavaScript transcript.
 The owner subsequently requested a GitHub push of the completed update.
 No live-service claims, lead activation or broader redesign are authorized.
+
+The owner's next 19 November request replaces the illustrative WhatsApp phone
+with the supplied screen recording at 3x speed. Keep the approved device frame,
+entire uncropped recording and section identity. Use a lightweight same-origin
+H.264 derivative with speed baked in, a representative poster, explicit manual
+play/pause, seek, replay and native fullscreen. No autoplay, live agent, remote
+embed or audio is added; the original audio track is silent. Make the real
+screen readable with wider desktop devices and stacked channel articles up
+through 1100px. Below 601px retain one article per row. Preserve the existing
+phone recording/transcript, reduced-motion and no-JavaScript fallbacks, and
+launch safeguards. The owner's subsequent request authorizes a GitHub push of
+this WhatsApp update only, excluding concurrent hero changes.

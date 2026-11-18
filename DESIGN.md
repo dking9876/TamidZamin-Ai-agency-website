@@ -353,7 +353,7 @@ plus-icon rotation transitions, preserving the open state and color feedback.
 
 `Picture.astro` renders WebP srcsets: legacy hero 768/1280/1920, support/About 640/960, logo 300/600, and trade images 320/640. Logo sizing is declared as 190px; other images declare 92vw on mobile and 45vw otherwise. These are the existing source hints, not a new universal layout rule. Images have dimensions, async decoding, and lazy loading except the header logo. The homepage hero now uses the exact supplied H.264 MP4 and an eager 1280x720 WebP first-frame poster in `public/media`, with provenance recorded alongside them. The original hero derivatives remain available for other assets.
 
-Nine numbered PNG originals are preserved. The shipping image directory contains 27 rasters: 19 photographic/logo WebP derivatives, six code-authored decorative WebPs, a logo-derived icon, and a hero-derived social image. The sidecar links their actual manifest, companion records, and preparation code rather than inventing model-generation provenance. People and the WhatsApp conversation remain explicitly illustrative.
+Nine numbered PNG originals are preserved. The shipping image directory contains 27 rasters: 19 photographic/logo WebP derivatives, six code-authored decorative WebPs, a logo-derived icon, and a hero-derived social image. The sidecar links their actual manifest, companion records, and preparation code rather than inventing model-generation provenance. People remain illustrative. The WhatsApp phone now shows the owner's recorded demo, explicitly labeled as recorded rather than live.
 
 ### Focus and reduced motion
 
@@ -364,8 +364,8 @@ Shared interactive focus is a 3px cyan outline with 5px offset. Fields use blue 
 - The hero's video owns the photographic motion; the superseded still-image zoom is removed. Poster and video loading never hold up the headline or action.
 - Two headline lines resolve from 3px blur, .6 opacity and 18px inline travel over 640ms, staggered by 90ms. They remain present rather than starting hidden. The original raster edge uncovers right-to-left over 900ms after a 120ms delay. The body and actions never animate or wait. All hero effects settle within 1020ms once their assets are available, run again on full reload, and do not repeat on scroll re-entry.
 - One inquiry -> AI -> confirmed summary -> human sequence pulses the four process nodes and traces the RTL connectors. It lasts at most 1760ms and settles; it does not repeat on re-entry.
-- Each device figure enters once over 620ms with 12px travel when its own figure comes into view. Three illustrative WhatsApp bubbles arrive from their respective sides, then the confirmation summary uncovers right-to-left. That sequence settles within 2340ms. The phone is now a user-initiated recording player, described below; it no longer animates a fictitious call on entry.
-- A 44px replay control below the WhatsApp illustration-only caption restarts its sequence, not its frame entrance. Rapid activation cancels the previous effects before restarting; focus stays on the button. Caption grid space is reserved so enabling/disabling replay does not shift the composition. This illustrative replay is unavailable without JavaScript or under reduced motion.
+- Each device figure enters once over 620ms with 12px travel when its own figure comes into view. Both phones are now user-initiated recording players; entering the viewport never starts a fictitious chat, audio or demo video.
+- The WhatsApp replay control restarts the actual recording, not its figure entrance. The superseded illustrative bubble/summary animations and their replay handler are removed. Requested playback remains available with reduced motion and through native controls without JavaScript.
 - About imagery opens through a small 650ms crop reveal. Other sections stay still rather than repeating fade-up effects everywhere.
 - `--motion-feedback` is 160ms; image hover is 260ms. Authored arrivals use `cubic-bezier(0.16, 1, 0.3, 1)`.
 - IntersectionObserver pauses authored animations below 15% intersection. Visibility changes pause them in hidden tabs; page lifecycle events cover back/forward restoration. No wheel/touch listener, scroll timer, custom cursor or live phone control is added.
@@ -416,7 +416,30 @@ uses immediate scrolling. The transcript is not an aria-live region: reading
 assistance must not speak over the recording.
 No live telephony, third-party player or external communication is added.
 
-Meaningful content is visible and crawlable before JavaScript; no reveal stylesheet hides it. Delayed chat entrances use temporary Web Animations effects only, reverting to fully visible content on finish or cancellation. Authored arrival sequences are shorter than three seconds; the background video and user-controlled recording indicator are deliberate looping exceptions with pause controls. No motion dependency or production capability is added.
+`website/src/components/WhatsAppDemo.astro` presents the full 720x1600 recording
+inside the existing blue-rimmed device without cropping, stretching, a duplicate
+WhatsApp header or a decorative notch covering the source. Its WebP poster
+shows a representative conversation frame. The compact controls sit below
+the phone: a pale play/pause button, replay and fullscreen icons, a native seek
+slider, tabular elapsed/total time and a persistent 3x label. All controls have
+44px minimum targets. The caption distinguishes the recorded demo from a live
+conversation; a status region provides explicit failure and direct-file recovery.
+
+The 3x speed is encoded into the 45.708-second H.264 asset, including native
+fullscreen and no-JavaScript playback. The original silent audio track is omitted.
+`whatsapp-demo.ts` does not autoplay, loop or request the video before activation.
+Page hiding/exit pauses playback without automatic resumption. Fullscreen uses
+native controls and an iOS native-video fallback; unsupported browsers omit
+the action. The service page links to `/#whatsapp-demo`.
+
+Desktop channel grids give the two recorded devices more width while retaining
+the central connector and side explanations. From 601 through 1100px, the two
+channels stack their headings/devices/features/actions into parallel columns
+with top-aligned devices; up to 600px they form a single reading column. Device
+width is capped at 17.5rem in the stacked compositions. No fixed video height
+clips the source or prevents surrounding controls from growing with text.
+
+Meaningful content is visible and crawlable before JavaScript; no reveal stylesheet hides it. Authored arrival sequences are shorter than three seconds; the background video and user-controlled recording indicator are deliberate looping exceptions with pause controls. No motion dependency or production capability is added.
 
 ## Do's and Don'ts
 

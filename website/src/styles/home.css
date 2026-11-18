@@ -71,13 +71,13 @@ html:has(.homepage) { scroll-padding-top: calc(var(--header-height, var(--home-h
 
 .home-channels { border-block-start: 1px solid #446079; }
 .channel-stage { display: grid; grid-template-columns: minmax(0, 1fr) 56px minmax(0, 1fr); align-items: center; direction: ltr; }
-.home-channel { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); grid-template-rows: 1fr auto 1fr; column-gap: 28px; min-width: 0; }
+.home-channel { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); grid-template-rows: 1fr auto 1fr; column-gap: 28px; min-width: 0; }
 .home-channel > * { min-width: 0; direction: rtl; }
 .home-channel > h2 { grid-column: 1; grid-row: 1; align-self: end; }
 .home-channel > .check-list { grid-column: 1; grid-row: 2; }
 .home-channel > .pill { grid-column: 1; grid-row: 3; align-self: start; justify-self: end; }
 .home-channel > .device-stage { grid-column: 2; grid-row: 1/4; align-self: center; }
-.phone-channel { grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr); }
+.phone-channel { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); }
 .phone-channel > :is(h2, .check-list, .pill) { grid-column: 2; }
 .phone-channel > .device-stage { grid-column: 1; }
 .homepage .home-channel h2 { display: flex; gap: 12px; align-items: center; font-size: clamp(1.6rem, 2.2vw, 2.1rem); }
@@ -204,6 +204,16 @@ html:has(.homepage) { scroll-padding-top: calc(var(--header-height, var(--home-h
   .angled-trade h3 { font-size: 1.05rem; }
   .faq-strip { grid-template-columns: 180px minmax(0, 1fr); }
 }
+@media (min-width: 881px) and (max-width: 1100px) {
+  .channel-stage { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px 32px; align-items: stretch; }
+  .home-channel { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto 1fr auto; gap: 24px; }
+  .home-channel > :is(h2, .check-list, .pill, .device-stage) { grid-column: 1; }
+  .home-channel > h2 { grid-row: 1; justify-content: center; }
+  .home-channel > .device-stage { grid-row: 2; width: min(100%, 17.5rem); justify-self: center; align-self: start; }
+  .home-channel > .check-list { grid-row: 3; margin: 0; justify-self: center; }
+  .home-channel > .pill { grid-row: 4; width: min(100%, 20rem); justify-self: center; }
+  .brand-connector { display: none; }
+}
 @media (max-width: 880px) {
   :root { --home-header-base: 4.25rem; }
   .homepage main > .home-hero { padding-block: clamp(140px, 22svh, 240px) 88px; justify-content: end; }
@@ -217,7 +227,7 @@ html:has(.homepage) { scroll-padding-top: calc(var(--header-height, var(--home-h
   .home-channel { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto 1fr auto; gap: 24px; }
   .home-channel > :is(h2, .check-list, .pill, .device-stage) { grid-column: 1; }
   .home-channel > h2 { grid-row: 1; }
-  .home-channel > .device-stage { grid-row: 2; width: min(100%, 17.5rem); justify-self: center; }
+  .home-channel > .device-stage { grid-row: 2; width: min(100%, 17.5rem); justify-self: center; align-self: start; }
   .home-channel > .check-list { grid-row: 3; margin: 0; justify-self: center; }
   .home-channel > .pill { grid-row: 4; width: min(100%, 20rem); justify-self: center; }
   .brand-connector { display: none; }

@@ -1,5 +1,51 @@
 # Verification and launch status
 
+## Recorded WhatsApp demonstration - 19 November 2026
+
+The supplied screen recording replaces the illustrative WhatsApp conversation
+inside the existing phone. The original is unchanged. The full recording is
+accelerated to 3x and converted locally from HEVC to broadly supported H.264:
+720x1600, 24fps, 45.708333 seconds, 3,405,953 bytes, with fast-start metadata.
+The 137.183447-second source divided by three matches the output within one
+24fps frame. The original audio stream is silent (FFmpeg mean/max -91 dB) and
+is omitted. The poster shows a representative conversation frame.
+
+### Verified
+
+- Production build and Astro/TypeScript check: 66 files, zero errors,
+  warnings or hints. No added website dependencies.
+- All 76 production browser cases passed across `whatsapp-demo`, `motion`,
+  `mobile-layout`, `call-demo`, `call-transcript` and `refinement`.
+  After selecting the final poster, the production build and all 10
+  WhatsApp-specific cases passed again.
+- Real H.264 decoding and video time advance; no video request before
+  activation. Encoded 3x duration is verified, including no-JavaScript playback.
+  Fullscreen uses native controls and returns to custom inline controls.
+- Play/pause, keyboard seeking, end/replay, restart, loading cancellation,
+  rapid input, download failure/retry, fullscreen rejection and direct-file
+  recovery pass. Reduced motion permits intentional playback; synthetic hidden
+  page and page-exit events pause without auto-resume.
+- Responsive layouts pass at 320, 360, 390, 430, 600, 601, 768, 880, 881,
+  1024, 1100, 1101 and 1440px. Existing landscape, short-screen and 200%-text
+  checks remain green. All new controls have 44px minimum targets.
+- Axe found no WCAG A/AA violations in the tested channels state. The changed
+  UI detector returned `[]`. Existing call playback and all 48 transcript
+  cues remain tested, with no source audio/transcript edits.
+- Preview noindex and disabled lead delivery remain intact.
+- Final desktop/phone render captures were visually inspected together.
+  FFmpeg decoded the complete optimized recording without errors, and its
+  byte count and SHA-256 match the stored provenance record.
+
+The initial test attempt used a previously running stale preview and was
+discarded; the clean production process passed all 76 cases. Tests use
+installed Edge/Chromium, emulated phone sizes and synthesized taps, not
+physical Android/iPhone or Safari certification. The iOS native-fullscreen
+fallback is implemented but not verified on hardware. These checks cover
+the local production build, not a hosted deployment. The owner subsequently
+requested a GitHub push of the WhatsApp update only, excluding concurrent
+hero changes. Recording contents and participant permissions remain the
+owner's responsibility; lead delivery and indexing remain disabled.
+
 ## Synchronized phone transcript - 19 November 2026
 
 The supplied Hebrew transcript is now displayed inside the demo phone as

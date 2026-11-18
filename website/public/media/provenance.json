@@ -47,5 +47,22 @@
     "source": "hero-film-mobile.mp4",
     "transform": "First frame extracted with FFmpeg, libwebp quality 85, 720x1280.",
     "purpose": "Responsive phone loading, reduced-motion, no-JavaScript and playback-failure fallback."
+  },
+  "demo-whatsapp-3x.mp4": {
+    "source": "https://drive.google.com/file/d/1p_rgRHpf3OWgL4RpZVShjAFurwL2rQY1/view",
+    "sourceFilename": "Screenrecorder-2026-11-19-00-31-56-635.mp4",
+    "sourceSha256": "fbb2c82e73eb25b50975cc179a78093b3e15f10277ecea620e5dad56fb54b09d",
+    "sourceDurationSeconds": 137.183447,
+    "sha256": "1db34350a77b1e335638e99d59fcfb1230ff8f26ef53aad897e8c408c473c8ab",
+    "durationSeconds": 45.708333,
+    "sizeBytes": 3405953,
+    "transform": "Full screen retained. FFmpeg: -map 0:v:0 -vf setpts=(PTS-STARTPTS)/3,scale=720:-2:flags=lanczos,fps=24 -an -c:v libx264 -preset slow -crf 21 -pix_fmt yuv420p -movflags +faststart -map_metadata -1. H.264, 720x1600, 24fps. Source HEVC was 1220x2712. Source audio verified silent with volumedetect (mean/max -91 dB) and omitted. Original untouched.",
+    "purpose": "Owner-requested 3x recorded WhatsApp demonstration inside the website phone. Speed is encoded for consistent inline, fullscreen and no-JavaScript playback.",
+    "publication": "Owner supplied the recording and subsequently requested a GitHub push on 19 November 2026 for the connected preview update, explicitly limited to the WhatsApp changes. Recording contents and participant permissions remain the owner's responsibility."
+  },
+  "demo-whatsapp-poster.webp": {
+    "source": "demo-whatsapp-3x.mp4",
+    "transform": "Representative conversation frame at 16 seconds, extracted with FFmpeg using libwebp quality 85, 720x1600.",
+    "purpose": "Lightweight preview before user-initiated playback; no automatic video request."
   }
 }

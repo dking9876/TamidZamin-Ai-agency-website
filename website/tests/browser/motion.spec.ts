@@ -44,45 +44,33 @@ test.beforeEach(async ({ page, baseURL }) => {
 });
 
 for (const width of [390, 1440]) {
-  test(`motion at ${width}px: messages arrive in order, settle and can be replayed by keyboard`, async ({ page }) => {
+  test(`motion at ${width}px: recorded demo enters once without starting playback`, async ({ page }) => {
     await page.setViewportSize({ width, height: 900 });
     await page.goto('/');
     await page.evaluate(() => document.fonts.ready);
     await reveal(page, '.whatsapp-channel figure');
-    await page.waitForFunction(() => window.__premiumAnimations.filter((animation) =>
-      (animation.effect as KeyframeEffect).target?.matches('.bubble')).length === 3);
+    await page.waitForFunction(() => window.__premiumAnimations.some((animation) =>
+      (animation.effect as KeyframeEffect).target?.matches('.whatsapp-demo')));
     const sequence = await page.evaluate(() => window.__premiumAnimations
-      .filter((animation) => (animation.effect as KeyframeEffect).target?.matches('.bubble, .chat-summary'))
+      .filter((animation) => (animation.effect as KeyframeEffect).target?.matches('.whatsapp-demo'))
       .map((animation) => ({
         delay: animation.effect!.getTiming().delay,
         end: Number(animation.effect!.getComputedTiming().endTime),
         iterations: animation.effect!.getTiming().iterations,
       })));
-    expect(sequence.map((step) => step.delay)).toEqual([180, 700, 1220, 1800]);
-    expect(sequence.every((step) => step.end <= 2340 && step.iterations === 1)).toBe(true);
+    expect(sequence).toEqual([{ delay: 0, end: 620, iterations: 1 }]);
     await expect(page.locator('.whatsapp-channel .device-caption')).toContainText('אין שיחה פעילה');
     expect(await page.locator('.device-caption').evaluateAll((captions) =>
       captions.every((caption) => caption.getAnimations().length === 0))).toBe(true);
     await page.waitForFunction(() => window.__premiumAnimations
-      .filter((animation) => (animation.effect as KeyframeEffect).target?.matches('.bubble, .chat-summary'))
+      .filter((animation) => (animation.effect as KeyframeEffect).target?.matches('.whatsapp-demo'))
       .every((animation) => animation.playState === 'finished'));
-    for (const bubble of await page.locator('.bubble').all()) await expect(bubble).toHaveCSS('opacity', '1');
-    const replay = page.locator('.whatsapp-channel .demo-replay');
-    await expect(replay).toBeVisible();
-    expect((await replay.boundingBox())!.height).toBeGreaterThanOrEqual(44);
-    await replay.focus();
-    await page.keyboard.press('Enter');
-    await page.waitForFunction(() => window.__premiumAnimations.filter((animation) =>
-      (animation.effect as KeyframeEffect).target?.matches('.bubble')).length === 6);
-    await page.keyboard.press('Enter');
-    await page.waitForFunction(() => window.__premiumAnimations.filter((animation) =>
-      (animation.effect as KeyframeEffect).target?.matches('.bubble')).length === 9);
-    await expect(replay).toBeFocused();
-    await expect.poll(() => page.locator('.whatsapp-channel figure').evaluate((element) =>
-      element.getAnimations({ subtree: true }).length)).toBe(0);
-    const settled = await page.locator('.bubble, .chat-summary').evaluateAll((elements) =>
-      elements.map((element) => ({ opacity: getComputedStyle(element).opacity, clip: getComputedStyle(element).clipPath })));
-    expect(settled.every((element) => element.opacity === '1' && element.clip === 'none')).toBe(true);
+    await expect(page.locator('.whatsapp-demo')).toHaveCSS('opacity', '1');
+    await expect(page.locator('.whatsapp-toggle')).toBeVisible();
+    expect(await page.locator('#demo-whatsapp-video').evaluate((video: HTMLVideoElement) => video.paused)).toBe(true);
+    await reveal(page, '#process');
+    await reveal(page, '.whatsapp-demo');
+    expect(await page.locator('.whatsapp-demo').evaluate((element) => element.getAnimations({ subtree: true }).length)).toBe(0);
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
   });
 }
@@ -105,23 +93,22 @@ test('voice waveform stays still until the recording plays and stops when paused
   expect(await page.locator('audio').evaluate((audio: HTMLAudioElement) => audio.paused)).toBe(true);
 });
 
-test('reduced motion cancels the demo without hiding copy or shifting the composition', async ({ page }) => {
+test('reduced motion cancels entrances without hiding recorded demo controls or shifting the composition', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto('/');
   await reveal(page, '.whatsapp-channel figure');
-  await expect(page.locator('.whatsapp-channel .demo-replay')).toBeVisible();
+  await expect(page.locator('.whatsapp-toggle')).toBeVisible();
   const before = await page.locator('#channels').boundingBox();
   await page.emulateMedia({ reducedMotion: 'reduce' });
-  for (const replay of await page.locator('.demo-replay').all()) await expect(replay).toBeHidden();
   await expect.poll(() => page.locator('#channels').evaluate((element) => element.getAnimations({ subtree: true }).length)).toBe(0);
-  for (const content of await page.locator('.bubble, .chat-summary, .recording-toggle').all()) {
+  for (const content of await page.locator('.whatsapp-toggle, .recording-toggle').all()) {
     await expect(content).toBeVisible();
     await expect(content).toHaveCSS('opacity', '1');
   }
   const after = await page.locator('#channels').boundingBox();
   expect(after!.height).toBeCloseTo(before!.height, 0);
   await page.emulateMedia({ reducedMotion: 'no-preference' });
-  await expect(page.locator('.whatsapp-channel .demo-replay')).toBeVisible();
+  await expect(page.locator('.whatsapp-toggle')).toBeVisible();
   expect(await page.locator('#channels').evaluate((element) => element.getAnimations({ subtree: true }).length)).toBe(0);
 });
 

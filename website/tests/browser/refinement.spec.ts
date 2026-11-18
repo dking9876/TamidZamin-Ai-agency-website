@@ -577,7 +577,7 @@ test.describe('refinement: actual motion runtime', () => {
         endTimes: window.__refinementMotion.groups[key].map((a) => a.effect!.getComputedTiming().endTime),
         forbidden: window.__refinementMotion.forbidden,
       }), name);
-      const expectedCount = name === 'devices' ? 6 : name === 'hero' ? 3 : 1;
+      const expectedCount = name === 'devices' ? 2 : name === 'hero' ? 3 : 1;
       expect(result.count).toBe(expectedCount);
       for (const endTime of result.endTimes) {
         expect(Number(endTime)).toBeGreaterThan(0);

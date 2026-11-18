@@ -56,6 +56,17 @@ The owner's subsequent request authorizes pushing the completed transcript
 update to the existing GitHub branch and connected website preview. Lead
 delivery and indexing safeguards remain unchanged.
 
+On 19 November the owner also supplied a WhatsApp screen recording and requested
+3x playback inside the homepage WhatsApp phone on mobile and desktop. This
+replaces the illustrative HTML conversation with user-initiated recorded video,
+not a live agent. A same-origin H.264 derivative preserves the full screen and
+bakes in 3x speed; the original is untouched. Its audio track is silent.
+The owner's subsequent 19 November request authorizes pushing this WhatsApp
+update to the existing GitHub branch and connected website preview, explicitly
+excluding concurrent hero changes. Recording contents and participant
+permissions remain the owner's responsibility. Existing lead-delivery and
+indexing safeguards remain unchanged.
+
 `this master demo prd.txt` is now nonempty. It specifies a TrisMaster electric
 shutter intake demo, not evidence of a working deployment or company-wide
 capabilities. It covers contact information, issue, urgency, preferred

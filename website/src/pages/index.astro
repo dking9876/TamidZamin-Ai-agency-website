@@ -5,6 +5,7 @@ import Picture from '../components/Picture.astro';
 import Icon from '../components/Icon.astro';
 import FAQ from '../components/FAQ.astro';
 import CallDemo from '../components/CallDemo.astro';
+import WhatsAppDemo from '../components/WhatsAppDemo.astro';
 const trades = [
   { name: 'plumber', label: 'אינסטלטורים', icon: 'wrench' as const },
   { name: 'electrician', label: 'חשמלאים', icon: 'bolt' as const },
@@ -51,16 +52,7 @@ const benefits = [
     <div class="container channel-stage">
       <article class="home-channel whatsapp-channel" aria-labelledby="whatsapp-title">
         <h2 id="whatsapp-title"><Icon name="chat" size={30} />סוכן AI בוואטסאפ</h2>
-        <figure class="device-stage" data-motion="devices">
-          <div class="phone-shell chat-phone">
-            <div class="phone-top"><Icon name="chat" size={19} /><strong>העוזר של העסק</strong></div>
-            <div class="chat-body"><p class="bubble incoming">שלום, אני עוזר AI.<br />איך אפשר לעזור?</p><p class="bubble outgoing">התריס החשמלי לא עולה.</p><p class="bubble incoming">נאסוף כמה פרטים<br />ונכין סיכום לאישורך.</p><div class="chat-summary"><Icon name="check" size={16} /><span>מסכמים ומאשרים<br />לפני המשך הטיפול</span></div></div>
-          </div>
-          <figcaption class="device-caption">
-            <span>המחשה בלבד · אין שיחה פעילה</span>
-            <button type="button" class="demo-replay" aria-label="הצגה חוזרת של המחשת הוואטסאפ" hidden><Icon name="replay" size={16} /><span>הצגה חוזרת</span></button>
-          </figcaption>
-        </figure>
+        <WhatsAppDemo />
         <ul class="check-list"><li><Icon name="check" />אוסף פרטים בשיחה קצרה</li><li><Icon name="check" />מבקש תמונה כשצריך</li><li><Icon name="check" />מסכם ומאפשר תיקונים</li><li><Icon name="check" />מכין להמשך טיפול אנושי</li></ul>
         <a class="pill" href="/services/whatsapp/">להכיר את מענה הוואטסאפ <Icon name="arrow" size={15} /></a>
       </article>
@@ -72,7 +64,7 @@ const benefits = [
         <a class="pill" href="/services/phone/">להכיר את המענה הטלפוני <Icon name="arrow" size={15} /></a>
       </article>
     </div>
-    <p class="demo-disclosure container">הוואטסאפ מוצג להמחשה; בטלפון אפשר להאזין לשיחת הדגמה מוקלטת. אין כאן שיחה חיה. יכולות, שפות וחיבורים דורשים בדיקה ואישור לכל עסק.</p>
+    <p class="demo-disclosure container">בוואטסאפ אפשר לצפות בהדגמה מוקלטת במהירות פי 3; בטלפון אפשר להאזין לשיחת הדגמה מוקלטת. אין כאן שיחה חיה. יכולות, שפות וחיבורים דורשים בדיקה ואישור לכל עסק.</p>
   </section>
 
   <section class="home-process pale-waves" id="process">
@@ -111,5 +103,6 @@ const benefits = [
     import '../scripts/home-motion';
     import '../scripts/hero-video';
     import '../scripts/call-demo';
+    import '../scripts/whatsapp-demo';
   </script>
 </Layout>

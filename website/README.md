@@ -53,8 +53,9 @@ TrisMaster electric-shutter intake demo, not proof of deployed functionality.
 It excludes diagnosis, pricing, appointment booking and payment. The language
 rules mix Hebrew/Russian with an English summary rule; resolve that separately.
 
-The homepage's WhatsApp conversation is illustrative HTML. The phone plays
-the owner's supplied recording on request; neither is a live agent.
+The homepage's WhatsApp phone plays the owner's screen recording at 3x speed.
+The other phone plays the owner's supplied call recording on request; neither
+is a live agent.
 No customer testimonials, installed-client logos, prices or measured client
 results were fabricated. Supplied people are labeled illustrative.
 
@@ -112,9 +113,9 @@ is used. A matching native `picture` supplies the phone poster without JS.
 Only the appropriate video is downloaded. Rotation switches versions while
 retaining the scene position and the visitor's pause choice.
 
-The homepage enhances its illustrative WhatsApp conversation with a short
-chat/summary sequence. It runs once on entry and has a labeled replay button.
-The phone's waveform now moves only while the visitor plays the recording;
+Both demo figures enter once without starting playback. WhatsApp's former
+illustrative chat/summary sequence has been replaced by the screen recording.
+The phone's waveform moves only while the visitor plays the call recording;
 it is a playback indicator, not an audio-amplitude visualization.
 
 `src/scripts/home-motion.ts` pauses effects offscreen/in hidden tabs, cancels
@@ -126,6 +127,46 @@ normal native toggles. The design contract is in `../DESIGN.md`.
 Run `npx playwright test hero.spec.ts motion.spec.ts refinement.spec.ts` against a running
 local production preview to test timing, interruption, replay, reduced motion,
 keyboard behavior and existing layout/navigation safeguards.
+
+## Recorded WhatsApp demo
+
+`src/components/WhatsAppDemo.astro` and `src/scripts/whatsapp-demo.ts` display
+the owner's supplied screen recording at `/#whatsapp-demo`, linked from the
+WhatsApp service page. The full phone screen remains visible without cropping
+or stretching, with play/pause, a seek slider, restart, fullscreen and a 3x label.
+Mobile uses one channel per row; tablet/narrow desktop uses two stacked articles
+up through 1100px. Wider desktop keeps the central connector and side copy with
+larger devices than the former illustrative layout.
+
+`public/media/demo-whatsapp-3x.mp4` is a same-origin H.264/yuv420p MP4 with
+fast-start metadata: 720x1600, 24fps, 45.708 seconds, 3,405,953 bytes. The entire
+137.183-second source is accelerated using `setpts=(PTS-STARTPTS)/3`; speed
+is baked into the file rather than dependent on browser playback-rate support.
+The source audio track was verified silent and omitted. No conversation content
+was rewritten or trimmed. The original downloaded recording is untouched.
+`provenance.json` records its source, hashes and transform. The poster is a
+representative frame at 16 seconds of the accelerated recording.
+
+The player never autoplays or loops, and `preload="none"` defers video requests
+until activation. A poster remains visible before play. Hidden tabs and page
+exit pause without automatic resumption; scrolling alone does not interrupt
+viewing. Reduced motion still permits requested playback. Fullscreen switches
+to native controls, with a native iOS-video fallback; unsupported browsers omit
+the action. No JavaScript retains native controls, the already accelerated
+asset and a direct recording link. Loading can be cancelled; errors offer
+explicit Hebrew recovery instructions, retry and a direct file.
+
+This is recorded evidence only, not a live WhatsApp integration. The owner's
+subsequent 19 November request authorizes pushing this WhatsApp update only
+to the existing GitHub branch and connected preview, excluding concurrent
+hero changes. Recording contents and participant permissions remain the
+owner's responsibility. Lead delivery and noindex safeguards are unchanged.
+
+Run `npx playwright test whatsapp-demo.spec.ts motion.spec.ts mobile-layout.spec.ts call-demo.spec.ts call-transcript.spec.ts refinement.spec.ts`
+against a freshly started local production build. The checks include actual
+decoding, accelerated duration, keyboard/touch controls, seek/end/replay,
+failed-load recovery, cancellation, fullscreen, no JavaScript, responsive
+layouts, enlarged text, accessibility and existing call-transcript behavior.
 
 ## Recorded phone demo
 

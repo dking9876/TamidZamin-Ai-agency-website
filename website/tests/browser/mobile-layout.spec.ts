@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.use({ reducedMotion: 'reduce' });
 
-for (const width of [320, 360, 390, 430, 600, 601, 768, 880, 881]) {
+for (const width of [320, 360, 390, 430, 600, 601, 768, 880, 881, 1024, 1100, 1101, 1440]) {
   test(`mobile layout at ${width}px: readable, grouped demos and usable section controls`, async ({ page }) => {
     await page.setViewportSize({ width, height: 844 });
     await page.goto('/');
@@ -24,7 +24,7 @@ for (const width of [320, 360, 390, 430, 600, 601, 768, 880, 881]) {
       return {
         scrollWidth: document.documentElement.scrollWidth,
         articles,
-        demoFontSizes: [...document.querySelectorAll('.bubble, .chat-summary, .phone-top, .recording-heading strong, .recording-description, .transcript-cue p')]
+        demoFontSizes: [...document.querySelectorAll('.whatsapp-action, .recording-heading strong, .recording-description, .transcript-cue p')]
           .map((element) => parseFloat(getComputedStyle(element).fontSize)),
         controls: [...document.querySelectorAll('main a, main summary, .site-footer a, .mobile-menu > summary')]
           .filter((element) => element.getClientRects().length > 0)
@@ -48,7 +48,7 @@ for (const width of [320, 360, 390, 430, 600, 601, 768, 880, 881]) {
       expect(article.children).toEqual(['H2', 'FIGURE', 'UL', 'A']);
       expect(article.device.left).toBeGreaterThanOrEqual(0);
       expect(article.device.right).toBeLessThanOrEqual(width);
-      if (width <= 880) {
+      if (width <= 1100) {
         expect(article.device.width).toBeGreaterThanOrEqual(240);
         expect(article.title.bottom).toBeLessThanOrEqual(article.demo.top);
         expect(article.demo.bottom).toBeLessThanOrEqual(article.features.top);
@@ -75,7 +75,7 @@ for (const width of [320, 360, 390, 430, 600, 601, 768, 880, 881]) {
       expect(layout.heroActions[0].height).toBeGreaterThan(layout.heroActions[1].height);
       await expect(page.locator('.hero-points')).toBeHidden();
       await expect(page.locator('.home-hero .scroll-cue')).toBeHidden();
-    } else if (width <= 880) {
+    } else if (width <= 1100) {
       expect(layout.articles[0].demo.top).toBeCloseTo(layout.articles[1].demo.top, 0);
       expect(layout.articles[0].action.top).toBeCloseTo(layout.articles[1].action.top, 0);
     }
@@ -119,11 +119,11 @@ test('mobile demo text grows at 200% without device clipping', async ({ page }) 
         }
       }
     }
-    return { clipped, height: bounds.height };
+    return { clipped, height: bounds.height, isVideo: element.classList.contains('whatsapp-phone') };
   }));
   for (const device of devices) {
     expect(device.clipped).toEqual([]);
-    expect(device.height).toBeGreaterThanOrEqual(768);
+    expect(device.height).toBeGreaterThanOrEqual(device.isVideo ? 600 : 768);
   }
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
 });
