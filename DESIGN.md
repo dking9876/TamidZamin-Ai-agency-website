@@ -34,15 +34,15 @@ colors:
 typography:
   display:
     fontFamily: "'Heebo Variable', sans-serif"
-    fontSize: "clamp(2.75rem, 5.2vw, 4.75rem)"
-    fontWeight: 850
-    lineHeight: 1.1
+    fontSize: "clamp(2.75rem, 5.8vw, 5.5rem)"
+    fontWeight: 800
+    lineHeight: 1.12
     letterSpacing: "-.025em"
   display-mobile:
     fontFamily: "'Heebo Variable', sans-serif"
-    fontSize: "clamp(2.5rem, 10.5vw, 3.1rem)"
-    fontWeight: 850
-    lineHeight: 1.1
+    fontSize: "clamp(2.25rem, 10.4vw, 3.5rem)"
+    fontWeight: 800
+    lineHeight: 1.14
     letterSpacing: "-.025em"
   headline-reading:
     fontFamily: "'Heebo Variable', sans-serif"
@@ -218,7 +218,7 @@ Authority: `website design assets\אתר TamidZamin_ סוכני AI לעסקים 
 
 Electric blue (`blue`) is the shared action and field-focus color; `blue-hover` serves hover/open states and readable text links. Cyan (`cyan`) is the shared keyboard-focus and dark-surface accent. These are roles within one blue accent family, not additional brand palettes.
 
-Homepage pills have separate `pill-paper`, `pill-ink`, hover, border, outline-border, and icon-circle colors. The filled hero action is pale, not electric blue; the second hero action is transparent with white text and a blue icon circle.
+Homepage pills have separate `pill-paper`, `pill-ink`, hover, border, outline-border, and icon-circle colors. The filled hero action is pale, not electric blue. The second hero action is now a quiet text link in `on-dark`, with no border or icon circle. The hero's answer line uses solid `cyan`, never gradient text.
 
 ### Neutral
 
@@ -242,7 +242,7 @@ The layout imports `@fontsource-variable/heebo` before both stylesheets. The run
 
 ### Hierarchy
 
-- **Display:** homepage hero uses `display`, weight 850 and 1.1 leading. Up to 880px it uses `clamp(2.75rem, 6.5vw, 3.75rem)`; up to 600px it uses `display-mobile`. The closing section has a separate editorial headline capped at 6rem.
+- **Display:** homepage hero uses `display`, weight 800 and 1.12 leading, in two block-level lines. Up to 880px it uses `clamp(2.75rem, 6.5vw, 3.75rem)`; up to 600px it uses `display-mobile` with 1.14 leading. The closing section has a separate editorial headline capped at 6rem.
 - **Headline:** `headline-reading` remains the supporting page title. Homepage `--home-title` is `clamp(2.25rem, 4vw, 3.75rem)`, weight 800 and 1.16 leading; up to 600px it becomes `clamp(2rem, 8.5vw, 2.75rem)`. Channel titles are smaller to support the device composition.
 - **Title:** `title` remains the shared h3 baseline; process labels use 1.35rem, benefits 1.3rem, and About values 1.15rem.
 - **Body:** `body` is the shared reading/input baseline. Homepage paragraphs use 1.65 leading with 1-1.25rem copy depending on role. Reading columns max out at 800px; page title and intro measures remain 24ch and 63ch.
@@ -264,7 +264,8 @@ The header reserves 4.75rem on desktop and 4.25rem up to 880px. A ResizeObserver
 
 `--section-space` is `clamp(3rem, 6vw, 6rem)` and becomes `clamp(3rem, 12vw, 4rem)` on phones. It is not the mechanism used to fill the viewport: flex/grid composition and minimum height are. `--composition-gap` is `clamp(2rem, 4vw, 4rem)`, fixed at 2rem on phones. Large and tight intervals distinguish sections from their internal groups.
 
-- **Hero:** copy occupies the left 49%, with the worker/van photograph behind the right. Image height is bounded by 55vw, object position is 80%, and a top mask blends it into navy without stretching the image. At up to 880px the photograph sits above centered copy; short/zoomed content grows naturally. On phones the actions share equal-width tracks, stacking when two 9rem tracks cannot fit, including with enlarged text. A static, focusable scroll cue links to channels.
+- **Hero:** copy occupies the left 52%, with the worker/van photograph behind the right. Image height is bounded by 55vw, object position is 80%, and a top mask blends it into navy without stretching the image. A clipped visual layer contains the photographic arrival without clipping text. The original raster blue edge is a separate, quieter layer rather than a replacement gradient.
+- **Hero on smaller screens:** up to 880px the photograph sits above centered copy. Up to 600px the visual is 280-410px high, responsive to the small viewport, with right-aligned copy beneath it. The original wording wraps naturally instead of forced body-copy line breaks. One full-width 56px primary action leads; a 48px secondary text link sits below. The redundant benefit row and separate scroll cue are hidden on phones. Their information remains in the hero body, channel/process sections, and navigation; no unique destination is removed. Desktop/tablet retain the benefit row and scroll cue. Short or enlarged-text layouts grow naturally.
 - **Channels:** each named article owns its heading, illustrative figure with caption, feature list and service link in that DOM order. Desktop keeps the two devices at the center, with explanations outside and the decorative brand connector between them. Up to 880px each article becomes a vertical composition in its own column; up to 600px the articles stack, separated by 48px and a fine rule. Devices are up to 17.5rem wide and at least 24rem high at these narrower sizes, growing with text. Each caption and the shared disclaimer explicitly state this is illustrative, not live. No tabs, carousel or duplicate hidden content.
 - **Process:** four generously spaced nodes joined right-to-left. Tablet uses two rows; phones use a vertical reading column with 64px icons and 16px between icon and copy. Step order remains the existing factual order.
 - **Trades:** the supplied angled photographs form a larger gallery beneath a heading/intro row. Five desktop columns become three on tablet and two on phones. Mobile tiles are width-constrained 3:4 portraits, with a full-width 16:9 last tile and a 180px minimum height; loading images cannot widen the grid.
@@ -305,7 +306,7 @@ SVG icons share a 24-unit viewBox, no fill, currentColor strokes of 1.7, and rou
 
 **Two deliberately distinct families.** Supporting blue buttons use the shared button tokens, 50px minimum height, and a 14px icon gap. Their secondary variant is transparent with a line-colored border and wash hover, as used on the 404 page.
 
-Homepage pills use 50px minimum height, a 12px gap, and a pale filled or outlined surface. Hero actions share the blue 28px circular arrow container; the secondary action remains outlined. The final action has a 60px minimum height.
+Homepage pills use 50px minimum height, a 12px gap, and a pale filled or outlined surface. The hero primary action has a 56px minimum height and the blue 28px circular arrow container. Its secondary action is a text link with a plain arrow and 48px minimum height. The final action has a 60px minimum height.
 
 The shared header action is a hybrid: it keeps the button's typography/transition, but takes the pale surface and pill radius from the later stylesheet. Its navy text follows route scope. Its higher-specificity background remains pale on hover while the button hover shadow applies.
 
@@ -352,7 +353,8 @@ Shared interactive focus is a 3px cyan outline with 5px offset. Fields use blue 
 
 `website/src/scripts/home-motion.ts` enhances only the homepage, with no dependency:
 
-- The hero photograph arrives over 760ms; headline, copy and CTA are never hidden or delayed. Its three existing channel/summary/human icons receive one short sequential accent, settling within 1120ms.
+- The hero's authored arrival replaces the earlier almost-static image fade and icon pulses. The photograph settles from 1.075 scale and .55 opacity over 1000ms, clipped within its own visual layer. It starts only when its image is available; a delayed image never holds up the headline or action.
+- Two headline lines resolve from 3px blur, .6 opacity and 18px inline travel over 640ms, staggered by 90ms. They remain present rather than starting hidden. The original raster edge uncovers right-to-left over 900ms after a 120ms delay. The body and actions never animate or wait. All hero effects settle within 1020ms once their assets are available, run again on full reload, and do not repeat on scroll re-entry.
 - One inquiry -> AI -> confirmed summary -> human sequence pulses the four process nodes and traces the RTL connectors. It lasts at most 1760ms and settles; it does not repeat on re-entry.
 - Each illustrative device figure enters once over 620ms with 12px travel when its own figure comes into view. The authored focal sequence is the existing inquiry becoming an organized request: three chat bubbles arrive from their respective sides, then the confirmation summary uncovers right-to-left. It settles within 2340ms. The voice illustration runs one bounded waveform phrase and settles within 2580ms. There is no sound, timer, live status or real communication.
 - A 44px replay control below each persistent illustration-only caption restarts that illustration, not its frame entrance. Rapid activation cancels the previous effects before restarting; focus stays on the button. Caption grid space is reserved so enabling/disabling replay does not shift the composition. Replay is unavailable without JavaScript or under reduced motion.
@@ -367,7 +369,7 @@ Meaningful content is visible and crawlable before JavaScript; no reveal stylesh
 
 ### Do:
 - **Do** preserve the homepage/supporting-page scopes and the global-then-home import order.
-- **Do** keep the first hero action pale and the second outlined, including their blue circular arrows.
+- **Do** keep the first hero action pale with its blue circular arrow and the second a quieter text link.
 - **Do** preserve readable Hebrew, logical-direction layout, visible focus, and native disclosure semantics.
 - **Do** reuse supplied imagery and documented derivatives without modifying the nine originals.
 - **Do** keep illustrative content labeled and let real copy and controls determine section height.

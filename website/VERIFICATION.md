@@ -1,5 +1,71 @@
 # Verification and launch status
 
+## Hero arrival and mobile simplification - 18 November 2026
+
+This refinement was initially **local only**, after the earlier animation
+commit. On 18 November 2026 the owner requested committing and pushing the
+verified hero and mobile changes to the existing GitHub repository. This
+authorizes the connected Vercel preview update, not live communications,
+lead activation or indexing. Hosted deployment completion is separate from
+the local checks below. Unrelated repository changes are excluded.
+
+### Requested first-impression changes
+
+- The supplied hero photograph now settles from a restrained zoom, rather
+  than receiving only an opacity fade. Two headline lines resolve from
+  bounded 3px blur and 18px travel, with the answer line in the existing cyan.
+  The original raster blue edge uncovers right-to-left. These effects settle
+  within 1020ms once the image is available and run again on full reload.
+- Body copy and actions never wait for the sequence. A delayed image gets its
+  own entrance after load without delaying the words or action. Switching to
+  reduced motion cancels pending effects too, including when the image has
+  not arrived yet; switching back does not revive that canceled entrance.
+- The hero has a larger, clearer desktop headline, stronger photograph/copy
+  separation, a quieter blue edge, one primary pill and a secondary text link.
+- On phones the photograph is more prominent and copy is right-aligned.
+  The primary action spans the available width with a 56px minimum height;
+  the process link remains below it with a 48px target. The redundant benefit
+  row and separate scroll prompt are hidden at widths up to 600px. Their
+  information and destinations remain in the body, navigation and following
+  sections. Factual wording and the other homepage sections are preserved.
+
+### Final verification
+
+- `npm run build`: passed; 51 files checked with zero errors, warnings or hints.
+- Complete production-browser suite: **59 passed**, no retries, in Microsoft
+  Edge. Eight new hero cases cover actual load/reload, delayed image loading,
+  reduced-motion cancellation before and during image arrival, primary-action
+  availability and mobile hierarchy. Existing responsive and motion tests were
+  updated only for the intentional headline and action changes.
+- Pixel-sampled contrast passes over the full boxes of both headline lines
+  and body text at 1440, 1024, 390 and 320px. The test now evaluates the actual
+  foreground color rather than assuming every headline glyph is white.
+- Existing keyboard, no-JavaScript, reduced-motion, 200% text, mobile
+  navigation, anchor/history, image-loading and axe checks all pass, as do
+  the preview/noindex and disabled-delivery safeguards.
+- Desktop, tablet and phone renders were inspected, including timed arrival
+  frames and final production captures. At 1440x900, 390x844, 320x740 and
+  768x1024, the header plus hero fill the initial viewport with no horizontal
+  overflow. Both phone actions fit in the first viewport. Short/enlarged-text
+  layouts grow rather than clipping.
+- No JavaScript errors were captured. The production homepage motion bundle
+  is 3423 bytes before compression, with no new dependency or asset.
+- The finished changed-UI Impeccable detector returned `[]`; whitespace checks
+  passed.
+- Local desktop-browser frame samples during cached desktop reloads and the
+  phone-sized entrance had approximately 16.7ms median and 17ms p95 intervals.
+  Cold-browser desktop startup still showed frame stalls, also present in a
+  static reduced-motion control; this is not a cold-load 60fps guarantee.
+
+Production captures, the before/after hero, arrival storyboard, frame
+profiles and test output are under:
+
+`C:\Users\USER\AppData\Roaming\Lumi\copilot\session-state\3778e32d-b8ca-4ebb-8359-05b51f0a5cd1\files`
+
+These are local browser-emulated viewports, not physical-device performance
+measurements. Safari/Firefox, assistive-technology use and real background-tab
+behavior remain unverified. No accessibility certification is implied.
+
 ## Authored motion refinement - 18 November 2026
 
 The initial refinement was **local only**. The owner subsequently requested

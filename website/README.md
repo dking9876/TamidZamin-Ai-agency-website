@@ -59,6 +59,13 @@ results were fabricated. Supplied people are labeled illustrative.
 
 ## Motion
 
+The hero has a bounded arrival on each full load/reload: its supplied photograph
+settles, the two headline lines resolve into focus, and the existing blue edge
+draws across the scene. The body and CTA are available immediately, including
+when the image loads slowly. On phones, one full-width primary action and a
+quiet process link replace competing pill actions, with redundant hero badges
+and the extra scroll prompt omitted.
+
 The homepage enhances its illustrative conversations with short chat/summary
 and voice-waveform sequences. Each runs once on entry; the visitor can replay
 an individual illustration with its labeled button. These are not live agents.
@@ -70,7 +77,7 @@ JavaScript. Navigation, menu and FAQ feedback are CSS-based; native disclosure
 and keyboard behavior remain. Unsupported FAQ transition features fall back to
 normal native toggles. The design contract is in `../DESIGN.md`.
 
-Run `npx playwright test motion.spec.ts refinement.spec.ts` against a running
+Run `npx playwright test hero.spec.ts motion.spec.ts refinement.spec.ts` against a running
 local production preview to test timing, interruption, replay, reduced motion,
 keyboard behavior and existing layout/navigation safeguards.
 

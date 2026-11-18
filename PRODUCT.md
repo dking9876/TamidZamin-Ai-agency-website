@@ -63,6 +63,10 @@ On 18 November 2026 the owner explicitly approved replacing its compressed
 proportions with spacious viewport-scale homepage compositions and purposeful
 motion. This is a refinement: identity, supplied imagery, factual content,
 section order, functionality and launch safeguards remain binding.
+Later that day the owner requested a more premium hero appearance and a
+noticeable entrance on reload, with less clutter on phones. This permits
+authored headline motion and a quieter mobile hero action hierarchy, replacing
+the earlier static-headline and equally prominent paired-action treatments.
 
 ## Evidence on Hand
 

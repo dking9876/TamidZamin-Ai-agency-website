@@ -12,7 +12,7 @@ const viewports = [
 ];
 const sectionOrder = ['', 'channels', 'process', 'trades', 'benefits', 'human', 'about', 'evidence', 'faq', 'contact'];
 const motionTargets = {
-  hero: '.home-hero-image',
+  hero: '.home-hero[data-motion="hero"]',
   devices: '.whatsapp-channel .device-stage[data-motion="devices"]',
   handoff: 'ol[data-motion="handoff"]',
   photo: '.about-photo[data-motion="photo"]',
@@ -153,7 +153,7 @@ async function assertContained(page: Page, info: TestInfo, name: string) {
   return metrics;
 }
 
-async function whiteTextContrast(screenshot: Buffer, box: { x: number; y: number; width: number; height: number }) {
+async function textContrast(screenshot: Buffer, box: { x: number; y: number; width: number; height: number }, foreground: number[]) {
   const left = Math.floor(box.x);
   const top = Math.floor(box.y);
   const region = { left, top, width: Math.ceil(box.x + box.width) - left, height: Math.ceil(box.y + box.height) - top };
@@ -163,20 +163,22 @@ async function whiteTextContrast(screenshot: Buffer, box: { x: number; y: number
     const channel = value / 255;
     return channel <= 0.04045 ? channel / 12.92 : ((channel + 0.055) / 1.055) ** 2.4;
   });
-  let maxLuminance = -1;
-  let brightestOffset = 0;
+  const foregroundLuminance = 0.2126 * linear[foreground[0]] + 0.7152 * linear[foreground[1]] + 0.0722 * linear[foreground[2]];
+  let minimum = Infinity;
+  let worstOffset = 0;
   for (let offset = 0; offset < data.length; offset += info.channels) {
     const luminance = 0.2126 * linear[data[offset]] + 0.7152 * linear[data[offset + 1]] + 0.0722 * linear[data[offset + 2]];
-    if (luminance > maxLuminance) { maxLuminance = luminance; brightestOffset = offset; }
+    const contrast = (Math.max(luminance, foregroundLuminance) + 0.05) / (Math.min(luminance, foregroundLuminance) + 0.05);
+    if (contrast < minimum) { minimum = contrast; worstOffset = offset; }
   }
-  const pixel = brightestOffset / info.channels;
+  const pixel = worstOffset / info.channels;
   return {
     region,
-    maxLuminance,
-    contrast: 1.05 / (maxLuminance + 0.05),
-    brightestPixel: {
+    foreground,
+    contrast: minimum,
+    worstPixel: {
       x: left + pixel % info.width, y: top + Math.floor(pixel / info.width),
-      rgb: [...data.subarray(brightestOffset, brightestOffset + 3)],
+      rgb: [...data.subarray(worstOffset, worstOffset + 3)],
     },
   };
 }
@@ -224,7 +226,7 @@ async function observeMotion(page: Page) {
           else if (time > firstTimes.get(animation)! + 1 && !state.advanced.includes(name)) state.advanced.push(name);
         }
       });
-      document.querySelectorAll('#hero-title, .hero-actions').forEach((element) => {
+      document.querySelectorAll('.home-hero-copy > p, .hero-actions').forEach((element) => {
         state.forbidden += element.getAnimations({ subtree: true }).filter(isWAAPI).length;
       });
       requestAnimationFrame(sample);
@@ -287,27 +289,28 @@ test.describe('refinement: static geometry', () => {
     });
   }
 
-  for (const viewport of [{ width: 1440, height: 1000 }, { width: 1024, height: 768 }]) {
+  for (const viewport of [{ width: 1440, height: 1000 }, { width: 1024, height: 768 }, { width: 390, height: 844 }, { width: 320, height: 740 }]) {
     test(`${viewport.width}x${viewport.height}: hero contrast across entire headline and body-copy boxes`, async ({ page }, info) => {
       await page.setViewportSize(viewport);
       await page.goto('/');
       await ready(page);
       const targets = [
-        { selector: '.home-hero h1', minimum: 3 },
+        { selector: '.hero-title-line:first-child', minimum: 3 },
+        { selector: '.hero-title-answer', minimum: 3 },
         { selector: '.home-hero-copy > p', minimum: 4.5 },
       ];
       const boxes = [];
       for (const target of targets) {
         const element = page.locator(target.selector);
         await expect(element).toBeVisible();
-        await expect(element).toHaveCSS('color', 'rgb(255, 255, 255)');
+        const foreground = await element.evaluate((node) => getComputedStyle(node).color.match(/\d+/g)!.slice(0, 3).map(Number));
         const box = await element.boundingBox();
         expect(box, `${target.selector} must have a measurable box`).not.toBeNull();
         expect(box!.x).toBeGreaterThanOrEqual(0);
         expect(box!.y).toBeGreaterThanOrEqual(0);
         expect(box!.x + box!.width).toBeLessThanOrEqual(viewport.width);
         expect(box!.y + box!.height).toBeLessThanOrEqual(viewport.height);
-        boxes.push({ ...target, box: box! });
+        boxes.push({ ...target, box: box!, foreground });
       }
       const copy = page.locator('.home-hero-copy');
       const originalVisibility = await copy.evaluate((element: HTMLElement) => ({
@@ -326,7 +329,7 @@ test.describe('refinement: static geometry', () => {
         }, originalVisibility);
       }
       const results = [];
-      for (const target of boxes) results.push({ ...target, ...await whiteTextContrast(background, target.box) });
+      for (const target of boxes) results.push({ ...target, ...await textContrast(background, target.box, target.foreground) });
       await info.attach('hero-contrast-background', { body: background, contentType: 'image/png' });
       await info.attach('hero-contrast-metrics', { body: JSON.stringify({ viewport, results }, null, 2), contentType: 'application/json' });
       for (const result of results) {
@@ -549,11 +552,11 @@ test.describe('refinement: actual motion runtime', () => {
         endTimes: window.__refinementMotion.groups[key].map((a) => a.effect!.getComputedTiming().endTime),
         forbidden: window.__refinementMotion.forbidden,
       }), name);
-      const expectedCount = name === 'devices' ? 20 : 1;
+      const expectedCount = name === 'devices' ? 20 : name === 'hero' ? 4 : 1;
       expect(result.count).toBe(expectedCount);
       for (const endTime of result.endTimes) {
         expect(Number(endTime)).toBeGreaterThan(0);
-        expect(Number(endTime)).toBeLessThanOrEqual(name === 'devices' ? 2_600 : 800);
+        expect(Number(endTime)).toBeLessThanOrEqual(name === 'devices' ? 2_600 : name === 'hero' ? 1_100 : 800);
       }
       expect(result.forbidden).toBe(0);
       await reveal(page, name === 'hero' ? '#faq' : '.home-hero');

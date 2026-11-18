@@ -19,7 +19,8 @@ OWN-WORLD: Deep blue-black hero/channels; light process; dark angled trade strip
 light benefits; dark human handoff; light About; dark factual demo-evidence
 replacement for the unsupported testimonial; light two-column FAQ; dark
 horizontal CTA and compact footer. Electric-blue wave edges and white pill
-CTAs, with an outlined secondary hero action. Heavy, compact Hebrew headlines.
+CTAs, with a quiet text link for the secondary hero action. Heavy, compact
+Hebrew headlines; the hero answer line uses the existing cyan accent.
 
 STORY: Recognize missed inquiries while working, understand WhatsApp and phone
 intake, see relevant trades, understand human involvement, then request a fit
@@ -27,7 +28,8 @@ discussion. No testimonial or quantified result without evidence.
 
 FIRST VIEWPORT: Navigation with original logo at left, section links
 in reference order and white CTA at right. Supplied trade photograph
-with worker/van on the right, two-line Hebrew headline and paired pill actions
+with worker/van on the right, two-line Hebrew headline and a primary pill action
+with a quieter secondary text link
 on the left. Header plus hero fill the initial small viewport; the next section
 starts below it. On 18 November 2026 the owner explicitly approved spacious
 viewport-scale homepage compositions instead of compressed poster proportions.
@@ -63,6 +65,17 @@ The owner's subsequent animate request retains this world and adds a bounded
 inquiry-to-summary chat sequence, a short illustrative voice waveform, and
 explicit per-device replay. Shared navigation, menu and FAQ transitions explain
 interaction state. No continuously running decoration or live-service claim.
+The owner's next animate request explicitly revises the hero's first
+impression: the supplied photograph settles, two headline lines resolve into
+focus, and the existing raster blue edge uncovers right-to-left. Copy and
+actions remain immediately available; no animation repeats on scroll re-entry.
+The photograph waits for its own load, never delaying the words or action.
+On phones, the photograph is more prominent above a right-aligned headline.
+One full-width primary action leads; "how it works" remains a quiet text link.
+The redundant hero benefit row and separate scroll prompt are omitted below
+600px because the body and following sections already carry their information.
+This is a hero refinement, not a new identity or permission to remove content
+and capabilities elsewhere on the site.
 On 18 November 2026 the owner requested a mobile layout refinement across all
 sections, especially the WhatsApp and phone demonstrations. On phones each
 channel now has its own heading, readable illustrative device, features and

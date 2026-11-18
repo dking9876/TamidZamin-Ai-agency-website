@@ -6,12 +6,10 @@ interface MotionGroup {
   animations: Animation[];
   visible: boolean;
   started: boolean;
+  cancelled: boolean;
 }
 
 const groups = new Map<Element, MotionGroup>();
-const hero = document.querySelector<HTMLElement>('.home-hero-image');
-if (hero) hero.dataset.motion = 'hero';
-
 function animate(group: MotionGroup, replay = false) {
   const { element } = group;
   const add = (target: Element, frames: Keyframe[], duration: number, delay = 0, fill: FillMode = 'none') => {
@@ -19,18 +17,35 @@ function animate(group: MotionGroup, replay = false) {
     group.animations.push(animation);
   };
   switch (element.dataset.motion) {
-    case 'hero':
-      add(element, [{ opacity: 0.65 }, { opacity: 1 }], 760);
-      break;
-    case 'signal':
-      element.querySelectorAll('li > svg').forEach((icon, index) => {
-        add(icon, [
-          { color: 'var(--cyan)', transform: 'translateY(0)' },
-          { color: 'var(--cyan)', transform: 'translateY(-3px)', offset: 0.4 },
-          { color: 'inherit', transform: 'translateY(0)' },
-        ], 640, index * 240);
+    case 'hero': {
+      const image = element.querySelector<HTMLImageElement>('.home-hero-image');
+      if (image) {
+        const arrive = () => add(image, [
+          { transform: 'scale(1.075)', opacity: 0.55 },
+          { transform: 'scale(1)', opacity: 1 },
+        ], 1000);
+        if (image.complete && image.naturalWidth > 0) arrive();
+        else image.addEventListener('load', () => {
+          if (reducedMotion.matches || group.cancelled) return;
+          arrive();
+          sync(group);
+        }, { once: true });
+      }
+      element.querySelectorAll('.hero-title-line').forEach((line, index) => {
+        add(line, [
+          { transform: 'translateX(18px)', filter: 'blur(3px)', opacity: 0.6 },
+          { transform: 'translateX(0)', filter: 'blur(0)', opacity: 1 },
+        ], 640, index * 90);
       });
+      const light = element.querySelector('.hero-light');
+      if (light) {
+        add(light, [
+          { clipPath: 'inset(0 0 0 100%)' },
+          { clipPath: 'inset(0)' },
+        ], 900, 120, 'backwards');
+      }
       break;
+    }
     case 'devices':
       if (!replay) {
         add(element, [{ transform: 'translateY(12px)', opacity: 0.8 }, { transform: 'none', opacity: 1 }], 620);
@@ -89,6 +104,7 @@ function sync(group: MotionGroup) {
   if (reducedMotion.matches) {
     group.animations.forEach((animation) => animation.cancel());
     group.started = true;
+    group.cancelled = true;
     return;
   }
   const shouldPlay = group.visible && !document.hidden;
@@ -112,7 +128,7 @@ if ('IntersectionObserver' in window && typeof Element.prototype.animate === 'fu
   }, { threshold: 0.15 });
 
   document.querySelectorAll<HTMLElement>('[data-motion]').forEach((element) => {
-    const group: MotionGroup = { element, animations: [], visible: false, started: false };
+    const group: MotionGroup = { element, animations: [], visible: false, started: false, cancelled: false };
     groups.set(element, group);
     const replay = element.querySelector<HTMLButtonElement>('.demo-replay');
     if (replay) {
@@ -121,6 +137,7 @@ if ('IntersectionObserver' in window && typeof Element.prototype.animate === 'fu
         if (reducedMotion.matches || document.hidden) return;
         group.animations.forEach((animation) => animation.cancel());
         group.animations = [];
+        group.cancelled = false;
         animate(group, true);
         sync(group);
       });
