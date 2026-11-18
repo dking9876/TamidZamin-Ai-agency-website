@@ -309,7 +309,7 @@ Homepage pills use 50px minimum height, a 12px gap, and a pale filled or outline
 
 The shared header action is a hybrid: it keeps the button's typography/transition, but takes the pale surface and pill radius from the later stylesheet. Its navy text follows route scope. Its higher-specificity background remains pale on hover while the button hover shadow applies.
 
-Buttons retain 160ms feedback. Pills transition color/border/pressed position over 160ms. Hover and focus both translate the directional arrow 3px toward the destination; pressing moves the control down 1px. Reduced motion removes translations but retains legible state colors. A disabled button retains the existing not-allowed cursor and .65 opacity; the disabled contact fieldset independently applies .65 opacity. Intake behavior is unchanged.
+Buttons retain 160ms feedback. Pills transition color/border/pressed position over 160ms. Hover and focus both translate the directional arrow 3px toward the destination; their icon circle expands gently over 260ms. Pressing moves the control down 1px. Reduced motion removes translations and scaling but retains legible state colors. A disabled button retains the existing not-allowed cursor and .65 opacity; the disabled contact fieldset independently applies .65 opacity. Intake behavior is unchanged.
 
 ### Cards / Containers
 
@@ -323,15 +323,22 @@ Invalid controls use an error border and associated error text. Empty error/stat
 
 ### Navigation
 
-Logo left, centered RTL links, and the pale action right are achieved with an LTR header wrapper. Desktop links have 44px minimum height; hover/current-page treatment is an underline accented in cyan with white text.
+Logo left, centered RTL links, and the pale action right are achieved with an LTR header wrapper. Desktop links have 44px minimum height; hover/focus/current-page treatment is a thin cyan underline that draws from the right over 260ms with white text. Reduced motion makes the underline immediate.
 
-The mobile menu is a native details/summary disclosure with a 44px square trigger and a navy-soft overlay below the header. The overlay has a viewport-bounded, scrollable maximum height. Escape closes it and restores trigger focus; outside clicks, following links, leaving the menu by keyboard, and switching to desktop close it too. It is not a modal and has no focus trap. Native hash navigation and history are not intercepted. Homepage anchor padding uses the measured sticky-header height plus 16px; short nonsticky layouts use 16px.
+The mobile menu is a native details/summary disclosure with a 44px square trigger and a navy-soft overlay below the header. Its three-line icon becomes a close icon; the overlay arrives over 220ms with 6px travel and closes immediately. Reduced motion changes the icon state without animation and opens the menu instantly. The overlay has a viewport-bounded, scrollable maximum height. Escape closes it and restores trigger focus; outside clicks, following links, leaving the menu by keyboard, and switching to desktop close it too. It is not a modal and has no focus trap. Native hash navigation and history are not intercepted. Homepage anchor padding uses the measured sticky-header height plus 16px; short nonsticky layouts use 16px.
 
 ### FAQ
 
 Both variants use native details/summary, visible question text, and a plus SVG rotating 45deg when open. The open question turns blue-hover. Multiple rows can remain open; there is no exclusive-accordion script.
 
 Homepage rows use the rounded bordered variant in a single question column beside the title, stacking below it at narrower widths. Summary height is at least 76px on desktop and 64px on phones. Hover, focus-within and open states strengthen the border; native plus rotation remains. Supporting FAQs retain their smaller-radius reading layout.
+
+Where `::details-content` and discrete transitions are supported, an answer
+wrapper expands/collapses through grid tracks over 260ms with a 160ms opacity
+transition. Native `open` state remains the source of truth; repeated toggles
+reverse cleanly without a script or fixed height. Unsupported browsers retain
+native immediate disclosure. Reduced motion removes spatial interpolation and
+plus-icon rotation transitions, preserving the open state and color feedback.
 
 ### Imagery and illustration
 
@@ -345,14 +352,16 @@ Shared interactive focus is a 3px cyan outline with 5px offset. Fields use blue 
 
 `website/src/scripts/home-motion.ts` enhances only the homepage, with no dependency:
 
-- The hero photograph arrives over 520ms; headline, copy and CTA are never hidden or delayed.
+- The hero photograph arrives over 760ms; headline, copy and CTA are never hidden or delayed. Its three existing channel/summary/human icons receive one short sequential accent, settling within 1120ms.
 - One inquiry -> AI -> confirmed summary -> human sequence pulses the four process nodes and traces the RTL connectors. It lasts at most 1760ms and settles; it does not repeat on re-entry.
-- Each illustrative device figure enters once over 620ms with 16px travel when its own figure comes into view. About imagery opens through a small 650ms crop reveal. Other sections stay still rather than repeating fade-up effects everywhere.
+- Each illustrative device figure enters once over 620ms with 12px travel when its own figure comes into view. The authored focal sequence is the existing inquiry becoming an organized request: three chat bubbles arrive from their respective sides, then the confirmation summary uncovers right-to-left. It settles within 2340ms. The voice illustration runs one bounded waveform phrase and settles within 2580ms. There is no sound, timer, live status or real communication.
+- A 44px replay control below each persistent illustration-only caption restarts that illustration, not its frame entrance. Rapid activation cancels the previous effects before restarting; focus stays on the button. Caption grid space is reserved so enabling/disabling replay does not shift the composition. Replay is unavailable without JavaScript or under reduced motion.
+- About imagery opens through a small 650ms crop reveal. Other sections stay still rather than repeating fade-up effects everywhere.
 - `--motion-feedback` is 160ms; image hover is 260ms. Authored arrivals use `cubic-bezier(0.16, 1, 0.3, 1)`.
-- IntersectionObserver pauses animations offscreen. Visibility changes pause them in hidden tabs; page lifecycle events cover back/forward restoration. No animation loop, wheel/touch listener, scroll timer, custom cursor or live phone control is added.
-- With reduced motion, authored sequences do not start; changing the preference cancels active ones and shows their static base composition. Smooth anchor scrolling becomes instant. State colors and native FAQ disclosure still explain interactions.
+- IntersectionObserver pauses animations below 15% intersection. Visibility changes pause them in hidden tabs; page lifecycle events cover back/forward restoration. No automatic animation loop, wheel/touch listener, scroll timer, custom cursor or live phone control is added.
+- With reduced motion, authored sequences do not start; changing the preference cancels active ones and shows their static base composition. Returning to normal motion does not automatically replay them. Smooth anchor scrolling becomes instant. State colors and native FAQ disclosure still explain interactions.
 
-Meaningful content is visible and crawlable before JavaScript; no reveal stylesheet hides it. Phone waveforms are static illustrations. Brief one-shot sequences need no persistent playback control.
+Meaningful content is visible and crawlable before JavaScript; no reveal stylesheet hides it. Delayed chat entrances use temporary Web Animations effects only, reverting to fully visible content on finish or cancellation. Every automatic sequence is shorter than three seconds. Motion adds no dependency, request, generated asset or production capability.
 
 ## Do's and Don'ts
 

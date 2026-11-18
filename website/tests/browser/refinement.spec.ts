@@ -549,11 +549,11 @@ test.describe('refinement: actual motion runtime', () => {
         endTimes: window.__refinementMotion.groups[key].map((a) => a.effect!.getComputedTiming().endTime),
         forbidden: window.__refinementMotion.forbidden,
       }), name);
-      const expectedCount = name === 'devices' ? 2 : 1;
+      const expectedCount = name === 'devices' ? 20 : 1;
       expect(result.count).toBe(expectedCount);
       for (const endTime of result.endTimes) {
         expect(Number(endTime)).toBeGreaterThan(0);
-        expect(Number(endTime)).toBeLessThanOrEqual(800);
+        expect(Number(endTime)).toBeLessThanOrEqual(name === 'devices' ? 2_600 : 800);
       }
       expect(result.forbidden).toBe(0);
       await reveal(page, name === 'hero' ? '#faq' : '.home-hero');

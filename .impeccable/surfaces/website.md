@@ -59,6 +59,10 @@ The approved refinement retains identity, section order and content, with
 one brief inquiry-to-AI-to-human sequence, selective entrances, native scrolling,
 keyboard-equivalent feedback and a static reduced-motion/no-JavaScript path.
 Current source geometry and limitations are documented in website/VERIFICATION.md.
+The owner's subsequent animate request retains this world and adds a bounded
+inquiry-to-summary chat sequence, a short illustrative voice waveform, and
+explicit per-device replay. Shared navigation, menu and FAQ transitions explain
+interaction state. No continuously running decoration or live-service claim.
 On 18 November 2026 the owner requested a mobile layout refinement across all
 sections, especially the WhatsApp and phone demonstrations. On phones each
 channel now has its own heading, readable illustrative device, features and

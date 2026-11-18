@@ -62,7 +62,7 @@ const schema = {
         </nav>
         <a href="/contact/" class="button header-cta">בואו נדבר <Icon name="arrow" size={17} /></a>
         <details class="mobile-menu">
-          <summary aria-label="פתיחת תפריט ניווט"><Icon name="menu" /></summary>
+          <summary aria-label="פתיחת תפריט ניווט"><svg class="menu-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16" /><path d="M4 12h16" /><path d="M4 18h16" /></svg></summary>
           <nav aria-label="ניווט לנייד">
             {nav.map(([href, label]) => <a href={href} aria-current={path === href ? 'page' : undefined}>{label}</a>)}
             <a href="/contact/">יצירת קשר</a>

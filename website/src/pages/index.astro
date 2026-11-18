@@ -27,7 +27,7 @@ const benefits = [
         <h1 id="hero-title">כל פנייה מתחילה<br />במענה נכון.</h1>
         <p>סוכני AI בוואטסאפ ובטלפון לעסקי שירות.<br /> אוספים פרטים, מסדרים פניות ומשאירים<br class="desktop-break" /> את ההחלטות המקצועיות אצלכם.</p>
         <div class="hero-actions"><a class="pill" href="/contact/">לבדיקת התאמה <span class="pill-icon"><Icon name="arrow" size={15} /></span></a><a class="pill pill-outline" href="#process">איך זה עובד <span class="pill-icon"><Icon name="arrow" size={15} /></span></a></div>
-        <ul class="hero-points"><li><Icon name="phone" size={19} />טלפון ווואטסאפ</li><li><Icon name="list" size={19} />פניות מסודרות</li><li><Icon name="user" size={19} />עם מענה אנושי</li></ul>
+        <ul class="hero-points" data-motion="signal"><li><Icon name="phone" size={19} />טלפון ווואטסאפ</li><li><Icon name="list" size={19} />פניות מסודרות</li><li><Icon name="user" size={19} />עם מענה אנושי</li></ul>
       </div>
     </div>
     <a class="scroll-cue" href="#channels"><span>מכאן מתחילה השיחה</span><svg width="20" height="28" viewBox="0 0 20 28" fill="none" aria-hidden="true"><path d="M10 2v22m-6-6 6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg></a>
@@ -42,7 +42,10 @@ const benefits = [
             <div class="phone-top"><Icon name="chat" size={19} /><strong>העוזר של העסק</strong></div>
             <div class="chat-body"><p class="bubble incoming">שלום, אני עוזר AI.<br />איך אפשר לעזור?</p><p class="bubble outgoing">התריס החשמלי לא עולה.</p><p class="bubble incoming">נאסוף כמה פרטים<br />ונכין סיכום לאישורך.</p><div class="chat-summary"><Icon name="check" size={16} /><span>מסכמים ומאשרים<br />לפני המשך הטיפול</span></div></div>
           </div>
-          <figcaption class="device-caption">המחשה בלבד · אין שיחה פעילה</figcaption>
+          <figcaption class="device-caption">
+            <span>המחשה בלבד · אין שיחה פעילה</span>
+            <button type="button" class="demo-replay" aria-label="הצגה חוזרת של המחשת הוואטסאפ" hidden><Icon name="replay" size={16} /><span>הצגה חוזרת</span></button>
+          </figcaption>
         </figure>
         <ul class="check-list"><li><Icon name="check" />אוסף פרטים בשיחה קצרה</li><li><Icon name="check" />מבקש תמונה כשצריך</li><li><Icon name="check" />מסכם ומאפשר תיקונים</li><li><Icon name="check" />מכין להמשך טיפול אנושי</li></ul>
         <a class="pill" href="/services/whatsapp/">להכיר את מענה הוואטסאפ <Icon name="arrow" size={15} /></a>
@@ -52,7 +55,10 @@ const benefits = [
         <h2 id="phone-title"><Icon name="phone" size={30} />סוכן AI טלפוני</h2>
         <figure class="device-stage" data-motion="devices">
           <div class="phone-shell voice-phone"><Icon name="phone" size={25} /><strong>TamidZamin AI</strong><span>מקשיב. שואל. מסכם.</span><div class="waveform" aria-hidden="true">{[12, 22, 36, 18, 48, 30, 55, 25, 43, 22, 36, 14, 26].map((height) => <i style={`height:${height}px`} />)}</div><p>״מתי נוח לך<br />שבעל המקצוע יחזור?״</p><span class="call-icon" aria-hidden="true"><Icon name="phone" size={23} /></span></div>
-          <figcaption class="device-caption">המחשה בלבד · אין שיחה פעילה</figcaption>
+          <figcaption class="device-caption">
+            <span>המחשה בלבד · אין שיחה פעילה</span>
+            <button type="button" class="demo-replay" aria-label="הצגה חוזרת של המחשת המענה הטלפוני" hidden><Icon name="replay" size={16} /><span>הצגה חוזרת</span></button>
+          </figcaption>
         </figure>
         <ul class="check-list"><li><Icon name="check" />מבין את סיבת הפנייה</li><li><Icon name="check" />אוסף פרטי קשר ודחיפות</li><li><Icon name="check" />מקריא סיכום לאישור</li><li><Icon name="check" />מעביר ליעד שסוכם ונבדק</li></ul>
         <a class="pill" href="/services/phone/">להכיר את המענה הטלפוני <Icon name="arrow" size={15} /></a>

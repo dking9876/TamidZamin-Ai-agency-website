@@ -57,6 +57,23 @@ The homepage's conversations are illustrative HTML, not a working agent.
 No customer testimonials, installed-client logos, prices or measured client
 results were fabricated. Supplied people are labeled illustrative.
 
+## Motion
+
+The homepage enhances its illustrative conversations with short chat/summary
+and voice-waveform sequences. Each runs once on entry; the visitor can replay
+an individual illustration with its labeled button. These are not live agents.
+No animation dependency, audio, external request or continuous loop is added.
+
+`src/scripts/home-motion.ts` pauses effects offscreen/in hidden tabs, cancels
+them when reduced motion is requested, and leaves all content readable without
+JavaScript. Navigation, menu and FAQ feedback are CSS-based; native disclosure
+and keyboard behavior remain. Unsupported FAQ transition features fall back to
+normal native toggles. The design contract is in `../DESIGN.md`.
+
+Run `npx playwright test motion.spec.ts refinement.spec.ts` against a running
+local production preview to test timing, interruption, replay, reduced motion,
+keyboard behavior and existing layout/navigation safeguards.
+
 ## Configuration
 
 Copy `.env.example` to `.env` on the runtime/deployment machine, not into source

@@ -8,7 +8,7 @@ const items = Astro.props.all ? faqs : faqs.slice(0, 4);
   {items.map(({ question, answer }) => (
     <details>
       <summary>{question}<Icon name="plus" size={20} /></summary>
-      <p>{answer}</p>
+      <div class="faq-answer"><p>{answer}</p></div>
     </details>
   ))}
 </div>

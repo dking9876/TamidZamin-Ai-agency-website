@@ -1,5 +1,5 @@
 ---
-interface Props { name: 'arrow' | 'check' | 'chat' | 'phone' | 'user' | 'menu' | 'close' | 'plus' | 'shield' | 'clock' | 'target' | 'list' | 'robot' | 'wrench' | 'bolt' | 'tools' | 'fan' | 'helmet'; size?: number; }
+interface Props { name: 'arrow' | 'check' | 'chat' | 'phone' | 'user' | 'menu' | 'close' | 'plus' | 'shield' | 'clock' | 'target' | 'list' | 'robot' | 'wrench' | 'bolt' | 'tools' | 'fan' | 'helmet' | 'replay'; size?: number; }
 const { name, size = 24 } = Astro.props;
 const paths = {
   arrow: 'M19 12H5m7-7-7 7 7 7',
@@ -10,6 +10,7 @@ const paths = {
   menu: 'M4 6h16M4 12h16M4 18h16',
   close: 'm6 6 12 12M6 18 18 6',
   plus: 'M12 5v14M5 12h14',
+  replay: 'M3 10a9 9 0 1 1 2 8M3 4v6h6',
   shield: 'm12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6l8-3Zm-4 9 3 3 5-6',
   clock: 'M12 8v5l3 2M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z',
   target: 'm14 10 6-6m-3 0h3v3M15 4a9 9 0 1 0 5 5M12 8a4 4 0 1 0 4 4',

@@ -1,5 +1,68 @@
 # Verification and launch status
 
+## Authored motion refinement - 18 November 2026
+
+The initial refinement was **local only**. The owner subsequently requested
+committing and pushing these animation changes to the existing GitHub
+repository on 18 November 2026. This authorizes the connected Vercel preview
+update, not lead activation, indexing, live communications or changes to
+production configuration. Hosted deployment completion is separate from the
+local verification below. Unrelated repository changes are excluded.
+
+### Implemented
+
+- The existing chat illustration now sequences its three messages and uncovers
+  the confirmation summary, settling within 2340ms. The voice illustration
+  plays one waveform phrase, settling within 2580ms. Both remain explicitly
+  labeled illustrations with no active conversation.
+- Each illustration has a keyboard-operable 44px replay control. Rapid replay
+  cancels the previous sequence; it does not move the device frame again.
+  Space for controls is reserved, including when reduced motion hides them.
+- Hero image arrival is 760ms, with a brief sequential accent on the existing
+  channel/summary/human icons. Headline, body and calls to action are never
+  delayed. Existing process and About motion are preserved.
+- Desktop navigation draws its underline from the right. Pill icons provide
+  subtle hover/focus feedback. The native mobile menu has a 220ms entrance,
+  a state-changing menu/close icon, and immediate dismissal.
+- Native FAQ disclosures interpolate their grid content over 260ms on
+  supporting browsers, without JavaScript height measurement or toggle
+  interception. Unsupported browsers retain native disclosure.
+- Authored effects pause below 15% intersection and in hidden tabs. Reduced
+  motion cancels them, removes spatial UI transitions and leaves content and
+  state feedback available. No automatic looping, sound, new dependency,
+  external request, fabricated claim or change to intake behavior.
+
+### Verified against the production Node preview
+
+- `npm run build`: passed, zero Astro/TypeScript diagnostics.
+- Final `npm run check`: 50 files, zero errors, warnings or hints.
+- Final complete Playwright run: **49 passed**, no retries, in Microsoft Edge.
+  The six added cases verify desktop/mobile chat order, keyboard replay and
+  rapid interruption, actual waveform movement and pause/resume, live
+  reduced-motion changes, native FAQ interpolation/reversal and mobile menu
+  feedback. Existing motion expectations now cover the new device sequence.
+- Existing coverage passes for 320-1920px responsive routes, 200% text, loaded
+  imagery, text containment, Hebrew/RTL semantics, native anchors/history,
+  no-JavaScript usability, hero contrast and axe WCAG A/AA checks on nine
+  routes. Preview/noindex and disabled lead-delivery safeguards still pass.
+- Rendered checks include desktop/mobile hero and channels, timed chat
+  storyboard frames, the voice illustration, expanded FAQs and the mobile
+  menu. Captured pages emitted no JavaScript errors.
+- A 120-frame sample during voice playback at each of 1440x900 and 390x844
+  measured a median frame interval of about 16.7ms; p95 was at most 17ms.
+  These are local desktop-browser rAF measurements, not physical-device
+  performance guarantees or a replacement for a field benchmark.
+- The generated homepage motion script is 3167 bytes before compression.
+  The changed-UI Impeccable detector returned `[]`.
+
+Screenshots, frame metrics and regression outputs are retained under:
+
+`C:\Users\USER\AppData\Roaming\Lumi\copilot\session-state\3778e32d-b8ca-4ebb-8359-05b51f0a5cd1\files`
+
+Physical iPhone/Android hardware, Safari/Firefox, real background-tab behavior
+(the existing visibility test is synthetic), and assistive-technology use
+remain unverified. No accessibility certification or launch approval is implied.
+
 ## Mobile layout refinement - 18 November 2026
 
 This follow-up is **local only**. No commit, push, deployment, live demo,
