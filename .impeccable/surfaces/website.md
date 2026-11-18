@@ -106,3 +106,12 @@ and actions, gutters and spacing adapt without changing factual content,
 section order, identity or preview safeguards.
 Review round1 disposition=rebuild: corrected the initial mistaken interpretation
 of section topology. No historical comp gate is claimed retrospectively.
+
+The owner's recorded-call request on 18 November supersedes the silent phone
+illustration only. Preserve the device frame and responsive composition; make
+the phone a clear play/pause target for the exact supplied 135-second MP3.
+Include time, seek, restart, loading/error recovery and native no-JavaScript
+playback. No autoplay or media fetch before activation. The waveform indicates
+actual playback state and stays still with reduced motion. Label it a recorded
+demonstration, not a live call. WhatsApp remains illustrative; publication,
+lead delivery and indexing safeguards are unchanged.

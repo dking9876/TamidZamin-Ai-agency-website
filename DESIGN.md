@@ -351,7 +351,7 @@ plus-icon rotation transitions, preserving the open state and color feedback.
 
 `Picture.astro` renders WebP srcsets: legacy hero 768/1280/1920, support/About 640/960, logo 300/600, and trade images 320/640. Logo sizing is declared as 190px; other images declare 92vw on mobile and 45vw otherwise. These are the existing source hints, not a new universal layout rule. Images have dimensions, async decoding, and lazy loading except the header logo. The homepage hero now uses the exact supplied H.264 MP4 and an eager 1280x720 WebP first-frame poster in `public/media`, with provenance recorded alongside them. The original hero derivatives remain available for other assets.
 
-Nine numbered PNG originals are preserved. The shipping image directory contains 27 rasters: 19 photographic/logo WebP derivatives, six code-authored decorative WebPs, a logo-derived icon, and a hero-derived social image. The sidecar links their actual manifest, companion records, and preparation code rather than inventing model-generation provenance. People and device conversations remain explicitly illustrative.
+Nine numbered PNG originals are preserved. The shipping image directory contains 27 rasters: 19 photographic/logo WebP derivatives, six code-authored decorative WebPs, a logo-derived icon, and a hero-derived social image. The sidecar links their actual manifest, companion records, and preparation code rather than inventing model-generation provenance. People and the WhatsApp conversation remain explicitly illustrative.
 
 ### Focus and reduced motion
 
@@ -362,8 +362,8 @@ Shared interactive focus is a 3px cyan outline with 5px offset. Fields use blue 
 - The hero's video owns the photographic motion; the superseded still-image zoom is removed. Poster and video loading never hold up the headline or action.
 - Two headline lines resolve from 3px blur, .6 opacity and 18px inline travel over 640ms, staggered by 90ms. They remain present rather than starting hidden. The original raster edge uncovers right-to-left over 900ms after a 120ms delay. The body and actions never animate or wait. All hero effects settle within 1020ms once their assets are available, run again on full reload, and do not repeat on scroll re-entry.
 - One inquiry -> AI -> confirmed summary -> human sequence pulses the four process nodes and traces the RTL connectors. It lasts at most 1760ms and settles; it does not repeat on re-entry.
-- Each illustrative device figure enters once over 620ms with 12px travel when its own figure comes into view. The authored focal sequence is the existing inquiry becoming an organized request: three chat bubbles arrive from their respective sides, then the confirmation summary uncovers right-to-left. It settles within 2340ms. The voice illustration runs one bounded waveform phrase and settles within 2580ms. There is no sound, timer, live status or real communication.
-- A 44px replay control below each persistent illustration-only caption restarts that illustration, not its frame entrance. Rapid activation cancels the previous effects before restarting; focus stays on the button. Caption grid space is reserved so enabling/disabling replay does not shift the composition. Replay is unavailable without JavaScript or under reduced motion.
+- Each device figure enters once over 620ms with 12px travel when its own figure comes into view. Three illustrative WhatsApp bubbles arrive from their respective sides, then the confirmation summary uncovers right-to-left. That sequence settles within 2340ms. The phone is now a user-initiated recording player, described below; it no longer animates a fictitious call on entry.
+- A 44px replay control below the WhatsApp illustration-only caption restarts its sequence, not its frame entrance. Rapid activation cancels the previous effects before restarting; focus stays on the button. Caption grid space is reserved so enabling/disabling replay does not shift the composition. This illustrative replay is unavailable without JavaScript or under reduced motion.
 - About imagery opens through a small 650ms crop reveal. Other sections stay still rather than repeating fade-up effects everywhere.
 - `--motion-feedback` is 160ms; image hover is 260ms. Authored arrivals use `cubic-bezier(0.16, 1, 0.3, 1)`.
 - IntersectionObserver pauses authored animations below 15% intersection. Visibility changes pause them in hidden tabs; page lifecycle events cover back/forward restoration. No wheel/touch listener, scroll timer, custom cursor or live phone control is added.
@@ -384,7 +384,23 @@ the source while retaining the current scene position and manual pause.
 When paused, source changes show the matching poster and defer video loading
 until play. A native `picture` supplies the correct poster even without JS.
 
-Meaningful content is visible and crawlable before JavaScript; no reveal stylesheet hides it. Delayed chat entrances use temporary Web Animations effects only, reverting to fully visible content on finish or cancellation. Authored UI sequences are shorter than three seconds; the background video is the deliberate looping exception, with a pause control. No motion dependency or production capability is added.
+`website/src/components/CallDemo.astro` preserves the blue-rimmed phone frame
+and makes its main screen a native play/pause button. A pale 56px play icon
+and a Hebrew action label provide the primary affordance. A native LTR seek
+slider, tabular elapsed/total time and a 44px restart action sit below it;
+there are no nested interactive controls. The 135-second owner recording
+is explicitly labeled as recorded, not live. Errors appear in a status
+region with retry and direct-file recovery.
+
+`website/src/scripts/call-demo.ts` requests audio only after activation.
+The existing cyan waveform becomes an animated playback indicator only while
+audio is playing, never a purported live amplitude trace. Pausing, buffering
+and completion stop it; reduced motion leaves it static while audio works.
+Hidden tabs and page exit pause the recording without automatic resumption.
+Native audio controls and a direct link provide the no-JavaScript fallback.
+No live telephony, third-party player or external communication is added.
+
+Meaningful content is visible and crawlable before JavaScript; no reveal stylesheet hides it. Delayed chat entrances use temporary Web Animations effects only, reverting to fully visible content on finish or cancellation. Authored arrival sequences are shorter than three seconds; the background video and user-controlled recording indicator are deliberate looping exceptions with pause controls. No motion dependency or production capability is added.
 
 ## Do's and Don'ts
 

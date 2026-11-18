@@ -53,7 +53,8 @@ TrisMaster electric-shutter intake demo, not proof of deployed functionality.
 It excludes diagnosis, pricing, appointment booking and payment. The language
 rules mix Hebrew/Russian with an English summary rule; resolve that separately.
 
-The homepage's conversations are illustrative HTML, not a working agent.
+The homepage's WhatsApp conversation is illustrative HTML. The phone plays
+the owner's supplied recording on request; neither is a live agent.
 No customer testimonials, installed-client logos, prices or measured client
 results were fabricated. Supplied people are labeled illustrative.
 
@@ -102,11 +103,10 @@ is used. A matching native `picture` supplies the phone poster without JS.
 Only the appropriate video is downloaded. Rotation switches versions while
 retaining the scene position and the visitor's pause choice.
 
-The homepage enhances its illustrative conversations with short chat/summary
-and voice-waveform sequences. Each runs once on entry; the visitor can replay
-an individual illustration with its labeled button. These are not live agents.
-No animation dependency, audio or external request is added. Only the explicitly
-approved hero background loops; the existing illustrative sequences still settle.
+The homepage enhances its illustrative WhatsApp conversation with a short
+chat/summary sequence. It runs once on entry and has a labeled replay button.
+The phone's waveform now moves only while the visitor plays the recording;
+it is a playback indicator, not an audio-amplitude visualization.
 
 `src/scripts/home-motion.ts` pauses effects offscreen/in hidden tabs, cancels
 them when reduced motion is requested, and leaves all content readable without
@@ -117,6 +117,37 @@ normal native toggles. The design contract is in `../DESIGN.md`.
 Run `npx playwright test hero.spec.ts motion.spec.ts refinement.spec.ts` against a running
 local production preview to test timing, interruption, replay, reduced motion,
 keyboard behavior and existing layout/navigation safeguards.
+
+## Recorded phone demo
+
+`src/components/CallDemo.astro` and `src/scripts/call-demo.ts` replace the old
+silent phone illustration at `/#phone-demo`. Clicking or tapping the phone
+plays/pauses the original 2:15 recording. Elapsed/total time, a native seek
+slider and a restart button remain inside the existing responsive phone frame.
+The phone service page links directly to the player.
+
+`public/media/demo-call.mp3` is the exact owner-supplied attachment, not
+re-encoded or trimmed. Its format, size and SHA-256 are in
+`public/media/provenance.json`. No audio is downloaded or played before user
+activation (`preload="none"`); all media stays same-origin. Switching tabs or
+leaving the page pauses playback without automatically resuming it. Scrolling
+does not interrupt listening. Reduced motion keeps the waveform static without
+disabling requested audio. No JavaScript leaves native audio controls and a
+direct file link. Loading can be cancelled; playback/download failures show a
+Hebrew recovery message, retry action and direct recording link.
+
+This is a recording, not an invitation to a live call or a claim that the
+agent is connected to a visitor's business. Lead delivery and noindex safeguards
+are unchanged. Before publishing, the owner must review the recording for
+personal/customer information and confirm participant/publication permissions.
+The owner subsequently approved pushing this implementation and recording to
+the existing GitHub repository for its connected website preview deployment.
+No live telephony, lead delivery or indexing is enabled by that approval.
+
+Run `npx playwright test call-demo.spec.ts motion.spec.ts mobile-layout.spec.ts`
+against a running preview for real MP3 decoding/playback, seeking, replay,
+failed-download recovery, rapid input, keyboard/touch, reduced motion,
+no-JavaScript fallback, accessibility and responsive regression coverage.
 
 ## Configuration
 

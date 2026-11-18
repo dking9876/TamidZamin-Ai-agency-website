@@ -51,16 +51,6 @@ function animate(group: MotionGroup, replay = false) {
           { clipPath: 'inset(0)', opacity: 1 },
         ], 540, 1800, 'backwards');
       }
-      element.querySelectorAll('.waveform i').forEach((bar, index) => {
-        const frames = Array.from({ length: 11 }, (_, beat) => ({
-          transform: `scaleY(${beat === 0 || beat === 10 ? 1 : 0.3 + ((index * 7 + beat * 3) % 11) / 10})`,
-          opacity: beat === 0 || beat === 10 ? 1 : 0.65 + ((index + beat) % 4) / 10,
-        }));
-        const animation = bar.animate(frames, { duration: 2400, delay: 180, easing: 'ease-in-out' });
-        group.animations.push(animation);
-      });
-      const voiceText = element.querySelector('.voice-phone > p');
-      if (voiceText) add(voiceText, [{ opacity: 0.55 }, { opacity: 1 }], 500, 300);
       break;
     case 'photo':
       add(element, [{ clipPath: 'inset(0 8% 0 0)', opacity: 0.8 }, { clipPath: 'inset(0)', opacity: 1 }], 650);

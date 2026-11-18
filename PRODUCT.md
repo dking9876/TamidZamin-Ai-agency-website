@@ -40,6 +40,12 @@ and more qualified jobs; these are goals, not verified results or guarantees.
 The company focuses on WhatsApp and phone AI agents. Production availability,
 supported languages, integrations, booking capabilities and public demo access
 have not been confirmed.
+On 18 November 2026 the owner supplied a 135-second MP3 conversation and
+requested click-to-listen playback in the homepage phone demonstration.
+That recording is implemented as playback, not a live agent or verified
+production integration. The owner subsequently requested a GitHub push,
+approving the connected website preview update without enabling lead delivery
+or indexing.
 
 `this master demo prd.txt` is now nonempty. It specifies a TrisMaster electric
 shutter intake demo, not evidence of a working deployment or company-wide
@@ -83,7 +89,8 @@ desktop framing, overlaid factual copy and preview safeguards stay unchanged.
 
 The approved homepage image, nine numbered PNGs, the TrisMaster requirements,
 and the agency context in the project instructions. No verified testimonials,
-prices, performance results or public demo destination were supplied.
+prices, performance results or live demo destination were supplied. The later
+owner-supplied MP3 supports recorded playback only.
 People in supplied illustrations must not be presented as identified customers
 or employees.
 

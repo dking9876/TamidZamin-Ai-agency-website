@@ -507,11 +507,11 @@ test.describe('refinement: native navigation and fallbacks', () => {
   test('preview safeguards and factual demo disclosures remain intact (no submissions)', async ({ page }) => {
     await page.goto('/');
     await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex, nofollow');
-    await expect(page.locator('#channels .demo-disclosure')).toContainText('השיחות להמחשה בלבד');
+    await expect(page.locator('#channels .demo-disclosure')).toContainText('שיחת הדגמה מוקלטת');
+    await expect(page.locator('#channels .demo-disclosure')).toContainText('אין כאן שיחה חיה');
     await expect(page.locator('.device-caption')).toHaveCount(2);
-    for (const caption of await page.locator('.device-caption').all()) {
-      await expect(caption).toContainText('אין שיחה פעילה');
-    }
+    await expect(page.locator('.whatsapp-channel .device-caption')).toContainText('אין שיחה פעילה');
+    await expect(page.locator('.phone-channel .device-caption')).toContainText('לא שיחה חיה');
     await expect(page.locator('#evidence .demo-disclosure')).toContainText('לא הדגמה חיה מאושרת');
     await page.goto('/contact/');
     await expect(page.locator('fieldset')).toHaveAttribute('disabled', '');
@@ -571,11 +571,11 @@ test.describe('refinement: actual motion runtime', () => {
         endTimes: window.__refinementMotion.groups[key].map((a) => a.effect!.getComputedTiming().endTime),
         forbidden: window.__refinementMotion.forbidden,
       }), name);
-      const expectedCount = name === 'devices' ? 20 : name === 'hero' ? 3 : 1;
+      const expectedCount = name === 'devices' ? 6 : name === 'hero' ? 3 : 1;
       expect(result.count).toBe(expectedCount);
       for (const endTime of result.endTimes) {
         expect(Number(endTime)).toBeGreaterThan(0);
-        expect(Number(endTime)).toBeLessThanOrEqual(name === 'devices' ? 2_600 : name === 'hero' ? 1_100 : 800);
+        expect(Number(endTime)).toBeLessThanOrEqual(name === 'devices' ? 2_400 : name === 'hero' ? 1_100 : 800);
       }
       expect(result.forbidden).toBe(0);
       await reveal(page, name === 'hero' ? '#faq' : '.home-hero');

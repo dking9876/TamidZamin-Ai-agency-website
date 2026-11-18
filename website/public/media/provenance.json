@@ -33,6 +33,13 @@
     "sha256": "2077f063ffb49e46f2a026ae9fcac1c0412d1b4d31d504aaf5a468de5bdde712",
     "build": "node scripts/prepare-hero-mobile.mjs"
   },
+  "demo-call.mp3": {
+    "source": "Owner-supplied conversation attachment, 18 November 2026",
+    "sha256": "363c48fa31ac18088552e84f92d39b4190e334519abd87e299e6f3e13a7cac59",
+    "transform": "None. Exact original MP3 bytes, given a browser-appropriate .mp3 extension. 135 seconds, mono, 16000 Hz, 2160044 bytes.",
+    "purpose": "User-initiated playback of the recorded phone demonstration, not a live call or evidence of a deployed customer integration.",
+    "publication": "Owner supplied the recording for the website and subsequently requested a GitHub push on 18 November 2026 for the connected preview update. Recording contents and participant permissions remain the owner's responsibility."
+  },
   "hero-poster-mobile.webp": {
     "source": "hero-film-mobile.mp4",
     "transform": "First frame extracted with FFmpeg, libwebp quality 85, 720x1280.",

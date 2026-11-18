@@ -1,5 +1,43 @@
 # Verification and launch status
 
+## Recorded phone demonstration - 18 November 2026
+
+The homepage phone now plays the owner's exact 135-second MP3 on activation.
+The blue phone frame is retained, with a large play/pause target, elapsed and
+total time, a native seek slider and restart. The phone service page links to
+`/#phone-demo`. Recorded-versus-live labels replace the obsolete silent-phone
+disclosure; WhatsApp remains an illustration.
+
+### Verified
+
+- Production Node build and final Astro/TypeScript check: 60 files, zero
+  errors, warnings or hints. No new dependencies.
+- 53 cases covered across `call-demo`, `motion`, `mobile-layout` and
+  `refinement`: 44 passed on the broad production run; the remaining nine
+  passed after updating obsolete layout/motion test assumptions. No production
+  code changed between these runs.
+- Real browser MP3 playback advances, remains unmuted, seeks, pauses, reaches
+  the end and replays. Keyboard and emulated mobile touch both operate it.
+  Cancellation during a pending load, rapid toggles, failed-download retry,
+  reduced motion, synthetic visibility/pagehide, and no-JavaScript fallback
+  were exercised. No audio request was made before activation.
+- Production HTTP response is `audio/mpeg`, 2,160,044 bytes, with SHA-256
+  `363c48fa31ac18088552e84f92d39b4190e334519abd87e299e6f3e13a7cac59`,
+  identical to the supplied attachment. FFmpeg decoded it without errors.
+- Responsive layouts pass at 320, 360, 390, 430, 600, 601, 768, 880 and
+  881px; broader 1024/1440px, landscape, 200%-text and text-containment checks
+  also pass. Final desktop and phone captures were visually inspected.
+- Axe found no WCAG A/AA violations in the channels section in the tested
+  state. The changed-UI mechanical design detector returned `[]`.
+
+These are installed Edge checks with emulated mobile input, not physical
+iOS/Safari or full assistive-technology certification. No verified transcript
+was supplied or invented. Review personal information and recording/publication
+permissions before publishing. The initial implementation was local only.
+The owner subsequently requested a GitHub push for the connected website
+preview update. Lead activation and indexing remain disabled; the checks
+above describe the local production build, not a hosted deployment check.
+
 ## Phone-sized portrait video - 18 November 2026
 
 The owner's follow-up requested a phone-appropriate video fit and a Git push.

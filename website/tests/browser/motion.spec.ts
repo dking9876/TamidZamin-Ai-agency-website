@@ -87,46 +87,22 @@ for (const width of [390, 1440]) {
   });
 }
 
-test('voice waveform advances, pauses offscreen, settles and never loops automatically', async ({ page }, info) => {
+test('voice waveform stays still until the recording plays and stops when paused', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/');
   await reveal(page, '.phone-channel figure');
-  await page.waitForFunction(() => document.querySelector('.waveform i')?.getAnimations()[0]?.playState === 'running');
+  expect(await page.locator('.waveform').evaluate((element) => element.getAnimations({ subtree: true }).length)).toBe(0);
+  await page.locator('.recording-toggle').click();
+  await expect(page.locator('.recording-phone')).toHaveAttribute('data-state', 'playing');
   await page.waitForFunction(() => window.__premiumFrameGaps.length > 10);
   await expect.poll(() => page.locator('.waveform i').evaluateAll((bars) =>
     new Set(bars.map((bar) => getComputedStyle(bar).transform)).size)).toBeGreaterThan(3);
-  await reveal(page, '.home-hero');
-  await page.waitForFunction(() => window.__premiumAnimations
-    .filter((animation) => (animation.effect as KeyframeEffect).target?.matches('.waveform i'))
-    .every((animation) => animation.playState === 'paused'));
-  const paused = await page.evaluate(async () => {
-    const animations = window.__premiumAnimations
-      .filter((animation) => (animation.effect as KeyframeEffect).target?.matches('.waveform i'));
-    await Promise.all(animations.map((animation) => animation.ready));
-    return animations.map((animation) => animation.currentTime);
-  });
-  await page.evaluate(async () => {
-    for (let frame = 0; frame < 8; frame++) await new Promise(requestAnimationFrame);
-  });
-  expect(await page.evaluate(() => window.__premiumAnimations
-    .filter((animation) => (animation.effect as KeyframeEffect).target?.matches('.waveform i'))
-    .map((animation) => animation.currentTime))).toEqual(paused);
-  await reveal(page, '.phone-channel figure');
-  await page.waitForFunction(() => window.__premiumAnimations
-    .filter((animation) => (animation.effect as KeyframeEffect).target?.matches('.waveform i'))
-    .every((animation) => animation.playState === 'finished'));
+  await page.locator('.recording-toggle').click();
+  await expect(page.locator('.recording-phone')).toHaveAttribute('data-state', 'paused');
   await reveal(page, '.home-hero');
   await reveal(page, '.phone-channel figure');
-  const result = await page.evaluate(() => ({
-    bars: window.__premiumAnimations.filter((animation) => (animation.effect as KeyframeEffect).target?.matches('.waveform i'))
-      .map((animation) => ({ state: animation.playState, iterations: animation.effect!.getTiming().iterations })),
-    frameGaps: window.__premiumFrameGaps,
-    current: document.querySelector('.waveform')!.getAnimations({ subtree: true }).length,
-  }));
-  expect(result.bars).toHaveLength(13);
-  expect(result.bars.every((bar) => bar.state === 'finished' && bar.iterations === 1)).toBe(true);
-  expect(result.current).toBe(0);
-  await info.attach('local-desktop-browser-frame-samples', { body: JSON.stringify(result), contentType: 'application/json' });
+  expect(await page.locator('.waveform').evaluate((element) => element.getAnimations({ subtree: true }).length)).toBe(0);
+  expect(await page.locator('audio').evaluate((audio: HTMLAudioElement) => audio.paused)).toBe(true);
 });
 
 test('reduced motion cancels the demo without hiding copy or shifting the composition', async ({ page }) => {
@@ -138,7 +114,7 @@ test('reduced motion cancels the demo without hiding copy or shifting the compos
   await page.emulateMedia({ reducedMotion: 'reduce' });
   for (const replay of await page.locator('.demo-replay').all()) await expect(replay).toBeHidden();
   await expect.poll(() => page.locator('#channels').evaluate((element) => element.getAnimations({ subtree: true }).length)).toBe(0);
-  for (const content of await page.locator('.bubble, .chat-summary, .voice-phone > p').all()) {
+  for (const content of await page.locator('.bubble, .chat-summary, .recording-toggle').all()) {
     await expect(content).toBeVisible();
     await expect(content).toHaveCSS('opacity', '1');
   }

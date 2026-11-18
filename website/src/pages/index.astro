@@ -4,6 +4,7 @@ import Layout from '../layouts/Layout.astro';
 import Picture from '../components/Picture.astro';
 import Icon from '../components/Icon.astro';
 import FAQ from '../components/FAQ.astro';
+import CallDemo from '../components/CallDemo.astro';
 const trades = [
   { name: 'plumber', label: 'אינסטלטורים', icon: 'wrench' as const },
   { name: 'electrician', label: 'חשמלאים', icon: 'bolt' as const },
@@ -66,18 +67,12 @@ const benefits = [
       <div class="brand-connector" aria-hidden="true"><img src="/images/connector.webp" width="280" height="240" alt="" loading="lazy" /><img class="connector-logo" src="/images/icon.png" width="64" height="64" alt="" loading="lazy" /></div>
       <article class="home-channel phone-channel" aria-labelledby="phone-title">
         <h2 id="phone-title"><Icon name="phone" size={30} />סוכן AI טלפוני</h2>
-        <figure class="device-stage" data-motion="devices">
-          <div class="phone-shell voice-phone"><Icon name="phone" size={25} /><strong>TamidZamin AI</strong><span>מקשיב. שואל. מסכם.</span><div class="waveform" aria-hidden="true">{[12, 22, 36, 18, 48, 30, 55, 25, 43, 22, 36, 14, 26].map((height) => <i style={`height:${height}px`} />)}</div><p>״מתי נוח לך<br />שבעל המקצוע יחזור?״</p><span class="call-icon" aria-hidden="true"><Icon name="phone" size={23} /></span></div>
-          <figcaption class="device-caption">
-            <span>המחשה בלבד · אין שיחה פעילה</span>
-            <button type="button" class="demo-replay" aria-label="הצגה חוזרת של המחשת המענה הטלפוני" hidden><Icon name="replay" size={16} /><span>הצגה חוזרת</span></button>
-          </figcaption>
-        </figure>
+        <CallDemo />
         <ul class="check-list"><li><Icon name="check" />מבין את סיבת הפנייה</li><li><Icon name="check" />אוסף פרטי קשר ודחיפות</li><li><Icon name="check" />מקריא סיכום לאישור</li><li><Icon name="check" />מעביר ליעד שסוכם ונבדק</li></ul>
         <a class="pill" href="/services/phone/">להכיר את המענה הטלפוני <Icon name="arrow" size={15} /></a>
       </article>
     </div>
-    <p class="demo-disclosure container">השיחות להמחשה בלבד. יכולות, שפות וחיבורים דורשים בדיקה ואישור לכל עסק.</p>
+    <p class="demo-disclosure container">הוואטסאפ מוצג להמחשה; בטלפון אפשר להאזין לשיחת הדגמה מוקלטת. אין כאן שיחה חיה. יכולות, שפות וחיבורים דורשים בדיקה ואישור לכל עסק.</p>
   </section>
 
   <section class="home-process pale-waves" id="process">
@@ -115,5 +110,6 @@ const benefits = [
   <script>
     import '../scripts/home-motion';
     import '../scripts/hero-video';
+    import '../scripts/call-demo';
   </script>
 </Layout>

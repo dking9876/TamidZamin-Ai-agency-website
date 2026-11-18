@@ -19,12 +19,12 @@ for (const width of [320, 360, 390, 430, 600, 601, 768, 880, 881]) {
         demo: box(article.querySelector('figure')!),
         device: box(article.querySelector('.phone-shell')!),
         features: box(article.querySelector('ul')!),
-        action: box(article.querySelector('a')!),
+        action: box(article.querySelector(':scope > a')!),
       }));
       return {
         scrollWidth: document.documentElement.scrollWidth,
         articles,
-        demoFontSizes: [...document.querySelectorAll('.bubble, .chat-summary, .phone-top, .voice-phone > p, .voice-phone > strong')]
+        demoFontSizes: [...document.querySelectorAll('.bubble, .chat-summary, .phone-top, .recording-toggle strong, .recording-description')]
           .map((element) => parseFloat(getComputedStyle(element).fontSize)),
         controls: [...document.querySelectorAll('main a, main summary, .site-footer a, .mobile-menu > summary')]
           .filter((element) => element.getClientRects().length > 0)
@@ -82,6 +82,10 @@ for (const width of [320, 360, 390, 430, 600, 601, 768, 880, 881]) {
 
     const actions = page.locator('.home-channel > a');
     await actions.first().focus();
+    await page.keyboard.press('Tab');
+    await expect(page.locator('.recording-toggle')).toBeFocused();
+    await page.keyboard.press('Tab');
+    await expect(page.locator('.recording-restart')).toBeFocused();
     await page.keyboard.press('Tab');
     await expect(actions.last()).toBeFocused();
     await expect(actions.first()).toHaveAttribute('href', '/services/whatsapp/');
