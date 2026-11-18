@@ -26,8 +26,11 @@ STORY: Recognize missed inquiries while working, understand WhatsApp and phone
 intake, see relevant trades, understand human involvement, then request a fit
 discussion. No testimonial or quantified result without evidence.
 
-FIRST VIEWPORT: Navigation with original logo at left, section links
-in reference order and white CTA at right. Supplied trade video
+FIRST VIEWPORT: Navigation with original logo at left, page-first grouped links
+and white CTA at right. The owner's 18 November navigation request supersedes
+the section-only menu: include all public pages, retain homepage section
+shortcuts in Solutions, and group the same links in the mobile menu and footer.
+Supplied trade video
 covers the entire hero, with a two-line Hebrew headline and a primary pill action
 with a quieter secondary text link
 on the left. Header plus hero fill the initial small viewport; the next section

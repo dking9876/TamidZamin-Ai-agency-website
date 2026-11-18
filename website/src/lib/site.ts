@@ -11,17 +11,7 @@ export const site = {
   legalName: env.PUBLIC_LEGAL_NAME || '',
 };
 
-export const routes = [
-  { href: '/', label: 'ראשי' },
-  { href: '/services/', label: 'השירותים שלנו' },
-  { href: '/services/whatsapp/', label: 'סוכן WhatsApp' },
-  { href: '/services/phone/', label: 'סוכן טלפוני' },
-  { href: '/about/', label: 'אודות' },
-  { href: '/faq/', label: 'שאלות ותשובות' },
-  { href: '/contact/', label: 'יצירת קשר' },
-  { href: '/privacy/', label: 'מדיניות פרטיות' },
-  { href: '/accessibility/', label: 'נגישות' },
-];
+export { routes } from './navigation';
 
 export const faqs = [
   {

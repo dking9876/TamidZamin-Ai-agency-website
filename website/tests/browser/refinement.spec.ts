@@ -395,6 +395,7 @@ test.describe('refinement: native navigation and fallbacks', () => {
       const mobile = viewport.width <= 880;
       for (const id of ['channels', 'process']) {
         if (mobile) await page.locator('.mobile-menu > summary').click();
+        else await page.locator('.solutions-menu > summary').click();
         await page.locator(`${mobile ? '.mobile-menu' : '.desktop-nav'} a[href="/#${id}"]`).click();
         if (mobile) await expect(page.locator('.mobile-menu')).not.toHaveAttribute('open', '');
         await anchorVisible(page, id);
@@ -484,6 +485,7 @@ test.describe('refinement: native navigation and fallbacks', () => {
           await expect(page.locator('.mobile-menu')).toHaveAttribute('open', '');
           await page.locator('.mobile-menu a[href="/#process"]').click();
         } else {
+          await page.locator('.solutions-menu > summary').click();
           await page.locator('.desktop-nav a[href="/#process"]').click();
         }
         await anchorVisible(page, 'process');

@@ -57,6 +57,28 @@ The homepage's conversations are illustrative HTML, not a working agent.
 No customer testimonials, installed-client logos, prices or measured client
 results were fabricated. Supplied people are labeled illustrative.
 
+## Navigation
+
+`src/lib/navigation.ts` is the shared page registry for the header, mobile menu,
+footer and launch-gated sitemap. All nine public content pages are linked;
+API endpoints, crawler files and the 404 page are intentionally not menu items.
+
+The desktop header has Home, a Solutions disclosure (overview, WhatsApp and
+phone), About, FAQ, useful information (privacy and accessibility), and Contact.
+Homepage section shortcuts are retained inside Solutions, separate from pages.
+The mobile menu groups the same destinations in a viewport-bounded, scrollable
+panel, with Contact at the top. The footer repeats the page links in labeled
+groups. Exact current pages and their containing desktop group are highlighted.
+
+Menus use native `details`/`summary`, including without JavaScript. Enhancement
+adds Escape/focus return, outside-click and focus-leave dismissal, closing after
+following a link, and resetting open state when switching between layouts.
+They are navigation disclosures, not ARIA application menus or modal dialogs.
+Run `npx tsx --test tests/navigation.test.ts` for page coverage, and
+`npx playwright test navigation.spec.ts` against a running preview for route
+reachability, keyboard behavior, mobile sizing, enlarged text, accessibility
+and no-JavaScript coverage.
+
 ## Motion
 
 The hero uses the owner's 14-second, silent H.264 montage as a full-bleed

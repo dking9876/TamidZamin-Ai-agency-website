@@ -254,7 +254,7 @@ Headings use balanced wrapping and allow long-word breaks; paragraphs use pretty
 
 ## Layout
 
-`Layout.astro` imports `global.css`, then `home.css`, on every page. The body receives the homepage class only at `/`. Consequently, unscoped navigation rules and the pale rounded header CTA from the second stylesheet also affect supporting pages.
+`Layout.astro` imports `global.css`, then `home.css`, then `navigation.css` on every page. The body receives the homepage class only at `/`. The shared navigation stylesheet owns header, disclosures and footer, retaining the pale rounded header CTA on both homepage and supporting pages.
 
 Shared containers use `min(1180px, calc(100% - 64px))`, then 48px total gutter up to 1100px and 36px up to 680px. Homepage widths up to 600px use at least 20px on each side, increasing equally when either horizontal safe-area inset requires it.
 
@@ -273,7 +273,7 @@ The header reserves 4.75rem on desktop and 4.25rem up to 880px. A ResizeObserver
 - **Human/About:** larger imagery and two-column editorial compositions replace strips. On phones the human explanation precedes its photograph; About keeps its introduction and principles together before the oblique image. DOM order agrees with mobile reading order. Handoff symbols remain decorative and use smaller 64px containers on phones.
 - **Evidence:** requirements copy is typeset as a clearly bounded specification, not a testimonial or active demo. No new capability claims.
 - **FAQ:** a two-column title/list composition, with one full-width question per list row, makes the content substantial at desktop size. Multiple native disclosures may remain open.
-- **Closing:** an oversized headline and horizontal action compose the last full-height section. The compact footer remains content-sized; its two navigation groups stay in stable columns below the logo on phones.
+- **Closing:** an oversized headline and horizontal action compose the last full-height section. The footer remains content-sized; its three labeled navigation groups use two columns below the logo on phones.
 
 The earlier 17 November scoped fix review and compressed section measurements are historical, not acceptance thresholds for this approved refinement. Current measured geometry and verification limits live in `website/VERIFICATION.md`. This is not a pixel-match or accessibility certification.
 
@@ -324,9 +324,15 @@ Invalid controls use an error border and associated error text. Empty error/stat
 
 ### Navigation
 
-Logo left, centered RTL links, and the pale action right are achieved with an LTR header wrapper. Desktop links have 44px minimum height; hover/focus/current-page treatment is a thin cyan underline that draws from the right over 260ms with white text. Reduced motion makes the underline immediate.
+Logo left, centered RTL links, and the pale action right are achieved with an LTR header wrapper. Desktop links have 44px minimum height, .9375rem medium-weight labels, quiet navy hover/open surfaces and a cyan underline that draws from the right over 260ms. Reduced motion makes the underline immediate.
 
-The mobile menu is a native details/summary disclosure with a 44px square trigger and a navy-soft overlay below the header. Its three-line icon becomes a close icon; the overlay arrives over 220ms with 6px travel and closes immediately. Reduced motion changes the icon state without animation and opens the menu instantly. The overlay has a viewport-bounded, scrollable maximum height. Escape closes it and restores trigger focus; outside clicks, following links, leaving the menu by keyboard, and switching to desktop close it too. It is not a modal and has no focus trap. Native hash navigation and history are not intercepted. Homepage anchor padding uses the measured sticky-header height plus 16px; short nonsticky layouts use 16px.
+The 18 November navigation refinement replaces the section-only header with page-first navigation: Home, Solutions, About, FAQ, useful information and Contact. Solutions opens a paper dropdown with overview, WhatsApp and phone links, descriptive secondary lines and the existing stroke icons. A pale inset column preserves the four homepage shortcuts. Useful information contains privacy and accessibility. Exact page links use `aria-current="page"`; the corresponding disclosure also shows an active-group underline without falsely marking the group as a page.
+
+Up to 880px the mobile menu uses a native details/summary disclosure with a labeled 44px-minimum trigger. Its three-line icon becomes a close icon; the paper panel arrives over 220ms with 6px travel and closes immediately. Contact stays at the start; service links, About/FAQ, homepage shortcuts and utility links form separated groups. The panel is viewport-bounded and scrollable, including on short screens and with enlarged text. Header measurement runs on supporting pages too so this bound reflects actual height.
+
+All disclosures work without JavaScript. Enhancement ensures only one opens at a time; Escape closes it and restores trigger focus; outside clicks, following links, leaving the menu by keyboard, and crossing the 880px breakpoint close it too. They are not modal dialogs or ARIA application menus and have no focus trap. Native hash navigation and history are not intercepted. Homepage anchor padding uses the measured sticky-header height plus 16px; short nonsticky layouts use 16px.
+
+`src/lib/navigation.ts` owns all nine public page destinations and is shared by header, mobile menu, footer and sitemap. Homepage shortcuts remain separate. Footer links are grouped under Solutions, TamidZamin and Useful information; all have 44px minimum targets and current-page feedback. No API, crawler or error route belongs in navigation.
 
 ### FAQ
 

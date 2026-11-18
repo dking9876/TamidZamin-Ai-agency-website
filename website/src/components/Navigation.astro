@@ -1,0 +1,121 @@
+---
+import Picture from './Picture.astro';
+import Icon from './Icon.astro';
+import { mainLinks, serviceLinks, utilityLinks, sectionLinks, contactLink } from '../lib/navigation';
+
+const path = Astro.url.pathname.replace(/\/?$/, '/');
+const current = (href: string) => path === href ? 'page' : undefined;
+---
+<header class="site-header">
+  <div class="header-inner container">
+    <a href="/" class="brand" aria-label="TamidZamin — לעמוד הבית"><Picture name="logo" alt="TamidZamin" width={600} height={146} eager /></a>
+    <nav class="desktop-nav" aria-label="ניווט ראשי">
+      <a class="nav-top-link" href={mainLinks[0].href} aria-current={current(mainLinks[0].href)}>{mainLinks[0].label}</a>
+      <details class="nav-disclosure solutions-menu" name="desktop-navigation" data-nav-disclosure>
+        <summary class="nav-top-link" aria-controls="solutions-panel" data-current={serviceLinks.some(({ href }) => path === href) || undefined}>
+          פתרונות <Icon name="chevron" size={16} />
+        </summary>
+        <div class="nav-panel solutions-panel" id="solutions-panel">
+          <div class="nav-services">
+            {serviceLinks.map((link) => (
+              <a class="nav-service" href={link.href} aria-current={current(link.href)}>
+                <Icon name={link.icon} size={23} />
+                <span><span class="nav-link-title">{link.label}</span><span class="nav-link-description">{link.description}</span></span>
+                <Icon name="arrow" size={17} />
+              </a>
+            ))}
+          </div>
+          <div class="nav-shortcuts">
+            <p class="nav-group-title">מבט על התהליך</p>
+            {sectionLinks.map((link) => <a href={link.href}>{link.label}<Icon name="arrow" size={16} /></a>)}
+          </div>
+        </div>
+      </details>
+      {mainLinks.slice(1).map((link) => <a class="nav-top-link" href={link.href} aria-current={current(link.href)}>{link.label}</a>)}
+      <details class="nav-disclosure utility-menu" name="desktop-navigation" data-nav-disclosure>
+        <summary class="nav-top-link" aria-controls="utility-panel" data-current={utilityLinks.some(({ href }) => path === href) || undefined}>
+          מידע שימושי <Icon name="chevron" size={16} />
+        </summary>
+        <div class="nav-panel utility-panel" id="utility-panel">
+          {utilityLinks.map((link) => <a href={link.href} aria-current={current(link.href)}>{link.label}<Icon name="arrow" size={16} /></a>)}
+        </div>
+      </details>
+    </nav>
+    <a href={contactLink.href} class="button header-cta" aria-current={current(contactLink.href)}>בואו נדבר <Icon name="arrow" size={17} /></a>
+    <details class="mobile-menu" data-nav-disclosure>
+      <summary aria-label="תפריט ניווט" aria-controls="mobile-navigation">
+        <span class="menu-open-label">תפריט</span><span class="menu-close-label">סגירה</span>
+        <svg class="menu-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16" /><path d="M4 12h16" /><path d="M4 18h16" /></svg>
+      </summary>
+      <nav id="mobile-navigation" aria-label="ניווט לנייד">
+        <div class="mobile-nav-start">
+          <a href={mainLinks[0].href} aria-current={current(mainLinks[0].href)}>{mainLinks[0].label}</a>
+          <a class="button mobile-contact" href={contactLink.href} aria-current={current(contactLink.href)}>{contactLink.label}<Icon name="arrow" size={18} /></a>
+        </div>
+        <div class="mobile-nav-group">
+          <p class="nav-group-title">פתרונות לעסק</p>
+          {serviceLinks.map((link) => (
+            <a class="nav-service" href={link.href} aria-current={current(link.href)}>
+              <Icon name={link.icon} size={23} />
+              <span><span class="nav-link-title">{link.label}</span><span class="nav-link-description">{link.description}</span></span>
+              <Icon name="arrow" size={17} />
+            </a>
+          ))}
+        </div>
+        <div class="mobile-nav-group mobile-main-links">
+          {mainLinks.slice(1).map((link) => <a href={link.href} aria-current={current(link.href)}>{link.label}<Icon name="arrow" size={17} /></a>)}
+        </div>
+        <div class="mobile-nav-group">
+          <p class="nav-group-title">מבט על התהליך</p>
+          <div class="mobile-section-links">{sectionLinks.map((link) => <a href={link.href}>{link.label}</a>)}</div>
+        </div>
+        <div class="mobile-nav-group mobile-utility-links">
+          {utilityLinks.map((link) => <a href={link.href} aria-current={current(link.href)}>{link.label}</a>)}
+        </div>
+      </nav>
+    </details>
+  </div>
+</header>
+<script>
+  const disclosures = [...document.querySelectorAll<HTMLDetailsElement>('[data-nav-disclosure]')];
+  const close = (menu: HTMLDetailsElement, restoreFocus = false) => {
+    menu.open = false;
+    if (restoreFocus) menu.querySelector('summary')?.focus();
+  };
+  for (const menu of disclosures) {
+    menu.addEventListener('toggle', () => {
+      if (menu.open) disclosures.forEach((other) => { if (other !== menu) close(other); });
+    });
+    menu.addEventListener('click', (event) => {
+      if (event.target instanceof Element && event.target.closest('a')) close(menu);
+    });
+    menu.addEventListener('focusout', () => {
+      requestAnimationFrame(() => {
+        if (menu.open && !menu.contains(document.activeElement)) close(menu);
+      });
+    });
+  }
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      disclosures.forEach((menu) => { if (menu.open) close(menu, true); });
+    }
+  });
+  document.addEventListener('click', (event) => {
+    const target = event.target;
+    if (target instanceof Node) {
+      disclosures.forEach((menu) => { if (menu.open && !menu.contains(target)) close(menu); });
+    }
+  });
+  matchMedia('(min-width: 881px)').addEventListener('change', () => {
+    disclosures.forEach((menu) => close(menu));
+  });
+  const header = document.querySelector<HTMLElement>('.site-header');
+  if (header) {
+    const measureHeader = () => {
+      document.documentElement.style.setProperty('--header-height', `${header.getBoundingClientRect().height}px`);
+    };
+    new ResizeObserver(measureHeader).observe(header);
+    measureHeader();
+    document.body.classList.add('header-measured');
+  }
+</script>

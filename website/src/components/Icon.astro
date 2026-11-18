@@ -1,8 +1,9 @@
 ---
-interface Props { name: 'arrow' | 'check' | 'chat' | 'phone' | 'user' | 'menu' | 'close' | 'plus' | 'shield' | 'clock' | 'target' | 'list' | 'robot' | 'wrench' | 'bolt' | 'tools' | 'fan' | 'helmet' | 'replay'; size?: number; }
+interface Props { name: 'arrow' | 'chevron' | 'check' | 'chat' | 'phone' | 'user' | 'menu' | 'close' | 'plus' | 'shield' | 'clock' | 'target' | 'list' | 'robot' | 'wrench' | 'bolt' | 'tools' | 'fan' | 'helmet' | 'replay'; size?: number; }
 const { name, size = 24 } = Astro.props;
 const paths = {
   arrow: 'M19 12H5m7-7-7 7 7 7',
+  chevron: 'm6 9 6 6 6-6',
   check: 'm5 12 4 4L19 6',
   chat: 'M21 11.5a8.5 8.5 0 0 1-12.3 7.6L3 21l1.9-5.7A8.5 8.5 0 1 1 21 11.5ZM8 10h8m-8 4h5',
   phone: 'M7 3H4a1 1 0 0 0-1 1c0 9.4 7.6 17 17 17a1 1 0 0 0 1-1v-3l-5-2-2 2a15 15 0 0 1-7-7l2-2-2-5Z',

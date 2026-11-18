@@ -2,17 +2,20 @@
 import '@fontsource-variable/heebo';
 import '../styles/global.css';
 import '../styles/home.css';
+import '../styles/navigation.css';
 import Picture from '../components/Picture.astro';
-import Icon from '../components/Icon.astro';
+import Navigation from '../components/Navigation.astro';
 import { site } from '../lib/site';
+import { mainLinks, serviceLinks, utilityLinks, contactLink } from '../lib/navigation';
 interface Props { title: string; description: string; noindex?: boolean; }
 const { title, description, noindex = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, site.origin).href;
 const indexable = site.launched && !noindex;
 const path = Astro.url.pathname;
-const nav = [
-  ['/#channels', 'פתרונות'], ['/#process', 'איך זה עובד'], ['/#trades', 'למי זה מתאים'],
-  ['/#benefits', 'יתרונות'], ['/about/', 'אודות'], ['/faq/', 'שאלות נפוצות'],
+const footerGroups = [
+  { label: 'פתרונות לעסק', links: serviceLinks },
+  { label: 'TamidZamin', links: [...mainLinks, contactLink] },
+  { label: 'מידע שימושי', links: utilityLinks },
 ];
 const schema = {
   '@context': 'https://schema.org', '@type': 'Organization',
@@ -54,22 +57,7 @@ const schema = {
   </head>
   <body class={path === '/' ? 'homepage' : undefined}>
     <a class="skip-link" href="#main">דלגו לתוכן הראשי</a>
-    <header class="site-header">
-      <div class="header-inner container">
-        <a href="/" class="brand" aria-label="TamidZamin — לעמוד הבית"><Picture name="logo" alt="TamidZamin" width={600} height={146} eager /></a>
-        <nav class="desktop-nav" aria-label="ניווט ראשי">
-          {nav.map(([href, label]) => <a href={href} aria-current={path === href ? 'page' : undefined}>{label}</a>)}
-        </nav>
-        <a href="/contact/" class="button header-cta">בואו נדבר <Icon name="arrow" size={17} /></a>
-        <details class="mobile-menu">
-          <summary aria-label="פתיחת תפריט ניווט"><svg class="menu-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16" /><path d="M4 12h16" /><path d="M4 18h16" /></svg></summary>
-          <nav aria-label="ניווט לנייד">
-            {nav.map(([href, label]) => <a href={href} aria-current={path === href ? 'page' : undefined}>{label}</a>)}
-            <a href="/contact/">יצירת קשר</a>
-          </nav>
-        </details>
-      </div>
-    </header>
+    <Navigation />
     <main id="main" tabindex="-1"><slot /></main>
     <footer class="site-footer">
       <div class="container footer-main">
@@ -77,8 +65,12 @@ const schema = {
           <a class="brand" href="/" aria-label="TamidZamin — לעמוד הבית"><Picture name="logo" alt="TamidZamin" width={600} height={146} /></a>
           <p>סוכני AI לעסקים של אנשים.</p>
         </div>
-        <nav aria-label="ניווט תחתון"><a href="/services/whatsapp/">סוכן WhatsApp</a><a href="/services/phone/">סוכן טלפוני</a><a href="/about/">אודות</a><a href="/contact/">יצירת קשר</a></nav>
-        <nav aria-label="מידע שימושי"><a href="/faq/">שאלות ותשובות</a><a href="/privacy/">מדיניות פרטיות</a><a href="/accessibility/">הצהרת נגישות</a></nav>
+        {footerGroups.map((group) => (
+          <nav aria-label={`ניווט תחתון — ${group.label}`}>
+            <h2 class="footer-nav-title">{group.label}</h2>
+            {group.links.map((link) => <a href={link.href} aria-current={path === link.href ? 'page' : undefined}>{link.label}</a>)}
+          </nav>
+        ))}
       </div>
       <div class="container footer-bottom">
         <span>© {new Date().getFullYear()} <bdi>TamidZamin</bdi></span>
@@ -86,38 +78,5 @@ const schema = {
         {!site.launched && <span class="preview-label">תצוגה מקדימה · לא אתר פעיל</span>}
       </div>
     </footer>
-    <script>
-      const menu = document.querySelector<HTMLDetailsElement>('.mobile-menu');
-      document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape' && menu?.open) {
-          menu.open = false;
-          menu.querySelector('summary')?.focus();
-        }
-      });
-      document.addEventListener('click', (event) => {
-        if (menu?.open && event.target instanceof Node && !menu.contains(event.target)) menu.open = false;
-      });
-      menu?.querySelector('nav')?.addEventListener('click', (event) => {
-        if (event.target instanceof Element && event.target.closest('a')) menu.open = false;
-      });
-      menu?.addEventListener('focusout', () => {
-        requestAnimationFrame(() => {
-          if (menu.open && !menu.contains(document.activeElement)) menu.open = false;
-        });
-      });
-      const desktop = matchMedia('(min-width: 881px)');
-      desktop.addEventListener('change', () => { if (desktop.matches && menu) menu.open = false; });
-      if (document.body.classList.contains('homepage')) {
-        const header = document.querySelector<HTMLElement>('.site-header');
-        if (header) {
-          const measureHeader = () => {
-            document.documentElement.style.setProperty('--header-height', `${header.getBoundingClientRect().height}px`);
-          };
-          new ResizeObserver(measureHeader).observe(header);
-          measureHeader();
-          document.body.classList.add('header-measured');
-        }
-      }
-    </script>
   </body>
 </html>
