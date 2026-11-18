@@ -312,15 +312,17 @@ test.describe('refinement: static geometry', () => {
         expect(box!.y + box!.height).toBeLessThanOrEqual(viewport.height);
         boxes.push({ ...target, box: box!, foreground });
       }
-      const copy = page.locator('.home-hero-copy');
-      const originalVisibility = await copy.evaluate((element: HTMLElement) => ({
-        value: element.style.getPropertyValue('visibility'), priority: element.style.getPropertyPriority('visibility'),
-      }));
+      const ink = page.locator('.home-hero-copy > *');
+      const originalVisibility = await ink.evaluateAll((elements) => elements.map((element) => ({
+        value: (element as HTMLElement).style.getPropertyValue('visibility'),
+        priority: (element as HTMLElement).style.getPropertyPriority('visibility'),
+      })));
       const results = [];
       try {
-        // Hide ink without changing layout; sample the entire box, not just
-        // existing glyph positions, so different line wraps remain protected.
-        await copy.evaluate((element: HTMLElement) => { element.style.setProperty('visibility', 'hidden', 'important'); });
+        // Keep the copy's contrast scrim while hiding only its ink.
+        await ink.evaluateAll((elements) => elements.forEach((element) => {
+          (element as HTMLElement).style.setProperty('visibility', 'hidden', 'important');
+        }));
         const poster = await page.screenshot({ scale: 'css', omitBackground: false });
         for (const target of boxes) results.push({ scene: 'poster', ...target, ...await textContrast(poster, target.box, target.foreground) });
         await page.emulateMedia({ reducedMotion: 'no-preference' });
@@ -337,9 +339,13 @@ test.describe('refinement: static geometry', () => {
           for (const target of boxes) results.push({ scene: String(time), ...target, ...await textContrast(background, target.box, target.foreground) });
         }
       } finally {
-        await copy.evaluate((element: HTMLElement, original) => {
-          if (original.value) element.style.setProperty('visibility', original.value, original.priority);
-          else element.style.removeProperty('visibility');
+        await ink.evaluateAll((elements, originals) => {
+          elements.forEach((element, index) => {
+            const style = (element as HTMLElement).style;
+            const original = originals[index];
+            if (original.value) style.setProperty('visibility', original.value, original.priority);
+            else style.removeProperty('visibility');
+          });
         }, originalVisibility);
       }
       await info.attach('hero-contrast-metrics', { body: JSON.stringify({ viewport, results }, null, 2), contentType: 'application/json' });

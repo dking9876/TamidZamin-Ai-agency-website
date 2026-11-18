@@ -4,14 +4,17 @@ const toggle = hero?.querySelector<HTMLButtonElement>('.hero-video-toggle');
 const label = toggle?.querySelector('span');
 const videoStatus = hero?.querySelector<HTMLElement>('.hero-video-status');
 
-if (hero && video && toggle && label && videoStatus && video.dataset.src) {
+if (hero && video && toggle && label && videoStatus && video.dataset.src && video.dataset.mobileSrc) {
   const source = video.dataset.src;
+  const mobileSource = video.dataset.mobileSrc;
+  const phonePortrait = matchMedia('(max-width: 600px) and (orientation: portrait)');
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   let visible = false;
   let pageActive = true;
   let userPaused = false;
   let failed = false;
   let playPending = false;
+  let resumeTime: number | null = null;
 
   const updateControl = () => {
     const playing = !video.paused;
@@ -32,13 +35,22 @@ if (hero && video && toggle && label && videoStatus && video.dataset.src) {
     updateControl();
   };
   const sync = async () => {
+    const selectedSource = phonePortrait.matches ? mobileSource : source;
+    if (video.hasAttribute('src') && video.getAttribute('src') !== selectedSource) {
+      if (video.readyState >= HTMLMediaElement.HAVE_METADATA) resumeTime = video.currentTime;
+      video.pause();
+      delete hero.dataset.videoReady;
+      video.removeAttribute('src');
+      video.load();
+      failed = false;
+    }
     updateControl();
     if (!shouldPlay()) {
       video.pause();
       return;
     }
     if (playPending || !video.paused) return;
-    if (!video.hasAttribute('src')) video.src = source;
+    if (!video.hasAttribute('src')) video.src = selectedSource;
     video.muted = true;
     playPending = true;
     try {
@@ -58,6 +70,12 @@ if (hero && video && toggle && label && videoStatus && video.dataset.src) {
     if (shouldPlay() && video.paused) void sync();
   };
 
+  video.addEventListener('loadedmetadata', () => {
+    if (resumeTime !== null) {
+      video.currentTime = Math.min(resumeTime, Math.max(0, video.duration - 0.1));
+      resumeTime = null;
+    }
+  });
   video.addEventListener('playing', () => {
     hero.dataset.videoReady = '';
     videoStatus.textContent = '';
@@ -65,6 +83,7 @@ if (hero && video && toggle && label && videoStatus && video.dataset.src) {
   });
   video.addEventListener('pause', updateControl);
   video.addEventListener('error', showFailure);
+  phonePortrait.addEventListener('change', () => { void sync(); });
   toggle.addEventListener('click', () => {
     userPaused = !video.paused;
     void sync();

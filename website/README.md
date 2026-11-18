@@ -59,8 +59,9 @@ results were fabricated. Supplied people are labeled illustrative.
 
 ## Motion
 
-The hero uses the owner's exact 14-second, silent H.264 montage as a full-bleed
-background on phones and computers. Video and poster use `object-fit: cover`;
+The hero uses the owner's 14-second, silent H.264 montage as a full-bleed
+background. Desktop retains the exact supplied film; portrait phones get a
+dedicated 9:16 edit of the same shots. Video and poster use `object-fit: cover`;
 the existing Hebrew headline, copy and actions stay on top, protected by
 responsive navy scrims. The two headline lines resolve into focus on each full
 load/reload and the existing blue edge draws across the scene. The body and
@@ -75,7 +76,9 @@ Initial reduced motion and no JavaScript display the poster without downloading
 video. Live reduced-motion changes restore the poster; switching back requires
 manual play. Blocked autoplay offers manual play; download/codec failures keep
 the poster and announce the fallback. No external video player or Drive request
-is used.
+is used. A matching native `picture` supplies the phone poster without JS.
+Only the appropriate video is downloaded. Rotation switches versions while
+retaining the scene position and the visitor's pause choice.
 
 The homepage enhances its illustrative conversations with short chat/summary
 and voice-waveform sequences. Each runs once on entry; the visitor can replay
@@ -284,7 +287,7 @@ No motion library, dependency, backend change or business claim was added.
 Do not regenerate supplied assets to adjust layout; use the existing responsive
 derivatives and check focal subjects at each viewport.
 
-### Hero video asset
+### Hero video assets
 
 `public/media/hero-film.mp4` is an unchanged copy of the owner's supplied
 `tamidzamin-original-photos-film.mp4`: 1280x720, 24fps, 14 seconds, 3,643,628 bytes,
@@ -293,6 +296,27 @@ silent H.264 with fast-start metadata. The first frame supplies
 the poster sidecar records its derivation. No baked-in text, desktop scrim or
 phone-preview render is used. Do not replace the source with a Drive viewing URL.
 `npm run assets` regenerates the older image derivatives, not these video assets.
+
+`hero-film-mobile.mp4` is a dedicated **720x1280 (9:16)** portrait adaptation,
+selected at `(max-width: 600px) and (orientation: portrait)`. It uses the same
+five original animation clips, scene timings, dissolves and 14-second loop.
+Each shot is reframed to keep the person and their work visible in the upper
+frame, with a softly extended moving background below for the overlaid copy.
+There is no new generation, baked-in text or change to the original film.
+Its matching poster is `hero-poster-mobile.webp`. The mobile film is
+2,510,750 bytes; phones do not also download the desktop film or poster.
+
+To reproduce the mobile film and poster using the committed source clips
+and an installed FFmpeg:
+
+```powershell
+node scripts\prepare-hero-mobile.mjs
+```
+
+The script verifies the approved desktop hash, records source clip/output
+hashes and transforms in `public/media/provenance.json`, and leaves desktop
+and original assets untouched. Re-embed the mobile poster's provenance with
+Impeccable after regeneration.
 
 Hero tests cover actual advancing playback, looping, cover geometry from
 320px through 1920px, keyboard pause/resume, offscreen and page lifecycle

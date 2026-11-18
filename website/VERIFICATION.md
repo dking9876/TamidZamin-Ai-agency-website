@@ -1,5 +1,45 @@
 # Verification and launch status
 
+## Phone-sized portrait video - 18 November 2026
+
+The owner's follow-up requested a phone-appropriate video fit and a Git push.
+The new mobile asset is 720x1280, 24fps, 14 seconds, silent H.264 with
+fast-start metadata, 2,510,750 bytes. It is an adaptation of the same five
+existing animated shots, not newly generated footage. Per-scene square crops
+preserve the person and work in the upper frame and blend into a softly
+extended moving background under the copy. The desktop film is unchanged.
+
+At portrait widths up to 600px, native picture selection loads the matching
+portrait poster and the playback controller selects only the portrait film.
+The mobile contrast scrim follows the actual text position instead of dimming
+the whole scene. Rotation switches to the wide version and back, preserving
+scene position and manual pause. Paused source changes defer video loading.
+Full-hero coverage, overlaid Hebrew copy, touch targets, accessibility and
+preview/noindex/disabled-delivery safeguards remain in place.
+
+### Verified
+
+- Node and Vercel builds: 53 files checked, zero errors, warnings or hints.
+  `npm run test:vercel` passed. The packaged portrait film matches its source
+  SHA-256; the desktop film retains the owner's original hash.
+- 72 targeted browser cases passed, no retries: hero, refinement, mobile-layout
+  and site suites. Includes actual decoded media dimensions and advancing
+  playback, single-variant downloads, correct no-JS/reduced-motion posters,
+  rotation while playing and paused, synthetic touch taps, failure fallbacks,
+  and existing navigation/axe/200%-text safeguards.
+- Video fills every hero edge at 320x568, 320x740, 360x800, 390x844, 430x932,
+  600x844, 768x1024, 844x390, 1440x900 and 1920x1080.
+- Full text-box contrast passes on posters and six film positions across
+  every scene: large text >=3:1 and body >=4.5:1 at 320, 390, 1024 and 1440px.
+  The test hides text ink, not the actual contrast scrim.
+- All five scenes were visually inspected in 320px and 390px phone captures.
+  Desktop/landscape still use the original 1280x720 film and framing.
+- Impeccable's changed-UI detector returned `[]`.
+
+These are installed Edge browser checks with emulated mobile screens/touch,
+not physical-device or Safari certification. Hosted verification follows the
+Git push.
+
 ## Full-bleed video hero - 18 November 2026
 
 The owner supplied the original-photos film and requested a video background

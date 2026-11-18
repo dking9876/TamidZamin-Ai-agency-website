@@ -75,6 +75,9 @@ Silent looping playback is approved for this decorative background, with a
 pause control and static reduced-motion/no-JavaScript fallback. The owner
 requested pushing all pending repository work to GitHub; existing preview
 safeguards and restrictions on real lead delivery remain unchanged.
+The owner's follow-up requested a better phone-sized fit and another Git push.
+Portrait phones now use a dedicated 9:16 adaptation of the same five shots;
+desktop framing, overlaid factual copy and preview safeguards stay unchanged.
 
 ## Evidence on Hand
 

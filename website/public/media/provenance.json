@@ -11,5 +11,31 @@
     "source": "hero-film.mp4",
     "transform": "First frame extracted with FFmpeg, libwebp quality 85, original 1280x720 dimensions.",
     "purpose": "Loading, reduced-motion, no-JavaScript and playback-failure fallback."
+  },
+  "hero-film-mobile.mp4": {
+    "source": "../../../photo-animated-hero/generated-clips",
+    "sourceRecord": "../../../photo-animated-hero/sources.json",
+    "transform": "720x1280 portrait, 24fps, 14 seconds, silent H.264 with fast-start metadata. Same five shots, timing and loop as the approved film. Scene-specific 720x720 crops keep the person and work in the upper frame; a softly extended moving background fills the lower copy area. No baked-in text, new generation or altered original.",
+    "cropX": [
+      560,
+      480,
+      450,
+      480,
+      440
+    ],
+    "sourceClipHashes": {
+      "01-hero-arrival": "5f6d4feb6d2644681bd0b5b807c091436f9a2ba4364ae9c879e60f6a07170513",
+      "02-plumber": "bc9e972a928c4c7468cc9623fa2bd342966aab4f16f4be3a6dbf3c7895a72306",
+      "03-electrician": "e530c385614c87e011f9fde409dc37bf814ee28d3244e7ee808b0350b885ae02",
+      "04-repair": "eda5a384a2d9603d9769a3c7e237ceb4660c560425974939ecd1ab5314229b78",
+      "05-hvac": "b4d96ab8527058be2777180641fea84941c91fb7521fe4f4117b48202d17c4e0"
+    },
+    "sha256": "2077f063ffb49e46f2a026ae9fcac1c0412d1b4d31d504aaf5a468de5bdde712",
+    "build": "node scripts/prepare-hero-mobile.mjs"
+  },
+  "hero-poster-mobile.webp": {
+    "source": "hero-film-mobile.mp4",
+    "transform": "First frame extracted with FFmpeg, libwebp quality 85, 720x1280.",
+    "purpose": "Responsive phone loading, reduced-motion, no-JavaScript and playback-failure fallback."
   }
 }

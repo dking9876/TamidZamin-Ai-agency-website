@@ -87,6 +87,12 @@ looping playback, a labeled play/pause control and an eager first-frame poster.
 Reduced motion and no JavaScript show the poster without requesting video.
 Offscreen/hidden-page playback pauses; manual pause survives re-entry.
 This video is the explicitly approved exception to the earlier no-loop rule.
+The subsequent phone-fit request uses a dedicated 720x1280 portrait edit of
+the same shots at portrait widths up to 600px. Keep the people and their work
+visible in the upper frame and softly extend the moving background below
+for the existing overlaid copy. A text-positioned contrast scrim replaces the
+phone-wide dimming. Serve only the matching film/poster, maintain pause and
+scene position through rotation, and leave the desktop presentation unchanged.
 On 18 November 2026 the owner requested a mobile layout refinement across all
 sections, especially the WhatsApp and phone demonstrations. On phones each
 channel now has its own heading, readable illustrative device, features and

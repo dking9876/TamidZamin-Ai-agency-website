@@ -513,7 +513,7 @@
       {
         "name": "hero-video",
         "value": "14s",
-        "purpose": "User-approved silent looping background across the full desktop/mobile hero. Manual pause; offscreen/hidden-page suspension; static reduced-motion/no-JavaScript poster. Source: website/public/media/provenance.json."
+        "purpose": "User-approved silent looping background across the full hero. Portrait phones up to 600px use a scene-reframed 720x1280 edit and top-aligned matching poster; desktop/landscape keep the wide film. Rotation preserves scene position and manual pause. Offscreen/hidden-page suspension; static reduced-motion/no-JavaScript poster. Source: website/public/media/provenance.json."
       },
       {
         "name": "device-arrival",

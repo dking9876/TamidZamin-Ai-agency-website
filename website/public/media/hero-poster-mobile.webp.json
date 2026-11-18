@@ -1,0 +1,4 @@
+{
+  "prompt": "Source: first frame of hero-film-mobile.mp4, a 720x1280 portrait adaptation of the same five existing AI-animated brand shots used in the user-approved film. Reframed with scene-specific square crops and a softly extended moving background for overlaid copy; no new generation or baked-in text. FFmpeg extraction, libwebp quality 85. Build: website/scripts/prepare-hero-mobile.mjs. Detailed source hashes and transforms: website/public/media/provenance.json.",
+  "createdAt": "2026-11-18T20:34:05.004Z"
+}

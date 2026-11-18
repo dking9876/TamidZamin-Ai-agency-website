@@ -63,9 +63,10 @@ for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 
 
 for (const cancelBeforeLoad of [false, true]) {
   test(`slow hero video never blocks copy; reduced motion before load: ${cancelBeforeLoad}`, async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
     let releaseVideo = () => {};
     const videoGate = new Promise<void>((resolve) => { releaseVideo = resolve; });
-    await page.route('**/media/hero-film.mp4', async (route) => {
+    await page.route('**/media/hero-film*.mp4', async (route) => {
       await videoGate;
       await route.continue();
     });
@@ -143,12 +144,18 @@ for (const width of [320, 390, 600]) {
 }
 
 for (const viewport of [
-  { width: 320, height: 740 }, { width: 390, height: 844 },
+  { width: 320, height: 568 }, { width: 320, height: 740 },
+  { width: 360, height: 800 }, { width: 390, height: 844 },
+  { width: 430, height: 932 }, { width: 600, height: 844 },
   { width: 768, height: 1024 }, { width: 844, height: 390 },
   { width: 1440, height: 900 }, { width: 1920, height: 1080 },
 ]) {
   test(`video fills every hero edge with overlaid text at ${viewport.width}x${viewport.height}`, async ({ page }) => {
     await page.setViewportSize(viewport);
+    const mediaRequests = new Set<string>();
+    page.on('request', (request) => {
+      if (/\/media\/hero-(film|poster)/.test(request.url())) mediaRequests.add(new URL(request.url()).pathname);
+    });
     await page.goto('/');
     const video = page.locator('.hero-video');
     await expect(page.locator('.home-hero')).toHaveAttribute('data-video-ready', '');
@@ -157,6 +164,13 @@ for (const viewport of [
     await expect(video).toHaveJSProperty('loop', true);
     await expect(video).toHaveJSProperty('playsInline', true);
     await expect(video).toHaveCSS('object-fit', 'cover');
+    const portrait = viewport.width <= 600 && viewport.height >= viewport.width;
+    await expect(video).toHaveJSProperty('videoWidth', portrait ? 720 : 1280);
+    await expect(video).toHaveJSProperty('videoHeight', portrait ? 1280 : 720);
+    const suffix = portrait ? '-mobile' : '';
+    expect(await page.locator('.hero-poster').evaluate((image: HTMLImageElement) => image.currentSrc))
+      .toContain(`/media/hero-poster${suffix}.webp`);
+    expect([...mediaRequests].sort()).toEqual([`/media/hero-film${suffix}.mp4`, `/media/hero-poster${suffix}.webp`]);
     const heroBox = (await page.locator('.home-hero').boundingBox())!;
     const videoBox = (await video.boundingBox())!;
     for (const axis of ['x', 'y', 'width', 'height'] as const) {
@@ -225,6 +239,8 @@ for (const mode of ['reduced-motion', 'no-javascript'] as const) {
     await expect(page.locator('.hero-video')).not.toHaveAttribute('src');
     await expect(page.locator('.hero-video-toggle')).toBeHidden();
     await expect(page.locator('.hero-poster')).toBeVisible();
+    expect(await page.locator('.hero-poster').evaluate((image: HTMLImageElement) => image.currentSrc))
+      .toContain('/media/hero-poster-mobile.webp');
     expect(await page.locator('.hero-poster').boundingBox()).toEqual(await page.locator('.home-hero').boundingBox());
     await page.locator('.hero-actions > .pill').click();
     await expect(page).toHaveURL(/\/contact\/$/);
@@ -233,8 +249,9 @@ for (const mode of ['reduced-motion', 'no-javascript'] as const) {
   });
 }
 
-test('video download failure keeps the poster and reports the fallback without blocking the CTA', async ({ page }) => {
-  await page.route('**/media/hero-film.mp4', (route) => route.abort('failed'));
+test('phone video download failure keeps the portrait poster without blocking the CTA', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.route('**/media/hero-film-mobile.mp4', (route) => route.abort('failed'));
   await page.goto('/');
   await expect(page.locator('.hero-video-status')).toContainText('סרטון הרקע אינו זמין');
   await expect(page.locator('.hero-video-toggle')).toBeHidden();
@@ -242,6 +259,55 @@ test('video download failure keeps the poster and reports the fallback without b
   await expect(page.locator('.hero-poster')).toBeVisible();
   await page.locator('.hero-actions > .pill').click();
   await expect(page).toHaveURL(/\/contact\/$/);
+});
+
+for (const manuallyPaused of [false, true]) {
+  test(`rotation selects the right film without losing position; manual pause: ${manuallyPaused}`, async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto('/');
+    const video = page.locator('.hero-video');
+    await expect(video).toHaveJSProperty('videoWidth', 720);
+    await expect(page.locator('.home-hero')).toHaveAttribute('data-video-ready', '');
+    await video.evaluate(async (element: HTMLVideoElement) => {
+      const seeked = new Promise<void>((resolve) => element.addEventListener('seeked', () => resolve(), { once: true }));
+      element.currentTime = 5;
+      await seeked;
+    });
+    if (manuallyPaused) await page.locator('.hero-video-toggle').click();
+    await page.setViewportSize({ width: 844, height: 390 });
+    await expect.poll(() => page.locator('.hero-poster').evaluate((image: HTMLImageElement) => image.currentSrc))
+      .toContain('/media/hero-poster.webp');
+    if (manuallyPaused) {
+      await expect(video).toHaveJSProperty('paused', true);
+      await expect(video).not.toHaveAttribute('src');
+      await expect(video).toBeHidden();
+      await page.locator('.hero-video-toggle').click();
+    }
+    await expect(video).toHaveJSProperty('videoWidth', 1280);
+    await expect(video).toHaveJSProperty('paused', false);
+    await expect.poll(() => video.evaluate((element: HTMLVideoElement) => element.currentTime)).toBeGreaterThanOrEqual(5);
+    await page.setViewportSize({ width: 390, height: 844 });
+    await expect(video).toHaveJSProperty('videoWidth', 720);
+    await expect(video).toHaveJSProperty('paused', false);
+    await expect.poll(() => video.evaluate((element: HTMLVideoElement) => element.currentTime)).toBeGreaterThanOrEqual(5);
+    await expect(page.locator('.hero-video-status')).toBeEmpty();
+  });
+}
+
+test('phone pause/play responds to touch and the page still scrolls normally', async ({ browser, baseURL }) => {
+  const context = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true });
+  const page = await context.newPage();
+  await page.goto(baseURL!);
+  const toggle = page.locator('.hero-video-toggle');
+  await expect(toggle).toHaveAttribute('data-playing', 'true');
+  await toggle.tap();
+  await expect(page.locator('.hero-video')).toHaveJSProperty('paused', true);
+  await toggle.tap();
+  await expect(page.locator('.hero-video')).toHaveJSProperty('paused', false);
+  await page.locator('.hero-secondary').tap();
+  await expect(page).toHaveURL(/#process$/);
+  await expect(page.locator('.hero-video')).toHaveJSProperty('paused', true);
+  await context.close();
 });
 
 test('blocked autoplay provides an explicit manual play action', async ({ page }) => {

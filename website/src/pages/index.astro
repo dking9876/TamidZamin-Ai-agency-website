@@ -22,8 +22,11 @@ const benefits = [
 <Layout title="TamidZamin | סוכני AI בוואטסאפ ובטלפון לעסקים בישראל" description="אתם בעבודה, והפניות ממשיכות להגיע. TamidZamin מאפיינת פתרונות AI בוואטסאפ ובטלפון לעסקי שירות, לאיסוף פרטים מסודר והמשך טיפול אנושי.">
   <section class="home-hero blue-edge" aria-labelledby="hero-title" data-motion="hero">
     <div class="hero-visual" aria-hidden="true">
-      <img class="hero-poster" src="/media/hero-poster.webp" alt="" width="1280" height="720" fetchpriority="high" />
-      <video id="hero-video" class="hero-video" data-src="/media/hero-film.mp4" poster="/media/hero-poster.webp" width="1280" height="720" muted loop playsinline preload="none" tabindex="-1"></video>
+      <picture>
+        <source media="(max-width: 600px) and (orientation: portrait)" srcset="/media/hero-poster-mobile.webp" width="720" height="1280" />
+        <img class="hero-poster" src="/media/hero-poster.webp" alt="" width="1280" height="720" fetchpriority="high" />
+      </picture>
+      <video id="hero-video" class="hero-video" data-src="/media/hero-film.mp4" data-mobile-src="/media/hero-film-mobile.mp4" width="1280" height="720" muted loop playsinline preload="none" tabindex="-1"></video>
     </div>
     <div class="hero-light" aria-hidden="true"></div>
     <div class="container">
