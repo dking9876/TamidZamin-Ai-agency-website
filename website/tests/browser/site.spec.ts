@@ -1,6 +1,9 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+import business from '../../src/data/business.json' with { type: 'json' };
 const paths = ['/', '/services/', '/services/whatsapp/', '/services/phone/', '/about/', '/faq/', '/contact/', '/privacy/', '/accessibility/'];
+const launched = process.env.TEST_SITE_LAUNCHED === 'true';
+const origin = process.env.TEST_SITE_ORIGIN || business.origin;
 
 test('all pages: real HTTP, Hebrew semantics, unique SEO and accessible content', async ({ page, request }) => {
   const titles = new Set<string>();
@@ -17,8 +20,11 @@ test('all pages: real HTTP, Hebrew semantics, unique SEO and accessible content'
     expect(descriptions.has(description!)).toBe(false);
     titles.add(title); descriptions.add(description!);
     expect(description!.length).toBeGreaterThan(40);
-    expect(await page.locator('link[rel="canonical"]').getAttribute('href')).toBe(new URL(path, process.env.TEST_SITE_ORIGIN || 'http://localhost:4321').href);
-    await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex, nofollow');
+    expect(await page.locator('link[rel="canonical"]').getAttribute('href')).toBe(new URL(path, origin).href);
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', launched ? 'index, follow' : 'noindex, nofollow');
+    if (launched && new URL(page.url()).hostname === new URL(origin).hostname) {
+      expect(response?.headers()['x-robots-tag'] || '').not.toContain('noindex');
+    }
     await page.evaluate(() => document.fonts.ready);
     const audit = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa']).analyze();
     expect(audit.violations.map((v) => ({ id: v.id, impact: v.impact, nodes: v.nodes.map((n) => n.target) })), path).toEqual([]);
@@ -74,22 +80,48 @@ test('responsive layouts, all loaded images, no horizontal clipping', async ({ p
   }
 });
 
-test('404 and unpublished crawler safeguards', async ({ page, request }) => {
+test('404, crawler controls and retired form endpoint', async ({ page, request }) => {
   const response = await page.goto('/not-a-real-page/');
   expect(response?.status()).toBe(404);
   await expect(page.locator('h1')).toContainText('לא זמין');
-  expect(await (await request.get('/robots.txt')).text()).toContain('Disallow: /');
-  expect(await (await request.get('/sitemap.xml')).text()).not.toContain('<loc>');
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex, nofollow');
+  const robots = await (await request.get('/robots.txt')).text();
+  expect(robots).toContain('Allow: /\n');
+  expect(robots).not.toContain('Disallow: /\n');
+  const sitemap = await (await request.get('/sitemap.xml')).text();
+  expect((sitemap.match(/<loc>/g) || []).length).toBe(launched ? paths.length : 0);
+  if (launched) expect(robots).toContain(`Sitemap: ${origin}/sitemap.xml`);
   await page.goto('/contact/');
-  await expect(page.locator('fieldset')).toHaveAttribute('disabled', '');
-  await expect(page.locator('#submit-lead')).toBeDisabled();
-  await expect(page.getByText('טופס הפניות עדיין לא מחובר.')).toBeVisible();
-  expect((await request.post('/api/lead', { form: {} })).ok()).toBe(false);
+  await expect(page.locator('form')).toHaveCount(0);
+  const gone = await request.post('/api/lead/', { headers: { Origin: new URL(page.url()).origin, 'Sec-Fetch-Site': 'same-origin' }, form: {} });
+  expect(gone.status()).toBe(410);
+  expect((await gone.json()).ok).toBe(false);
+});
+
+test('all direct actions use the exact approved number and message without sending', async ({ page }) => {
+  for (const path of paths) {
+    await page.goto(path);
+    const whatsapp = await page.locator('a[href^="https://wa.me/"]').evaluateAll((links) => links.map((link) => link.getAttribute('href')!));
+    expect(whatsapp.length, path).toBeGreaterThan(0);
+    for (const href of whatsapp) {
+      const url = new URL(href);
+      expect(url.pathname).toBe(`/${business.whatsapp}`);
+      expect(url.searchParams.get('text')).toBe(business.whatsappMessage);
+    }
+    for (const href of await page.locator('a[href^="tel:"]').evaluateAll((links) => links.map((link) => link.getAttribute('href')))) {
+      expect(href).toBe(`tel:${business.phone}`);
+    }
+    await expect(page.locator('form')).toHaveCount(0);
+  }
 });
 
 test('essential pages work without JavaScript; 200% text and reduced motion', async ({ browser, baseURL }) => {
   const context = await browser.newContext({ baseURL, javaScriptEnabled: false, viewport: { width: 390, height: 844 }, reducedMotion: 'reduce' });
   const page = await context.newPage();
+  await page.goto('/contact/');
+  await expect(page.locator('.direct-actions a[href^="https://wa.me/"]')).toBeVisible();
+  await expect(page.locator('.direct-actions a[href^="tel:"]')).toBeVisible();
+  await expect(page.locator('form')).toHaveCount(0);
   await page.goto('/faq/');
   await page.locator('.faq-list summary').first().click();
   await expect(page.locator('.faq-list details').first()).toHaveAttribute('open', '');

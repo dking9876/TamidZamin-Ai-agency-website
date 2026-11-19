@@ -10,16 +10,16 @@ const cli = resolve('node_modules\\astro', typeof astroPackage.bin === 'string' 
 const result = spawnSync(process.execPath, [cli, 'build', '--outDir', output], {
   stdio: 'pipe', encoding: 'utf8',
   env: {
-    ...process.env, SITE_URL: origin, SITE_LAUNCHED: 'true',
+    ...process.env, SITE_URL: origin, SITE_LAUNCHED: 'true', VERCEL: '0', DEPLOY_TARGET: 'node',
     PUBLIC_CONTACT_EMAIL: 'test@example.test', PUBLIC_LEGAL_NAME: 'TEST FIXTURE - NOT A REAL OPERATOR',
-    LEGAL_REVIEW_APPROVED: 'true', CAPABILITIES_APPROVED: 'true',
+    POLICY_CONTENT_APPROVED: 'true', CAPABILITIES_APPROVED: 'true',
     ASSET_RIGHTS_CONFIRMED: 'true', LAUNCH_APPROVED: 'true',
-    ASTRO_TELEMETRY_DISABLED: '1',
+    ASTRO_TELEMETRY_DISABLED: '1', LEAD_DELIVERY_ENABLED: 'false',
   },
 });
 if (result.status !== 0) throw new Error(result.stderr || result.stdout || 'SEO fixture build failed.');
 try {
-  const routes = ['', 'services', 'services\\whatsapp', 'services\\phone', 'about', 'faq', 'privacy', 'accessibility'];
+  const routes = ['', 'services', 'services\\whatsapp', 'services\\phone', 'about', 'faq', 'contact', 'privacy', 'accessibility'];
   const titles = new Set();
   for (const route of routes) {
     const html = await readFile(resolve(output, 'client', route, 'index.html'), 'utf8');
@@ -29,6 +29,12 @@ try {
     assert.ok(html.includes(`href="${origin}/${route ? route.replaceAll('\\', '/') + '/' : ''}"`));
     assert.ok(!html.includes('http://localhost:4321'));
     assert.ok(!html.includes('AggregateRating'));
+    assert.ok(!html.includes('"legalName"'), 'Do not describe the operator as an incorporated legal entity');
+    assert.doesNotMatch(html, /<form\b/);
+    const graph = JSON.parse(html.match(/<script type="application\/ld\+json">([^<]+)<\/script>/)?.[1] || '{}')['@graph'];
+    assert.ok(graph.some((entry) => entry['@type'] === 'Organization' && entry.telephone === '+972584345513'));
+    assert.ok(graph.some((entry) => entry['@type'] === 'WebSite' && entry.url === `${origin}/`));
+    if (route.startsWith('services')) assert.ok(graph.some((entry) => entry['@type'] === 'Service'));
     const title = html.match(/<title>([^<]+)<\/title>/)?.[1];
     assert.ok(title && !titles.has(title)); titles.add(title);
   }
@@ -40,7 +46,7 @@ try {
   assert.ok(robots.includes(`Sitemap: ${origin}/sitemap.xml`));
   assert.ok(!robots.includes('Disallow: /\n'));
   assert.match(await readFile(resolve(output, 'client', '404.html'), 'utf8'), /noindex, nofollow/);
-  console.log('PASS: isolated launch-mode SEO fixture: 8 static pages, 9 sitemap URLs, canonical URLs, unique titles, Organization JSON-LD, robots and noindex 404. No public deployment or external requests.');
+  console.log('PASS: isolated launch-mode SEO fixture: 9 static pages, 9 sitemap URLs, canonical URLs, unique titles, Organization/WebSite/Service JSON-LD, no forms, robots and noindex 404. No public deployment or external requests.');
 } finally {
   // Only this script's generated build output is removed; source and preview stay intact.
   await rm(output, { recursive: true, force: true });

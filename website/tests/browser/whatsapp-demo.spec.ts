@@ -200,6 +200,7 @@ test('without JavaScript the native player still plays the encoded 3x asset', as
   await expect(video).toHaveAttribute('controls', '');
   await expect(page.locator('.whatsapp-controls')).toBeHidden();
   await expect(page.locator('noscript .whatsapp-download')).toBeVisible();
+  await expect(page.locator('noscript .whatsapp-description-link')).toHaveAttribute('href', '/services/whatsapp/#recorded-demo-description');
   await video.evaluate((element: HTMLVideoElement) => element.play());
   await expect.poll(() => video.evaluate((element: HTMLVideoElement) => element.currentTime)).toBeGreaterThan(.2);
   expect(await video.evaluate((element: HTMLVideoElement) => element.duration)).toBeCloseTo(45.708333, 2);
@@ -209,10 +210,13 @@ test('without JavaScript the native player still plays the encoded 3x asset', as
 
 test('service page links directly to the recorded demo without enabling the live service', async ({ page }) => {
   await page.goto('/services/whatsapp/');
+  await expect(page.locator('#recorded-demo-description')).toBeVisible();
   await page.getByRole('link', { name: 'לצפייה בהדגמה', exact: true }).click();
   await expect(page).toHaveURL(/#whatsapp-demo$/);
   await expect(page.locator('.whatsapp-toggle')).toBeVisible();
-  await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex, nofollow');
+  await expect(page.locator('.whatsapp-description-link').first()).toHaveAttribute('href', '/services/whatsapp/#recorded-demo-description');
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', process.env.TEST_SITE_LAUNCHED === 'true' ? 'index, follow' : 'noindex, nofollow');
   await page.goto('/contact/');
-  await expect(page.locator('#submit-lead')).toBeDisabled();
+  await expect(page.locator('form')).toHaveCount(0);
+  await expect(page.locator('.direct-actions a[href^="tel:"]')).toBeVisible();
 });

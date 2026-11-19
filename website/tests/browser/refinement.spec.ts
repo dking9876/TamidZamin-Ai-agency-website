@@ -528,9 +528,9 @@ test.describe('refinement: native navigation and fallbacks', () => {
     }
   });
 
-  test('requested demo copy is removed while preview safeguards remain intact (no submissions)', async ({ page }) => {
+  test('requested demo copy stays removed and the direct-contact release stays truthful (no submissions)', async ({ page }) => {
     await page.goto('/');
-    await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex, nofollow');
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', process.env.TEST_SITE_LAUNCHED === 'true' ? 'index, follow' : 'noindex, nofollow');
     await expect(page.locator('#channels .demo-disclosure, #whatsapp-demo-description')).toHaveCount(0);
     await expect(page.locator('.device-caption')).toHaveCount(2);
     await expect(page.locator('.whatsapp-caption')).not.toContainText('אין שיחה פעילה');
@@ -538,11 +538,11 @@ test.describe('refinement: native navigation and fallbacks', () => {
     await expect(page.locator('.recording-caption')).toHaveCSS('margin-top', '0px');
     await expect(page.locator('#demo-whatsapp-video')).toHaveAccessibleName('הקלטת הדגמת וואטסאפ במהירות פי שלושה');
     await expect(page.locator('#demo-whatsapp-video')).not.toHaveAttribute('aria-describedby');
-    await expect(page.locator('#evidence .demo-disclosure')).toContainText('לא הדגמה חיה מאושרת');
+    await expect(page.locator('#evidence .demo-disclosure')).toContainText('השיחות מבוימות ואינן עדות לקוח');
     await page.goto('/contact/');
-    await expect(page.locator('fieldset')).toHaveAttribute('disabled', '');
-    await expect(page.locator('#submit-lead')).toBeDisabled();
-    await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex, nofollow');
+    await expect(page.locator('form')).toHaveCount(0);
+    await expect(page.locator('.direct-actions a[href^="https://wa.me/"]')).toBeVisible();
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', process.env.TEST_SITE_LAUNCHED === 'true' ? 'index, follow' : 'noindex, nofollow');
   });
 });
 

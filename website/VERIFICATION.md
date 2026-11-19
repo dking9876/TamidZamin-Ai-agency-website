@@ -1,5 +1,77 @@
 # Verification and launch status
 
+## Direct-contact production release - 19 November 2026
+
+The owner supplied the real domain, contact details, service scope and operator,
+then explicitly approved the final privacy wording and production publication.
+This release supersedes the preview-only restrictions in the historical
+entries below. Registration/legal advice and Google account verification are
+separate from the website implementation.
+
+### Implemented
+
+- Nine prerendered Hebrew pages with the canonical origin
+  `https://www.tamidzamin.com`, consistent with the existing apex redirect.
+- Direct WhatsApp and telephone actions using the exact approved number and
+  Hebrew draft. No form, submission script or form/session cookie.
+- Retired API returns 410 without reading, storing or forwarding its body,
+  even with old delivery environment variables enabled. Astro still blocks
+  cross-site form-shaped requests with 403.
+- Real operator identity, full implementation/support offering, human
+  follow-up by the client/staff, and privacy/accessibility contacts. No
+  registered-company, language, integration, instant-response or retention
+  guarantee was fabricated.
+- Updated policy wording approved by the owner, not represented as a legal
+  certification. No fixed automatic-deletion schedule is promised.
+- Production-only indexing; copied flags cannot index Vercel previews.
+  Host-specific noindex protects `*.vercel.app`. Robots allows crawling so
+  noindex can actually be read; production sitemap contains nine URLs.
+- Canonicals, unique titles/descriptions, social metadata and factual
+  Organization/WebSite/WebPage/Service/Breadcrumb JSON-LD.
+- Existing approved hero, media, phone dimensions and transcript preserved.
+  Media controls' accessible names now include their visible labels. The
+  WhatsApp recording has a linked text summary of its observed conversation,
+  including no-JavaScript access; it is not claimed to be a verbatim transcript.
+- Production-scoped Vercel environment configuration saved successfully.
+  No new paid service, tracking, live agent or Maps profile was enabled.
+
+### Final local checks
+
+- Astro/TypeScript: zero errors, warnings or hints; Node and Vercel builds pass.
+- **37 unit tests pass**, including exact public contact/message values,
+  preview/production gates, lockfile regressions and retained legacy guards.
+- **132 production-build browser cases pass without retries**. Coverage
+  includes all nine pages, 320-1920px layouts, 200% text, keyboard/touch,
+  navigation, forms absent, exact links, real media playback, reduced motion,
+  no JavaScript, 404, crawler controls and automated accessibility checks.
+- Vercel generated-output/handler tests pass in production and with production
+  flags deliberately copied into a preview: only production is indexable.
+- Node integration verifies zero receiver requests and no database creation
+  with old intake settings deliberately enabled.
+- Isolated launch-mode SEO fixture passes for all nine pages and sitemap URLs.
+- Production dependency audit reports **0 known vulnerabilities**.
+- Impeccable detector returns no findings; Git whitespace check passes.
+
+The complete browser run found undersized new footer contact targets; those
+were increased to 44px before the final passing run. Superseded tests expecting
+the removed form, old demo captions or former contact-page CTA destination
+were updated to the owner's approved release behavior. WhatsApp navigation
+tests intercept the destination locally and do not send a message or call.
+
+These are Edge/Chromium checks with emulated devices, not physical-device,
+Safari or assistive-technology certification. The WhatsApp text summary was
+checked against sampled decoded frames, not a frame-by-frame transcription.
+Do not treat automated scores or structured data as a ranking guarantee.
+
+### Google setup dependency
+
+Search Console must be owned by `tamidzaminai@gmail.com`. The available browser
+session was signed into the personal account instead; the correct account's
+sign-in was prepared and awaits the owner. No property was created in the
+wrong account, no DNS verification record was added, and no sitemap/indexing
+request was submitted. The live site's crawlability is independent of Google
+Business Profile/Maps, which the owner deliberately deferred.
+
 ## Removing redundant demo copy - 19 November 2026
 
 At the owner's request, both short text captions beneath the phones and the

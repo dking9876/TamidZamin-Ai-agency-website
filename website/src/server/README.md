@@ -1,15 +1,23 @@
 # Lead intake — dedicated Node server only
 
+**Historical, disconnected implementation.** The current direct-contact
+website has no form and does not import these modules from a public route.
+`/api/lead/` returns 410 without processing input; environment variables cannot
+reactivate it. The launch gate now allows contact-only Vercel production.
+The examples below describe the former integration, not the current page.
+Reintroducing it requires new owner approval and fresh delivery/privacy review.
+`npm run test:delivery` now asserts zero receiver requests through the actual
+website; `npm test` retains isolated coverage of these unused modules.
+
 No delivery takes place by default. Configuration comes from **runtime
 `process.env`**, never `import.meta.env`. Nothing in this folder may be imported
 into client scripts. All external communications in `test-delivery.mjs` are to
 loopback mock processes with synthetic test data; the script does not read `.env`.
 
-The website can also be built as a **Vercel preview**, but this intake service
+The website can also be built for **Vercel production**, but this intake service
 cannot be enabled there yet. `readLeadConfig` returns
 `persistent_storage_required` for a Vercel target before opening SQLite or
-sending data. Both UI and API fail closed; the launch gate also rejects this
-target. A durable shared store or separately hosted intake backend must be
+sending data. A durable shared store or separately hosted intake backend must be
 implemented and tested before enabling delivery on Vercel.
 
 ## Astro UI integration

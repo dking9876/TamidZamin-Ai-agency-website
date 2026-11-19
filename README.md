@@ -16,28 +16,36 @@ Import this GitHub repository through Vercel's **Add New > Project**:
 | Build command | `npm run build` |
 | Output directory | Leave the Astro preset default; do not override it |
 
-No secrets are needed for the initial preview. Leave `SITE_LAUNCHED` and
-`LEAD_DELIVERY_ENABLED` unset or `false`. Do not upload `.env.example` values
-wholesale: its placeholder domain is deliberately not a real deployment URL.
-On Vercel, the app selects the Vercel adapter and uses the deployment URL for
-preview metadata automatically. Set `SITE_URL` explicitly only when an approved
-canonical domain is known.
+The owner's selected release is **WhatsApp/telephone contact only**, with no
+on-site form, delivery credentials, database, analytics or paid integration.
+Approved public facts live in `website\src\data\business.json`. Canonical URLs
+always use `https://www.tamidzamin.com`, not a generated deployment hostname.
+The existing apex-to-www redirect should be retained.
 
-**Important: this is a preview deployment, not a fully launched lead service.**
-The existing anti-spam/idempotency database needs persistent storage. Vercel
-Functions do not provide persistent SQLite storage, so this version explicitly
-blocks lead delivery there, even if somebody sets the delivery flag to `true`.
-It does not replace persistence with `/tmp`, in-memory state, or fake success.
-Before activating the form on Vercel, migrate that store to an approved durable
-service and verify real receiver delivery. The original dedicated-Node
-deployment remains supported.
+After owner approval and verification, configure these values on the Vercel
+project's **Production target only** and redeploy:
 
-The preview remains noindex with an honest disabled-form notice. Use Vercel's
-deployment protection when sharing unpublished business material: noindex is
-not access control. Import/deployment can create a publicly reachable URL;
-review that choice in Vercel before proceeding. This preparation does not create
-or deploy a Vercel project. Once connected, future Git pushes may trigger Vercel
-deployments automatically.
+```text
+SITE_URL=https://www.tamidzamin.com
+SITE_LAUNCHED=true
+POLICY_CONTENT_APPROVED=true
+CAPABILITIES_APPROVED=true
+ASSET_RIGHTS_CONFIRMED=true
+LAUNCH_APPROVED=true
+LEAD_DELIVERY_ENABLED=false
+```
+
+`POLICY_CONTENT_APPROVED` means the operator approved the public facts and
+wording; it does not assert professional legal review or business registration.
+Preview/development builds remain noindex even if these flags are copied.
+The `*.vercel.app` hosts receive an additional noindex response header.
+Robots permits crawling so crawlers can actually read the noindex directive.
+The production sitemap lists the nine public pages; preview sitemaps are empty.
+
+The old `/api/lead/` endpoint is retired (HTTP 410) and cannot be reactivated
+with environment variables. Preserved legacy intake modules are not wired to
+the public website. Use Vercel deployment protection for private previews:
+noindex is not access control. Git pushes to connected `main` auto-deploy.
 
 ## Run locally
 

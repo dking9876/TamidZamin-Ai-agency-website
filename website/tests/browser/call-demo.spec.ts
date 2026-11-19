@@ -22,6 +22,7 @@ for (const width of [390, 1440]) {
     const audio = page.locator('#demo-call-audio');
     const seek = page.locator('.recording-seek');
     await expect(toggle).toBeVisible();
+    await expect(toggle).toHaveAccessibleName('לחצו להאזנה לשיחת ההדגמה');
     expect(mediaRequests).toEqual([]);
     expect(await audio.evaluate((element: HTMLAudioElement) => ({ paused: element.paused, muted: element.muted, volume: element.volume })))
       .toEqual({ paused: true, muted: false, volume: 1 });
@@ -32,6 +33,7 @@ for (const width of [390, 1440]) {
     expect(response.ok()).toBe(true);
     expect(response.headers()['content-type']).toContain('audio/mpeg');
     await expect(player).toHaveAttribute('data-state', 'playing');
+    await expect(toggle).toHaveAccessibleName('השהיה של שיחת ההדגמה');
     await expect.poll(() => audio.evaluate((element: HTMLAudioElement) => element.currentTime)).toBeGreaterThan(.2);
     expect(await audio.evaluate((element: HTMLAudioElement) => element.duration)).toBeCloseTo(135, 0);
     expect(await audio.evaluate((element: HTMLAudioElement) => element.readyState)).toBeGreaterThanOrEqual(2);
@@ -53,7 +55,7 @@ for (const width of [390, 1440]) {
     await expect(player).toHaveAttribute('data-state', 'playing');
     await seek.fill(String(await audio.evaluate((element: HTMLAudioElement) => element.duration - .25)));
     await expect(player).toHaveAttribute('data-state', 'ended');
-    await expect(toggle).toHaveAccessibleName('האזנה חוזרת לשיחת ההדגמה');
+    await expect(toggle).toHaveAccessibleName('להאזנה שוב לשיחת ההדגמה');
     await toggle.click();
     await expect(player).toHaveAttribute('data-state', 'playing');
     expect(await audio.evaluate((element: HTMLAudioElement) => element.currentTime)).toBeLessThan(3);

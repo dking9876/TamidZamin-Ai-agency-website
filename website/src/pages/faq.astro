@@ -4,8 +4,9 @@ import Layout from '../layouts/Layout.astro';
 import PageHeading from '../components/PageHeading.astro';
 import FAQ from '../components/FAQ.astro';
 import CTA from '../components/CTA.astro';
+import { site } from '../lib/site';
 ---
-<Layout title="שאלות ותשובות | לפני שמחברים סוכן AI — TamidZamin" description="תשובות על סוכני AI לעסקים: שפות, מספר קיים, מחירים, תיאום תורים והעברה לאדם. מה בודקים מראש ומה לא מבטיחים ללא אישור.">
-  <PageHeading title="לפני שמתחילים, שואלים." description="מה הסוכן עושה, איפה הגבולות ואילו דברים צריך לבדוק יחד." />
-  <section class="page-section"><div class="container reading"><FAQ all /><div class="notice"><strong>יש שאלה שלא ענינו עליה?</strong><p>אפשר לתאר אותה בעמוד <a href="/contact/">יצירת הקשר</a>. מידע על הטיפול בפרטי פנייה נמצא ב<a href="/privacy/">מדיניות הפרטיות</a>.</p></div></div></section><CTA />
+<Layout title="שאלות ותשובות על סוכני AI לעסקים | TamidZamin" description="מה כולל תהליך האפיון וההקמה, איך נקבע היקף השירות ומתי ממשיכים לטיפול אנושי. תשובות לשאלות על סוכני AI בוואטסאפ ובטלפון לעסק.">
+  <PageHeading title="לפני שמתחילים, שואלים." description="על תהליך ההקמה, התמיכה השוטפת והחלוקה בין הסוכן לאנשים בעסק." />
+  <section class="page-section"><div class="container reading"><FAQ all /><div class="notice"><strong>יש שאלה שלא ענינו עליה?</strong><p>אפשר <a href={site.whatsappUrl}>לכתוב ל{site.legalName} בוואטסאפ</a> או <a href={site.phoneUrl}>להתקשר למספר <bdi>{site.phoneDisplay}</bdi></a>. הפנייה היא ישירה, ללא טופס וללא סוכן אוטומטי. מידע על הטיפול בפרטי הפנייה נמצא ב<a href="/privacy/">מדיניות הפרטיות</a>.</p></div></div></section><CTA />
 </Layout>

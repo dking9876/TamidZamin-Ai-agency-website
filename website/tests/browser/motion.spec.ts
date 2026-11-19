@@ -59,7 +59,8 @@ for (const width of [390, 1440]) {
         iterations: animation.effect!.getTiming().iterations,
       })));
     expect(sequence).toEqual([{ delay: 0, end: 620, iterations: 1 }]);
-    await expect(page.locator('.whatsapp-channel .device-caption')).toContainText('אין שיחה פעילה');
+    await expect(page.locator('.whatsapp-channel .device-caption')).not.toContainText('אין שיחה פעילה');
+    await expect(page.locator('#demo-whatsapp-video')).toHaveAccessibleName('הקלטת הדגמת וואטסאפ במהירות פי שלושה');
     expect(await page.locator('.device-caption').evaluateAll((captions) =>
       captions.every((caption) => caption.getAnimations().length === 0))).toBe(true);
     await page.waitForFunction(() => window.__premiumAnimations

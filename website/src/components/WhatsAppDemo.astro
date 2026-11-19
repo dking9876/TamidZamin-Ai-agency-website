@@ -8,7 +8,7 @@ import Icon from './Icon.astro';
   <figcaption class="device-caption whatsapp-caption">
     <div class="whatsapp-controls" hidden>
       <div class="whatsapp-toolbar">
-        <button class="whatsapp-toggle" type="button" aria-controls="demo-whatsapp-video" aria-label="צפייה בהדגמת הוואטסאפ">
+        <button class="whatsapp-toggle" type="button" aria-controls="demo-whatsapp-video" aria-label="לצפייה בדמו הוואטסאפ המוקלט">
           <svg class="whatsapp-play-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 10 7-10 7V5Z" /></svg>
           <svg class="whatsapp-pause-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M8 5v14M16 5v14" /></svg>
           <span class="whatsapp-action">לצפייה בדמו</span>
@@ -19,11 +19,11 @@ import Icon from './Icon.astro';
         </button>
       </div>
       <input class="whatsapp-seek" type="range" min="0" max="45.708333" value="0" step="0.1" dir="ltr" aria-label="מיקום בהדגמת הוואטסאפ" aria-valuetext="0:00 מתוך 0:45" aria-controls="demo-whatsapp-video" disabled />
-      <div class="whatsapp-meta"><span>מהירות <bdi>3×</bdi></span><span class="whatsapp-time" dir="ltr" aria-hidden="true"><span class="whatsapp-elapsed">0:00</span> / <span class="whatsapp-duration">0:45</span></span></div>
+      <div class="whatsapp-meta"><span>מהירות <bdi>3×</bdi></span><a class="whatsapp-description-link" href="/services/whatsapp/#recorded-demo-description">תיאור טקסטואלי</a><span class="whatsapp-time" dir="ltr" aria-hidden="true"><span class="whatsapp-elapsed">0:00</span> / <span class="whatsapp-duration">0:45</span></span></div>
     </div>
     <span class="whatsapp-status" role="status" aria-atomic="true"></span>
     <a class="whatsapp-download" href="/media/demo-whatsapp-3x.mp4" hidden>פתיחת הסרטון ישירות</a>
-    <noscript><span>מהירות פי 3 · כ־46 שניות</span><a class="whatsapp-download" href="/media/demo-whatsapp-3x.mp4">פתיחת הסרטון ישירות</a></noscript>
+    <noscript><span>מהירות פי 3 · כ־46 שניות</span><a class="whatsapp-description-link" href="/services/whatsapp/#recorded-demo-description">תיאור טקסטואלי</a><a class="whatsapp-download" href="/media/demo-whatsapp-3x.mp4">פתיחת הסרטון ישירות</a></noscript>
   </figcaption>
 </figure>
 
@@ -48,7 +48,8 @@ import Icon from './Icon.astro';
   .whatsapp-seek { display: block; width: 100%; min-height: 44px; margin: 0; padding: 0; border: 0; background: transparent; accent-color: var(--cyan); cursor: pointer; }
   .whatsapp-seek:disabled { opacity: .55; cursor: default; }
   .whatsapp-seek:focus-visible { outline-offset: 0; }
-  .whatsapp-meta { display: flex; justify-content: space-between; gap: 12px; font-size: .8125rem; }
+  .whatsapp-meta { display: flex; align-items: center; flex-wrap: wrap; justify-content: space-between; gap: 4px 8px; font-size: .8125rem; }
+  .whatsapp-description-link { display: inline-flex; align-items: center; min-height: 44px; color: var(--cyan); }
   .whatsapp-time { font-variant-numeric: tabular-nums; }
   .whatsapp-status:empty { display: none; }
   .whatsapp-status { color: var(--paper); }

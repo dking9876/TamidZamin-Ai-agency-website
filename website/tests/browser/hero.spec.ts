@@ -53,7 +53,7 @@ for (const viewport of [{ width: 1440, height: 900 }, { width: 390, height: 844 
       expect(motion.effects).toHaveLength(2);
       expect(motion.effects.some((effect) => effect.frames.some((frame) => frame.filter === 'blur(3px)'))).toBe(true);
       await expect(page.locator('.hero-actions > .pill')).toBeVisible();
-      await expect(page.locator('.hero-actions > .pill')).toHaveAttribute('href', '/contact/');
+      await expect(page.locator('.hero-actions > .pill')).toHaveAttribute('href', /^https:\/\/wa\.me\/972584345513\?text=/);
       await page.waitForFunction(() => window.__heroMotion.effects.every((animation) => animation.playState === 'finished'));
       expect(await page.locator('.home-hero').evaluate((element) => element.getAnimations({ subtree: true }).length)).toBe(0);
       expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(viewport.width);
@@ -251,8 +251,9 @@ for (const mode of ['reduced-motion', 'no-javascript'] as const) {
     expect(await page.locator('.hero-poster').evaluate((image: HTMLImageElement) => image.currentSrc))
       .toContain('/media/hero-poster-mobile.webp');
     expect(await page.locator('.hero-poster').boundingBox()).toEqual(await page.locator('.home-hero').boundingBox());
+    await page.route('https://wa.me/**', (route) => route.fulfill({ contentType: 'text/html', body: '<title>Local destination check</title>' }));
     await page.locator('.hero-actions > .pill').click();
-    await expect(page).toHaveURL(/\/contact\/$/);
+    await expect(page).toHaveURL(/^https:\/\/wa\.me\/972584345513\?text=/);
     expect(videos).toEqual([]);
     await context.close();
   });
@@ -266,8 +267,9 @@ test('phone video download failure keeps the portrait poster without blocking th
   await expect(page.locator('.hero-video-toggle')).toBeHidden();
   await expect(page.locator('.hero-video')).toBeHidden();
   await expect(page.locator('.hero-poster')).toBeVisible();
+  await page.route('https://wa.me/**', (route) => route.fulfill({ contentType: 'text/html', body: '<title>Local destination check</title>' }));
   await page.locator('.hero-actions > .pill').click();
-  await expect(page).toHaveURL(/\/contact\/$/);
+  await expect(page).toHaveURL(/^https:\/\/wa\.me\/972584345513\?text=/);
 });
 
 for (const manuallyPaused of [false, true]) {

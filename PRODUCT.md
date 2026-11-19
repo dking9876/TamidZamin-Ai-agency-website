@@ -9,7 +9,8 @@ web
 ## Stack
 
 Delegated by the user's request: a simple maintainable crawlable site. Astro with
-prerendered content and a Node server for contact intake. No public deployment
+prerendered content. The original Node contact intake is now disconnected;
+the public endpoint returns 410 and never reads or forwards its body. No public deployment
 was authorized during the initial implementation. The website application lives
 in `website`.
 The user moved the source to a local Git repository and requested a GitHub push
@@ -37,9 +38,10 @@ and more qualified jobs; these are goals, not verified results or guarantees.
 
 ## Capabilities and Constraints
 
-The company focuses on WhatsApp and phone AI agents. Production availability,
-supported languages, integrations, booking capabilities and public demo access
-have not been confirmed.
+TamidZamin provides discovery, dedicated WhatsApp and phone agent development,
+setup and ongoing support, with scope agreed per business. The owner has
+confirmed this offering. Do not publish language or integration claims.
+Booking capabilities and a live public demo have not been approved.
 On 18 November 2026 the owner supplied a 135-second MP3 conversation and
 requested click-to-listen playback in the homepage phone demonstration.
 That recording is implemented as playback, not a live agent or verified
@@ -129,12 +131,47 @@ owner-supplied MP3 supports recorded playback only.
 People in supplied illustrations must not be presented as identified customers
 or employees.
 
-## Open Launch Decisions
+## Approved Direct-Contact Launch
 
-The user answered: "Build now; leave all launch details unconfigured."
-Domain, hosting, legal operator name, public contact details, delivery recipient,
-booking destination, production capabilities, retention policy and legal review
-remain open. Preview must be noindex and real delivery disabled by default.
+The owner's later production-launch instructions supersede the original
+"Build now; leave all launch details unconfigured" choice and the historical
+preview-only restrictions above. Preserve the approved design and recordings.
+
+- Brand: TamidZamin. Responsible operator: **דניאל וייצר**. Do not imply an
+  incorporated company or completed registration/regulatory arrangements.
+- Domain: `tamidzamin.com`, already connected with HTTPS; apex redirects to
+  `https://www.tamidzamin.com`, the canonical origin.
+- WhatsApp and telephone: `058-4345513` / `+972584345513`.
+- Exact WhatsApp draft: `היי, אני מתעניין בסוכן לעסק שלי. אשמח לשמוע פרטים`.
+- Email: `tamidzaminai@gmail.com`, including privacy/accessibility requests.
+- No on-site contact form, booking service, live inquiry agent, analytics,
+  pixels, marketing list, automatic inquiry-call recording or CRM transfer.
+  The operator handles inquiries himself. WhatsApp sends only after the
+  visitor chooses to send in that external service.
+- Contact is available 24/7, not a guarantee of immediate human response.
+- All trades and service businesses across Israel, especially central Israel.
+  Online conversations are available. Do not publish a home address.
+- Human follow-up means the client business owner or their staff.
+- The owner created the assets, owns the recorded voice and confirms public
+  commercial use of the staged demonstrations and their names. They are not
+  customer endorsements or evidence of real bookings/handoffs.
+- No fixed deletion period or automatic six-month deletion was approved.
+  Policy wording must describe actual purpose-based handling and provider
+  limitations without invented legal certification.
+- Google Business Profile/Maps is deliberately deferred. This does not block
+  ordinary website indexing. Search Console owner: `tamidzaminai@gmail.com`.
+
+The owner explicitly approved the final privacy wording and production launch
+in a follow-up approval card. Production-scoped Vercel launch settings were
+created successfully; publication still requires passing technical checks and
+verification of the actual new deployment.
+Preview builds remain noindex even if production flags are accidentally copied.
+Noindex is not access control. Google verification needs authorized account
+access and approval for its specific DNS TXT record. Do not change unrelated
+DNS, send real messages, spend money or enable new data collection.
+
+Formal business registration, tax/regulatory advice, client contracts and
+per-client AI data-processing arrangements remain separate owner tasks.
 
 ## Product Principles
 

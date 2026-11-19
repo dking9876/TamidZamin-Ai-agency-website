@@ -1,13 +1,15 @@
 # TamidZamin website
 
 A real Hebrew RTL company website built with Astro and official Node/Vercel
-adapters. Content pages are prerendered; the contact page and lead endpoint run
-on the server. No client framework, analytics, advertising, remote fonts or
+adapters. All nine public content pages, including contact, are prerendered.
+The retired lead endpoint returns HTTP 410 without reading its body.
+No client framework, analytics, advertising, remote fonts or
 live AI service is included.
 
-**Current state: preview only, not approved for lead activation or indexing.** Real lead
-delivery is disabled. The site is noindex, robots blocks crawling, and the
-sitemap intentionally contains no public URLs until launch is configured.
+**Selected release: direct WhatsApp and telephone contact.** The owner has
+supplied the business facts and requested a production launch. Indexing still
+requires explicit approval flags on the production environment; previews stay
+noindex. There is no contact form or automatic message sending.
 
 ## Source and local preview
 
@@ -42,9 +44,9 @@ this repository.
 - `/services/`, `/services/whatsapp/`, `/services/phone/`: useful service
   explanations, constraints, trades and internal links.
 - `/about/`, `/faq/`: company approach and keyboard-operable native FAQs.
-- `/contact/`: server-rendered form; explicit unavailable state by default.
-- `/privacy/`, `/accessibility/`: implementation-specific drafts requiring
-  business/legal review, not invented compliance certifications.
+- `/contact/`: direct WhatsApp/telephone actions, operator and next steps.
+- `/privacy/`, `/accessibility/`: actual direct-contact practices and reporting
+  channels; owner-approved wording is not legal/accessibility certification.
 - Custom 404 with real HTTP 404 status.
 - `/robots.txt`, `/sitemap.xml`: environment-aware crawl controls.
 
@@ -99,8 +101,8 @@ the existing Hebrew headline and actions stay on top, protected by restrained
 black contrast scrims. The 19 November Broccoli-inspired layout uses transparent
 overlaid navigation, light white type and two compact side-by-side actions on
 desktop and phone. Two headline lines resolve into focus on full load/reload;
-the blue edge is removed. Actions never wait for media. The unchanged explanatory
-paragraph now introduces the channels below the hero.
+the blue edge is removed. Actions never wait for media. The approved service
+summary introduces the channels below the hero.
 
 `src/scripts/hero-video.ts` starts muted inline playback while the hero is
 visible and provides a keyboard-operable play/pause control. Playback pauses
@@ -156,11 +158,9 @@ the action. No JavaScript retains native controls, the already accelerated
 asset and a direct recording link. Loading can be cancelled; errors offer
 explicit Hebrew recovery instructions, retry and a direct file.
 
-This is recorded evidence only, not a live WhatsApp integration. The owner's
-subsequent 19 November request authorizes pushing this WhatsApp update only
-to the existing GitHub branch and connected preview, excluding concurrent
-hero changes. Recording contents and participant permissions remain the
-owner's responsibility. Lead delivery and noindex safeguards are unchanged.
+This is a staged recording, not a live WhatsApp integration or customer
+endorsement. The owner confirms that he created the material and authorizes
+public use. Playing it does not send a message or initiate a real handoff.
 
 Run `npx playwright test whatsapp-demo.spec.ts motion.spec.ts mobile-layout.spec.ts call-demo.spec.ts call-transcript.spec.ts refinement.spec.ts`
 against a freshly started local production build. The checks include actual
@@ -188,13 +188,9 @@ disabling requested audio. No JavaScript leaves native audio controls and a
 direct file link. Loading can be cancelled; playback/download failures show a
 Hebrew recovery message, retry action and direct recording link.
 
-This is a recording, not an invitation to a live call or a claim that the
-agent is connected to a visitor's business. Lead delivery and noindex safeguards
-are unchanged. Before publishing, the owner must review the recording for
-personal/customer information and confirm participant/publication permissions.
-The owner subsequently approved pushing this implementation and recording to
-the existing GitHub repository for its connected website preview deployment.
-No live telephony, lead delivery or indexing is enabled by that approval.
+This is a staged recording, not a live call or a claim that the agent is
+connected to the visitor's business. The owner confirms it is his voice and
+authorizes public use. No live telephony or automated inquiry intake is enabled.
 
 ### Synchronized transcript
 
@@ -226,133 +222,102 @@ failed-download recovery, rapid input, keyboard/touch, reduced motion,
 no-JavaScript fallback, cue-by-cue synchronization, manual reading,
 accessibility and responsive regression coverage.
 
-## Configuration
+## Configuration and launch
 
-Copy `.env.example` to `.env` on the runtime/deployment machine, not into source
-control. `npm start` loads that file. Astro config loads it for prerendering.
+No secrets or delivery service are needed. `src/data/business.json` contains
+the approved public identity, canonical origin, number and exact WhatsApp
+draft. `scripts/deployment.mjs` centralizes links and indexability.
+Optional `PUBLIC_*` overrides are documented in `.env.example`; empty or
+invalid contacts fail the launch gate instead of silently disappearing.
 
-Public/build values:
+The canonical origin defaults to `https://www.tamidzamin.com` in every
+environment. `SITE_URL` may explicitly override it for isolated tests.
+Never use a generated Vercel URL as the production canonical.
 
-- `SITE_URL`: exact approved HTTPS origin. Local default is
-  `http://localhost:4321`.
-- `SITE_LAUNCHED=false`: keep false until publication is expressly approved.
-- `PUBLIC_LEGAL_NAME`, `PUBLIC_CONTACT_EMAIL`, `PUBLIC_PHONE`,
-  `PUBLIC_WHATSAPP`, `PUBLIC_BOOKING_URL`: real approved public details.
-  Empty optional values omit the corresponding action; they never become fake
-  links. Use an international WhatsApp number, an email address, and an HTTPS
-  booking URL.
-- `LEGAL_REVIEW_APPROVED`, `CAPABILITIES_APPROVED`, `ASSET_RIGHTS_CONFIRMED`,
-  `LAUNCH_APPROVED`: explicit launch gates, not substitutes for actual review.
+For an approved launch, set these on Vercel's **Production target only**:
 
-Rebuild after changing public values so canonical URLs, Open Graph tags,
-Organization structured data, sitemap and static page contact details agree.
-Structured data contains no ratings, prices or unverified business addresses.
-It is withheld while unpublished.
+```text
+SITE_URL=https://www.tamidzamin.com
+SITE_LAUNCHED=true
+POLICY_CONTENT_APPROVED=true
+CAPABILITIES_APPROVED=true
+ASSET_RIGHTS_CONFIRMED=true
+LAUNCH_APPROVED=true
+LEAD_DELIVERY_ENABLED=false
+```
 
-Server-only values and delivery details are documented in `.env.example` and
-the server modules. The essential values are `FORM_SECRET`,
-`LEAD_DELIVERY_ENABLED`, `LEAD_WEBHOOK_URL`, `LEAD_WEBHOOK_TOKEN`, and `DATA_DIR`.
-**Never expose webhook credentials in a `PUBLIC_` variable.**
+Policy approval confirms the operator's public facts and wording, not
+professional legal review, incorporation or accessibility certification.
+`PUBLIC_LEGAL_NAME` is the responsible person's name, not a claim that the
+brand is a registered company. Do not invent a registration ID or office.
 
-Run `npm run verify:launch`. It must fail for the current unconfigured preview.
-Setting `SITE_LAUNCHED=true` also runs the public configuration gate at build
-time. Runtime secrets are deliberately not required during a Docker build and
-must never be copied into image layers.
+`npm run verify:launch` checks the same gates as an indexable production build.
+Leave flags unset/false in ordinary local previews. `VERCEL_ENV` is supplied
+by Vercel: only `production` can be indexed, even if flags leak to previews.
+Robots allows page crawling so noindex can be read; preview sitemaps are empty.
+Production lists all nine public pages, omitting API and 404 routes.
 
-## Lead delivery
+Rebuild after public configuration changes. Canonicals, social tags, contacts,
+Organization/WebSite/Service/Breadcrumb structured data and sitemap then agree.
+No schema ratings, prices, registered legal entity, office address or staffed
+24/7 support claim is invented.
 
-This is a real server-side form, not a fake success toast or mailto form.
-Disabled configuration returns an honest unavailable response and never
-transmits the visitor's data.
+## Direct contact and retired intake
 
-When explicitly enabled, the backend validates field lengths and types,
-phone/email formats, consent, same-origin submission, an HMAC-signed expiring
-form token bound to an HttpOnly SameSite cookie, a honeypot, minimum completion
-time and persistent request limits. Request bodies are bounded during reading.
+WhatsApp links open a visitor-editable draft; only the visitor can send it in
+WhatsApp. Telephone links open the device's dialer. Checks validate the exact
+destinations without sending messages or placing calls. Email remains available
+for privacy/accessibility requests. Contacts are possible 24/7; immediate human
+response is not promised.
 
-The receiver must accept authenticated JSON and deduplicate `Idempotency-Key`.
-A 2xx HTTP response alone is not success: it must return JSON
-`{"accepted": true}`. Only then does the UI report receiver acceptance.
-That is **not** a promise that a human has read the request or booked a call.
-Timeout/uncertain outcomes do not trigger automatic duplicate deliveries.
+`/contact/` is static and contains no form, token, session cookie or submit
+script. `/api/lead/` returns HTTP 410 with `ok:false`, no-store and noindex.
+It never reads, persists or forwards the body, even if old delivery settings
+are supplied. Astro's default cross-origin guard may reject cross-site
+form-shaped requests with 403 before they reach that retired endpoint.
 
-SQLite stores protection/idempotency metadata, not the full form message.
-Use a writable persistent local disk volume, backed up and restricted to the
-service account. Run **one Node instance per data directory**. Do not deploy
-unchanged to an ephemeral/serverless filesystem or independently scaled replicas.
+The unused `src/server` modules remain as historical implementation, with
+isolated unit tests. Reintroducing a form would require a separately approved
+design, policies, durable protection storage and actual delivery verification.
+There is no environment flag that reconnects those modules to the website.
+The historical `test:delivery` command now verifies **zero delivery** through
+the actual Node app using a local trap receiver and synthetic data.
 
-The form enhances a normal HTML POST: it works without JavaScript when enabled.
-With JavaScript, errors preserve input and receive keyboard focus. Native
-POSTs return a Hebrew status/error page. API logs must remain free of message
-contents and secrets.
+## Deployment and Google Search
 
-Before enabling delivery:
+Vercel: Root Directory **`website`**, framework **Astro**, Node **24.x**,
+install `npm ci`, build `npm run build`, no output-directory override.
+The connected project already hosts the website. Git pushes to `main` trigger
+deployments; only push when publication is approved.
 
-1. Obtain permission to contact the approved receiver and select its operator.
-2. Establish retention, access, deletion and security responsibilities.
-3. Configure HTTPS, a strong secret and the receiver's bearer credential.
-4. Run an **approved real** delivery test and confirm downstream receipt.
-5. Verify proxy trust/IP behavior, rate limits, persistence and recovery.
+`VERCEL=1` selects the official adapter. `vercel.json` applies security headers
+to static and dynamic routes, no-store to contact/API, and noindex to
+`*.vercel.app`, API and 404 URLs. Preview builds also contain noindex metadata.
+Analytics, image optimization and ISR remain off. The routing override and
+the repaired npm12-compatible lockfile must be preserved.
 
-The implementation tests use only a loopback mock receiver. They do not
-constitute verification of a real CRM, email inbox or WhatsApp account.
+`npm run build:vercel` and `npm run test:vercel` validate generated output
+locally without publishing. For production-mode checks, supply the launch
+flags and `VERCEL_ENV=production` in that shell only. To check a preview with
+copied flags, use `VERCEL_ENV=preview`: output must stay noindex.
 
-## Deployment
+The standalone Node target still works: rebuild using `npm run build` before
+`npm start`, and restart after rebuilding. Behind a reverse proxy, apply
+headers to static files too; Astro middleware alone does not cover them.
+Docker/Caddy files are optional examples, not evidence that Docker was tested
+or a separate server was deployed. No SQLite volume is needed for this release.
 
-### Vercel preview
+After the live domain passes checks, use `tamidzaminai@gmail.com` to own the
+Search Console Domain property `tamidzamin.com`. Add only Google's supplied
+verification TXT record with owner authorization; preserve existing DNS.
+Verify ownership, submit `https://www.tamidzamin.com/sitemap.xml`, and use URL
+Inspection to request indexing of the key public pages. Submission is not
+proof that Google has indexed or ranked a page; monitor Search Console.
 
-Import the GitHub repository with **Root Directory `website`**, framework
-**Astro**, **Node 24.x**, install command `npm ci`, build command `npm run build`,
-and no output-directory override. See the [root guide](../README.md).
-
-Vercel's `VERCEL=1` environment selects the official `@astrojs/vercel` adapter.
-The initial preview needs no secrets. Do not set `SITE_URL` to the placeholder
-from `.env.example`; when unset, Vercel's generated deployment URL is used.
-The approved canonical origin can later be provided explicitly with `SITE_URL`.
-Keep `SITE_LAUNCHED=false` and `LEAD_DELIVERY_ENABLED=false`.
-
-`vercel.json` sets security headers for prerendered files as well as dynamic
-routes, and no-store for contact/API routes. Analytics, image optimization and
-ISR are not enabled. The adapter emits `.vercel\output` for Vercel Functions.
-The lockfile pins `path-to-regexp` 6.3.0 within Vercel's routing utilities to
-avoid the vulnerable 6.1.0 transitive dependency; route generation is tested.
-`npm run build:vercel` generates that output locally; `npm run test:vercel`
-checks its structure and exercises the generated function without publishing.
-Rebuild with `npm run build` before starting the standalone Node server again.
-
-**Lead delivery is blocked on Vercel**, even if its flag is accidentally enabled.
-Local SQLite cannot provide durable, shared protection/idempotency state across
-Vercel Functions. The launch gate rejects this target until an approved durable
-store or a separately hosted intake backend is implemented and tested. No
-`/tmp` database, in-memory bypass or success-shaped fallback is used.
-
-Vercel hosting itself has not been exercised. No deployment, hosting purchase,
-domain attachment or DNS change is part of the Git push. Use deployment access
-protection as appropriate; noindex does not make an accessible URL private.
-
-### Dedicated Node with persistent lead storage
-
-For enabled delivery, use a small Node 24 service with persistent disk behind an HTTPS
-reverse proxy. The included `Dockerfile` is a portable deployment example;
-the Docker image and public hosting have not been exercised here.
-
-- Build on CI/local disk with `npm ci && npm run build`.
-- Supply public build variables before compiling.
-- Run the server as an unprivileged user, with runtime secrets injected.
-- Bind Node to loopback when using the supplied Caddy reverse-proxy example.
-- Provision `DATA_DIR`; preserve it across restarts/deployments.
-- Add HTTPS and security/compression/cache headers at the proxy for **both
-  static and dynamic responses**. Astro middleware alone does not add headers
-  to prerendered files in the standalone adapter.
-- The example Caddyfile is not live and contains an intentionally invalid
-  hostname. Configure trusted client IP handling only for a verified proxy;
-  never trust arbitrary inbound forwarded-IP headers.
-- Do not cache `/contact/` or `/api/`. Fingerprinted assets can be cached long
-  term; image names are stable and use a short cache policy.
-- Restart after deploying a build. Back up configuration and SQLite metadata.
-
-No DNS, hosting, certificates, public deployment, analytics or paid services
-were configured.
+Google Business Profile/Maps is intentionally deferred. It is not required
+for ordinary Search indexing. No home address or fake local listing should
+be created. Future business registration, legal/tax advice, client agreements
+and AI data-processing arrangements are separate owner responsibilities.
 
 ## Assets and design
 
@@ -481,8 +446,9 @@ Before/after screenshots and Lighthouse reports are local review artifacts,
 not publication or a new approval to launch.
 For a deployed preview, set `TEST_BASE_URL` to the URL being visited and
 `TEST_SITE_ORIGIN` to its configured canonical origin before `test:browser`.
-Without an explicit `SITE_URL`, Vercel uses its unique deployment URL for the
-canonical origin, even when the visit URL is the stable project alias.
+Canonical origin defaults to `https://www.tamidzamin.com` even when testing a
+local or Vercel preview. Set `TEST_SITE_LAUNCHED=true` only when testing an
+indexable production build; otherwise tests expect preview noindex.
 
 After dependency changes, verify `npm ci` in a fresh checkout with npm 12 and a
 supported Node 24 release, then run `npm test`, `npm run build:vercel` and
