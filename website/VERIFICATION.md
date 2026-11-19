@@ -51,6 +51,30 @@ separate from the website implementation.
 - Isolated launch-mode SEO fixture passes for all nine pages and sitemap URLs.
 - Production dependency audit reports **0 known vulnerabilities**.
 - Impeccable detector returns no findings; Git whitespace check passes.
+- Final desktop/mobile contact-page captures were visually inspected together.
+
+### Verified on the real domain
+
+The source release `beeef49` was pushed to `main`; the remote commit matches
+the clean local checkout and includes the public business configuration.
+`https://www.tamidzamin.com/` serves the new indexable release over HTTPS.
+
+- All **six hosted browser suites pass**, exercising all nine pages, canonical
+  URLs, metadata, accessible content, internal links, contact destinations,
+  responsive layouts, no JavaScript and the real retired API.
+- Apex-to-www and HTTP-to-HTTPS redirects return **308**.
+- The custom domain has no noindex response header. The Vercel alias still
+  sends `X-Robots-Tag: noindex, nofollow`; the live sitemap contains nine URLs.
+- Security headers are present on public pages. The now-static contact page
+  is public/cacheable and has no form token or session cookie; the old
+  session-bound no-store rule is no longer needed there.
+- Live mobile Lighthouse measurement at **2026-11-19 13:47 UTC**:
+  performance **99**, accessibility **100**, best practices **100**, SEO **100**.
+  FCP/LCP **1.2 seconds**, total blocking time **102ms**, CLS **0**,
+  transfer **3,286,562 bytes**. No run warnings or failed binary audits.
+
+Lighthouse is a lab measurement, not field Core Web Vitals data or a prediction
+of Google placement. The SEO score verifies technical checks, not indexing.
 
 The complete browser run found undersized new footer contact targets; those
 were increased to 44px before the final passing run. Superseded tests expecting

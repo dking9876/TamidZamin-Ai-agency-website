@@ -291,9 +291,11 @@ The connected project already hosts the website. Git pushes to `main` trigger
 deployments; only push when publication is approved.
 
 `VERCEL=1` selects the official adapter. `vercel.json` applies security headers
-to static and dynamic routes, no-store to contact/API, and noindex to
+to static and dynamic routes, no-store to the retired API, and noindex to
 `*.vercel.app`, API and 404 URLs. Preview builds also contain noindex metadata.
-Analytics, image optimization and ISR remain off. The routing override and
+The static contact page contains only public information, has no session, and
+uses ordinary public-page caching. Analytics, image optimization and ISR
+remain off. The routing override and
 the repaired npm12-compatible lockfile must be preserved.
 
 `npm run build:vercel` and `npm run test:vercel` validate generated output
