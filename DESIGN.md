@@ -422,8 +422,8 @@ WhatsApp header or a decorative notch covering the source. Its WebP poster
 shows a representative conversation frame. The compact controls sit below
 the phone: a pale play/pause button, replay and fullscreen icons, a native seek
 slider, tabular elapsed/total time and a persistent 3x label. All controls have
-44px minimum targets. The caption distinguishes the recorded demo from a live
-conversation; a status region provides explicit failure and direct-file recovery.
+44px minimum targets. A status region provides explicit failure and direct-file
+recovery.
 
 The 3x speed is encoded into the 45.708-second H.264 asset, including native
 fullscreen and no-JavaScript playback. The original silent audio track is omitted.
@@ -438,6 +438,20 @@ channels stack their headings/devices/features/actions into parallel columns
 with top-aligned devices; up to 600px they form a single reading column. Device
 width is capped at 17.5rem in the stacked compositions. No fixed video height
 clips the source or prevents surrounding controls from growing with text.
+
+Both demo phone shells share a 9:20 aspect ratio and a 32rem minimum height
+that scales with enlarged text. Their tops align in side-by-side layouts.
+The WhatsApp video fits the entire inner frame without cropping; the call
+transcript flexes into the remaining space above its uncompressed controls.
+Shared frame sizing applies across desktop, tablet and stacked mobile layouts.
+
+At the owner's later 19 November request, the two short captions beneath the
+demo phones and the shared explanatory paragraph below the channel grid are
+removed. This overrides their earlier visible-copy requirements, not the
+recorded nature of the demos. Accessible media labels, the phone's internal
+recording heading, 3x speed, player controls, error messages and direct-file
+fallbacks remain. The idle phone caption reserves no empty margin; recovery
+messages and no-JavaScript links retain their spacing when present.
 
 Meaningful content is visible and crawlable before JavaScript; no reveal stylesheet hides it. Authored arrival sequences are shorter than three seconds; the background video and user-controlled recording indicator are deliberate looping exceptions with pause controls. No motion dependency or production capability is added.
 

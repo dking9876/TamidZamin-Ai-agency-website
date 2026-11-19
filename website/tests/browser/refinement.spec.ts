@@ -528,14 +528,16 @@ test.describe('refinement: native navigation and fallbacks', () => {
     }
   });
 
-  test('preview safeguards and factual demo disclosures remain intact (no submissions)', async ({ page }) => {
+  test('requested demo copy is removed while preview safeguards remain intact (no submissions)', async ({ page }) => {
     await page.goto('/');
     await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex, nofollow');
-    await expect(page.locator('#channels .demo-disclosure')).toContainText('שיחת הדגמה מוקלטת');
-    await expect(page.locator('#channels .demo-disclosure')).toContainText('אין כאן שיחה חיה');
+    await expect(page.locator('#channels .demo-disclosure, #whatsapp-demo-description')).toHaveCount(0);
     await expect(page.locator('.device-caption')).toHaveCount(2);
-    await expect(page.locator('.whatsapp-channel .device-caption')).toContainText('אין שיחה פעילה');
-    await expect(page.locator('.phone-channel .device-caption')).toContainText('לא שיחה חיה');
+    await expect(page.locator('.whatsapp-caption')).not.toContainText('אין שיחה פעילה');
+    await expect(page.locator('.recording-caption')).not.toContainText('לא שיחה חיה');
+    await expect(page.locator('.recording-caption')).toHaveCSS('margin-top', '0px');
+    await expect(page.locator('#demo-whatsapp-video')).toHaveAccessibleName('הקלטת הדגמת וואטסאפ במהירות פי שלושה');
+    await expect(page.locator('#demo-whatsapp-video')).not.toHaveAttribute('aria-describedby');
     await expect(page.locator('#evidence .demo-disclosure')).toContainText('לא הדגמה חיה מאושרת');
     await page.goto('/contact/');
     await expect(page.locator('fieldset')).toHaveAttribute('disabled', '');

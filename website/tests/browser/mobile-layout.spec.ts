@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.use({ reducedMotion: 'reduce' });
 
-for (const width of [320, 360, 390, 430, 600, 601, 768, 880, 881, 1024, 1100, 1101, 1440]) {
+for (const width of [320, 360, 390, 430, 600, 601, 768, 880, 881, 1024, 1100, 1101, 1440, 1920]) {
   test(`mobile layout at ${width}px: readable, grouped demos and usable section controls`, async ({ page }) => {
     await page.setViewportSize({ width, height: 844 });
     await page.goto('/');
@@ -44,6 +44,11 @@ for (const width of [320, 360, 390, 430, 600, 601, 768, 880, 881, 1024, 1100, 11
 
     expect(layout.scrollWidth).toBeLessThanOrEqual(width);
     expect(layout.articles).toHaveLength(2);
+    expect(layout.articles[0].device.width).toBeCloseTo(layout.articles[1].device.width, 0);
+    expect(layout.articles[0].device.height).toBeCloseTo(layout.articles[1].device.height, 0);
+    if (width > 600) {
+      expect(layout.articles[0].device.top).toBeCloseTo(layout.articles[1].device.top, 0);
+    }
     for (const article of layout.articles) {
       expect(article.children).toEqual(['H2', 'FIGURE', 'UL', 'A']);
       expect(article.device.left).toBeGreaterThanOrEqual(0);
@@ -120,11 +125,35 @@ test('mobile demo text grows at 200% without device clipping', async ({ page }) 
         }
       }
     }
-    return { clipped, height: bounds.height, isVideo: element.classList.contains('whatsapp-phone') };
+    return { clipped, width: bounds.width, height: bounds.height };
   }));
   for (const device of devices) {
     expect(device.clipped).toEqual([]);
-    expect(device.height).toBeGreaterThanOrEqual(device.isVideo ? 600 : 768);
+    expect(device.height).toBeGreaterThanOrEqual(768);
   }
+  expect(devices[0].width).toBeCloseTo(devices[1].width, 0);
+  expect(devices[0].height).toBeCloseTo(devices[1].height, 0);
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
+});
+
+test('demo frames match without JavaScript on mobile and desktop', async ({ browser, baseURL }) => {
+  const context = await browser.newContext({ baseURL, javaScriptEnabled: false, reducedMotion: 'reduce' });
+  const page = await context.newPage();
+  for (const width of [320, 768, 1101, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto('/#channels');
+    await page.evaluate(() => document.fonts.ready);
+    const frames = await page.locator('.device-stage .phone-shell').evaluateAll((elements) => elements.map((element) => {
+      const { width, height, top } = element.getBoundingClientRect();
+      return { width, height, top };
+    }));
+    expect(frames).toHaveLength(2);
+    expect(frames[0].width).toBeCloseTo(frames[1].width, 0);
+    expect(frames[0].height).toBeCloseTo(frames[1].height, 0);
+    if (width > 600) expect(frames[0].top).toBeCloseTo(frames[1].top, 0);
+    await expect(page.locator('#demo-whatsapp-video')).toBeVisible();
+    await expect(page.locator('#demo-call-audio')).toBeVisible();
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
+  }
+  await context.close();
 });

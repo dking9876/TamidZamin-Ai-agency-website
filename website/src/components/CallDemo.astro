@@ -42,7 +42,6 @@ import { formatCallTime } from '../lib/call-transcript';
     <audio id="demo-call-audio" src="/media/demo-call.mp3" preload="none" controls aria-label="הקלטת שיחת ההדגמה של TamidZamin"></audio>
   </div>
   <figcaption class="device-caption recording-caption">
-    <span>הקלטה אמיתית · לא שיחה חיה</span>
     <span class="recording-status" role="status" aria-atomic="true"></span>
     <a class="recording-download" href="/media/demo-call.mp3" hidden>פתיחת ההקלטה ישירות</a>
     <noscript><a class="recording-download" href="/media/demo-call.mp3">פתיחת ההקלטה ישירות</a></noscript>
@@ -55,12 +54,14 @@ import { formatCallTime } from '../lib/call-transcript';
     flex-direction: column;
     padding: 0;
   }
+  .recording-phone > :not(.recording-transcript) { flex-shrink: 0; }
   .recording-heading { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 28px 12px 20px; }
   .recording-heading > svg { color: var(--cyan); flex-shrink: 0; width: 22px; }
   .recording-heading strong { display: block; font-size: 1rem; overflow-wrap: anywhere; }
   .recording-description { display: block; font-size: .875rem; color: var(--on-dark); margin-block-start: 4px; }
   .recording-transcript {
-    block-size: 16rem;
+    flex: 1;
+    min-height: 8rem;
     overflow: auto;
     padding: 12px;
     text-align: start;
@@ -152,6 +153,7 @@ import { formatCallTime } from '../lib/call-transcript';
   }
   .recording-restart:is(:hover, :focus-visible) { color: var(--paper); background: #ffffff0d; }
   .recording-caption { grid-template-rows: auto; font-size: .8125rem; }
+  .recording-caption:not(:has(.recording-status:not(:empty), .recording-download:not([hidden]))) { margin-block-start: 0; }
   .recording-status:empty { display: none; }
   .recording-status { color: var(--paper); }
   .recording-download { display: inline-flex; align-items: center; min-height: 44px; color: var(--cyan); text-underline-offset: .25em; }
@@ -160,7 +162,6 @@ import { formatCallTime } from '../lib/call-transcript';
   @keyframes call-wave { from { transform: scaleY(.35); } to { transform: scaleY(1); } }
   @media (max-width: 880px) {
     .recording-heading strong { font-size: 1.125rem; }
-    .recording-transcript { block-size: 17rem; }
     .recording-transcript .transcript-cue p { font-size: .9375rem; }
     .recording-time, .recording-restart { font-size: .875rem; }
   }

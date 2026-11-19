@@ -39,13 +39,13 @@ html:has(.homepage) { scroll-padding-top: calc(var(--header-height, var(--home-h
 .homepage main > section p { line-height: 1.65; }
 
 .home-channels { border-block-start: 1px solid #446079; }
-.channel-stage { display: grid; grid-template-columns: minmax(0, 1fr) 56px minmax(0, 1fr); align-items: center; direction: ltr; }
+.channel-stage { display: grid; grid-template-columns: minmax(0, 1fr) 56px minmax(0, 1fr); align-items: stretch; direction: ltr; }
 .home-channel { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); grid-template-rows: 1fr auto 1fr; column-gap: 28px; min-width: 0; }
 .home-channel > * { min-width: 0; direction: rtl; }
 .home-channel > h2 { grid-column: 1; grid-row: 1; align-self: end; }
 .home-channel > .check-list { grid-column: 1; grid-row: 2; }
 .home-channel > .pill { grid-column: 1; grid-row: 3; align-self: start; justify-self: end; }
-.home-channel > .device-stage { grid-column: 2; grid-row: 1/4; align-self: center; }
+.home-channel > .device-stage { grid-column: 2; grid-row: 1/4; align-self: start; }
 .phone-channel { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); }
 .phone-channel > :is(h2, .check-list, .pill) { grid-column: 2; }
 .phone-channel > .device-stage { grid-column: 1; }
@@ -57,7 +57,7 @@ html:has(.homepage) { scroll-padding-top: calc(var(--header-height, var(--home-h
 .home-channel .check-list svg { color: var(--cyan); }
 .home-channel .pill { font-size: .875rem; padding-inline: 16px; }
 .device-stage { min-width: 0; margin: 0; }
-.device-stage .phone-shell { width: 100%; min-width: 0; height: auto; min-height: clamp(380px, 30vw, 440px); border: 3px solid #259fe9; outline: 1px solid #b0e6ff; border-radius: 28px; box-shadow: 0 10px 24px #008fff25, 4px 8px 12px #00000070; direction: rtl; transform: none; margin: 0; position: relative; }
+.device-stage .phone-shell { width: 100%; min-width: 0; height: auto; min-height: 32rem; aspect-ratio: 9 / 20; border: 3px solid #259fe9; outline: 1px solid #b0e6ff; border-radius: 28px; box-shadow: 0 10px 24px #008fff25, 4px 8px 12px #00000070; direction: rtl; transform: none; margin: 0; position: relative; }
 .device-stage .phone-shell::after { content: ''; position: absolute; inset-block-start: 0; left: 50%; transform: translateX(-50%); width: 45px; height: 8px; border-radius: 0 0 8px 8px; background: #020a11; }
 .device-stage .chat-phone { align-self: start; margin-block-start: 28px; background: #edf2f5; }
 .device-stage .phone-top { padding: 24px 10px 12px; background: #e5ecec; font-size: .8rem; }
@@ -71,7 +71,7 @@ html:has(.homepage) { scroll-padding-top: calc(var(--header-height, var(--home-h
 .device-stage .waveform { margin-block: 24px 16px; height: 64px; gap: 3px; }
 .device-stage .waveform i { flex-shrink: 1; }
 .device-stage .call-icon { width: 36px; height: 36px; margin-block-start: 24px; }
-.brand-connector { position: relative; width: 100%; }
+.brand-connector { position: relative; width: 100%; align-self: center; }
 .brand-connector > img:first-child { width: 100%; }
 .connector-logo { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 42%; height: auto; border-radius: 50%; }
 .device-caption { display: grid; grid-template-rows: auto 44px; justify-items: center; gap: 4px; margin-block-start: 16px; text-align: center; color: var(--on-dark); font-size: .75rem; direction: rtl; }
@@ -168,7 +168,6 @@ html:has(.homepage) { scroll-padding-top: calc(var(--header-height, var(--home-h
   .homepage .brand { width: 142px; }
   .channel-stage { grid-template-columns: minmax(0, 1fr) 32px minmax(0, 1fr); }
   .home-channel { column-gap: 20px; }
-  .device-stage .phone-shell { min-height: 380px; }
   .angled-trades { gap: 14px; }
   .angled-trade h3 { font-size: 1.05rem; }
   .faq-strip { grid-template-columns: 180px minmax(0, 1fr); }
@@ -195,7 +194,6 @@ html:has(.homepage) { scroll-padding-top: calc(var(--header-height, var(--home-h
   .brand-connector { display: none; }
   .home-channel h2 { justify-content: center; }
   .device-stage .chat-phone { margin-block-start: 0; }
-  .device-stage .phone-shell { min-height: 24rem; }
   .device-stage .phone-top { padding: 24px 16px 16px; font-size: .875rem; gap: 8px; }
   .device-stage .chat-body { padding: 16px 16px 24px; }
   .device-stage .bubble { font-size: .875rem; padding: 12px; }

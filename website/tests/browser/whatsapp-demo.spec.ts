@@ -45,7 +45,11 @@ for (const width of [390, 1440]) {
     expect(media.decoded).toBeGreaterThan(0);
     await expect(video).toHaveCSS('object-fit', 'contain');
     const bounds = await video.boundingBox();
-    expect(bounds!.width / bounds!.height).toBeCloseTo(720 / 1600, 2);
+    const frame = await page.locator('.whatsapp-phone').evaluate((element) => ({
+      width: element.clientWidth, height: element.clientHeight,
+    }));
+    expect(bounds!.width).toBeCloseTo(frame.width, 0);
+    expect(bounds!.height).toBeCloseTo(frame.height, 0);
 
     await toggle.focus();
     await page.keyboard.press('Space');

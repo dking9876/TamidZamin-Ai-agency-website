@@ -67,6 +67,14 @@ excluding concurrent hero changes. Recording contents and participant
 permissions remain the owner's responsibility. Existing lead-delivery and
 indexing safeguards remain unchanged.
 
+Later on 19 November the owner requested removing both short captions below
+the demo phones and the shared explanatory paragraph beneath the demo section.
+This supersedes those visible copy requirements only: the players remain
+recorded demonstrations, with unchanged controls and no new live capability.
+The owner's follow-up authorizes committing and pushing all pending website
+changes, including the matching phone dimensions, to the existing Git branch
+and connected preview. Lead delivery and indexing remain disabled.
+
 `this master demo prd.txt` is now nonempty. It specifies a TrisMaster electric
 shutter intake demo, not evidence of a working deployment or company-wide
 capabilities. It covers contact information, issue, urgency, preferred

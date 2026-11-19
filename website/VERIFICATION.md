@@ -1,5 +1,53 @@
 # Verification and launch status
 
+## Removing redundant demo copy - 19 November 2026
+
+At the owner's request, both short text captions beneath the phones and the
+shared explanatory paragraph beneath the demo grid are removed. Playback
+controls, matching frame dimensions, accessible media labels, transcript,
+error recovery and no-JavaScript links are preserved. The removed WhatsApp
+description no longer has a dangling aria-describedby reference. The idle
+call caption no longer reserves an empty top margin.
+
+### Verified
+
+- Production build and Astro/TypeScript check passed with zero diagnostics.
+- All 43 related production browser tests passed: the copy-removal regression,
+  preview safeguards, 14 responsive widths, 200% text, native fallbacks,
+  accessibility, both players and transcript synchronization.
+- Mobile and desktop captures were visually inspected. The UI detector
+  returned no findings; Git's whitespace check passed.
+
+Tests use Edge/Chromium with emulated mobile dimensions, not physical devices
+or Safari. The owner explicitly approved committing and pushing all pending
+website changes, including the matching phone dimensions, to the existing
+Git branch and connected preview. Lead delivery and indexing remain disabled.
+Hosted deployment status is separate from these local production-build checks.
+
+## Matching demo phone dimensions - 19 November 2026
+
+The WhatsApp and call demo phones now use shared responsive frame sizing:
+a 9:20 aspect ratio with a text-scalable 32rem minimum height. Side-by-side
+frames align at the top. The complete WhatsApp recording remains uncropped,
+and the call transcript fills the remaining space without compressing controls.
+Playback, recordings, supplied transcript and preview safeguards are unchanged.
+
+### Verified
+
+- Production build and Astro/TypeScript check passed with zero diagnostics.
+- All 42 related production browser tests passed: responsive layout,
+  WhatsApp playback, call playback and transcript synchronization.
+- Matching widths/heights verified at 14 viewport widths from 320 to 1920px,
+  including both sides of the layout breakpoints. Side-by-side tops align.
+- Enlarged 200% text and no-JavaScript fallback frames remain equal without
+  clipped controls or horizontal page overflow.
+- Desktop and phone captures were visually inspected. The UI detector
+  returned no findings; Git's whitespace check passed.
+
+These are local production-build checks using Edge/Chromium with emulated
+mobile dimensions, not physical-device or Safari certification. The owner
+subsequently approved pushing this sizing change with the demo-copy removal.
+
 ## Full-frame Broccoli-reference hero - 19 November 2026
 
 The owner clarified that real video must fill the entire mobile hero and

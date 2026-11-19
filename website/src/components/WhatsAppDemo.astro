@@ -3,7 +3,7 @@ import Icon from './Icon.astro';
 ---
 <figure class="device-stage whatsapp-demo" id="whatsapp-demo" data-motion="devices" data-state="idle">
   <div class="phone-shell whatsapp-phone">
-    <video id="demo-whatsapp-video" src="/media/demo-whatsapp-3x.mp4" poster="/media/demo-whatsapp-poster.webp" width="720" height="1600" preload="none" muted playsinline controls aria-label="הקלטת הדגמת וואטסאפ במהירות פי שלושה" aria-describedby="whatsapp-demo-description"></video>
+    <video id="demo-whatsapp-video" src="/media/demo-whatsapp-3x.mp4" poster="/media/demo-whatsapp-poster.webp" width="720" height="1600" preload="none" muted playsinline controls aria-label="הקלטת הדגמת וואטסאפ במהירות פי שלושה"></video>
   </div>
   <figcaption class="device-caption whatsapp-caption">
     <div class="whatsapp-controls" hidden>
@@ -21,7 +21,6 @@ import Icon from './Icon.astro';
       <input class="whatsapp-seek" type="range" min="0" max="45.708333" value="0" step="0.1" dir="ltr" aria-label="מיקום בהדגמת הוואטסאפ" aria-valuetext="0:00 מתוך 0:45" aria-controls="demo-whatsapp-video" disabled />
       <div class="whatsapp-meta"><span>מהירות <bdi>3×</bdi></span><span class="whatsapp-time" dir="ltr" aria-hidden="true"><span class="whatsapp-elapsed">0:00</span> / <span class="whatsapp-duration">0:45</span></span></div>
     </div>
-    <span id="whatsapp-demo-description">הדגמה מוקלטת · אין שיחה פעילה</span>
     <span class="whatsapp-status" role="status" aria-atomic="true"></span>
     <a class="whatsapp-download" href="/media/demo-whatsapp-3x.mp4" hidden>פתיחת הסרטון ישירות</a>
     <noscript><span>מהירות פי 3 · כ־46 שניות</span><a class="whatsapp-download" href="/media/demo-whatsapp-3x.mp4">פתיחת הסרטון ישירות</a></noscript>
@@ -29,9 +28,9 @@ import Icon from './Icon.astro';
 </figure>
 
 <style>
-  .device-stage .whatsapp-phone { min-height: 0; background: #0b141a; }
+  .device-stage .whatsapp-phone { background: #0b141a; }
   .device-stage .whatsapp-phone::after { display: none; }
-  .whatsapp-phone video { display: block; width: 100%; height: auto; aspect-ratio: 9 / 20; object-fit: contain; background: #0b141a; }
+  .whatsapp-phone video { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: contain; background: #0b141a; }
   .whatsapp-phone video:fullscreen { width: 100%; height: 100%; border-radius: 0; }
   .whatsapp-caption { grid-template-rows: auto; gap: 12px; font-size: .8125rem; }
   .whatsapp-controls { width: 100%; }
