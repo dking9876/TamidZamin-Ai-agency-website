@@ -44,6 +44,16 @@ Native/no-JavaScript media UI still uses encoded WhatsApp asset timestamps;
 the new normalized custom timeline and selectors require JavaScript.
 No real customer call, WhatsApp message or external trial was initiated.
 
+### Verified on the real domain
+
+Source release `ed1ffed` was pushed to `main` and served over HTTPS at
+`https://www.tamidzamin.com/`. All 36 hosted speed, scroll-autoplay and
+responsive-layout cases pass without retries, including actual calibrated
+clock advancement, independent speed choices, replay/retry, fullscreen,
+the owner-summary ending, keyboard, 200% text and no-JavaScript trial actions.
+Mobile trials precede the phone; desktop trials stay with their introductions.
+Local and remote release commits matched after publication.
+
 ## Google Search Console connection - 23 November 2026
 
 The canonical URL-prefix property `https://www.tamidzamin.com/` is verified
