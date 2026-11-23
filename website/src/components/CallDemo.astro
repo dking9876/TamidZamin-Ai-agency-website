@@ -30,12 +30,12 @@ import { formatCallTime } from '../lib/call-transcript';
       <span class="transcript-follow-note"><Icon name="check" size={14} />התמליל עוקב אחרי השיחה</span>
       <button class="recording-follow" type="button" aria-controls="call-transcript-list" hidden><Icon name="replay" size={15} />חזרה לשיחה</button>
     </div>
-    <button class="recording-toggle" type="button" aria-controls="demo-call-audio" aria-label="לחצו להאזנה לשיחת ההדגמה" hidden>
+    <button class="recording-toggle" type="button" aria-controls="demo-call-audio" aria-describedby="recording-status" aria-label="להאזנה לשיחת ההדגמה עם קול" hidden>
       <span class="recording-play" aria-hidden="true">
         <svg class="recording-play-icon" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="m9 5 10 7-10 7V5Z" /></svg>
         <svg class="recording-pause-icon" width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M8 5v14M16 5v14" /></svg>
       </span>
-      <span class="recording-action">לחצו להאזנה</span>
+      <span class="recording-action">להאזנה עם קול</span>
       <span class="waveform" aria-hidden="true">
         {[12, 22, 36, 18, 48, 30, 55, 25, 43, 22, 36, 14, 26].map((height, index) =>
           <i style={`height:${height}px;--beat-delay:${index * -90}ms`} />)}
@@ -52,12 +52,11 @@ import { formatCallTime } from '../lib/call-transcript';
         <button class="recording-restart" type="button" aria-controls="demo-call-audio"><Icon name="replay" size={16} /><span>מההתחלה</span></button>
       </div>
     </div>
-    <!-- Inline video supports muted autoplay of this unchanged audio-only file. -->
     <video id="demo-call-audio" src="/media/demo-call.mp3" preload="none" playsinline controls aria-label="הקלטת שיחת ההדגמה של TamidZamin"></video>
   </div>
   <figcaption class="device-caption recording-caption">
     <div class="recording-speed"><DemoSpeed mediaId="demo-call-audio" label="מהירות שיחת ההדגמה" /></div>
-    <span class="recording-status" role="status" aria-atomic="true"></span>
+    <span class="recording-status" id="recording-status" role="status" aria-atomic="true"></span>
     <a class="recording-download" href="/media/demo-call.mp3" hidden>פתיחת ההקלטה ישירות</a>
     <noscript><a class="recording-download" href="/media/demo-call.mp3">פתיחת ההקלטה ישירות</a></noscript>
   </figcaption>

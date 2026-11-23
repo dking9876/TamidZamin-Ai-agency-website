@@ -86,10 +86,13 @@ The recordings remain staged media, not embedded live conversations.
 Playback starts once per page visit at 40% frame visibility, pauses below
 15% visibility or when the page is hidden, and never overrides manual pause
 or restarts on re-entry. Reduced-motion preferences keep manual playback.
-Both automatic previews are silent; a visible call sound control enables
-audio only after visitor interaction. The call's unchanged MP3 uses an inline
-media player because native audio-only elements can block even muted autoplay.
-Browsers that still block playback receive an explicit manual recovery action.
+The owner's later sound-first request supersedes the initial silent call
+preview: the phone attempts audible playback once. Browser denial leaves it
+paused at the beginning with an explicit "play with sound" action, not a muted
+retry or a download-error state. Manual playback enables sound; its existing
+sound control still allows muting. WhatsApp remains silent. The call's unchanged
+MP3 keeps its inline media player and native no-JavaScript fallback. Audible
+autoplay depends on browser permission or prior interaction and is not guaranteed.
 Publishing the trial number is not evidence that its underlying workflow,
 handoff, data storage or response availability has been verified. No test
 message or call is authorized by this implementation request. Visitors are

@@ -447,19 +447,22 @@ recovery.
 The 3x speed is encoded into the 45.708-second H.264 asset, including native
 fullscreen and no-JavaScript playback. The original silent audio track is omitted.
 The owner's 23 November request supersedes the earlier manual-only behavior.
-Both recordings attempt one silent start when their own frame is at least
-40% visible. The shared `demo-playback.ts` observer pauses active or pending
+Both recordings attempt one start when their own frame is at least 40% visible:
+silent WhatsApp playback and, under the owner's later sound-first instruction,
+audible call playback. The shared `demo-playback.ts` observer pauses active or pending
 playback below 15% visibility, on page hiding or on exit. Re-entry, completed
 recordings and returning to the tab never start a second automatic attempt.
 User playback/seek controls take precedence; reduced motion disables automatic
 previews while leaving requested playback available. Browser refusal stays
 explicit and recoverable with the existing play/retry controls.
 The WhatsApp video stays muted, non-looping and unloaded before visibility.
-The call's unchanged MP3 now uses an inline video media element for
-browser-supported silent autoplay: a native audio element can reject even
-muted playback without activation. It has no new video asset or visual
-content. A labeled 44px sound action beside restart enables audible playback
-only in response to a visitor gesture. No surprise audio is started by scroll.
+The call's unchanged MP3 keeps its inline video media element and native
+fallback, with no new video asset or visual content. The call starts with sound
+only if the browser allows it. Autoplay denial leaves the recording at the start
+in a distinct blocked state: the primary 44px action says "play with sound",
+and a status message explains the required click without claiming a media
+download failure. There is no silent fallback or repeated automatic attempt.
+A labeled 44px sound action beside restart still permits muting and unmuting.
 Page hiding/exit pauses playback without automatic resumption. Fullscreen uses
 native controls and an iOS native-video fallback; unsupported browsers omit
 the action. The service page links to `/#whatsapp-demo`.

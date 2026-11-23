@@ -81,6 +81,7 @@ test('voice waveform follows the scroll-started recording and stops when paused'
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/');
   expect(await page.locator('.waveform').evaluate((element) => element.getAnimations({ subtree: true }).length)).toBe(0);
+  await page.locator('.home-hero h1').click();
   await reveal(page, '.phone-channel figure');
   await expect(page.locator('.recording-phone')).toHaveAttribute('data-state', 'playing');
   await page.waitForFunction(() => window.__premiumFrameGaps.length > 10);

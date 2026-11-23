@@ -1,5 +1,42 @@
 # Verification and launch status
 
+## Sound-first phone demo - 23 November 2026
+
+The owner approved trying audible playback on scroll, with a clear manual
+sound-start action when browser policy requires a click. This supersedes the
+earlier silent automatic call preview; WhatsApp remains silent.
+
+- The phone makes one audible attempt at 40% visibility. Real browser denial
+  leaves it paused at 0:00, unmuted, with "play with sound" as the main action.
+  There is no silent retry or automatic replay on re-entry.
+- Policy denial has a distinct blocked state and an accessible explanation,
+  not a recording-download error. Genuine media errors retain retry/direct-file
+  recovery. Manual playback, mute, seek, speeds and owner-summary replay work.
+- Offscreen, hidden-page, reduced-motion, cancellation and manual-precedence
+  safeguards remain; the original recording and transcript are unchanged.
+  Both phone dimensions, early trial actions and native fallbacks are preserved.
+- Phone-service and accessibility copy now describe the sound-first behavior.
+
+### Verified against the final local production build
+
+- Astro/TypeScript and production build: zero errors, warnings or hints.
+- All 37 unit tests and 79 related browser cases pass without retries.
+- Strict, trace-free Edge/Chromium tests use gesture-free CDP reads and native
+  wheel input. Before activation the call stays blocked at 0:00 while actual
+  WhatsApp frames decode. A manual sound-start click plays the real recording.
+  A genuine prior visitor click separately permits audible scroll playback.
+  Both paths pass at 390px and 1440px.
+- Matching frames, responsive controls at 14 widths, 200% text, blocked-state
+  accessibility, keyboard/touch, mute, calibrated speeds, transcript, receipt,
+  network recovery and native/no-JavaScript playback pass.
+- Mobile/desktop rendered captures and measured bounds preserve the existing
+  composition and clear sound-start action. The UI detector has no findings,
+  and Git's whitespace check passes.
+
+Audible autoplay still depends on browser permission or prior interaction.
+Tests use emulated sizes in Edge/Chromium, not physical phones or Safari.
+No real customer call, WhatsApp message or external trial was initiated.
+
 ## User-controlled demo speed and early trial actions - 23 November 2026
 
 The owner requested separate playback speed controls and earlier placement

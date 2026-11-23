@@ -33,9 +33,10 @@ if (root) {
   let following = true;
   let frame = 0;
 
-  type State = 'idle' | 'loading' | 'playing' | 'paused' | 'ended' | 'error';
+  type State = 'idle' | 'blocked' | 'loading' | 'playing' | 'paused' | 'ended' | 'error';
   const labels: Record<State, [string, string]> = {
-    idle: ['לחצו להאזנה', 'לחצו להאזנה לשיחת ההדגמה'],
+    idle: ['להאזנה עם קול', 'להאזנה לשיחת ההדגמה עם קול'],
+    blocked: ['להאזנה עם קול', 'להאזנה לשיחת ההדגמה עם קול'],
     loading: ['טוען… ביטול', 'טוען… ביטול טעינת שיחת ההדגמה'],
     playing: ['השהיה', 'השהיה של שיחת ההדגמה'],
     paused: ['המשך האזנה', 'המשך האזנה לשיחת ההדגמה'],
@@ -146,7 +147,7 @@ if (root) {
     updateTime();
   }
 
-  async function play() {
+  async function play(automatic = false) {
     const currentRequest = ++request;
     wantsPlayback = true;
     status.textContent = '';
@@ -161,6 +162,15 @@ if (root) {
     } catch (error) {
       // A newer click or page lifecycle event may have cancelled this request.
       if (currentRequest !== request) return;
+      if (automatic && error instanceof DOMException && error.name === 'NotAllowedError') {
+        wantsPlayback = false;
+        request++;
+        audio.pause();
+        stopTranscriptClock();
+        setState('blocked');
+        status.textContent = 'הדפדפן חסם הפעלה אוטומטית עם קול. לחצו על כפתור ההאזנה.';
+        return;
+      }
       fail(error instanceof DOMException && error.name === 'NotAllowedError'
         ? 'הדפדפן חסם את ההשמעה. לחצו שוב להאזנה או פתחו את ההקלטה ישירות.'
         : 'לא הצלחנו לטעון את ההקלטה. נסו שוב או פתחו אותה ישירות.');
@@ -170,9 +180,9 @@ if (root) {
   const playback = observeDemoPlayback({
     frame: phone,
     start: () => {
-      audio.muted = true;
+      audio.muted = false;
       updateSound();
-      void play();
+      void play(true);
     },
     pause,
     isActive: () => wantsPlayback || !audio.paused,
@@ -234,7 +244,7 @@ if (root) {
     stopTranscriptClock();
   });
   audio.addEventListener('pause', () => {
-    if (!audio.paused || audio.ended || phone.dataset.state === 'error') return;
+    if (!audio.paused || audio.ended || phone.dataset.state === 'error' || phone.dataset.state === 'blocked') return;
     wantsPlayback = false;
     stopTranscriptClock();
     syncTranscript();

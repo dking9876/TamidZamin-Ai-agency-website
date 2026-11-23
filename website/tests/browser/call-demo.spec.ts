@@ -24,7 +24,7 @@ for (const width of [390, 1440]) {
     const audio = page.locator('#demo-call-audio');
     const seek = page.locator('.recording-seek');
     await expect(toggle).toBeVisible();
-    await expect(toggle).toHaveAccessibleName('לחצו להאזנה לשיחת ההדגמה');
+    await expect(toggle).toHaveAccessibleName('להאזנה לשיחת ההדגמה עם קול');
     expect(mediaRequests).toEqual([]);
     expect(await audio.evaluate((element: HTMLAudioElement) => ({ paused: element.paused, muted: element.muted, volume: element.volume })))
       .toEqual({ paused: true, muted: false, volume: 1 });
