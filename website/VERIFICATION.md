@@ -1,5 +1,58 @@
 # Verification and launch status
 
+## Google Search Console connection - 23 November 2026
+
+The canonical URL-prefix property `https://www.tamidzamin.com/` is verified
+under the approved account, `tamidzaminai@gmail.com`. Google displayed
+"Ownership auto verified" with the HTML file method. This is separate from
+the whole-domain property `tamidzamin.com`, which still awaits a DNS record.
+
+Release `d08f94a` added only Google's public verification file and its README
+instructions. Vercel reported a successful deployment. The live
+`/googleea35bb1e8014c8cb.html` returns HTTP 200 without a redirect and matches
+Google's downloaded verification content, apart from an optional final newline.
+Keep this file after verification. No tracking script, DNS change or account
+credential was added; unrelated concurrent demo edits were not included.
+
+### Confirmed by Google
+
+- `https://www.tamidzamin.com/sitemap.xml` was submitted and then reported
+  **"Sitemap processed successfully"**, with **9 discovered pages** and a
+  last-read date of 23 November. An initial list-view fetch warning resolved
+  when the processed sitemap's detail report loaded.
+- The homepage's live URL test reported **"URL is available to Google"** and
+  **"Page can be indexed"**; a video was also detected.
+- Google displayed **"Indexing requested"** and confirmed addition to its
+  priority crawl queue for each URL below. Service-page requests included
+  Google's live eligibility check before acceptance.
+
+| Page | Index status observed before the request | Request accepted |
+| --- | --- | --- |
+| `/` | Crawled - currently not indexed | Yes |
+| `/services/` | URL is unknown to Google | Yes |
+| `/services/whatsapp/` | Discovered - currently not indexed | Yes |
+| `/services/phone/` | Discovered - currently not indexed | Yes |
+
+These are accepted requests, not confirmation of indexing or rankings.
+Google decides when and whether to index a URL. Repeated requests do not
+improve its queue position. Performance/indexing reports were still processing.
+
+### Fresh website checks and remaining DNS task
+
+All nine sitemap pages returned HTTP 200 with `index, follow`, correct
+self-referencing canonical URLs and no noindex response header. The sitemap
+still contains exactly nine content pages and excludes the verification file.
+No application behavior changed in this verification-file release; the
+earlier build/browser measurements below retain their original dates.
+
+The owner clarified that a friend controls Cloudflare. Exact instructions for
+adding Google's new apex TXT record were supplied for forwarding. No existing
+DNS, hosting, email, nameserver or proxy setting was modified. After the friend
+confirms the TXT record is saved, check DNS and complete verification of the
+`tamidzamin.com` Domain property in the same Google account. This expands
+property coverage; it does not block the already-verified canonical site's
+sitemap submission or indexing requests and provides no ranking guarantee.
+
 ## Owner WhatsApp summary at the end of the phone demo - 23 November 2026
 
 The owner's supplied WhatsApp screenshot is reproduced as responsive HTML
