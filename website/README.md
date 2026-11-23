@@ -316,6 +316,18 @@ Verify ownership, submit `https://www.tamidzamin.com/sitemap.xml`, and use URL
 Inspection to request indexing of the key public pages. Submission is not
 proof that Google has indexed or ranked a page; monitor Search Console.
 
+When DNS access is unavailable, the URL-prefix property
+`https://www.tamidzamin.com/` can be verified independently using Google's
+downloaded file at `public/googleea35bb1e8014c8cb.html`, issued for
+`tamidzaminai@gmail.com`. Keep its filename and verification content unchanged
+and retain it after verification; Google periodically rechecks ownership.
+It is a public ownership proof, not a password or tracking script. It does not
+belong in the page navigation or sitemap. Check its live URL returns HTTP 200
+with Google's verification text before pressing Verify in Search Console.
+This method covers the canonical HTTPS www site, not the entire Domain
+property; the separate apex TXT record is still needed for domain-wide access.
+See `VERIFICATION.md` for the latest confirmed Google setup status.
+
 Google Business Profile/Maps is intentionally deferred. It is not required
 for ordinary Search indexing. No home address or fake local listing should
 be created. Future business registration, legal/tax advice, client agreements
