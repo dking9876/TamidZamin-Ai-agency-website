@@ -37,6 +37,15 @@ Audible autoplay still depends on browser permission or prior interaction.
 Tests use emulated sizes in Edge/Chromium, not physical phones or Safari.
 No real customer call, WhatsApp message or external trial was initiated.
 
+### Verified on the real domain
+
+Source release `7090124` was pushed to `main` and served over HTTPS at
+`https://www.tamidzamin.com/`. All 38 hosted call, scroll-policy, receipt and
+speed checks pass without retries. Genuine first-visit autoplay denial leaves
+the call paused at 0:00 with the sound-start action; a real prior click permits
+audible scroll playback. Manual recovery, mute, cancellation, hidden/reduced
+motion, calibrated speeds, summary completion and native fallbacks also pass.
+
 ## User-controlled demo speed and early trial actions - 23 November 2026
 
 The owner requested separate playback speed controls and earlier placement
