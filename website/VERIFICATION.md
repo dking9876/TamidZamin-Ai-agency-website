@@ -1,5 +1,49 @@
 # Verification and launch status
 
+## Scroll-started demos and Super Tris trial links - 23 November 2026
+
+The owner requested scroll-triggered playback and supplied `+972584017275`
+for visitor-initiated Super Tris calls and WhatsApp conversations. The shared
+trial contact sits directly beneath the two demos, with a displayed number,
+separate telephone/WhatsApp actions and a request to use fictional test details.
+TamidZamin's agency contact, exact inquiry draft and launch settings are unchanged.
+
+Each recording starts silently once per page visit at 40% phone-frame
+visibility, stops below 15% visibility or when the page is hidden, and does
+not automatically restart. Manual input takes priority. Reduced motion keeps
+playback manual. A visible call sound control explicitly enables or mutes
+audio; browser refusals retain manual retry and direct-media recovery.
+The unchanged MP3 uses an inline video media element because native audio
+elements can block even muted playback before the first user gesture.
+The transcript continues to follow the real media clock.
+
+### Verified locally against the production build
+
+- Astro/TypeScript checks and production build: zero errors, warnings or hints.
+- All 37 existing unit tests pass; the supplied MP3 and transcript are unchanged.
+- All 64 related browser checks pass without retries, including matching
+  frames at 14 widths, 200% text, keyboard/touch controls, actual playback,
+  transcript synchronization, no JavaScript and automated accessibility.
+- The ten new autoplay/contact checks also pass twice consecutively.
+  Their first-visit proof disables tracing, enforces document activation
+  policy and uses CDP reads/scrolling with `userGesture: false`. Both media
+  clocks advance without user activation before a real pointer enables sound.
+  Tracing and ordinary automation evaluations can grant activation and were
+  deliberately excluded from that initial proof.
+- Manual pause/completion, cancelled pending loads, reduced-motion changes,
+  hidden/restored pages and denied-autoplay recovery are covered.
+- Exact Super Tris links are checked separately from all agency actions,
+  including without JavaScript. No real call or message was made or sent.
+- Final mobile/desktop production-layout captures were saved. The UI
+  detector returned no findings; Git's whitespace check passed.
+
+These are Edge/Chromium checks with emulated mobile viewports, not physical
+iPhone/Android or Safari certification. Browser/device policy can still
+require manual playback. The external trial's availability, responses, human
+handoff and storage behavior have not been independently verified.
+These results describe the local production build; hosted publication is a
+separate verification step.
+
 ## Direct-contact production release - 19 November 2026
 
 The owner supplied the real domain, contact details, service scope and operator,

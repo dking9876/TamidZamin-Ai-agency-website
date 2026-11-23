@@ -403,12 +403,13 @@ scrolls only the inner reader and never changes page scroll or keyboard focus.
 The 135-second recording remains explicitly recorded, not live. Errors appear
 in a status region with retry and direct-file recovery.
 
-`website/src/scripts/call-demo.ts` requests audio only after activation.
+`website/src/scripts/call-demo.ts` loads the recording on its first visible
+automatic preview, or on an explicit play action when autoplay is disabled.
 The existing cyan waveform becomes an animated playback indicator only while
 audio is playing, never a purported live amplitude trace. Pausing, buffering
 and completion stop it; reduced motion leaves it static while audio works.
 Hidden tabs and page exit pause the recording without automatic resumption.
-Native audio controls and a direct link provide the no-JavaScript fallback.
+Native media controls and a direct link provide the no-JavaScript fallback.
 The complete transcript is available without JavaScript as well. Media time
 owns highlighting, including seeks, pauses, silence, replay and buffering;
 there is no guessed transcript timer. Reduced motion keeps the highlight and
@@ -427,7 +428,20 @@ recovery.
 
 The 3x speed is encoded into the 45.708-second H.264 asset, including native
 fullscreen and no-JavaScript playback. The original silent audio track is omitted.
-`whatsapp-demo.ts` does not autoplay, loop or request the video before activation.
+The owner's 23 November request supersedes the earlier manual-only behavior.
+Both recordings attempt one silent start when their own frame is at least
+40% visible. The shared `demo-playback.ts` observer pauses active or pending
+playback below 15% visibility, on page hiding or on exit. Re-entry, completed
+recordings and returning to the tab never start a second automatic attempt.
+User playback/seek controls take precedence; reduced motion disables automatic
+previews while leaving requested playback available. Browser refusal stays
+explicit and recoverable with the existing play/retry controls.
+The WhatsApp video stays muted, non-looping and unloaded before visibility.
+The call's unchanged MP3 now uses an inline video media element for
+browser-supported silent autoplay: a native audio element can reject even
+muted playback without activation. It has no new video asset or visual
+content. A labeled 44px sound action beside restart enables audible playback
+only in response to a visitor gesture. No surprise audio is started by scroll.
 Page hiding/exit pauses playback without automatic resumption. Fullscreen uses
 native controls and an iOS native-video fallback; unsupported browsers omit
 the action. The service page links to `/#whatsapp-demo`.
@@ -452,6 +466,16 @@ recorded nature of the demos. Accessible media labels, the phone's internal
 recording heading, 3x speed, player controls, error messages and direct-file
 fallbacks remain. The idle phone caption reserves no empty margin; recovery
 messages and no-JavaScript links retain their spacing when present.
+
+On 23 November the owner supplied Super Tris's trial number `+972584017275`.
+A ruled, open contact row below the two channels names Super Tris, prints the
+international number in an LTR isolate, and provides distinct WhatsApp and
+telephone actions. On phones the actions stack at full width. This is separate
+from TamidZamin's own inquiry number and does not change the header/footer or
+business schema. Links require visitor activation and do not send a message,
+place a call or contact a service on scroll. A short note requests fictional
+test details; the privacy page distinguishes this external trial from agency
+inquiries without inventing its storage or retention behavior.
 
 Meaningful content is visible and crawlable before JavaScript; no reveal stylesheet hides it. Authored arrival sequences are shorter than three seconds; the background video and user-controlled recording indicator are deliberate looping exceptions with pause controls. No motion dependency or production capability is added.
 

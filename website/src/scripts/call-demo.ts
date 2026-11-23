@@ -1,11 +1,12 @@
 import transcript from '../data/call-transcript.json';
 import { activeCueIndex, formatCallTime, transcriptAnchorIndex } from '../lib/call-transcript';
+import { observeDemoPlayback } from '../lib/demo-playback';
 
 const root = document.querySelector<HTMLElement>('.call-demo');
 
 if (root) {
   const phone = root.querySelector<HTMLElement>('.recording-phone')!;
-  const audio = root.querySelector<HTMLAudioElement>('audio')!;
+  const audio = root.querySelector<HTMLMediaElement>('#demo-call-audio')!;
   const toggle = root.querySelector<HTMLButtonElement>('.recording-toggle')!;
   const action = root.querySelector<HTMLElement>('.recording-action')!;
   const controls = root.querySelector<HTMLElement>('.recording-controls')!;
@@ -18,6 +19,8 @@ if (root) {
   const cueElements = [...root.querySelectorAll<HTMLElement>('.transcript-cue')];
   const follow = root.querySelector<HTMLButtonElement>('.recording-follow')!;
   const followNote = root.querySelector<HTMLElement>('.transcript-follow-note')!;
+  const sound = root.querySelector<HTMLButtonElement>('.recording-sound')!;
+  const soundLabel = sound.querySelector<HTMLElement>('span')!;
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   let wantsPlayback = false;
   let request = 0;
@@ -39,6 +42,12 @@ if (root) {
     phone.dataset.state = state;
     action.textContent = labels[state][0];
     toggle.setAttribute('aria-label', labels[state][1]);
+  }
+
+  function updateSound() {
+    sound.dataset.muted = String(audio.muted);
+    soundLabel.textContent = audio.muted ? 'הפעלת קול' : 'השתקת קול';
+    sound.setAttribute('aria-label', audio.muted ? 'הפעלת קול בשיחת ההדגמה' : 'השתקת קול בשיחת ההדגמה');
   }
 
   function setFollowing(value: boolean) {
@@ -134,11 +143,30 @@ if (root) {
     }
   }
 
+  const playback = observeDemoPlayback({
+    frame: phone,
+    start: () => {
+      audio.muted = true;
+      updateSound();
+      void play();
+    },
+    pause,
+    isActive: () => wantsPlayback || !audio.paused,
+  });
+
   toggle.addEventListener('click', () => {
+    playback.takeControl();
     if (wantsPlayback || !audio.paused) pause();
-    else void play();
+    else {
+      audio.muted = false;
+      updateSound();
+      void play();
+    }
   });
   root.querySelector<HTMLButtonElement>('.recording-restart')!.addEventListener('click', () => {
+    playback.takeControl();
+    audio.muted = false;
+    updateSound();
     setFollowing(true);
     audio.currentTime = 0;
     updateTime();
@@ -146,12 +174,26 @@ if (root) {
     void play();
   });
   seek.addEventListener('input', () => {
+    playback.takeControl();
     setFollowing(true);
     audio.currentTime = seek.valueAsNumber;
     updateTime();
     syncTranscript(true);
     if (!wantsPlayback) setState('paused');
   });
+  sound.addEventListener('click', () => {
+    playback.takeControl();
+    if (audio.muted) {
+      pause();
+      audio.muted = false;
+      updateSound();
+      void play();
+    } else {
+      audio.muted = true;
+      updateSound();
+    }
+  });
+  audio.addEventListener('volumechange', updateSound);
 
   audio.addEventListener('playing', () => {
     if (!wantsPlayback) { audio.pause(); return; }
@@ -193,11 +235,7 @@ if (root) {
     transcriptViewport.focus({ preventScroll: true });
   });
   window.addEventListener('resize', () => syncTranscript(true));
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden && (wantsPlayback || !audio.paused)) pause();
-  });
-  window.addEventListener('pagehide', pause);
-
+  updateSound();
   audio.controls = false;
   audio.hidden = true;
   root.querySelector<HTMLElement>('.transcript-follow-row')!.hidden = false;

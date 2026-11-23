@@ -1,6 +1,8 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
+test.use({ reducedMotion: 'reduce' });
+
 test.beforeEach(async ({ page, baseURL }) => {
   const origin = new URL(baseURL!).origin;
   await page.route('**/*', (route) => new URL(route.request().url()).origin === origin
@@ -98,14 +100,14 @@ test('a pending load can be cancelled and rapid toggles do not restart cancelled
   await toggle.click();
   release();
   await expect(phone).toHaveAttribute('data-state', 'idle');
-  await expect.poll(() => page.locator('audio').evaluate((audio: HTMLAudioElement) => audio.paused)).toBe(true);
+  await expect.poll(() => page.locator('#demo-call-audio').evaluate((audio: HTMLMediaElement) => audio.paused)).toBe(true);
   await toggle.click();
   await expect(phone).toHaveAttribute('data-state', 'playing');
   await toggle.evaluate((button: HTMLButtonElement) => { button.click(); button.click(); });
   await expect(phone).toHaveAttribute('data-state', 'playing');
   await toggle.evaluate((button: HTMLButtonElement) => { button.click(); button.click(); button.click(); });
   await expect(phone).toHaveAttribute('data-state', 'paused');
-  expect(await page.locator('audio').evaluate((audio: HTMLAudioElement) => audio.paused)).toBe(true);
+  expect(await page.locator('#demo-call-audio').evaluate((audio: HTMLMediaElement) => audio.paused)).toBe(true);
 });
 
 test('reduced motion stops waveform motion, not requested audio; page hiding pauses without auto-resume', async ({ page }) => {
@@ -115,7 +117,7 @@ test('reduced motion stops waveform motion, not requested audio; page hiding pau
   await page.locator('.recording-toggle').click();
   await expect(phone).toHaveAttribute('data-state', 'playing');
   expect(await page.locator('.waveform').evaluate((waveform) => waveform.getAnimations({ subtree: true }).length)).toBe(0);
-  await expect.poll(() => page.locator('audio').evaluate((audio: HTMLAudioElement) => audio.currentTime)).toBeGreaterThan(.2);
+  await expect.poll(() => page.locator('#demo-call-audio').evaluate((audio: HTMLMediaElement) => audio.currentTime)).toBeGreaterThan(.2);
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await expect.poll(() => page.locator('.waveform').evaluate((waveform) => waveform.getAnimations({ subtree: true }).length)).toBe(13);
   await page.emulateMedia({ reducedMotion: 'reduce' });
@@ -137,7 +139,7 @@ test('reduced motion stops waveform motion, not requested audio; page hiding pau
 });
 
 test('mobile touch controls, focus, layout and accessibility work in idle and playing states', async ({ browser, baseURL }) => {
-  const context = await browser.newContext({ baseURL, viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+  const context = await browser.newContext({ baseURL, viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, reducedMotion: 'reduce' });
   const page = await context.newPage();
   await page.goto('/#phone-demo');
   const toggle = page.locator('.recording-toggle');
@@ -149,7 +151,7 @@ test('mobile touch controls, focus, layout and accessibility work in idle and pl
   await page.keyboard.press('Tab');
   await page.keyboard.press('Shift+Tab');
   await expect(toggle).toHaveCSS('outline-style', 'solid');
-  for (const selector of ['.recording-toggle', '.recording-seek', '.recording-restart']) {
+  for (const selector of ['.recording-toggle', '.recording-seek', '.recording-sound', '.recording-restart']) {
     const bounds = await page.locator(selector).boundingBox();
     expect(bounds!.height).toBeGreaterThanOrEqual(44);
     expect(bounds!.x).toBeGreaterThanOrEqual(0);
@@ -169,6 +171,9 @@ test('without JavaScript the native audio controls and direct recording link rem
   await expect(page.locator('#demo-call-audio')).toHaveAttribute('controls', '');
   await expect(page.locator('.recording-toggle')).toBeHidden();
   await expect(page.locator('noscript .recording-download')).toBeVisible();
+  await page.locator('#demo-call-audio').press('Space');
+  await expect(page.locator('#demo-call-audio')).toHaveJSProperty('paused', false);
+  await expect.poll(() => page.locator('#demo-call-audio').evaluate((media: HTMLMediaElement) => media.currentTime)).toBeGreaterThan(0);
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
   await context.close();
 });

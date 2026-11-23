@@ -93,6 +93,8 @@ for (const width of [320, 360, 390, 430, 600, 601, 768, 880, 881, 1024, 1100, 11
     await page.keyboard.press('Tab');
     await expect(page.locator('.recording-toggle')).toBeFocused();
     await page.keyboard.press('Tab');
+    await expect(page.locator('.recording-sound')).toBeFocused();
+    await page.keyboard.press('Tab');
     await expect(page.locator('.recording-restart')).toBeFocused();
     await page.keyboard.press('Tab');
     await expect(actions.last()).toBeFocused();

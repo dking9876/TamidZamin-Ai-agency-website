@@ -1,4 +1,5 @@
 import { formatCallTime } from '../lib/call-transcript';
+import { observeDemoPlayback } from '../lib/demo-playback';
 
 interface DemoVideo extends HTMLVideoElement {
   webkitEnterFullscreen?: () => void;
@@ -82,16 +83,26 @@ if (root) {
     }
   }
 
+  const playback = observeDemoPlayback({
+    frame: root.querySelector<HTMLElement>('.phone-shell')!,
+    start: () => { void play(); },
+    pause,
+    isActive: () => wantsPlayback || !video.paused,
+  });
+
   toggle.addEventListener('click', () => {
+    playback.takeControl();
     if (wantsPlayback || !video.paused) pause();
     else void play();
   });
   root.querySelector<HTMLButtonElement>('.whatsapp-restart')!.addEventListener('click', () => {
+    playback.takeControl();
     video.currentTime = 0;
     updateTime();
     void play();
   });
   seek.addEventListener('input', () => {
+    playback.takeControl();
     video.currentTime = seek.valueAsNumber;
     updateTime();
     if (!wantsPlayback) setState('paused');
@@ -125,6 +136,7 @@ if (root) {
 
   fullscreen.hidden = !document.fullscreenEnabled && !video.webkitEnterFullscreen;
   fullscreen.addEventListener('click', async () => {
+    playback.takeControl();
     video.controls = true;
     try {
       if (document.fullscreenEnabled) await video.requestFullscreen();
@@ -139,13 +151,6 @@ if (root) {
     video.controls = document.fullscreenElement === video;
   });
   video.addEventListener('webkitendfullscreen', () => { video.controls = false; });
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden && (wantsPlayback || !video.paused)) pause();
-  });
-  window.addEventListener('pagehide', () => {
-    if (wantsPlayback || !video.paused) pause();
-  });
-
   video.controls = false;
   root.querySelector<HTMLElement>('.whatsapp-controls')!.hidden = false;
 }

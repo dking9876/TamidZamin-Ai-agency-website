@@ -98,18 +98,22 @@ test('404, crawler controls and retired form endpoint', async ({ page, request }
   expect((await gone.json()).ok).toBe(false);
 });
 
-test('all direct actions use the exact approved number and message without sending', async ({ page }) => {
+test('agency and Super Tris actions use their separate approved numbers without sending', async ({ page }) => {
   for (const path of paths) {
     await page.goto(path);
-    const whatsapp = await page.locator('a[href^="https://wa.me/"]').evaluateAll((links) => links.map((link) => link.getAttribute('href')!));
+    const whatsapp = await page.locator('a[href^="https://wa.me/"]:not(.demo-contact a)').evaluateAll((links) => links.map((link) => link.getAttribute('href')!));
     expect(whatsapp.length, path).toBeGreaterThan(0);
     for (const href of whatsapp) {
       const url = new URL(href);
       expect(url.pathname).toBe(`/${business.whatsapp}`);
       expect(url.searchParams.get('text')).toBe(business.whatsappMessage);
     }
-    for (const href of await page.locator('a[href^="tel:"]').evaluateAll((links) => links.map((link) => link.getAttribute('href')))) {
+    for (const href of await page.locator('a[href^="tel:"]:not(.demo-contact a)').evaluateAll((links) => links.map((link) => link.getAttribute('href')))) {
       expect(href).toBe(`tel:${business.phone}`);
+    }
+    if (path === '/') {
+      await expect(page.locator('.demo-contact a[href^="https://wa.me/"]')).toHaveAttribute('href', 'https://wa.me/972584017275');
+      await expect(page.locator('.demo-contact a[href^="tel:"]')).toHaveAttribute('href', 'tel:+972584017275');
     }
     await expect(page.locator('form')).toHaveCount(0);
   }

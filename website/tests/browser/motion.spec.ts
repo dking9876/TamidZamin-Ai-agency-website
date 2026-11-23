@@ -44,7 +44,7 @@ test.beforeEach(async ({ page, baseURL }) => {
 });
 
 for (const width of [390, 1440]) {
-  test(`motion at ${width}px: recorded demo enters once without starting playback`, async ({ page }) => {
+  test(`motion at ${width}px: recorded demo enters once and starts playback on view`, async ({ page }) => {
     await page.setViewportSize({ width, height: 900 });
     await page.goto('/');
     await page.evaluate(() => document.fonts.ready);
@@ -68,20 +68,20 @@ for (const width of [390, 1440]) {
       .every((animation) => animation.playState === 'finished'));
     await expect(page.locator('.whatsapp-demo')).toHaveCSS('opacity', '1');
     await expect(page.locator('.whatsapp-toggle')).toBeVisible();
-    expect(await page.locator('#demo-whatsapp-video').evaluate((video: HTMLVideoElement) => video.paused)).toBe(true);
+    await expect(page.locator('#demo-whatsapp-video')).toHaveJSProperty('paused', false);
     await reveal(page, '#process');
+    await expect(page.locator('#demo-whatsapp-video')).toHaveJSProperty('paused', true);
     await reveal(page, '.whatsapp-demo');
     expect(await page.locator('.whatsapp-demo').evaluate((element) => element.getAnimations({ subtree: true }).length)).toBe(0);
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
   });
 }
 
-test('voice waveform stays still until the recording plays and stops when paused', async ({ page }) => {
+test('voice waveform follows the scroll-started recording and stops when paused', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/');
-  await reveal(page, '.phone-channel figure');
   expect(await page.locator('.waveform').evaluate((element) => element.getAnimations({ subtree: true }).length)).toBe(0);
-  await page.locator('.recording-toggle').click();
+  await reveal(page, '.phone-channel figure');
   await expect(page.locator('.recording-phone')).toHaveAttribute('data-state', 'playing');
   await page.waitForFunction(() => window.__premiumFrameGaps.length > 10);
   await expect.poll(() => page.locator('.waveform i').evaluateAll((bars) =>
@@ -91,7 +91,7 @@ test('voice waveform stays still until the recording plays and stops when paused
   await reveal(page, '.home-hero');
   await reveal(page, '.phone-channel figure');
   expect(await page.locator('.waveform').evaluate((element) => element.getAnimations({ subtree: true }).length)).toBe(0);
-  expect(await page.locator('audio').evaluate((audio: HTMLAudioElement) => audio.paused)).toBe(true);
+  expect(await page.locator('#demo-call-audio').evaluate((audio: HTMLMediaElement) => audio.paused)).toBe(true);
 });
 
 test('reduced motion cancels entrances without hiding recorded demo controls or shifting the composition', async ({ page }) => {

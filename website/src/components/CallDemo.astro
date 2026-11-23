@@ -37,9 +37,16 @@ import { formatCallTime } from '../lib/call-transcript';
     <div class="recording-controls" hidden>
       <div class="recording-time" dir="ltr" aria-hidden="true"><span class="recording-elapsed">0:00</span><span class="recording-duration">2:15</span></div>
       <input class="recording-seek" type="range" min="0" max="135" value="0" step="0.1" dir="ltr" aria-label="מיקום בשיחת ההדגמה" aria-valuetext="0:00 מתוך 2:15" aria-controls="demo-call-audio" disabled />
-      <button class="recording-restart" type="button" aria-controls="demo-call-audio"><Icon name="replay" size={16} /><span>מההתחלה</span></button>
+      <div class="recording-actions">
+        <button class="recording-sound" type="button" aria-controls="demo-call-audio" aria-label="השתקת קול בשיחת ההדגמה" data-muted="false">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m11 5-6 4H2v6h3l6 4V5Z" /><path class="sound-on" d="M15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14" /><path class="sound-off" d="m16 9 6 6m0-6-6 6" /></svg>
+          <span>השתקת קול</span>
+        </button>
+        <button class="recording-restart" type="button" aria-controls="demo-call-audio"><Icon name="replay" size={16} /><span>מההתחלה</span></button>
+      </div>
     </div>
-    <audio id="demo-call-audio" src="/media/demo-call.mp3" preload="none" controls aria-label="הקלטת שיחת ההדגמה של TamidZamin"></audio>
+    <!-- Inline video supports muted autoplay of this unchanged audio-only file. -->
+    <video id="demo-call-audio" src="/media/demo-call.mp3" preload="none" playsinline controls aria-label="הקלטת שיחת ההדגמה של TamidZamin"></video>
   </div>
   <figcaption class="device-caption recording-caption">
     <span class="recording-status" role="status" aria-atomic="true"></span>
@@ -137,7 +144,8 @@ import { formatCallTime } from '../lib/call-transcript';
   }
   .recording-seek:disabled { opacity: .55; cursor: default; }
   .recording-seek:focus-visible { outline-color: var(--cyan); outline-offset: 0; }
-  .recording-restart {
+  .recording-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; }
+  .recording-restart, .recording-sound {
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -151,19 +159,24 @@ import { formatCallTime } from '../lib/call-transcript';
     font-size: .8125rem;
     cursor: pointer;
   }
-  .recording-restart:is(:hover, :focus-visible) { color: var(--paper); background: #ffffff0d; }
+  .recording-restart:is(:hover, :focus-visible), .recording-sound:is(:hover, :focus-visible) { color: var(--paper); background: #ffffff0d; }
+  .recording-sound { color: var(--cyan); }
+  .recording-sound[data-muted="true"] { background: var(--pill-paper); color: var(--pill-ink); }
+  .recording-sound[data-muted="true"]:is(:hover, :focus-visible) { background: var(--pill-hover); color: var(--pill-ink); }
+  .recording-sound .sound-off, .recording-sound[data-muted="true"] .sound-on { display: none; }
+  .recording-sound[data-muted="true"] .sound-off { display: block; }
   .recording-caption { grid-template-rows: auto; font-size: .8125rem; }
   .recording-caption:not(:has(.recording-status:not(:empty), .recording-download:not([hidden]))) { margin-block-start: 0; }
   .recording-status:empty { display: none; }
   .recording-status { color: var(--paper); }
   .recording-download { display: inline-flex; align-items: center; min-height: 44px; color: var(--cyan); text-underline-offset: .25em; }
-  .recording-phone > audio { width: 100%; margin-block: 24px; }
+  #demo-call-audio { width: 100%; height: 54px; margin-block: 24px; }
   .call-demo [hidden] { display: none; }
   @keyframes call-wave { from { transform: scaleY(.35); } to { transform: scaleY(1); } }
   @media (max-width: 880px) {
     .recording-heading strong { font-size: 1.125rem; }
     .recording-transcript .transcript-cue p { font-size: .9375rem; }
-    .recording-time, .recording-restart { font-size: .875rem; }
+    .recording-time, .recording-restart, .recording-sound { font-size: .875rem; }
   }
   @media (min-width: 881px) and (max-width: 1100px) {
     .recording-heading { flex-direction: column; gap: 8px; }

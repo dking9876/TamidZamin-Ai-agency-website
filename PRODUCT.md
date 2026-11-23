@@ -41,7 +41,8 @@ and more qualified jobs; these are goals, not verified results or guarantees.
 TamidZamin provides discovery, dedicated WhatsApp and phone agent development,
 setup and ongoing support, with scope agreed per business. The owner has
 confirmed this offering. Do not publish language or integration claims.
-Booking capabilities and a live public demo have not been approved.
+Booking capabilities have not been approved. The later 23 November instruction
+below approves links to the owner's external Super Tris trial number only.
 On 18 November 2026 the owner supplied a 135-second MP3 conversation and
 requested click-to-listen playback in the homepage phone demonstration.
 That recording is implemented as playback, not a live agent or verified
@@ -76,6 +77,24 @@ recorded demonstrations, with unchanged controls and no new live capability.
 The owner's follow-up authorizes committing and pushing all pending website
 changes, including the matching phone dimensions, to the existing Git branch
 and connected preview. Lead delivery and indexing remain disabled.
+
+On 23 November the owner requested automatic playback when each homepage demo
+phone scrolls into view, and supplied the Super Tris trial number
+`+972584017275` for visitor-initiated telephone and WhatsApp links beside the
+demos. This is separate from TamidZamin's business contact `+972584345513`.
+The recordings remain staged media, not embedded live conversations.
+Playback starts once per page visit at 40% frame visibility, pauses below
+15% visibility or when the page is hidden, and never overrides manual pause
+or restarts on re-entry. Reduced-motion preferences keep manual playback.
+Both automatic previews are silent; a visible call sound control enables
+audio only after visitor interaction. The call's unchanged MP3 uses an inline
+media player because native audio-only elements can block even muted autoplay.
+Browsers that still block playback receive an explicit manual recovery action.
+Publishing the trial number is not evidence that its underlying workflow,
+handoff, data storage or response availability has been verified. No test
+message or call is authorized by this implementation request. Visitors are
+encouraged to use fictional test details. No agency contact, indexing,
+analytics or retired lead-endpoint configuration changes are authorized.
 
 `this master demo prd.txt` is now nonempty. It specifies a TrisMaster electric
 shutter intake demo, not evidence of a working deployment or company-wide
@@ -126,8 +145,9 @@ copy, other section, business claim or launch safeguard is removed.
 
 The approved homepage image, nine numbered PNGs, the TrisMaster requirements,
 and the agency context in the project instructions. No verified testimonials,
-prices, performance results or live demo destination were supplied. The later
-owner-supplied MP3 supports recorded playback only.
+prices or performance results were supplied. The owner-supplied MP3 supports
+recorded playback only; the separately approved trial contact does not verify
+its underlying workflow.
 People in supplied illustrations must not be presented as identified customers
 or employees.
 
@@ -144,10 +164,12 @@ preview-only restrictions above. Preserve the approved design and recordings.
 - WhatsApp and telephone: `058-4345513` / `+972584345513`.
 - Exact WhatsApp draft: `היי, אני מתעניין בסוכן לעסק שלי. אשמח לשמוע פרטים`.
 - Email: `tamidzaminai@gmail.com`, including privacy/accessibility requests.
-- No on-site contact form, booking service, live inquiry agent, analytics,
+- No on-site contact form, booking service, embedded live inquiry agent, analytics,
   pixels, marketing list, automatic inquiry-call recording or CRM transfer.
   The operator handles inquiries himself. WhatsApp sends only after the
   visitor chooses to send in that external service.
+  The separately approved Super Tris external trial is described above and
+  must not be presented as the agency's inquiry line.
 - Contact is available 24/7, not a guarantee of immediate human response.
 - All trades and service businesses across Israel, especially central Israel.
   Online conversations are available. Do not publish a home address.

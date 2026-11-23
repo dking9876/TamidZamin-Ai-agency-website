@@ -7,7 +7,7 @@ async function loadAndPause(page: Page) {
   await page.locator('.recording-toggle').click();
   await expect(page.locator('.recording-phone')).toHaveAttribute('data-state', 'playing');
   await page.locator('.recording-toggle').click();
-  await expect.poll(() => page.locator('audio').evaluate((audio: HTMLAudioElement) => audio.paused)).toBe(true);
+  await expect.poll(() => page.locator('#demo-call-audio').evaluate((audio: HTMLMediaElement) => audio.paused)).toBe(true);
 }
 
 for (const width of [320, 768, 1024, 1440]) {
@@ -16,7 +16,7 @@ for (const width of [320, 768, 1024, 1440]) {
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await loadAndPause(page);
     const problems = await page.evaluate(async (cues) => {
-      const audio = document.querySelector<HTMLAudioElement>('audio')!;
+      const audio = document.querySelector<HTMLMediaElement>('#demo-call-audio')!;
       const viewport = document.querySelector<HTMLElement>('.recording-transcript')!;
       const elements = [...document.querySelectorAll<HTMLElement>('.transcript-cue')];
       const issues: string[] = [];
@@ -51,7 +51,7 @@ test('normal playback highlights from the media clock without drift and freezes 
   await page.locator('.recording-seek').fill(String(cue.start));
   await page.locator('.recording-toggle').click();
   const timing = await page.evaluate(async (cues) => {
-    const audio = document.querySelector<HTMLAudioElement>('audio')!;
+    const audio = document.querySelector<HTMLMediaElement>('#demo-call-audio')!;
     const mismatches: number[] = [];
     let mismatchSince: number | null = null;
     let checked = 0;
@@ -72,10 +72,10 @@ test('normal playback highlights from the media clock without drift and freezes 
   expect(timing.checked).toBeGreaterThan(20);
   expect(timing.longestMismatch).toBeLessThan(100);
   await page.locator('.recording-toggle').click();
-  const paused = await page.locator('audio').evaluate((audio: HTMLAudioElement) => audio.currentTime);
+  const paused = await page.locator('#demo-call-audio').evaluate((audio: HTMLMediaElement) => audio.currentTime);
   const active = await page.locator('.transcript-cue[aria-current="true"]').evaluateAll((elements) => elements.map((element) => element.getAttribute('data-cue')));
   await page.waitForTimeout(300);
-  expect(await page.locator('audio').evaluate((audio: HTMLAudioElement) => audio.currentTime)).toBe(paused);
+  expect(await page.locator('#demo-call-audio').evaluate((audio: HTMLMediaElement) => audio.currentTime)).toBe(paused);
   expect(await page.locator('.transcript-cue[aria-current="true"]').evaluateAll((elements) => elements.map((element) => element.getAttribute('data-cue')))).toEqual(active);
 });
 
@@ -91,7 +91,7 @@ test('manual reading suspends auto-scroll; return-to-call restores context witho
   await expect(page.locator('.recording-follow')).toBeVisible();
   await expect.poll(() => reader.evaluate((element) => element.scrollTop)).toBe(0);
   const later = transcript[transcript.length - 4];
-  await page.locator('audio').evaluate((audio: HTMLAudioElement, time) => { audio.currentTime = time; }, later.start + .05);
+  await page.locator('#demo-call-audio').evaluate((audio: HTMLMediaElement, time) => { audio.currentTime = time; }, later.start + .05);
   await expect(page.locator(`.transcript-cue[data-cue="${transcript.length - 4}"]`)).toHaveAttribute('aria-current', 'true');
   expect(await reader.evaluate((element) => element.scrollTop)).toBe(0);
   const scroll = await page.evaluate(() => scrollY);
