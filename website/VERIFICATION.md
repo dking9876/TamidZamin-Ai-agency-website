@@ -44,6 +44,16 @@ handoff and storage behavior have not been independently verified.
 These results describe the local production build; hosted publication is a
 separate verification step.
 
+### Verified on the real domain
+
+Source release `3e712fb` was pushed to `main` and served successfully at
+`https://www.tamidzamin.com/`. All ten autoplay/contact browser checks pass
+against that public domain, including genuine gesture-free muted playback
+at 390px and 1440px, explicit sound activation, lifecycle/manual precedence,
+recovery and exact separate Super Tris links. The tests do not initiate an
+external call or send a WhatsApp message. Local and remote release commits
+matched and the checkout was clean after publication.
+
 ## Direct-contact production release - 19 November 2026
 
 The owner supplied the real domain, contact details, service scope and operator,
