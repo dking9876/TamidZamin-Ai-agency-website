@@ -21,6 +21,10 @@ if (root) {
   const followNote = root.querySelector<HTMLElement>('.transcript-follow-note')!;
   const sound = root.querySelector<HTMLButtonElement>('.recording-sound')!;
   const soundLabel = sound.querySelector<HTMLElement>('span')!;
+  const summary = root.querySelector<HTMLElement>('.recording-summary')!;
+  const summaryAnnouncement = root.querySelector<HTMLElement>('.recording-summary-announcement')!;
+  const description = root.querySelector<HTMLElement>('.recording-description')!;
+  const followRow = root.querySelector<HTMLElement>('.transcript-follow-row')!;
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   let wantsPlayback = false;
   let request = 0;
@@ -42,6 +46,24 @@ if (root) {
     phone.dataset.state = state;
     action.textContent = labels[state][0];
     toggle.setAttribute('aria-label', labels[state][1]);
+    updateSummary();
+  }
+
+  function updateSummary() {
+    const show = audio.ended && !audio.error;
+    if (show === !summary.hidden) return;
+    const readerFocused = transcriptViewport.contains(document.activeElement);
+    const summaryFocused = summary.contains(document.activeElement);
+    summary.hidden = !show;
+    transcriptViewport.hidden = show;
+    followRow.hidden = show;
+    phone.dataset.view = show ? 'summary' : 'call';
+    description.textContent = show ? 'הסיכום בוואטסאפ של בעל העסק' : 'שיחת הדגמה מוקלטת';
+    summaryAnnouncement.textContent = show ? 'השיחה הסתיימה. מוצג סיכום לדוגמה בוואטסאפ של בעל העסק.' : '';
+    if (show) {
+      summary.scrollTop = 0;
+      if (readerFocused) summary.focus({ preventScroll: true });
+    } else if (summaryFocused) toggle.focus({ preventScroll: true });
   }
 
   function updateSound() {
@@ -70,12 +92,13 @@ if (root) {
   }
 
   function syncTranscript(immediate = false) {
+    updateSummary();
     const next = activeCueIndex(transcript, audio.currentTime);
     if (next === currentCue && !immediate) return;
     cueElements[currentCue]?.removeAttribute('aria-current');
     currentCue = next;
     cueElements[currentCue]?.setAttribute('aria-current', 'true');
-    if (following && (currentCue >= 0 || immediate)) {
+    if (following && !transcriptViewport.hidden && (currentCue >= 0 || immediate)) {
       scrollToCue(currentCue >= 0 ? currentCue : transcriptAnchorIndex(transcript, audio.currentTime), immediate);
     }
   }
@@ -163,7 +186,7 @@ if (root) {
       void play();
     }
   });
-  root.querySelector<HTMLButtonElement>('.recording-restart')!.addEventListener('click', () => {
+  function restart() {
     playback.takeControl();
     audio.muted = false;
     updateSound();
@@ -172,7 +195,9 @@ if (root) {
     updateTime();
     syncTranscript(true);
     void play();
-  });
+  }
+  root.querySelector<HTMLButtonElement>('.recording-restart')!.addEventListener('click', restart);
+  root.querySelector<HTMLButtonElement>('.call-summary-listen')!.addEventListener('click', restart);
   seek.addEventListener('input', () => {
     playback.takeControl();
     setFollowing(true);
@@ -238,7 +263,7 @@ if (root) {
   updateSound();
   audio.controls = false;
   audio.hidden = true;
-  root.querySelector<HTMLElement>('.transcript-follow-row')!.hidden = false;
+  followRow.hidden = false;
   toggle.hidden = false;
   controls.hidden = false;
 }

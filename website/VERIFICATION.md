@@ -1,5 +1,47 @@
 # Verification and launch status
 
+## Owner WhatsApp summary at the end of the phone demo - 23 November 2026
+
+The owner's supplied WhatsApp screenshot is reproduced as responsive HTML
+inside the existing call phone after the recording actually ends. The receipt
+identifies the business owner's view and shows the staged call's name, address,
+problem, urgency and preferred date. The unknown caller number is masked.
+The screenshot's personal customer data and unrelated dates are not published.
+The original image, MP3, transcript and WhatsApp video are untouched.
+
+The receipt's recording action replays the same MP3 and restores the transcript.
+Backward seeks also restore the conversation. The customer WhatsApp row opens
+a native explanation of its purpose, not a link to a real customer's number.
+A single screen-reader announcement marks completion. Focus moves only when
+the focused transcript is replaced, or when replay hides a focused receipt.
+Without JavaScript, a native disclosure exposes the same example and direct
+recording link. Both phone frames retain the same dimensions in all states.
+
+### Local production-build checks
+
+- Astro/TypeScript and production build: zero errors, warnings or hints.
+- All 37 existing unit tests pass, including original media/transcript checks.
+- All eight receipt-specific browser cases pass at 320, 390, 768, 1024 and
+  1440px, covering actual media completion, no premature receipt, replay,
+  backward seek, keyboard focus, masked contact details, native fallback,
+  200% text and automated accessibility.
+- All 72 related production browser checks pass without retries. Existing
+  playback, synchronized cues, responsive sizing, motion, agency/trial links,
+  site semantics and error recovery remain covered.
+- The genuine no-click autoplay proof also passes three times at both mobile
+  and desktop widths. It waits for fonts without granting activation, then
+  uses CDP native wheel input rather than an instantaneous DOM scroll. It
+  still verifies decoded video frames and the real audio clock while
+  `navigator.userActivation.hasBeenActive` remains false.
+- The UI detector returns no findings; Git's whitespace check passes.
+- Mobile/desktop ending captures were saved together, and their frame sizes,
+  scroll bounds, target sizes and horizontal containment were measured.
+
+These are Edge/Chromium checks with emulated viewports, not physical-device,
+Safari or assistive-technology certification. This is an illustrative website
+handoff, not proof of a live summary being delivered or an appointment booked.
+No customer message, telephone call or external delivery was initiated.
+
 ## Scroll-started demos and Super Tris trial links - 23 November 2026
 
 The owner requested scroll-triggered playback and supplied `+972584017275`

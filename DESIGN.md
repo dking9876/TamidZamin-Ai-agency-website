@@ -417,6 +417,24 @@ uses immediate scrolling. The transcript is not an aria-live region: reading
 assistance must not speak over the recording.
 No live telephony, third-party player or external communication is added.
 
+The owner's later 23 November WhatsApp receipt reference adds a terminal
+owner-view to the same phone, not another phone or a longer media asset.
+Only actual recording completion replaces the transcript with a white,
+green-accented WhatsApp-style message on a warm chat background. The header
+names the owner's WhatsApp summary; six concise fields match the recorded
+scenario, with the unknown phone number visibly masked. The screenshot's
+personal details and unrelated dates are not copied.
+The inner receipt scrolls when needed; both phone frames retain their shared
+dimensions, including enlarged text. Redundant end-state time/sound/restart
+decorations yield space while the replay and seek controls remain available.
+Listening from the receipt replays the same recording and returns keyboard
+focus to the main control. The WhatsApp row is a native explanatory
+disclosure, not a live customer contact. Completion is announced once through
+a visually hidden status region, without interrupting the audio or moving
+page scroll. A focused transcript reader transfers to the receipt; otherwise
+completion does not steal focus. A native disclosure below the player makes
+the same summary and direct recording available without JavaScript.
+
 `website/src/components/WhatsAppDemo.astro` presents the full 720x1600 recording
 inside the existing blue-rimmed device without cropping, stretching, a duplicate
 WhatsApp header or a decorative notch covering the source. Its WebP poster

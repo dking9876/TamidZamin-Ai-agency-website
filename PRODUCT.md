@@ -96,6 +96,18 @@ message or call is authorized by this implementation request. Visitors are
 encouraged to use fictional test details. No agency contact, indexing,
 analytics or retired lead-endpoint configuration changes are authorized.
 
+Later on 23 November the owner supplied an example WhatsApp summary received
+by a business owner after a customer call and requested it at the end of the
+phone demo. Recreate the message as readable, responsive HTML rather than
+publishing the screenshot's personal customer data. Use the existing staged
+recording's name, address, issue, urgency and preferred date; mask the unknown
+caller number. Only the real media-ended state reveals the receipt. Replay
+and backward seeks restore the transcript; native no-JavaScript disclosure
+keeps the example accessible. The recording action replays the same MP3.
+The customer WhatsApp action explains the workflow without linking to a
+personal number or sending a message. This is a website demonstration of the
+owner-supplied summary format, not verification of live delivery or booking.
+
 `this master demo prd.txt` is now nonempty. It specifies a TrisMaster electric
 shutter intake demo, not evidence of a working deployment or company-wide
 capabilities. It covers contact information, issue, urgency, preferred

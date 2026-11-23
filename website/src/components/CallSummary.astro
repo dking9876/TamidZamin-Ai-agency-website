@@ -1,0 +1,59 @@
+---
+import Icon from './Icon.astro';
+
+interface Props { replay?: boolean; }
+const { replay = false } = Astro.props;
+const fields = [
+  { icon: 'user', label: 'שם', value: 'דניאל ויצר' },
+  { icon: 'phone', label: 'טלפון', value: '05X-XXX-XXXX' },
+  { icon: 'pin', label: 'כתובת', value: 'תל אביב, שלמה 18, בית פרטי' },
+  { icon: 'wrench', label: 'תקלה', value: 'תריס תקוע, לא עולה ולא יורד' },
+  { icon: 'bolt', label: 'דחיפות', value: 'דחוף — אין אפשרות לצאת החוצה' },
+  { icon: 'calendar', label: 'מועד מועדף', value: '19.11.2026, כל היום' },
+] as const;
+---
+<article class="call-summary-message" aria-label="דוגמה להודעת סיכום השיחה">
+  <div class="call-summary-body">
+    <h3>בקשה חדשה לביקור טכנאי</h3>
+    <dl>
+      {fields.map((field) => (
+        <div>
+          <dt><Icon name={field.icon} size={16} />{field.label}:</dt>{' '}
+          <dd class:list={{ 'call-summary-number': field.icon === 'phone' }}><bdi dir={field.icon === 'phone' ? 'ltr' : 'rtl'}>{field.value}</bdi></dd>
+        </div>
+      ))}
+    </dl>
+    <p class="call-summary-handoff">הבקשה התקבלה מהעוזר הדיגיטלי וממתינה לאישור הצוות.</p>
+    <p class="call-summary-example">דוגמה מהשיחה · מספר הלקוח מוסתר</p>
+  </div>
+  {replay
+    ? <button class="call-summary-listen" type="button" aria-controls="demo-call-audio"><Icon name="external" size={19} />האזנה להקלטת השיחה</button>
+    : <a class="call-summary-listen" href="/media/demo-call.mp3"><Icon name="external" size={19} />האזנה להקלטת השיחה</a>}
+  <details class="call-summary-contact">
+    <summary><Icon name="external" size={19} />שיחה בוואטסאפ<Icon name="chevron" size={13} /></summary>
+    <p>במערכת של העסק הכפתור פותח שיחה עם הלקוח. כאן זו המחשה בלבד, ללא קישור למספר אישי.</p>
+  </details>
+</article>
+
+<style>
+  .call-summary-message { width: 100%; color: #182b23; background: #fff; border: 1px solid #d7dfd9; border-radius: 9px; font-size: .8125rem; line-height: 1.55; text-align: start; overflow-wrap: anywhere; }
+  .call-summary-body { padding: 12px; }
+  .call-summary-body h3 { margin: 0 0 12px; font-size: .875rem; line-height: 1.4; font-weight: 650; }
+  .call-summary-body dl { margin: 0; }
+  .call-summary-body dl > div + div { margin-block-start: 5px; }
+  .call-summary-body dt, .call-summary-body dd { display: inline; margin: 0; }
+  .call-summary-body dt { color: #425a4e; font-weight: 650; }
+  .call-summary-body dt svg { display: inline-block; margin-inline-end: 4px; vertical-align: -.15em; }
+  .call-summary-number { color: #207b56; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .call-summary-body .call-summary-handoff { margin: 14px 0 0; font-size: inherit; line-height: inherit; color: inherit; }
+  .call-summary-body .call-summary-example { margin: 8px 0 0; font-size: .75rem; color: #425a4e; }
+  .call-summary-listen, .call-summary-contact > summary { display: flex; align-items: center; justify-content: center; gap: 7px; width: 100%; min-height: 44px; padding: 10px 8px; border: 0; border-block-start: 1px solid #dde5df; background: transparent; color: #207b56; font: inherit; font-weight: 550; text-align: center; text-decoration: none; cursor: pointer; }
+  .call-summary-listen svg, .call-summary-contact > summary svg { flex-shrink: 0; }
+  .call-summary-listen:is(:hover, :focus-visible), .call-summary-contact > summary:is(:hover, :focus-visible) { color: #16643d; background: #edf5ef; }
+  .call-summary-listen:focus-visible, .call-summary-contact > summary:focus-visible { outline: 2px solid #207b56; outline-offset: -3px; }
+  .call-summary-contact > summary { list-style: none; }
+  .call-summary-contact > summary::-webkit-details-marker { display: none; }
+  .call-summary-contact[open] > summary > svg:last-child { transform: rotate(180deg); }
+  .call-summary-contact p { margin: 0; padding: 0 12px 12px; color: #425a4e; font-size: .75rem; line-height: 1.65; }
+  .call-summary-message ::selection { background: #cce8d5; color: #182b23; }
+</style>

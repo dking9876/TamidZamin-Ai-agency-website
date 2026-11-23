@@ -36,6 +36,10 @@ for (const width of [390, 1440]) {
     const audio = page.locator('#demo-call-audio');
     // Playwright locator reads grant activation; keep all initial reads in CDP.
     const cdp = await page.context().newCDPSession(page);
+    await cdp.send('Runtime.evaluate', {
+      expression: 'document.fonts.ready.then(() => true)',
+      awaitPromise: true, userGesture: false,
+    });
     const read = async () => (await cdp.send('Runtime.evaluate', {
       expression: `({
         activation: navigator.userActivation.hasBeenActive,
@@ -48,10 +52,16 @@ for (const width of [390, 1440]) {
       })`,
       returnByValue: true, userGesture: false,
     })).result.value;
-    const scroll = async (selector: string) => cdp.send('Runtime.evaluate', {
-      expression: `document.querySelector(${JSON.stringify(selector)}).scrollIntoView({behavior: 'instant', block: 'center'})`,
-      userGesture: false,
-    });
+    const scroll = async (selector: string) => {
+      const result = await cdp.send('Runtime.evaluate', {
+        expression: `(() => { const box = document.querySelector(${JSON.stringify(selector)}).getBoundingClientRect(); return box.top + box.height / 2 - innerHeight / 2; })()`,
+        returnByValue: true, userGesture: false,
+      });
+      // Native wheel input models a visitor's scroll without click activation.
+      await cdp.send('Input.dispatchMouseEvent', {
+        type: 'mouseWheel', x: 8, y: 450, deltaX: 0, deltaY: result.result.value,
+      });
+    };
     expect(await read()).toMatchObject({ activation: false, videoPaused: true, audioPaused: true });
     await scroll('.whatsapp-phone');
     await expect.poll(read).toMatchObject({ activation: false, videoPaused: false, videoMuted: true });
