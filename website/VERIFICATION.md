@@ -42,6 +42,15 @@ Safari or assistive-technology certification. This is an illustrative website
 handoff, not proof of a live summary being delivered or an appointment booked.
 No customer message, telephone call or external delivery was initiated.
 
+### Verified on the real domain
+
+Source release `effa2b8` was pushed to `main` and served over HTTPS at
+`https://www.tamidzamin.com/`. All 18 hosted receipt/autoplay browser cases
+pass without retries, including actual completion, replay, backward seek,
+five receipt widths, 200% text, accessibility, no JavaScript, gesture-free
+muted playback and the unchanged separate agency/Super Tris destinations.
+The source release's local and remote commit IDs matched after the push.
+
 ## Scroll-started demos and Super Tris trial links - 23 November 2026
 
 The owner requested scroll-triggered playback and supplied `+972584017275`
