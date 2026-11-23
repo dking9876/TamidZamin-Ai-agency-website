@@ -1,5 +1,6 @@
 import { formatCallTime } from '../lib/call-transcript';
 import { observeDemoPlayback } from '../lib/demo-playback';
+import { setupDemoSpeed, whatsappEncodedSpeed } from '../lib/demo-speed';
 
 interface DemoVideo extends HTMLVideoElement {
   webkitEnterFullscreen?: () => void;
@@ -40,11 +41,11 @@ if (root) {
     const hasDuration = Number.isFinite(video.duration) && video.duration > 0;
     seek.disabled = !hasDuration || !!video.error;
     if (hasDuration) {
-      seek.max = String(video.duration);
-      duration.textContent = formatCallTime(video.duration);
+      seek.max = String(video.duration * whatsappEncodedSpeed);
+      duration.textContent = formatCallTime(video.duration * whatsappEncodedSpeed);
     }
-    seek.value = String(video.currentTime);
-    elapsed.textContent = formatCallTime(video.currentTime);
+    seek.value = String(video.currentTime * whatsappEncodedSpeed);
+    elapsed.textContent = formatCallTime(video.currentTime * whatsappEncodedSpeed);
     seek.setAttribute('aria-valuetext', `${elapsed.textContent} מתוך ${duration.textContent}`);
   }
 
@@ -89,6 +90,7 @@ if (root) {
     pause,
     isActive: () => wantsPlayback || !video.paused,
   });
+  setupDemoSpeed({ root, media: video, encodedSpeed: whatsappEncodedSpeed, takeControl: playback.takeControl, reportError: fail });
 
   toggle.addEventListener('click', () => {
     playback.takeControl();
@@ -103,7 +105,7 @@ if (root) {
   });
   seek.addEventListener('input', () => {
     playback.takeControl();
-    video.currentTime = seek.valueAsNumber;
+    video.currentTime = seek.valueAsNumber / whatsappEncodedSpeed;
     updateTime();
     if (!wantsPlayback) setState('paused');
   });

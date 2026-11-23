@@ -1,5 +1,49 @@
 # Verification and launch status
 
+## User-controlled demo speed and early trial actions - 23 November 2026
+
+The owner requested separate playback speed controls and earlier placement
+of Super Tris's trial number/actions beside the demo explanations.
+
+- Each player offers 0.5x, 1x, 1.5x, 2x and 3x of the original conversation.
+  Defaults remain 1x for the call and 3x for WhatsApp.
+- The shared speed helper compensates for the unchanged WhatsApp asset's
+  encoded 3x speed. The custom WhatsApp timeline shows original conversation
+  time, so 1x is normal speed and not a second multiplier.
+- Changing speed does not start paused media or unmute it. Separate choices
+  survive seek, replay, retry, fullscreen and the call's owner-summary ending.
+  Native rate changes update the visible control; failure is recoverable.
+- Each channel introduction now shows the same approved trial number and its
+  matching primary WhatsApp or telephone action. These precede the phones on
+  smaller screens and sit beside them on desktop. The old shared bottom row
+  is removed; service links remain as secondary actions.
+- The agency number, exact inquiry message, media assets, transcript, summary
+  data, muted scroll autoplay and no-JavaScript native fallbacks are unchanged.
+
+### Verified against the final local production build
+
+- Astro/TypeScript and production build: zero errors, warnings or hints.
+- All 37 existing unit tests pass.
+- All 82 related browser cases pass without retries, plus the retained
+  demo-copy/direct-contact regression. Ten new speed cases cover every offered
+  rate, real clock advancement, independent controls, paused-state preservation,
+  calibrated seeks, replay, fullscreen, summary, rejected-rate and failed-load
+  recovery, keyboard, 200% text, accessibility and no-JavaScript behavior.
+- Matching phone dimensions and tops, introduction/trial grouping and usable
+  controls pass at 14 widths from 320 to 1920px. Trial actions are available
+  before the phones on mobile, including without JavaScript.
+- Genuine gesture-free autoplay still advances decoded video and the media
+  clock before any user activation.
+- Mobile/desktop captures are saved. Rendered bounds confirm the number and
+  trial actions are grouped with the title; selectors have 44px targets and
+  do not cause horizontal overflow. The UI detector returns no findings;
+  Git's whitespace check passes.
+
+Tests use Edge/Chromium with emulated viewports, not physical phones or Safari.
+Native/no-JavaScript media UI still uses encoded WhatsApp asset timestamps;
+the new normalized custom timeline and selectors require JavaScript.
+No real customer call, WhatsApp message or external trial was initiated.
+
 ## Google Search Console connection - 23 November 2026
 
 The canonical URL-prefix property `https://www.tamidzamin.com/` is verified

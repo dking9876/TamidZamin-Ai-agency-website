@@ -1,0 +1,16 @@
+---
+import Icon from './Icon.astro';
+import { demoContact } from '../lib/demo-contact';
+
+interface Props { channel: 'whatsapp' | 'phone'; }
+const { channel } = Astro.props;
+---
+<div class="demo-contact" aria-labelledby={`demo-contact-${channel}`}>
+  <h3 id={`demo-contact-${channel}`}>נסו בעצמכם את {demoContact.name}</h3>
+  <p class="demo-contact-number"><bdi dir="ltr">{demoContact.phoneDisplay}</bdi></p>
+  <a class="pill" href={channel === 'whatsapp' ? demoContact.whatsappUrl : demoContact.phoneUrl}>
+    <Icon name={channel === 'whatsapp' ? 'chat' : 'phone'} size={19} />
+    {channel === 'whatsapp' ? 'לנסות בוואטסאפ' : 'להתקשר לסופר טריס'}
+  </a>
+  <p class="demo-contact-note">להתנסות, השתמשו בפרטים לדוגמה.</p>
+</div>

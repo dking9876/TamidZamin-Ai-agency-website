@@ -1,9 +1,11 @@
 ---
 import Icon from './Icon.astro';
+import DemoSpeed from './DemoSpeed.astro';
+import { whatsappEncodedSpeed } from '../lib/demo-speed';
 ---
 <figure class="device-stage whatsapp-demo" id="whatsapp-demo" data-motion="devices" data-state="idle">
   <div class="phone-shell whatsapp-phone">
-    <video id="demo-whatsapp-video" src="/media/demo-whatsapp-3x.mp4" poster="/media/demo-whatsapp-poster.webp" width="720" height="1600" preload="none" muted playsinline controls aria-label="הקלטת הדגמת וואטסאפ במהירות פי שלושה"></video>
+    <video id="demo-whatsapp-video" src="/media/demo-whatsapp-3x.mp4" poster="/media/demo-whatsapp-poster.webp" width="720" height="1600" preload="none" muted playsinline controls aria-label="הקלטת הדגמת וואטסאפ"></video>
   </div>
   <figcaption class="device-caption whatsapp-caption">
     <div class="whatsapp-controls" hidden>
@@ -18,8 +20,9 @@ import Icon from './Icon.astro';
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5" /></svg>
         </button>
       </div>
-      <input class="whatsapp-seek" type="range" min="0" max="45.708333" value="0" step="0.1" dir="ltr" aria-label="מיקום בהדגמת הוואטסאפ" aria-valuetext="0:00 מתוך 0:45" aria-controls="demo-whatsapp-video" disabled />
-      <div class="whatsapp-meta"><span>מהירות <bdi>3×</bdi></span><a class="whatsapp-description-link" href="/services/whatsapp/#recorded-demo-description">תיאור טקסטואלי</a><span class="whatsapp-time" dir="ltr" aria-hidden="true"><span class="whatsapp-elapsed">0:00</span> / <span class="whatsapp-duration">0:45</span></span></div>
+      <input class="whatsapp-seek" type="range" min="0" max="137.125" value="0" step="0.1" dir="ltr" aria-label="מיקום בהדגמת הוואטסאפ" aria-valuetext="0:00 מתוך 2:17" aria-controls="demo-whatsapp-video" disabled />
+      <div class="whatsapp-meta"><DemoSpeed mediaId="demo-whatsapp-video" label="מהירות הדגמת הוואטסאפ" initialSpeed={whatsappEncodedSpeed} /><span class="whatsapp-time" dir="ltr" aria-hidden="true"><span class="whatsapp-elapsed">0:00</span> / <span class="whatsapp-duration">2:17</span></span></div>
+      <a class="whatsapp-description-link" href="/services/whatsapp/#recorded-demo-description">תיאור טקסטואלי</a>
     </div>
     <span class="whatsapp-status" role="status" aria-atomic="true"></span>
     <a class="whatsapp-download" href="/media/demo-whatsapp-3x.mp4" hidden>פתיחת הסרטון ישירות</a>

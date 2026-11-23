@@ -6,8 +6,8 @@ import Icon from '../components/Icon.astro';
 import FAQ from '../components/FAQ.astro';
 import CallDemo from '../components/CallDemo.astro';
 import WhatsAppDemo from '../components/WhatsAppDemo.astro';
+import DemoContact from '../components/DemoContact.astro';
 import { site } from '../lib/site';
-import { demoContact } from '../lib/demo-contact';
 const trades = [
   { name: 'plumber', label: 'אינסטלטורים', icon: 'wrench' as const },
   { name: 'electrician', label: 'חשמלאים', icon: 'bolt' as const },
@@ -50,29 +50,24 @@ const benefits = [
     <p class="home-intro container">סוכני AI בוואטסאפ ובטלפון לעסקי שירות. מאפיינים את הצרכים, בונים ומקימים סוכן ייעודי ומלווים אתכם בתמיכה שוטפת. ההחלטות המקצועיות נשארות אצלכם.</p>
     <div class="container channel-stage">
       <article class="home-channel whatsapp-channel" aria-labelledby="whatsapp-title">
-        <h2 id="whatsapp-title"><Icon name="chat" size={30} />סוכן AI בוואטסאפ</h2>
+        <div class="channel-intro">
+          <h2 id="whatsapp-title"><Icon name="chat" size={30} />סוכן AI בוואטסאפ</h2>
+          <DemoContact channel="whatsapp" />
+        </div>
         <WhatsAppDemo />
         <ul class="check-list"><li><Icon name="check" />אוסף פרטים בשיחה קצרה</li><li><Icon name="check" />מבקש תמונה כשצריך</li><li><Icon name="check" />מסכם ומאפשר תיקונים</li><li><Icon name="check" />מכין להמשך טיפול אנושי</li></ul>
-        <a class="pill" href="/services/whatsapp/">להכיר את מענה הוואטסאפ <Icon name="arrow" size={15} /></a>
+        <a class="channel-learn text-link" href="/services/whatsapp/">להכיר את מענה הוואטסאפ <Icon name="arrow" size={15} /></a>
       </article>
       <div class="brand-connector" aria-hidden="true"><img src="/images/connector.webp" width="280" height="240" alt="" loading="lazy" /><img class="connector-logo" src="/images/icon.png" width="64" height="64" alt="" loading="lazy" /></div>
       <article class="home-channel phone-channel" aria-labelledby="phone-title">
-        <h2 id="phone-title"><Icon name="phone" size={30} />סוכן AI טלפוני</h2>
+        <div class="channel-intro">
+          <h2 id="phone-title"><Icon name="phone" size={30} />סוכן AI טלפוני</h2>
+          <DemoContact channel="phone" />
+        </div>
         <CallDemo />
         <ul class="check-list"><li><Icon name="check" />מבין את סיבת הפנייה</li><li><Icon name="check" />אוסף פרטי קשר ודחיפות</li><li><Icon name="check" />מקריא סיכום לאישור</li><li><Icon name="check" />מעביר ליעד שסוכם ונבדק</li></ul>
-        <a class="pill" href="/services/phone/">להכיר את המענה הטלפוני <Icon name="arrow" size={15} /></a>
+        <a class="channel-learn text-link" href="/services/phone/">להכיר את המענה הטלפוני <Icon name="arrow" size={15} /></a>
       </article>
-    </div>
-    <div class="container demo-contact" aria-labelledby="demo-contact-title">
-      <div>
-        <h3 id="demo-contact-title">נסו בעצמכם את {demoContact.name}</h3>
-        <p><bdi dir="ltr">{demoContact.phoneDisplay}</bdi></p>
-        <p class="demo-contact-note">להתנסות, השתמשו בפרטים לדוגמה.</p>
-      </div>
-      <div class="demo-contact-actions">
-        <a class="pill" href={demoContact.whatsappUrl}><Icon name="chat" size={19} />לנסות בוואטסאפ</a>
-        <a class="pill pill-outline" href={demoContact.phoneUrl}><Icon name="phone" size={19} />להתקשר לסופר טריס</a>
-      </div>
     </div>
   </section>
 

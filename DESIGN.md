@@ -486,14 +486,30 @@ fallbacks remain. The idle phone caption reserves no empty margin; recovery
 messages and no-JavaScript links retain their spacing when present.
 
 On 23 November the owner supplied Super Tris's trial number `+972584017275`.
-A ruled, open contact row below the two channels names Super Tris, prints the
-international number in an LTR isolate, and provides distinct WhatsApp and
-telephone actions. On phones the actions stack at full width. This is separate
-from TamidZamin's own inquiry number and does not change the header/footer or
-business schema. Links require visitor activation and do not send a message,
-place a call or contact a service on scroll. A short note requests fictional
-test details; the privacy page distinguishes this external trial from agency
-inquiries without inventing its storage or retention behavior.
+The owner's follow-up moves this contact from beneath the channels into each
+channel's introduction. The number stays LTR, followed by the corresponding
+primary WhatsApp or telephone action and the fictional-test-data note. The
+service page action becomes a secondary text link. Above 1100px these
+introductions remain beside their phones; below that width they precede the
+phone so a visitor does not have to finish scrolling through a demo to try it.
+The two-column tablet composition uses shared subgrid rows to keep different
+introduction lengths from misaligning the phone tops. Up to 600px channels
+stack in a single reading column. Agency contact/schema remain unchanged.
+Links require activation and do not send a message, place a call or contact a
+service on scroll. The privacy page distinguishes the external trial from
+agency inquiries without inventing its storage or retention behavior.
+
+Each recording now has a labeled native speed selector below its phone with
+44px minimum touch targets, visible focus, dark themed options and tabular
+values. Choices are 0.5x, 1x, 1.5x, 2x and 3x of original speed, with unchanged
+1x call and 3x WhatsApp defaults. The shared helper compensates for the
+pre-accelerated WhatsApp asset instead of multiplying its already-3x speed.
+The WhatsApp custom timeline shows original conversation time at every rate;
+native/no-JavaScript controls still show encoded asset time. Pitch preservation
+stays enabled. Changes preserve paused/muted state, manual precedence, replay,
+error retry, fullscreen and the call's terminal summary. Native rate changes
+update the selector. Without JavaScript the new selectors stay hidden while
+existing native controls and early trial links remain usable.
 
 Meaningful content is visible and crawlable before JavaScript; no reveal stylesheet hides it. Authored arrival sequences are shorter than three seconds; the background video and user-controlled recording indicator are deliberate looping exceptions with pause controls. No motion dependency or production capability is added.
 

@@ -16,6 +16,8 @@ for (const width of [320, 360, 390, 430, 600, 601, 768, 880, 881, 1024, 1100, 11
       const articles = [...document.querySelectorAll('.home-channel')].map((article) => ({
         children: [...article.children].map((child) => child.tagName),
         title: box(article.querySelector('h2')!),
+        intro: box(article.querySelector('.channel-intro')!),
+        trial: box(article.querySelector('.demo-contact')!),
         demo: box(article.querySelector('figure')!),
         device: box(article.querySelector('.phone-shell')!),
         features: box(article.querySelector('ul')!),
@@ -50,12 +52,13 @@ for (const width of [320, 360, 390, 430, 600, 601, 768, 880, 881, 1024, 1100, 11
       expect(layout.articles[0].device.top).toBeCloseTo(layout.articles[1].device.top, 0);
     }
     for (const article of layout.articles) {
-      expect(article.children).toEqual(['H2', 'FIGURE', 'UL', 'A']);
+      expect(article.children).toEqual(['DIV', 'FIGURE', 'UL', 'A']);
       expect(article.device.left).toBeGreaterThanOrEqual(0);
       expect(article.device.right).toBeLessThanOrEqual(width);
       if (width <= 1100) {
         expect(article.device.width).toBeGreaterThanOrEqual(240);
-        expect(article.title.bottom).toBeLessThanOrEqual(article.demo.top);
+        expect(article.title.bottom).toBeLessThanOrEqual(article.trial.top);
+        expect(article.trial.bottom).toBeLessThanOrEqual(article.demo.top);
         expect(article.demo.bottom).toBeLessThanOrEqual(article.features.top);
         expect(article.features.bottom).toBeLessThanOrEqual(article.action.top);
       }
@@ -89,6 +92,8 @@ for (const width of [320, 360, 390, 430, 600, 601, 768, 880, 881, 1024, 1100, 11
     const actions = page.locator('.home-channel > a');
     await actions.first().focus();
     await page.keyboard.press('Tab');
+    await expect(page.locator('.phone-channel .demo-contact a')).toBeFocused();
+    await page.keyboard.press('Tab');
     await expect(page.locator('.recording-transcript')).toBeFocused();
     await page.keyboard.press('Tab');
     await expect(page.locator('.recording-toggle')).toBeFocused();
@@ -96,6 +101,8 @@ for (const width of [320, 360, 390, 430, 600, 601, 768, 880, 881, 1024, 1100, 11
     await expect(page.locator('.recording-sound')).toBeFocused();
     await page.keyboard.press('Tab');
     await expect(page.locator('.recording-restart')).toBeFocused();
+    await page.keyboard.press('Tab');
+    await expect(page.locator('.call-demo .demo-speed select')).toBeFocused();
     await page.keyboard.press('Tab');
     await expect(actions.last()).toBeFocused();
     await expect(actions.first()).toHaveAttribute('href', '/services/whatsapp/');

@@ -108,6 +108,20 @@ The customer WhatsApp action explains the workflow without linking to a
 personal number or sending a message. This is a website demonstration of the
 owner-supplied summary format, not verification of live delivery or booking.
 
+The owner's next 23 November instruction adds independent playback speed
+choices to both demonstrations and moves the external trial contact into
+each channel's introduction. Both offer 0.5x, 1x, 1.5x, 2x and 3x relative to
+the original conversation; defaults remain 1x call and 3x WhatsApp. The
+encoded WhatsApp asset is already 3x, so its player rate is divided by three.
+Its custom scrubber/timestamps now show original conversation time. Neither
+recording is re-encoded. Speed changes do not start paused media, enable sound,
+override manual intent or affect the other recording; selected rates persist
+through replay and retry within the page visit.
+Each introduction shows Super Tris's number and its matching visitor-initiated
+WhatsApp or telephone action. On smaller screens these precede the phone,
+with the existing features and secondary service link following the demo.
+No personal contact, live message or agency contact configuration is changed.
+
 `this master demo prd.txt` is now nonempty. It specifies a TrisMaster electric
 shutter intake demo, not evidence of a working deployment or company-wide
 capabilities. It covers contact information, issue, urgency, preferred

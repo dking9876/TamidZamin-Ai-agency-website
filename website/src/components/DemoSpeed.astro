@@ -1,0 +1,24 @@
+---
+import { demoSpeeds } from '../lib/demo-speed';
+
+interface Props {
+  mediaId: string;
+  label: string;
+  initialSpeed?: number;
+}
+const { mediaId, label, initialSpeed = 1 } = Astro.props;
+---
+<label class="demo-speed" hidden>
+  <span>מהירות</span>
+  <select aria-label={label} aria-controls={mediaId} dir="ltr">
+    {demoSpeeds.map((speed) => <option value={speed} selected={speed === initialSpeed}>{speed}×</option>)}
+  </select>
+</label>
+
+<style>
+  .demo-speed { display: inline-flex; align-items: center; gap: 6px; max-width: 100%; min-height: 44px; color: var(--on-dark); font-size: .875rem; }
+  .demo-speed select { width: 5rem; max-width: 100%; min-height: 44px; padding: 6px 8px; border: 1px solid #527d99; border-radius: 6px; background: #102340; color: var(--paper); font: inherit; font-variant-numeric: tabular-nums; cursor: pointer; color-scheme: dark; }
+  .demo-speed select:is(:hover, :focus-visible) { border-color: var(--cyan); }
+  .demo-speed select:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+  .demo-speed[hidden] { display: none; }
+</style>

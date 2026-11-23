@@ -1,6 +1,7 @@
 ---
 import Icon from './Icon.astro';
 import CallSummary from './CallSummary.astro';
+import DemoSpeed from './DemoSpeed.astro';
 import transcript from '../data/call-transcript.json';
 import { formatCallTime } from '../lib/call-transcript';
 ---
@@ -55,6 +56,7 @@ import { formatCallTime } from '../lib/call-transcript';
     <video id="demo-call-audio" src="/media/demo-call.mp3" preload="none" playsinline controls aria-label="הקלטת שיחת ההדגמה של TamidZamin"></video>
   </div>
   <figcaption class="device-caption recording-caption">
+    <div class="recording-speed"><DemoSpeed mediaId="demo-call-audio" label="מהירות שיחת ההדגמה" /></div>
     <span class="recording-status" role="status" aria-atomic="true"></span>
     <a class="recording-download" href="/media/demo-call.mp3" hidden>פתיחת ההקלטה ישירות</a>
     <noscript><a class="recording-download" href="/media/demo-call.mp3">פתיחת ההקלטה ישירות</a></noscript>
@@ -193,6 +195,8 @@ import { formatCallTime } from '../lib/call-transcript';
   .recording-sound .sound-off, .recording-sound[data-muted="true"] .sound-on { display: none; }
   .recording-sound[data-muted="true"] .sound-off { display: block; }
   .recording-caption { grid-template-rows: auto; font-size: .8125rem; }
+  .recording-speed { display: flex; justify-content: center; }
+  .recording-speed:has(.demo-speed:not([hidden])) { margin-block-start: 12px; }
   .recording-caption:not(:has(.recording-status:not(:empty), .recording-download:not([hidden]))) { margin-block-start: 0; }
   .recording-status:empty { display: none; }
   .recording-status { color: var(--paper); }

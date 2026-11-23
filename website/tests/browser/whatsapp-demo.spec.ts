@@ -27,7 +27,7 @@ for (const width of [390, 1440]) {
     expect(requests).toEqual([]);
     await expect(seek).toBeDisabled();
     await expect(video).toHaveAttribute('playsinline', '');
-    await expect(demo).toContainText('3×');
+    await expect(demo.locator('.demo-speed select')).toHaveValue('3');
     const responsePromise = page.waitForResponse('**/media/demo-whatsapp-3x.mp4');
     await toggle.click();
     const response = await responsePromise;
@@ -39,7 +39,7 @@ for (const width of [390, 1440]) {
       duration: element.duration, width: element.videoWidth, height: element.videoHeight,
       rate: element.playbackRate, muted: element.muted, decoded: element.getVideoPlaybackQuality().totalVideoFrames,
     }));
-    // Speed is baked into the asset, including the native/no-JavaScript player.
+    // The default 3x speed is baked into the asset; slower choices compensate for it.
     expect(Math.abs(media.duration * 3 - 137.183447)).toBeLessThan(.15);
     expect(media).toMatchObject({ width: 720, height: 1600, rate: 1, muted: true });
     expect(media.decoded).toBeGreaterThan(0);
@@ -54,15 +54,15 @@ for (const width of [390, 1440]) {
     await toggle.focus();
     await page.keyboard.press('Space');
     await expect(demo).toHaveAttribute('data-state', 'paused');
-    await seek.fill('20');
+    await seek.fill('60');
     await seek.focus();
     await page.keyboard.press('ArrowRight');
     await expect.poll(() => video.evaluate((element: HTMLVideoElement) => element.currentTime)).toBeGreaterThan(20);
-    await expect(seek).toHaveAttribute('aria-valuetext', /0:20 מתוך 0:45/);
+    await expect(seek).toHaveAttribute('aria-valuetext', /1:00 מתוך 2:17/);
     await toggle.focus();
     await page.keyboard.press('Enter');
     await expect(demo).toHaveAttribute('data-state', 'playing');
-    await seek.fill(String(media.duration - .2));
+    await seek.fill(String((media.duration - .2) * 3));
     await expect(demo).toHaveAttribute('data-state', 'ended');
     await toggle.click();
     await expect(demo).toHaveAttribute('data-state', 'playing');

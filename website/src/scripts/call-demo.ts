@@ -1,6 +1,7 @@
 import transcript from '../data/call-transcript.json';
 import { activeCueIndex, formatCallTime, transcriptAnchorIndex } from '../lib/call-transcript';
 import { observeDemoPlayback } from '../lib/demo-playback';
+import { setupDemoSpeed } from '../lib/demo-speed';
 
 const root = document.querySelector<HTMLElement>('.call-demo');
 
@@ -176,6 +177,7 @@ if (root) {
     pause,
     isActive: () => wantsPlayback || !audio.paused,
   });
+  setupDemoSpeed({ root, media: audio, takeControl: playback.takeControl, reportError: fail });
 
   toggle.addEventListener('click', () => {
     playback.takeControl();

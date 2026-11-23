@@ -536,7 +536,7 @@ test.describe('refinement: native navigation and fallbacks', () => {
     await expect(page.locator('.whatsapp-caption')).not.toContainText('אין שיחה פעילה');
     await expect(page.locator('.recording-caption')).not.toContainText('לא שיחה חיה');
     await expect(page.locator('.recording-caption')).toHaveCSS('margin-top', '0px');
-    await expect(page.locator('#demo-whatsapp-video')).toHaveAccessibleName('הקלטת הדגמת וואטסאפ במהירות פי שלושה');
+    await expect(page.locator('#demo-whatsapp-video')).toHaveAccessibleName('הקלטת הדגמת וואטסאפ');
     await expect(page.locator('#demo-whatsapp-video')).not.toHaveAttribute('aria-describedby');
     await expect(page.locator('#evidence .demo-disclosure')).toContainText('השיחות מבוימות ואינן עדות לקוח');
     await page.goto('/contact/');

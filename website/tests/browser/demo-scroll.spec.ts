@@ -211,11 +211,12 @@ test('Super Tris trial links stay separate from agency contacts and work without
   const page = await context.newPage();
   await page.goto('/#channels');
   const contact = page.locator('.demo-contact');
-  await expect(contact).toContainText('נסו בעצמכם את סופר טריס');
-  await expect(contact).toContainText('+972 58-401-7275');
+  await expect(contact).toHaveCount(2);
+  await expect(contact).toHaveText([/נסו בעצמכם את סופר טריס.*\+972 58-401-7275/s, /נסו בעצמכם את סופר טריס.*\+972 58-401-7275/s]);
   await expect(contact.locator('a[href^="tel:"]')).toHaveAttribute('href', 'tel:+972584017275');
   await expect(contact.locator('a[href^="https://wa.me/"]')).toHaveAttribute('href', 'https://wa.me/972584017275');
   await expect(page.locator('.hero-actions > .pill')).toHaveAttribute('href', /^https:\/\/wa\.me\/972584345513\?text=/);
+  await expect(page.locator('#channels > .demo-contact')).toHaveCount(0);
   for (const link of await contact.locator('a').all()) {
     const box = await link.boundingBox();
     expect(box!.height).toBeGreaterThanOrEqual(44);
